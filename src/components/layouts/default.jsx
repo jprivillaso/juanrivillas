@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import Header from '../commons/header';
 
-import './default.css';
+import './main.css';
 
 const Layout = styled.div`
   width: 100%;
@@ -11,6 +12,7 @@ const Layout = styled.div`
 
 const layout = ({ children }) => (
   <Layout className="default_layout">
+    <Header />
     {children}
   </Layout>
 );

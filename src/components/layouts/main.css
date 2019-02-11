@@ -637,18 +637,3 @@ pre tt:after {
     font-size: 100%;
   }
 }
-
-.main_page_body {
-  /* Photo by Jesus Kiteque on Unsplash */
-  background: url(../../images/main_page.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  max-width: 100% !important;
-  margin: 0 !important;
-}
-
-h5.header_menu_item {
-  margin: 0px 20px;
-}

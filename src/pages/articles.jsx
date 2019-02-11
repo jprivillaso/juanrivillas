@@ -1,11 +1,9 @@
 import React from 'react';
 
-import Layout from '../components/layouts/default';
+import PaddedLayout from '../components/layouts/padded';
 
 const Articles = () => (
-  <Layout>
-    <h1>Hi from Articles</h1>
-  </Layout>
+  <PaddedLayout />
 );
 
 export default Articles;
