@@ -25,7 +25,7 @@ exports.createPages = ({ actions, graphql }) => {
             }
           }
         }
-      `).then((result) => {
+      `).then(result => {
         if (result.errors) {
           console.log(result.errors);
           return reject(result.errors);
@@ -42,8 +42,7 @@ exports.createPages = ({ actions, graphql }) => {
             }, // additional data can be passed via context
           });
         });
-        return;
-      }),
+      })
     );
   });
 };
@@ -51,7 +50,7 @@ exports.createPages = ({ actions, graphql }) => {
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
   if (node.internal.type === 'MarkdownRemark') {
-    const slug = createFilePath({ node, getNode, basePath: 'pages' });
+    const slug = createFilePath({ node, getNode, basePath: 'articles' });
     createNodeField({
       node,
       name: 'slug',

@@ -12,11 +12,13 @@ const HeaderContainer = styled.header`
   right: 0;
   left: 0;
   display: flex;
-  alignItems: center;
+  align-items: center;
+  z-index: 10;
 
   .header_menu_item {
     padding: 0px 20px;
   }
+
 `;
 
 const Header = () => (

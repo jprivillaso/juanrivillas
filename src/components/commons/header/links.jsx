@@ -8,6 +8,12 @@ const LinkText = styled.h5`
 const HeaderLink = styled(Link)`
   color: black;
   text-decoration: none;
+  text-decoration: none;
+  text-transform: uppercase;
+  display: inline-block;
+  font-weight: 300;
+  letter-spacing: 1.2px;
+  font-size: 12px;
 `;
 
 const HeaderLinks = styled.div`
@@ -27,11 +33,7 @@ const menuItems = [
   {
     label: 'Articles',
     path: '/articles',
-  },
-  {
-    label: 'Talks',
-    path: '/talks',
-  },
+  }
 ];
 
 const headerLinks = () => {

@@ -28,16 +28,23 @@ module.exports = {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
-          'gatsby-remark-prismjs',
-        ],
-      },
+          'gatsby-remark-prismjs'
+        ]
+      }
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         path: `${ __dirname }/src/pages`,
-        name: 'pages',
-      },
+        name: 'pages'
+      }
     },
-  ],
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${ __dirname }/src/pages/articles`,
+        name: 'articles'
+      }
+    }
+  ]
 };

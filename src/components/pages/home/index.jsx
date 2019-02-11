@@ -14,8 +14,17 @@ const Home = styled.div`
   display: flex;
 `;
 
+const MainImage = styled.img`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -80%);
+`;
+
 const home = () => (
-  <Home className="page_home" />
+  <Home className="page_home">
+    <MainImage src="/images/welcome.png"/>
+  </Home>
 );
 
 export default home;
