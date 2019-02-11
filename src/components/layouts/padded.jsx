@@ -10,29 +10,32 @@ const PaddedLayout = styled.div`
   height: 100%;
   overflow: auto;
   margin: 0 auto;
+
+  .header a {
+    color: black;
+  }
 `;
 
 const PaddedContent = styled.section`
   margin: 5rem 20% 1.0875rem;
 `;
 
-const getImage = backgroundUrl => {
+const getImage = (backgroundUrl, backgroundPosition) => {
   return styled.div`
-    background: url(/images/articles.jpg) no-repeat center center;
+    background: url(/images/${ backgroundUrl || 'articles.jpg' }) no-repeat center center;
     height: -webkit-fill-available;
     background-color: #141618;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: ${ backgroundPosition || 'center' };
     background-size: cover;
-    opacity: .4;
     width: 100%;
     z-index: 1;
     will-change: transform;
   `;
 };
 
-const paddedLayout = ({ children, backgroundUrl }) => {
-  const Image = getImage(backgroundUrl);
+const paddedLayout = ({ children, backgroundUrl, backgroundPosition }) => {
+  const Image = getImage(backgroundUrl, backgroundPosition);
 
   return (
     <PaddedLayout

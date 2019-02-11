@@ -8,6 +8,7 @@ const Articles = props => {
   return (
     <PaddedLayout
       backgroundUrl="articles.jpg"
+      backgroundPosition="bottom"
     >
       <ArticleList
         articles={ props.data.allMarkdownRemark.edges }
