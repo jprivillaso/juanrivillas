@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import './home.css';
 
 const Home = styled.div`
   -webkit-background-size: cover;
@@ -23,7 +22,7 @@ const MainImage = styled.img`
 
 const home = () => (
   <Home className="page_home">
-    <MainImage src="/images/welcome.png"/>
+    <MainImage atl="Welcome Image" src="/images/welcome.png"/>
   </Home>
 );
 

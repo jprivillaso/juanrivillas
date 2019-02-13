@@ -17,7 +17,14 @@ const LayoutContent = styled.section`
 `;
 
 const layout = ({ children }) => (
-  <Layout className="default_layout">
+  <Layout
+    className="default_layout"
+    style={{
+      background: 'url("../../../images/main_page.jpg") no-repeat center center',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center'
+    }}
+  >
     <LayoutContent>
       <Header />
       {children}

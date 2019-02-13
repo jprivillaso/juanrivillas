@@ -1,7 +1,11 @@
 module.exports = {
   siteMetadata: {
-    title: 'JR',
+    title: 'Juan Rivillas Personal Website',
     siteUrl: 'http://juanrivillas.com',
+    description: `
+    Personal website of Juan Pablo Rivillas Ospina. Contains articles related to
+    technology and programming.
+    `
   },
   plugins: [
     'gatsby-plugin-react-helmet',

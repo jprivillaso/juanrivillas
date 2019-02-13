@@ -45,6 +45,14 @@ function Metatags(props) {
           property: 'og:locale',
           content: 'en',
         },
+        {
+          property: 'og:locale:alternate',
+          content: 'pt_BR',
+        },
+        {
+          property: 'og:locale:alternate',
+          content: 'es_CO',
+        },
         { name: 'twitter:card', content: 'summary_large_image' },
 
         { name: 'twitter:title', content: props.title },
@@ -60,8 +68,8 @@ function Metatags(props) {
         { property: 'og:type', content: 'website' },
         { name: 'robots', content: 'index, follow' },
 
-        { name: 'twitter:creator', content: '@saigowthamr' },
-        { property: 'og:site_name', content: 'Reactgo' },
+        { name: 'twitter:creator', content: '@jprivillaso' },
+        { property: 'og:site_name', content: 'www.juanrivillas.com' },
       ]}
     >
       <html lang="en" />

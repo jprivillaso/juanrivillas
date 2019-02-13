@@ -22,7 +22,7 @@ const PaddedContent = styled.section`
 
 const getImage = (backgroundUrl, backgroundPosition) => {
   return styled.div`
-    background: url(/images/${ backgroundUrl || 'articles.jpg' }) no-repeat center center;
+    background: url(../../images/${ backgroundUrl || 'articles.jpg' }) no-repeat center center;
     height: -webkit-fill-available;
     background-color: #141618;
     background-repeat: no-repeat;

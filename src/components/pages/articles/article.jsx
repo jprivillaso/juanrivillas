@@ -26,11 +26,11 @@ const Title = styled.div`
 const Content = styled.div`
 `;
 
-const article = ({ node, key }) => (
+const article = ({ node, keyProp }) => (
   <Article
     className="article_item"
     to={node.fields.slug}
-    key={key}
+    key={`article-${ keyProp }`}
   >
     <Title className="post_title">
       <h1>{node.frontmatter.title}</h1>

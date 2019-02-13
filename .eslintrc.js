@@ -22,7 +22,7 @@ module.exports = {
     "max-len": ["error", { code: 100 }],
     "template-curly-spacing": ["error", "always"],
     "arrow-parens": ["error", "as-needed"],
-
+    "no-debugger": 0,
     // standard.js
     "space-before-function-paren": [
       "error",

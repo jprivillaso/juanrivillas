@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 
 import PaddedLayout from '../components/layouts/padded';
 import ArticleList from '../components/pages/articles';
+import Metatags from '../components/commons/meta_tags';
 
 const Articles = props => {
   return (
@@ -10,15 +11,21 @@ const Articles = props => {
       backgroundUrl="articles.jpg"
       backgroundPosition="bottom"
     >
+      <Metatags
+        title="Articles"
+        description={props.data.site.siteMetadata.description}
+        url={props.data.site.siteMetadata.siteUrl}
+        pathname={props.location.pathname}
+      />
       <ArticleList
-        articles={ props.data.allMarkdownRemark.edges }
+        data={ props.data }
       />
     </PaddedLayout>
   );
 };
 
-export const listQuery = graphql`
-  query ListQuery {
+export const articlesMetadataQuery = graphql`
+  query ArticlesMetadataQuery {
     allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
       edges {
         node {
@@ -31,6 +38,14 @@ export const listQuery = graphql`
             title
           }
         }
+      }
+    }
+
+    site {
+      siteMetadata {
+        title
+        siteUrl
+        description
       }
     }
   }
