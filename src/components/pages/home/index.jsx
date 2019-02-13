@@ -22,7 +22,7 @@ const MainImage = styled.img`
 
 const home = () => (
   <Home className="page_home">
-    <MainImage atl="Welcome Image" src="/images/welcome.png"/>
+    <MainImage atl="Welcome Image" src="../../images/welcome.png"/>
   </Home>
 );
 
