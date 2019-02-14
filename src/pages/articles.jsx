@@ -53,7 +53,7 @@ export const articlesMetadataQuery = graphql`
 
     articlesImage: imageSharp(original: { src: { regex: "/articles/" } }) {
       fluid(maxWidth: 1920, quality: 100) {
-        ...GatsbyImageSharpFluid
+        ...GatsbyImageSharpFluid_tracedSVG
       }
     }
   }
