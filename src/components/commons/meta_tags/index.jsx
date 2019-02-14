@@ -73,6 +73,7 @@ function Metatags(props) {
       ]}
     >
       <html lang="en" />
+      <noscript>{`Enable your JS please`}</noscript>
     </Helmet>
   );
 }

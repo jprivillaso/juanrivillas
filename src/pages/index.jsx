@@ -34,15 +34,15 @@ export const homeMetadataQuery = graphql`
       }
     }
 
-    homeImage: imageSharp(original: { src: { regex: "/home/" } }) {
+    homeImage: imageSharp(original: { src: { regex: "/home_1/" } }) {
       fluid(maxWidth: 1920, quality: 100) {
-        ...GatsbyImageSharpFluid_tracedSVG
+        ...GatsbyImageSharpFluid
       }
     }
 
     welcomeImage: imageSharp(original: { src: { regex: "/welcome/" } }) {
       fluid(maxWidth: 500, quality: 100) {
-        ...GatsbyImageSharpFluid_tracedSVG
+        ...GatsbyImageSharpFluid
         presentationWidth
       }
     }

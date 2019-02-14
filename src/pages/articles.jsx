@@ -51,9 +51,9 @@ export const articlesMetadataQuery = graphql`
       }
     }
 
-    articlesImage: imageSharp(original: { src: { regex: "/articles/" } }) {
+    articlesImage: imageSharp(original: { src: { regex: "/articles_1/" } }) {
       fluid(maxWidth: 1920, quality: 100) {
-        ...GatsbyImageSharpFluid_tracedSVG
+        ...GatsbyImageSharpFluid
       }
     }
   }
