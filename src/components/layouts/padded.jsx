@@ -27,6 +27,7 @@ const PaddedContent = styled.section`
     width: 100% !important;
     margin: 0;
     padding: 2em;
+    margin-top: 3em;
   }
 `;
 
