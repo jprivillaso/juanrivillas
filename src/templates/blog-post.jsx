@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import Metatags from '../components/commons/meta_tags';
 import PaddedLayout from '../components/layouts/padded';
-import Icon from '../images/gatsby-icon.png';
+import Icon from '../img/gatsby-icon.png';
 
 const PostWrapper = styled.div`
   margin-bottom: 50px;

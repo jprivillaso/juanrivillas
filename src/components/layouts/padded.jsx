@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from '../commons/header';
+import Img from 'gatsby-image';
 
 import './main.css';
-import './padded.css';
 
 const PaddedLayout = styled.div`
   width: 100%;
@@ -14,29 +14,27 @@ const PaddedLayout = styled.div`
   .header a {
     color: black;
   }
+
+  @media (max-width: 1280px) {
+    width: 100% !important;
+  }
 `;
 
 const PaddedContent = styled.section`
   margin: 5rem 20% 1.0875rem;
+
+  @media (max-width: 1280px) {
+    width: 100% !important;
+    margin: 0;
+    padding: 2em;
+  }
 `;
 
-const getImage = (backgroundUrl, backgroundPosition) => {
-  return styled.div`
-    background: url(../../images/${ backgroundUrl || 'articles.jpg' }) no-repeat center center;
-    height: -webkit-fill-available;
-    background-color: #141618;
-    background-repeat: no-repeat;
-    background-position: ${ backgroundPosition || 'center' };
-    background-size: cover;
-    width: 100%;
-    z-index: 1;
-    will-change: transform;
-  `;
-};
+const Image = styled(Img)`
+  margin-top: -10%;
+`;
 
-const paddedLayout = ({ children, backgroundUrl, backgroundPosition }) => {
-  const Image = getImage(backgroundUrl, backgroundPosition);
-
+const paddedLayout = ({ children, backgroundUrl, backgroundPosition, image }) => {
   return (
     <PaddedLayout
       className="padded_layout"
@@ -44,7 +42,13 @@ const paddedLayout = ({ children, backgroundUrl, backgroundPosition }) => {
       <Header />
       {
         backgroundUrl !== 'none'
-          ? <Image className="page_main_image" />
+          ? (
+            <Image
+              title="Articles image"
+              alt="A pencil with brown background"
+              sizes={image}
+            />
+          )
           : null
       }
       <PaddedContent>

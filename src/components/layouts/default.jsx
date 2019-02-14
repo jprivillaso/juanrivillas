@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Img from 'gatsby-image';
 
 import Header from '../commons/header';
 import './main.css';
@@ -8,9 +9,6 @@ const Layout = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: url("../../../images/main_page.jpg") no-repeat center center;
-  background-size: cover;
-  background-position: center;
 `;
 
 const LayoutContent = styled.section`
@@ -19,11 +17,30 @@ const LayoutContent = styled.section`
   overflow: hidden;
 `;
 
-const layout = ({ children }) => (
+const Image = styled(Img)`
+  margin-top: -10%;
+  overflow: hidden;
+  position: fixed !important;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  @media only screen and (max-width : 1024px) {
+    margin-top: 0;
+  }
+`;
+
+const layout = ({ children, image }) => (
   <Layout
     className="default_layout"
   >
     <LayoutContent>
+      <Image
+        title="Home image"
+        alt="A mac with mouse on the right and glasses on top of it."
+        sizes={image}
+      />
       <Header />
       {children}
     </LayoutContent>

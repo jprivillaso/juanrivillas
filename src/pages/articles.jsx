@@ -6,19 +6,21 @@ import ArticleList from '../components/pages/articles';
 import Metatags from '../components/commons/meta_tags';
 
 const Articles = props => {
+  const { data } = props;
   return (
     <PaddedLayout
       backgroundUrl="articles.jpg"
       backgroundPosition="bottom"
+      image={data.articlesImage.sizes}
     >
       <Metatags
         title="Articles"
-        description={props.data.site.siteMetadata.description}
-        url={props.data.site.siteMetadata.siteUrl}
+        description={data.site.siteMetadata.description}
+        url={data.site.siteMetadata.siteUrl}
         pathname={props.location.pathname}
       />
       <ArticleList
-        data={ props.data }
+        data={ data }
       />
     </PaddedLayout>
   );
@@ -46,6 +48,12 @@ export const articlesMetadataQuery = graphql`
         title
         siteUrl
         description
+      }
+    }
+
+    articlesImage: imageSharp(original: { src: { regex: "/articles/" } }) {
+      sizes(maxWidth: 1920) {
+        ...GatsbyImageSharpSizes
       }
     }
   }
