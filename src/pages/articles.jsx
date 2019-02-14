@@ -5,19 +5,19 @@ import PaddedLayout from '../components/layouts/padded';
 import ArticleList from '../components/pages/articles';
 import Metatags from '../components/commons/meta_tags';
 
-const Articles = props => {
-  const { data } = props;
+const Articles = ({ data, location }) => {
+  console.log(data);
   return (
     <PaddedLayout
       backgroundUrl="articles.jpg"
       backgroundPosition="bottom"
-      image={data.articlesImage.sizes}
+      image={data.articlesImage.fluid}
     >
       <Metatags
         title="Articles"
         description={data.site.siteMetadata.description}
         url={data.site.siteMetadata.siteUrl}
-        pathname={props.location.pathname}
+        pathname={location.pathname}
       />
       <ArticleList
         data={ data }
@@ -52,8 +52,8 @@ export const articlesMetadataQuery = graphql`
     }
 
     articlesImage: imageSharp(original: { src: { regex: "/articles/" } }) {
-      sizes(maxWidth: 1920) {
-        ...GatsbyImageSharpSizes
+      fluid(maxWidth: 1920, quality: 100) {
+        ...GatsbyImageSharpFluid
       }
     }
   }

@@ -39,7 +39,8 @@ const layout = ({ children, image }) => (
       <Image
         title="Home image"
         alt="A mac with mouse on the right and glasses on top of it."
-        sizes={image}
+        fixed={typeof window === 'undefined' ? { src: {} } : undefined}
+        fluid={image}
       />
       <Header />
       {children}

@@ -19,7 +19,7 @@ function BlogPost(props) {
 
   return (
     <PaddedLayout
-      backgroundUrl="none"
+      background="none"
     >
       <Metatags
         title={title}

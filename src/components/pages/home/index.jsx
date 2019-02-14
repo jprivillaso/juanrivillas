@@ -24,16 +24,16 @@ const Image = styled(Img)`
 const home = ({ welcomeImg }) => {
   let normalizedProps = welcomeImg;
 
-  console.log(welcomeImg.fluid.presentationWidth < window.outerWidth);
-  console.log(welcomeImg.fluid.presentationWidth, window.outerWidth);
-
   if (normalizedProps.fluid && normalizedProps.fluid.presentationWidth) {
+    let isWindowSmallerThanImg =
+      typeof window !== `undefined` && window.outerWidth < welcomeImg.fluid.presentationWidth;
+
     normalizedProps = {
       ...welcomeImg,
       style: {
         ...(welcomeImg.style || {}),
         maxWidth: welcomeImg.fluid.presentationWidth,
-        width: window.outerWidth < welcomeImg.fluid.presentationWidth
+        width: isWindowSmallerThanImg
           ? welcomeImg.fluid.presentationWidth * 0.7
           : welcomeImg.fluid.presentationWidth
       }
@@ -47,6 +47,7 @@ const home = ({ welcomeImg }) => {
         title="Welcome Image"
         alt="A welcome text"
         {...normalizedProps}
+        fixed={typeof window === 'undefined' ? { src: {} } : undefined}
       />
     </Home>
   );

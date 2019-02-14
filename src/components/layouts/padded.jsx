@@ -34,19 +34,21 @@ const Image = styled(Img)`
   margin-top: -10%;
 `;
 
-const paddedLayout = ({ children, backgroundUrl, backgroundPosition, image }) => {
+const paddedLayout = ({ children, background, image }) => {
+  const pageWithoutBackground = background === 'none';
   return (
     <PaddedLayout
       className="padded_layout"
     >
       <Header />
       {
-        backgroundUrl !== 'none'
+        !pageWithoutBackground
           ? (
             <Image
               title="Articles image"
               alt="A pencil with brown background"
-              sizes={image}
+              fixed={typeof window === 'undefined' ? { src: {} } : undefined}
+              fluid={image}
             />
           )
           : null
