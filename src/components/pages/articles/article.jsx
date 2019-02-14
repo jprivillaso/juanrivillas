@@ -3,15 +3,17 @@ import { Link } from 'gatsby';
 import styled from 'styled-components';
 
 const Article = styled(Link)`
+  color: black;
+  padding: 1em;
+  border-radius: 5px;
+  font-family: 'Roboto', sans-serif !important;
   display: flex;
   flex-direction: column;
   border: 1px solid  gainsboro;
-  padding: .5rem;
   box-shadow: 0 -1px 4px #ede7e7;
   margin: 1rem;
   margin-bottom: 50px;
   text-decoration: none;
-  color: black;
 
   &:hover {
     background-color: whitesmoke;
@@ -21,9 +23,14 @@ const Article = styled(Link)`
 const Title = styled.div`
   display: flex;
   justify-content: space-between;
+
+  h1 {
+    font-family: 'Anton', sans-serif !important;
+  }
 `;
 
 const Content = styled.div`
+  font-family: 'Roboto', sans-serif !important;
 `;
 
 const article = ({ node, keyProp }) => (
@@ -32,12 +39,12 @@ const article = ({ node, keyProp }) => (
     to={node.fields.slug}
     key={`article-${ keyProp }`}
   >
-    <Title className="post_title">
-      <h1>{node.frontmatter.title}</h1>
+    <Title className="post_header">
+      <h1 className="post_title">{node.frontmatter.title}</h1>
       <span>{node.frontmatter.date}</span>
     </Title>
     <Content>
-      <p>{node.excerpt}</p>
+      <p>{node.frontmatter.description}</p>
     </Content>
   </Article>
 );

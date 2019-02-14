@@ -74,6 +74,7 @@ function Metatags(props) {
     >
       <html lang="en" />
       <noscript>{`Enable your JS please`}</noscript>
+      <link href="https://fonts.googleapis.com/css?family=Anton|Roboto" rel="stylesheet" />
     </Helmet>
   );
 }

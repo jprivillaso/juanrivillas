@@ -9,6 +9,14 @@ import Icon from '../img/gatsby-icon.png';
 
 const PostWrapper = styled.div`
   margin-bottom: 50px;
+
+  p {
+    font-family: 'Roboto', sans-serif !important;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Anton', sans-serif !important;
+  }
 `;
 
 function BlogPost(props) {
@@ -31,7 +39,12 @@ function BlogPost(props) {
       <PostWrapper className="post_wrapper">
         <h1>{title}</h1>
         {thumbnail && (
-          <Img fluid={post.frontmatter.image.childImageSharp.fluid} />
+          <Img
+            fluid={post.frontmatter.image.childImageSharp.fluid}
+            style={{
+              marginBottom: '40px'
+            }}
+          />
         )}
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
       </PostWrapper>
