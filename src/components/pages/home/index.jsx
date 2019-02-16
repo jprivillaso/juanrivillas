@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Img from 'gatsby-image';
-import './home.css';
 
 const Home = styled.div`
   -webkit-background-size: cover;
@@ -16,7 +15,7 @@ const Home = styled.div`
 `;
 
 const Image = styled(Img)`
-  position: absolute !important;
+  position: fixed !important;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -80%);
