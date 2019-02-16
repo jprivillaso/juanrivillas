@@ -35,7 +35,7 @@ export const articlesMetadataQuery = graphql`
           }
           excerpt(pruneLength: 250)
           frontmatter {
-            date(formatString: "MMMM Do YYYY")
+            date(formatString: "MMMM D/YYYY", locale: "pt")
             title,
             description
           }

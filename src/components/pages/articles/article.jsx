@@ -33,6 +33,10 @@ const Content = styled.div`
   font-family: 'Roboto', sans-serif !important;
 `;
 
+const Date = styled.span`
+  text-transform: capitalize;
+`;
+
 const article = ({ node, keyProp }) => (
   <Article
     className="article_item"
@@ -41,7 +45,7 @@ const article = ({ node, keyProp }) => (
   >
     <Title className="post_header">
       <h1 className="post_title">{node.frontmatter.title}</h1>
-      <span>{node.frontmatter.date}</span>
+      <Date>{node.frontmatter.date}</Date>
     </Title>
     <Content>
       <p>{node.frontmatter.description}</p>
