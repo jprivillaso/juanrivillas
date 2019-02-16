@@ -39,7 +39,7 @@ const paddedLayout = ({ children, background, image }) => {
   const pageWithoutBackground = background === 'none';
   return (
     <PaddedLayout
-      className="padded_layout"
+      id="padded_layout"
     >
       <Header />
       {

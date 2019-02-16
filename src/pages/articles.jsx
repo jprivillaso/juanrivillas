@@ -6,7 +6,6 @@ import ArticleList from '../components/pages/articles';
 import Metatags from '../components/commons/meta_tags';
 
 const Articles = ({ data, location }) => {
-  console.log(data);
   return (
     <PaddedLayout
       backgroundUrl="articles.jpg"

@@ -2,7 +2,7 @@
 title: Bem-vindo!
 description : Primeiro post, post de boas vindas :) !
 date: '2019-02-14'
-image: time.jpg
+image: hello.jpg
 ---
 
 #Olá!

@@ -1,0 +1,10 @@
+type MarkdownRemark {
+  frontmatter: frontmatter_forced_type
+}
+
+type frontmatter_forced_type {
+  image: File
+  title: String
+  description: String
+  date: String
+}
