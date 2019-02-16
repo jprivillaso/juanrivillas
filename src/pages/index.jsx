@@ -34,7 +34,7 @@ export const homeMetadataQuery = graphql`
       }
     }
 
-    homeImage: imageSharp(original: { src: { regex: "/home_1/" } }) {
+    homeImage: imageSharp(original: { src: { regex: "/home/" } }) {
       fluid(maxWidth: 1920, quality: 100) {
         ...GatsbyImageSharpFluid
       }
