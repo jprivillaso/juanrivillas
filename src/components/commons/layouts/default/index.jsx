@@ -4,7 +4,7 @@ import Header from '../../header';
 import {
   Layout,
   Content
-} from './default_UI';
+} from './index_UI';
 
 import '../main.css';
 

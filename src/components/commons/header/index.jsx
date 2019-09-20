@@ -1,25 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import HeaderLogo from './logo';
 import HeaderLinks from './links';
 import HeaderSocial from './social';
-
-const HeaderContainer = styled.header`
-  position: fixed;
-  right: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  z-index: 10;
-  transition: top 0.3s;
-  background: transparent;
-
-  .header_menu_item {
-    padding: 0px 20px;
-  }
-
-`;
+import {
+  HeaderContainer
+} from './index_UI';
 
 class Header extends React.Component {
   componentDidMount() {

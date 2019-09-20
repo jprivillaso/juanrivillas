@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 
 import Metatags from '../components/commons/meta_tags';
 import Layout from '../components/commons/layouts/default';
+import NotFound from '../components/views/notFound';
 
 export const homeMetadataQuery = graphql`
   query NotFoundMetadataQuery {
@@ -24,8 +25,7 @@ const NotFoundPage = props => (
       url={ props.data.site.siteMetadata.siteUrl }
       pathname={ props.location.pathname }
     />
-    <h1>NOT FOUND</h1>
-    <p>You just hit a route that doesn't exist... the sadness.</p>
+    <NotFound />
   </Layout>
 );
 

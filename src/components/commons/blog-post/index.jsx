@@ -1,27 +1,14 @@
 import React from 'react';
 import Img from 'gatsby-image';
 import { graphql } from 'gatsby';
-import styled from 'styled-components';
 
 import Metatags from '../meta_tags';
 import PaddedLayout from '../layouts/padded';
 import Icon from '../../../img/favicon.png';
 
-const PostWrapper = styled.div`
-  width: 70%;
-  margin: 0 auto;
-  margin-top: 5rem;
-  margin-bottom: 1.0875rem;
-
-  p {
-    font-family: 'Roboto', sans-serif !important;
-    text-align: justify;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Anton', sans-serif !important;
-  }
-`;
+import {
+  PostWrapper
+} from './index_UI';
 
 export const query = graphql`
   query PostQuery($slug: String!) {
@@ -51,7 +38,7 @@ export const query = graphql`
   }
 `;
 
-function BlogPost(props) {
+const BlogPost = props => {
   const post = props.data.markdownRemark;
   const url = props.data.site.siteMetadata.siteUrl;
   const { title, description } = post.frontmatter;
@@ -80,6 +67,6 @@ function BlogPost(props) {
       </PostWrapper>
     </PaddedLayout>
   );
-}
+};
 
 export default BlogPost;
