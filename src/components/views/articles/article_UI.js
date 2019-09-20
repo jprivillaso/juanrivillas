@@ -21,14 +21,16 @@ export const View = styled(Link)`
 export const Title = styled.div`
   display: flex;
   justify-content: space-between;
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
   h1 {
-    font-family: 'Anton', sans-serif !important;
+    font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
 `;
 
 export const Content = styled.div`
-  font-family: 'Roboto', sans-serif !important;
+font-family: -apple-system, system-ui, "Segoe UI",
+Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 `;
 
 export const Date = styled.span`

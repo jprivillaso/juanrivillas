@@ -10,6 +10,7 @@ body {
   margin: 0;
   width: 100%;
   position: relative;
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 #___gatsby,
 #___gatsby > div {
@@ -70,10 +71,6 @@ strong {
 }
 dfn {
   font-style: italic;
-}
-h1 {
-  font-size: 2em;
-  margin: .67em 0;
 }
 mark {
   background-color: #ff0;
@@ -332,6 +329,9 @@ h6 {
   font-size: 0.78405rem;
   line-height: 1.1;
 }
+h1, h2, h3, h4, h5, h6 {
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
 hgroup {
   margin-left: 0;
   margin-right: 0;
@@ -405,23 +405,6 @@ figure {
   padding-right: 0;
   padding-top: 0;
   margin-bottom: 1.45rem;
-}
-pre {
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 0;
-  padding-bottom: 0;
-  padding-left: 0;
-  padding-right: 0;
-  padding-top: 0;
-  margin-bottom: 1.45rem;
-  font-size: 0.85rem;
-  line-height: 1.42;
-  background: hsla(0, 0%, 0%, 0.04);
-  border-radius: 3px;
-  overflow: auto;
-  word-wrap: normal;
-  padding: 1.45rem;
 }
 table {
   margin-left: 0;
@@ -633,4 +616,53 @@ pre tt:after {
   html {
     font-size: 100%;
   }
+}
+
+pre[class*=language-] {
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto;
+}
+
+code[class*=language-], pre[class*=language-] {
+  color: #ccc;
+  background: none;
+  font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
+  font-size: 1em;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+.token.atrule, .token.builtin, .token.important, .token.keyword, .token.selector {
+  color: #cc99cd;
+}
+
+.token.attr-value, .token.char, .token.regex, .token.string, .token.variable {
+  color: #7ec699;
+}
+
+.token.punctuation {
+  color: #ccc;
+}
+
+.token.boolean, .token.function, .token.number {
+  color: #f08d49;
+}
+
+.token.entity, .token.operator, .token.url {
+  color: #67cdcc;
+}
+
+:not(pre)>code[class*=language-], pre[class*=language-] {
+  background: #2d2d2d;
 }

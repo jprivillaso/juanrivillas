@@ -7,11 +7,18 @@ export const PostWrapper = styled.div`
   margin-bottom: 1.0875rem;
 
   p {
-    font-family: 'Roboto', sans-serif !important;
+    font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     text-align: justify;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Anton', sans-serif !important;
+  h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin: 1rem auto;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 200;
   }
 `;
