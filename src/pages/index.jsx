@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import Layout from '../components/commons/layouts/default/index';
+import Layout from '../components/commons/layouts/default';
 import Metatags from '../components/commons/meta_tags';
 import Home from '../components/views/home';
 

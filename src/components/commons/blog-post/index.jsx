@@ -3,7 +3,7 @@ import Img from 'gatsby-image';
 import { graphql } from 'gatsby';
 
 import Metatags from '../meta_tags';
-import PaddedLayout from '../layouts/padded';
+import Layout from '../layouts/infinite';
 import Icon from '../../../img/favicon.png';
 
 import {
@@ -45,7 +45,7 @@ const BlogPost = props => {
   const thumbnail = post.frontmatter.image && post.frontmatter.image.childImageSharp.resize.src;
 
   return (
-    <PaddedLayout>
+    <Layout>
       <Metatags
         title={title}
         description={description}
@@ -65,7 +65,7 @@ const BlogPost = props => {
         )}
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
       </PostWrapper>
-    </PaddedLayout>
+    </Layout>
   );
 };
 

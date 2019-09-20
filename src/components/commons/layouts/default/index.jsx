@@ -2,19 +2,19 @@ import React from 'react';
 
 import Header from '../../header';
 import {
-  Layout,
+  DefaultLayout,
   Content
 } from './index_UI';
 
 import '../main.css';
 
-const layout = ({ children }) => (
-  <Layout>
+const Layout = ({ children }) => (
+  <DefaultLayout>
     <Header />
     <Content>
       {children}
     </Content>
-  </Layout>
+  </DefaultLayout>
 );
 
-export default layout;
+export default Layout;

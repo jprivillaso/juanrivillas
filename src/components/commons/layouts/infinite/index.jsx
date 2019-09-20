@@ -1,20 +1,20 @@
 import React from 'react';
 
 import {
-  Layout,
+  InfiniteLayout,
   Content
 } from './index_UI';
 import Header from '../../header';
 
 import '../main.css';
 
-const paddedLayout = ({ children }) => (
-  <Layout>
+const Layout = ({ children }) => (
+  <InfiniteLayout>
     <Header/>
     <Content>
       { children }
     </Content>
-  </Layout>
+  </InfiniteLayout>
 );
 
-export default paddedLayout;
+export default Layout;

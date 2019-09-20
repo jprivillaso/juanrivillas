@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import PaddedLayout from '../components/commons/layouts/padded';
+import Layout from '../components/commons/layouts/infinite';
 import ArticleList from '../components/views/articles';
 import Metatags from '../components/commons/meta_tags';
 
@@ -41,7 +41,7 @@ export const articlesMetadataQuery = graphql`
 
 const Articles = ({ data, location }) => {
   return (
-    <PaddedLayout className="padded_layout">
+    <Layout>
       <Metatags
         title="Articles"
         description={ data.site.siteMetadata.description }
@@ -49,7 +49,7 @@ const Articles = ({ data, location }) => {
         pathname={ location.pathname }
       />
       <ArticleList data={ data } />
-    </PaddedLayout>
+    </Layout>
   );
 };
 
