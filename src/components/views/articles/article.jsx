@@ -11,8 +11,6 @@ const Article = styled(Link)`
   flex-direction: column;
   border: 1px solid  gainsboro;
   box-shadow: 0 -1px 4px #ede7e7;
-  margin: 1rem;
-  margin-bottom: 50px;
   text-decoration: none;
 
   &:hover {

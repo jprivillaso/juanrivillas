@@ -6,12 +6,12 @@ import {
   Content
 } from './default_UI';
 
-import '../default.css';
+import '../main.css';
 
 const layout = ({ children }) => (
   <Layout>
+    <Header />
     <Content>
-      <Header />
       {children}
     </Content>
   </Layout>

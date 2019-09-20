@@ -30,16 +30,16 @@ export const homeMetadataQuery = graphql`
   }
 `;
 
-const IndexPage = props => {
+const IndexPage = ({ data, location }) => {
   return (
     <Layout>
       <Metatags
         title="Home"
-        description={ props.data.site.siteMetadata.description }
-        url={ props.data.site.siteMetadata.siteUrl }
-        pathname={ props.location.pathname }
+        description={ data.site.siteMetadata.description }
+        url={ data.site.siteMetadata.siteUrl }
+        pathname={ location.pathname }
       />
-      <Home data={ props.data } />
+      <Home data={ data } />
     </Layout>
   );
 };

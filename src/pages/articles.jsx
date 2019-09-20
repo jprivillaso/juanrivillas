@@ -5,26 +5,6 @@ import PaddedLayout from '../components/commons/layouts/padded';
 import ArticleList from '../components/views/articles';
 import Metatags from '../components/commons/meta_tags';
 
-const Articles = ({ data, location }) => {
-  return (
-    <PaddedLayout
-      backgroundUrl="articles.jpg"
-      backgroundPosition="bottom"
-      image={data.articlesImage.fluid}
-    >
-      <Metatags
-        title="Articles"
-        description={data.site.siteMetadata.description}
-        url={data.site.siteMetadata.siteUrl}
-        pathname={location.pathname}
-      />
-      <ArticleList
-        data={ data }
-      />
-    </PaddedLayout>
-  );
-};
-
 export const articlesMetadataQuery = graphql`
   query ArticlesMetadataQuery {
     allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
@@ -58,5 +38,19 @@ export const articlesMetadataQuery = graphql`
     }
   }
 `;
+
+const Articles = ({ data, location }) => {
+  return (
+    <PaddedLayout className="padded_layout">
+      <Metatags
+        title="Articles"
+        description={ data.site.siteMetadata.description }
+        url={ data.site.siteMetadata.siteUrl }
+        pathname={ location.pathname }
+      />
+      <ArticleList data={ data } />
+    </PaddedLayout>
+  );
+};
 
 export default Articles;
