@@ -7,7 +7,7 @@ import {
 
 const articleList = data => {
   return data.allMarkdownRemark.edges.map(({ node }, i) => (
-    <Article node={node} key={i} keyProp={i} />
+    <Article node={ node } key={ i } keyProp={ i } />
   ));
 };
 
