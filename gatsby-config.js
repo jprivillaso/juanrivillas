@@ -9,6 +9,13 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    'gatsby-transformer-remark',
+    'gatsby-plugin-sharp',
+    'gatsby-image',
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-offline',
+    'gatsby-plugin-eslint',
+    'gatsby-plugin-styled-components',
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
@@ -21,13 +28,6 @@ module.exports = {
         icon: 'src/img/favicon.png', // This path is relative to the root of the site.
       },
     },
-    'gatsby-transformer-remark',
-    'gatsby-plugin-sharp',
-    'gatsby-image',
-    'gatsby-transformer-sharp',
-    'gatsby-plugin-offline',
-    'gatsby-plugin-eslint',
-    'gatsby-plugin-styled-components',
     {
       resolve: 'gatsby-transformer-remark',
       options: {

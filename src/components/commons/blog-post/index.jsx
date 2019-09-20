@@ -3,9 +3,9 @@ import Img from 'gatsby-image';
 import { graphql } from 'gatsby';
 import styled from 'styled-components';
 
-import Metatags from '../components/commons/meta_tags';
-import PaddedLayout from '../components/layouts/padded';
-import Icon from '../img/favicon.png';
+import Metatags from '../meta_tags';
+import PaddedLayout from '../layouts/padded';
+import Icon from '../../../img/favicon.png';
 
 const PostWrapper = styled.div`
   margin-bottom: 50px;

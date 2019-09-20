@@ -21,27 +21,47 @@ const Image = styled(Img)`
   transform: translate(-50%, -80%);
 `;
 
-const home = ({ welcomeImg }) => {
-  let normalizedProps = welcomeImg;
+const BackgroundImage = styled(Img)`
+  margin-top: -10%;
+  overflow: hidden;
+  position: fixed !important;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  @media only screen and (max-width : 1024px) {
+    margin-top: 0;
+  }
+`;
+
+const home = props => {
+  const welcomeImage = props.data.welcomeImage;
+  let normalizedProps = welcomeImage;
 
   if (normalizedProps.fluid && normalizedProps.fluid.presentationWidth) {
     let isWindowSmallerThanImg =
-      typeof window !== `undefined` && window.outerWidth < welcomeImg.fluid.presentationWidth;
+      typeof window !== `undefined` && window.outerWidth < welcomeImage.fluid.presentationWidth;
 
     normalizedProps = {
-      ...welcomeImg,
+      ...welcomeImage,
       style: {
-        ...(welcomeImg.style || {}),
-        maxWidth: welcomeImg.fluid.presentationWidth,
+        ...(welcomeImage.style || {}),
+        maxWidth: welcomeImage.fluid.presentationWidth,
         width: isWindowSmallerThanImg
-          ? welcomeImg.fluid.presentationWidth * 0.7
-          : welcomeImg.fluid.presentationWidth
+          ? welcomeImage.fluid.presentationWidth * 0.7
+          : welcomeImage.fluid.presentationWidth
       }
     };
   }
 
   return (
     <Home className="page_home">
+      <BackgroundImage
+        title="Home image"
+        alt="A table with a phone on the right, a Macbook in the middle and a mouse on the right."
+        fixed={typeof window === 'undefined' ? { src: {} } : undefined}
+        fluid={props.data.homeImage.fluid}
+      />
       <Image
         className="welcome_image"
         title="Welcome Image"

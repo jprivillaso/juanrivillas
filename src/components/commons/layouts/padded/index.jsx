@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from '../commons/header';
 import Img from 'gatsby-image';
 
-import './main.css';
+import Header from '../../header';
+import '../default.css';
 
 const PaddedLayout = styled.div`
   width: 100%;

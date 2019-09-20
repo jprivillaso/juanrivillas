@@ -1,8 +1,8 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import PaddedLayout from '../components/layouts/padded';
-import ArticleList from '../components/pages/articles';
+import PaddedLayout from '../components/commons/layouts/padded';
+import ArticleList from '../components/views/articles';
 import Metatags from '../components/commons/meta_tags';
 
 const Articles = ({ data, location }) => {

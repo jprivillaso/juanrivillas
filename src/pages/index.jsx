@@ -1,28 +1,9 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import Layout from '../components/layouts/default';
-import Home from '../components/pages/home';
+import Layout from '../components/commons/layouts/default/index';
 import Metatags from '../components/commons/meta_tags';
-
-const IndexPage = props => {
-  console.log(props);
-  return (
-    <Layout
-      image={props.data.homeImage.fluid}
-    >
-      <Metatags
-        title="Home"
-        description={props.data.site.siteMetadata.description}
-        url={props.data.site.siteMetadata.siteUrl}
-        pathname={props.location.pathname}
-      />
-      <Home
-        welcomeImg={props.data.welcomeImage}
-      />
-    </Layout>
-  );
-};
+import Home from '../components/views/home';
 
 export const homeMetadataQuery = graphql`
   query HomeMetadataQuery {
@@ -48,5 +29,19 @@ export const homeMetadataQuery = graphql`
     }
   }
 `;
+
+const IndexPage = props => {
+  return (
+    <Layout>
+      <Metatags
+        title="Home"
+        description={ props.data.site.siteMetadata.description }
+        url={ props.data.site.siteMetadata.siteUrl }
+        pathname={ props.location.pathname }
+      />
+      <Home data={ props.data } />
+    </Layout>
+  );
+};
 
 export default IndexPage;
