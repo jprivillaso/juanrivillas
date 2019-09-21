@@ -72,8 +72,8 @@ const BlogPost = props => {
           )
         }
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
+        <DiscussionEmbed {...disqusConfig} />
       </PostWrapper>
-      <DiscussionEmbed {...disqusConfig} />
     </Layout>
   );
 };
