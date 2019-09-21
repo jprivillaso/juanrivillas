@@ -4,7 +4,7 @@ export const PostWrapper = styled.div`
   width: 70%;
   margin: 0 auto;
 
-  p {
+  p, li {
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     text-align: justify;
   }

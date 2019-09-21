@@ -31,7 +31,7 @@ exports.createPages = ({ actions, graphql }) => {
           return reject(result.errors);
         }
 
-        const blogTemplate = path.resolve('./src/components/commons/blog-post/index.jsx');
+        const blogTemplate = path.resolve('./src/components/views/blog-post/index.jsx');
 
         result.data.allMarkdownRemark.edges.forEach(({ node }) => {
           createPage({
@@ -39,7 +39,7 @@ exports.createPages = ({ actions, graphql }) => {
             component: blogTemplate,
             context: {
               slug: node.fields.slug,
-            }, // additional data can be passed via context
+            }
           });
         });
       })
