@@ -16,7 +16,7 @@ class Header extends React.Component {
         const $header = document.getElementsByClassName('header')[0];
         let currentScrollPos = window.pageYOffset;
 
-        if (prevScrollpos > currentScrollPos) {
+        if (prevScrollpos >= currentScrollPos) {
           $header.style.top = '0';
         } else {
           $header.style.top = '-5.0rem';

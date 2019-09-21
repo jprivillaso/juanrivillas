@@ -3,9 +3,10 @@ import React from 'react';
 import {
   View, Title, Date, Content, Tag, Flex
 } from './article_UI';
+import { COLORS } from '../../../utils/colors';
 
 const getColor = tag => {
-  if (tag === 'random') return '#F28C0F';
+  if (COLORS[tag]) return COLORS[tag];
   return 'red';
 };
 

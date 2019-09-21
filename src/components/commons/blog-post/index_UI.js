@@ -3,8 +3,6 @@ import styled from 'styled-components';
 export const PostWrapper = styled.div`
   width: 70%;
   margin: 0 auto;
-  margin-top: 5rem;
-  margin-bottom: 1.0875rem;
 
   p {
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
