@@ -1,3 +1,8 @@
+const queries = require('./src/utils/algolia1');
+require('dotenv').config({
+  path: `.env.development`
+});
+
 module.exports = {
   siteMetadata: {
     title: 'Juan Rivillas Personal Website',
@@ -16,6 +21,25 @@ module.exports = {
     'gatsby-plugin-offline',
     'gatsby-plugin-eslint',
     'gatsby-plugin-styled-components',
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: 'UA-148608835-1',
+        // Defines where to place the tracking script - `true` in the head and `false` in the body
+        head: true,
+        // Setting this parameter is optional
+        anonymize: true,
+        // Setting this parameter is also optional
+        respectDNT: true,
+        // Avoids sending pageview hits from custom paths
+        exclude: ['/preview/**'],
+        // Delays sending pageview hits on route update (in milliseconds)
+        pageTransitionDelay: 0,
+        sampleRate: 5,
+        siteSpeedSampleRate: 10,
+        cookieDomain: 'juanrivillas.com',
+      },
+    },
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
