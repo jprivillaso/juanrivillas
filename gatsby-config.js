@@ -1,4 +1,4 @@
-const queries = require('./src/utils/algolia1');
+// const queries = require('./src/utils/algolia1');
 require('dotenv').config({
   path: `.env.development`
 });
@@ -24,7 +24,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: 'UA-148608835-1',
+        trackingId: process.env.GOOGLE_ANALYTICS_TRACKING_ID,
         // Defines where to place the tracking script - `true` in the head and `false` in the body
         head: true,
         // Setting this parameter is optional
