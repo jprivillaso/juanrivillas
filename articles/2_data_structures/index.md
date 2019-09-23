@@ -12,7 +12,7 @@ Sempre que falamos sobre carreira aparece o tema *processos de seleção*.
 Nesse tema, é de suma importância mencionar o que devemos saber ou como devemos nos preparar para uma entrevista em aquela empresa que todos sonhamos trabalhar.
 Em consequência, escolhi falar sobre a importância de um tema que aparece em muitas das vagas e processos de seleção pelos quais você ira passar na sua vida: **Estruturas de dados!**
 
-Normalmente durante a faculdade, a matéria estruturas de dados é dada nos primeiros semestres. Eu considero hoje essa matéria, uma das mais importantes do curso inteiro de Ciências da Computação. O problema que eu vejo é que a maturidade  naquela hora (minha e da maioria das pessoas tal vez) não é suficiente para entender a importância desse tópico e o impacto que irá ter na sua vida se você não aprender estes conceitos fundamentais.
+Normalmente durante a faculdade, a matéria estruturas de dados é dada nos primeiros semestres. Eu considero hoje essa matéria, uma das mais importantes do curso inteiro de Ciências da Computação. O problema que eu vejo é que a maturidade  naquela hora (minha e da maioria das pessoas talvez) não é suficiente para entender a importância desse tópico e o impacto que irá ter na sua vida se você não aprender estes conceitos fundamentais.
 
 Toda linguagem de programação tem uma série de estruturas de dados específicas para ajudar você na criação de aplicações e consegue brindar multiplas formas de representação dos dados, dependendo da sua necessidade.
 
