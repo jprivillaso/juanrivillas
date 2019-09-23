@@ -48,8 +48,8 @@ Hoje em dia frameworks e bibliotecas de frontend como React, Vue, Angular etc. u
 
 Em conclusão, entender o funcionamento das estruturas de dados tem grandes beneficios no seu dia a dia, e pode lhe ajudar a se dar bem em processo de seleção. Para quem fala que nunca chegou a utilizar algum desses algoritmos no seu dia a dia, eu tenho algo para lhe dizer:
 
-*Se você sabe lidar com estruturas de dados e algoritmos complexos, tal vez você não chegue a utilizar eles no seu trabalho do dia a dia. Mas se você não sabe, com certeza nunca irá fazê-lo!*
+*Se você sabe lidar com estruturas de dados e algoritmos complexos, tal vez você não chegue a utilizar eles no seu trabalho do dia a dia. Mas se você não sabe, com certeza nunca irá utilizá-los!*
 
-E você, o que acha ? Concorda ou discorda ? Me conta o que achou :)
+E você ? Me conta o que acha :)
 
 **Obrigado pela Visita!**
