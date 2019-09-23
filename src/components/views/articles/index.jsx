@@ -4,6 +4,12 @@ import Article from './article';
 import {
   View, Image, Articles
 } from './index_UI';
+// import Search from '../../commons/search';
+
+// const searchIndices = [
+//   { name: `Pages`, title: `Pages`, hitComp: `PageHit` },
+//   { name: `Posts`, title: `Blog Posts`, hitComp: `PostHit` },
+// ];
 
 const articleList = data => {
   return data.allMarkdownRemark.edges.map(({ node }, i) => (

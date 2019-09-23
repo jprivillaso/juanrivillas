@@ -50,4 +50,6 @@ Em conclusão, entender o funcionamento das estruturas de dados tem grandes bene
 
 *Se você sabe lidar com estruturas de dados e algoritmos complexos, tal vez você não chegue a utilizar eles no seu trabalho do dia a dia. Mas se você não sabe, com certeza nunca irá fazê-lo!*
 
+E você, o que acha ? Concorda ou discorda ? Me conta o que achou :)
+
 **Obrigado pela Visita!**

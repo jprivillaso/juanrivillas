@@ -12,7 +12,8 @@ export const View = styled(Link)`
   border: 1px solid  gainsboro;
   box-shadow: 0 -1px 4px #ede7e7;
   text-decoration: none;
-  margin-bottom: 1em;
+  margin-bottom: 0px;
+  margin-top: 2em;
 
   &:hover {
     background-color: whitesmoke;
