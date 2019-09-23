@@ -42,7 +42,7 @@ Novamente, tudo vai depender da sua **necessidade!**.
 Por fim, é importante conhecer as vantagens e desvantagens de cada estrutura para poder entender em qual cenário será melhor utilizar uma ou outra. É muito importante destacar que, assim como uma receita de cozinha, você precisa ter experimentado os sabores para que em uma nova receita você pense: *Acho que se eu colocar este ingrediente vai ficar bom.*
 Da mesma forma, você precisa ter experimentado as estruturas de dados, *brincar* com elas e olhar em quais casos elas são boas e em quais casos não.
 
-Entender esses conceitos, não só fará de você um melhor desenvolvedor ou desenvoldora, mas também vai permitir que você se saia bem nos procesos de seleção.
+Entender esses conceitos, não só fará de você um melhor desenvolvedor ou desenvolvedora, mas também vai permitir que você se saia bem nos procesos de seleção.
 85% dos processos de seleção em que eu participei, tive que utilizar o conhecimento de estruturas de dados e algoritmos. E não se engane, este é um conhecimento que não é só para vagas de backend ou full stack!
 Hoje em dia frameworks e bibliotecas de frontend como React, Vue, Angular etc. utilizam algoritmos bastante complexos para determinar se um nodo foi atualizado ou não, ou ferramentas como Webpack que permitem gerar bundles da sua aplicação.
 
