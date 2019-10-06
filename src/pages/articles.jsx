@@ -18,7 +18,7 @@ export const articlesMetadataQuery = graphql`
             date(formatString: "MMMM D/YYYY", locale: "pt")
             title,
             description
-            tag
+            tags
           }
         }
       }

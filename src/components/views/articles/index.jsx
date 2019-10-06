@@ -4,12 +4,11 @@ import Article from './article';
 import {
   View, Image, Articles
 } from './index_UI';
-// import Search from '../../commons/search';
+import Search from '../search';
 
-// const searchIndices = [
-//   { name: `Pages`, title: `Pages`, hitComp: `PageHit` },
-//   { name: `Posts`, title: `Blog Posts`, hitComp: `PostHit` },
-// ];
+const searchIndices = [
+  { name: `Posts`, title: `Posts`, hitComp: `PageHit` }
+];
 
 const articleList = data => {
   return data.allMarkdownRemark.edges.map(({ node }, i) => (
@@ -27,6 +26,7 @@ const articles = ({ data }) => {
         fluid={ data.articlesImage.fluid }
       />
       <Articles>
+        <Search collapse indices={searchIndices} />
         { articleList(data) }
       </Articles>
     </View>

@@ -10,6 +10,16 @@ const getColor = tag => {
   return 'red';
 };
 
+const getTags = tags => {
+  return tags.map(tag => {
+    return (
+      <Tag color={ getColor(tag) }>
+        { tag }
+      </Tag>
+    );
+  });
+};
+
 const Article = ({ node, keyProp }) => (
   <View
     className="article_item"
@@ -20,9 +30,7 @@ const Article = ({ node, keyProp }) => (
       <Date>{node.frontmatter.date}</Date>
       <Flex>
         <h1 className="post_title">{node.frontmatter.title}</h1>
-        <Tag
-          color={ getColor(node.frontmatter.tag) }
-        >{ node.frontmatter.tag }</Tag>
+        { getTags(node.frontmatter.tags) }
       </Flex>
     </Title>
     <Content>

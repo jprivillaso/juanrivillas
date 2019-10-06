@@ -6,6 +6,7 @@ import {
   connectStateResults
 } from 'react-instantsearch-dom';
 import algoliasearch from 'algoliasearch/lite';
+import { ThemeProvider } from 'styled-components';
 
 import { Root, HitsWrapper, PoweredBy } from './styles';
 import Input from './Input';
@@ -37,6 +38,17 @@ const useClickOutside = (ref, handler, events) => {
   });
 };
 
+const theme = {
+  smallBorderRadius: '3px',
+  darkGray: 'gray',
+  lightGray: 'gray',
+  lightBlue: 'blue',
+  darkBlue: 'blue',
+  gray: 'gray',
+  shortTrans: '1s',
+  veryLightGray: 'gray'
+};
+
 export default function Search({ indices, collapse, hitsAsGrid }) {
   const ref = createRef();
   const [query, setQuery] = useState(``);
@@ -45,29 +57,32 @@ export default function Search({ indices, collapse, hitsAsGrid }) {
     process.env.GATSBY_ALGOLIA_APP_ID,
     process.env.GATSBY_ALGOLIA_SEARCH_KEY
   );
+
   useClickOutside(ref, () => setFocus(false));
   return (
-    <InstantSearch
-      searchClient={searchClient}
-      indexName={indices[0].name}
-      onSearchStateChange={({ query }) => setQuery(query)}
-      root={{ Root, props: { ref } }}
-    >
-      <Input onFocus={() => setFocus(true)} {...{ collapse, focus }} />
-      <HitsWrapper show={query.length > 0 && focus} asGrid={hitsAsGrid}>
-        {indices.map(({ name, title, hitComp }) => (
-          <Index key={name} indexName={name}>
-            <header>
-              <h3>{title}</h3>
+    <ThemeProvider theme={ theme }>
+      <InstantSearch
+        searchClient={ searchClient }
+        indexName={ indices[0].name }
+        onSearchStateChange={({ query }) => setQuery(query)}
+        root={{ Root, props: { ref } }}
+      >
+        <Input />
+        <HitsWrapper
+          show={ query.length > 0 && focus }
+          asGrid={ hitsAsGrid }
+        >
+          {indices.map(({ name, hitComp }) => (
+            <Index key={name} indexName={name}>
               <Stats />
-            </header>
-            <Results>
-              <Hits hitComponent={hitComps[hitComp](() => setFocus(false))} />
-            </Results>
-          </Index>
-        ))}
-        <PoweredBy />
-      </HitsWrapper>
-    </InstantSearch>
+              <Results>
+                <Hits hitComponent={hitComps[hitComp](() => setFocus(false))} />
+              </Results>
+            </Index>
+          ))}
+          <PoweredBy />
+        </HitsWrapper>
+      </InstantSearch>
+    </ThemeProvider>
   );
 };

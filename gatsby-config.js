@@ -1,4 +1,4 @@
-// const queries = require('./src/utils/algolia1');
+const queries = require('./src/utils/algolia');
 require('dotenv').config();
 
 module.exports = {
@@ -19,6 +19,15 @@ module.exports = {
     'gatsby-plugin-offline',
     'gatsby-plugin-eslint',
     'gatsby-plugin-styled-components',
+    {
+      resolve: `gatsby-plugin-algolia`,
+      options: {
+        appId: '2001TEZ445',
+        apiKey: '5dca5a3e614ed3e17cb1dd222a4e24fb',
+        queries,
+        chunkSize: 10000
+      },
+    },
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
