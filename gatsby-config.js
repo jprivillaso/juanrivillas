@@ -12,6 +12,12 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-sharp',
+    'gatsby-image',
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-offline',
+    'gatsby-plugin-eslint',
+    'gatsby-plugin-styled-components',
     {
       resolve: `gatsby-transformer-remark`,
       options: {
@@ -67,12 +73,6 @@ module.exports = {
         ],
       },
     },
-    'gatsby-plugin-sharp',
-    'gatsby-image',
-    'gatsby-transformer-sharp',
-    'gatsby-plugin-offline',
-    'gatsby-plugin-eslint',
-    'gatsby-plugin-styled-components',
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
