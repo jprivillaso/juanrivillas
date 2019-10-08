@@ -14,6 +14,7 @@ export const Articles = styled.div`
     padding: 2em;
     padding-top: 0;
     margin: 0px;
+    border: red;
   }
 `;
 

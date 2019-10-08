@@ -31,6 +31,22 @@ export const Title = styled.div`
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     margin-bottom: 0px;
   }
+
+  @media (max-width: 1280px) {
+    h1 {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    > div {
+      flex-direction: column;
+      align-items: start;
+
+      > div {
+        margin-left: 0px;
+      }
+    }
+  }
 `;
 
 export const Content = styled.div`
