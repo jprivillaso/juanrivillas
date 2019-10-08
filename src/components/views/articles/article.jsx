@@ -20,9 +20,13 @@ const Article = ({ node, keyProp }) => (
       <Date>{node.frontmatter.date}</Date>
       <Flex>
         <h1 className="post_title">{node.frontmatter.title}</h1>
-        <Tag
-          color={ getColor(node.frontmatter.tag) }
-        >{ node.frontmatter.tag }</Tag>
+        {
+          node.frontmatter.tags.map((t, i) => (
+            <Tag key={i} color={ getColor(t) }>
+              { t }
+            </Tag>
+          ))
+        }
       </Flex>
     </Title>
     <Content>

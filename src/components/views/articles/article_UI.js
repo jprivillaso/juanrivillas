@@ -53,8 +53,9 @@ export const Image = styled(Img)`
 
 export const Tag = styled.div`
   background-color: ${ props => props.color || 'red' };
-  width: 100px;
+  min-width: 100px;
   height: 40px;
+  padding: 0 10px;
   display: flex;
   align-items: center;
   justify-content: center;

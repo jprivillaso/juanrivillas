@@ -12,7 +12,61 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-react-helmet',
-    'gatsby-transformer-remark',
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: 'gatsby-remark-relative-images',
+          },
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              // It's important to specify the maxWidth (in pixels) of
+              // the content container as this plugin uses this as the
+              // base for generating different widths of each image.
+              maxWidth: 650,
+              linkImagesToOriginal: false
+            },
+          },
+          {
+            resolve: 'gatsby-remark-copy-linked-files',
+            options: {
+              destinationDir: 'static/assets/'
+            }
+          },
+          {
+            resolve: `gatsby-remark-responsive-iframe`,
+            options: {
+              wrapperStyle: `margin-bottom: 1.0725rem`,
+            },
+          },
+          {
+            resolve: `@raae/gatsby-remark-oembed`,
+            options: {
+              usePrefix: false,
+              providers: {
+                include: [
+                  'Youtube',
+                  'Twitter',
+                  'Codepen',
+                ],
+                exclude: [
+                  'Reddit',
+                  'Flickr',
+                  'Instagram'
+                ]
+              },
+            },
+          },
+          `gatsby-plugin-catch-links`,
+          `gatsby-remark-lazy-load`,
+          `gatsby-remark-prismjs`,
+          `gatsby-remark-external-links`,
+          `gatsby-remark-smartypants`,
+        ],
+      },
+    },
     'gatsby-plugin-sharp',
     'gatsby-image',
     'gatsby-transformer-sharp',
@@ -65,6 +119,13 @@ module.exports = {
         path: `${ __dirname }/src/img`,
         name: 'img'
       }
-    }
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${ __dirname }/static/assets`,
+        name: `assets`,
+      },
+    },
   ]
 };
