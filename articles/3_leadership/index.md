@@ -77,11 +77,11 @@ Dado que as pessoas não estão fisicamente presentes, nem trabalhando no mesmo 
 Como cereja do bolo, vem a chave de **OURO**, mais conhecida como: **Documentação** 😍
 É muito importante escrever uma boa documentação não só para sua aplicação senão também para o *Onboarding* dos novos funcionários.
 
-Aprendi isso em um emprego que tive antes do meu emprego atual, onde no meu primeiro dia me enviaram um repositório com toda a documentação do projeto. Depois de longas horas lendo e lendo, compreendi muita coisa de como aquele time funcionava, quais suas práticas de código, como funcionava o processo de entrega e deploy de novas funcionalidades. Foi um momento lindo ver toda essa prepração para minha chegada!
+Aprendi isso no meu emprego anterior, onde no meu primeiro dia me enviaram um repositório com toda a documentação do projeto. Depois de longas horas lendo e lendo, compreendi muita coisa de como aquele time funcionava, quais suas práticas de código, como funcionava o processo de entrega e deploy de novas funcionalidades. Foi um momento lindo ver toda essa prepração para minha chegada!
 
 Hoje, estamos usando [Notion](https://www.notion.so/) para armazenar nossa documentação e anteriormente usavamos Stack Overflow Teams.
 
-Por isso, você e se time devem escrever documentação de todas as funcionalidades para facilitar a chegada de um novo membro.
+Por isso, você e seu time devem escrever documentação de todas as funcionalidades para facilitar a chegada de um novo membro.
 
 ---
 
@@ -90,7 +90,7 @@ Minha resposta é:
 
 > Praticamente nada!
 
-Um bom líder será bom presencialmente ou de maneira remota, sempre e quando se preocupe com as PESSOAS, saiba escutar e tenha a humildade para aprender todo dia uma coisa nova de cada pessoa.
+Um bom líder será bom presencialmente ou de maneira remota, sempre que se preocupe com as PESSOAS, saiba escutar e tenha a humildade para aprender todo dia uma coisa nova de cada pessoa.
 
 Não foi fácil ser breve nessa ocasião, mas espero que tenha gostado!
 
