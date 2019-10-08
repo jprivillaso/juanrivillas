@@ -1,6 +1,6 @@
 ---
 title: Liderando um time remotamente!
-description : Gostaria de compartilhar um pouco as vivencias sobre ser um líder técnico trabalhando remotamente.
+description : Gostaria de compartilhar um pouco sobre a experiência de ser um líder técnico trabalhando remotamente.
 date: '2019-10-06'
 tags: [ 'liderança' ]
 ---
