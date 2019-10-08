@@ -45,7 +45,7 @@ Isto tem a ver com a concentração de conhecimento em uma pessoa só. Assim, se
 
 Um bom líder sabe reconhecer as aptidões das pessoas, em conjunto com a vontade delas para aprender. Uma boa prática é dar oportunidade às pessoas que estão abertas para aprender, uma tarefa nova em um tema que essa pessoa não é tão boa, porém, tem a vontade de se tornar melhor.
 
-Trabalhando de forma remota, é comum fazer certo tipo de reuniões chamadas de *KX (Knowledge Exchange)* ou troca de conhecimento com suas siglas em inglês. Nelas, você escolhe um tópico, provavelmente de alguma funcionalidade que alguém do seu time desenvolveu recentemente e você mostra como foi resolvida e os quesitos técnicos por tás dos panos. Dessa forma todo mundo fica sabendo de como funciona e aprendem coisas novas.
+Trabalhando de forma remota, é comum fazer certo tipo de reuniões chamadas de *KX (Knowledge Exchange)* ou troca de conhecimento com suas siglas em inglês. Nelas, você escolhe um tópico, provavelmente de alguma funcionalidade que alguém do seu time desenvolveu recentemente e você mostra como foi resolvida e os quesitos técnicos por trás dos panos. Dessa forma todo mundo fica sabendo como funciona e aprendem coisas novas.
 
 É muito importante que você divida o conhecimento!
 
@@ -63,7 +63,7 @@ Ser líder requer que você seja muito esperto nesse quesito. Eu principalmente 
 
 Eu tento sempre ser bastante descolado e ter comunicações onde nunca tenho uma posição de superioridade perante os outros. Embora, é uma linha tênue. Já vi casos onde o lider vira amigo do time e não é enchergado com respeito. Você deve tomar muito cuidado com isso!
 
-De qualquer forma, a principal dica aqui é: Converse muito com seu time, não só de questões de tarbalho, mas de algumas coisas descontraidas. Tente sempre **humanizar as pessoas que estão com você**, e isso ajudará a que as pessoas tenham confiança em você.
+De qualquer forma, a principal dica aqui é: Converse muito com seu time, não só de questões de trabalho, mas de algumas coisas descontraidas. Tente sempre **humanizar as pessoas que estão com você**, e isso ajudará com que as pessoas tenham confiança em você.
 
 Além disso, eu sempre estou escrevendo código junto com todas as pessoas da equipe. Dessa forma, eu consigo **sentir a dor do time.** Isso quer dizer, você deve experimentar as falhas do processo de Engenharia de Software. Durante a última sessão de *1 on 1* ([O que é uma reunião 1 on 1?](https://qulture.rocks/blog/como-fazer-uma-one-on-one-e-por-que/)) as pessoas do time manifestaram vários aspectos que precisavam ser melhorados, e eu concordei imediatamente pois eu senti a dor e a necessidade de ter as coisas que os meus colegas estavam pedindo. Portanto, é muito importante sentir e entender as dores do time!
 
