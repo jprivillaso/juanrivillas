@@ -29,22 +29,16 @@ export const Title = styled.div`
   h1 {
     font-weight: 700;
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    margin-bottom: 0px;
+    width: 100%;
+    margin-bottom: 10px;
   }
 
-  @media (max-width: 1280px) {
-    h1 {
-      width: 100%;
-      margin-bottom: 10px;
-    }
+  > div {
+    flex-direction: column;
+    align-items: start;
 
     > div {
-      flex-direction: column;
-      align-items: start;
-
-      > div {
-        margin-left: 0px;
-      }
+      margin-left: 0px;
     }
   }
 `;

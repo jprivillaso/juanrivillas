@@ -2,7 +2,7 @@ import Img from 'gatsby-image';
 import styled from 'styled-components';
 
 export const Articles = styled.div`
-  width: 80%;
+  width: 50%;
   margin: 0 auto;
   margin-top: 2em;
   margin-bottom: 0em;
