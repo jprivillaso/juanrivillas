@@ -29,7 +29,17 @@ export const Title = styled.div`
   h1 {
     font-weight: 700;
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    margin-bottom: 0px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  > div {
+    flex-direction: column;
+    align-items: start;
+
+    > div {
+      margin-left: 0px;
+    }
   }
 `;
 
@@ -53,8 +63,9 @@ export const Image = styled(Img)`
 
 export const Tag = styled.div`
   background-color: ${ props => props.color || 'red' };
-  width: 100px;
+  min-width: 100px;
   height: 40px;
+  padding: 0 10px;
   display: flex;
   align-items: center;
   justify-content: center;

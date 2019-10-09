@@ -3,7 +3,7 @@ title: Bem-vindo!
 description : Primeiro post, post de boas vindas :)
 date: '2019-02-14'
 image: hello.jpg
-tags: ["random"]
+tags: ['random']
 ---
 
 ## Olá

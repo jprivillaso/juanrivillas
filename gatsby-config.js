@@ -12,7 +12,6 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-react-helmet',
-    'gatsby-transformer-remark',
     'gatsby-plugin-sharp',
     'gatsby-image',
     'gatsby-transformer-sharp',
@@ -20,12 +19,58 @@ module.exports = {
     'gatsby-plugin-eslint',
     'gatsby-plugin-styled-components',
     {
-      resolve: `gatsby-plugin-algolia`,
+      resolve: `gatsby-transformer-remark`,
       options: {
-        appId: '2001TEZ445',
-        apiKey: '5dca5a3e614ed3e17cb1dd222a4e24fb',
-        queries,
-        chunkSize: 10000
+        plugins: [
+          {
+            resolve: 'gatsby-remark-relative-images',
+          },
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              // It's important to specify the maxWidth (in pixels) of
+              // the content container as this plugin uses this as the
+              // base for generating different widths of each image.
+              maxWidth: 650,
+              linkImagesToOriginal: false
+            },
+          },
+          {
+            resolve: 'gatsby-remark-copy-linked-files',
+            options: {
+              destinationDir: 'static/assets/'
+            }
+          },
+          {
+            resolve: `gatsby-remark-responsive-iframe`,
+            options: {
+              wrapperStyle: `margin-bottom: 1.0725rem`,
+            },
+          },
+          {
+            resolve: `@raae/gatsby-remark-oembed`,
+            options: {
+              usePrefix: false,
+              providers: {
+                include: [
+                  'Youtube',
+                  'Twitter',
+                  'Codepen',
+                ],
+                exclude: [
+                  'Reddit',
+                  'Flickr',
+                  'Instagram'
+                ]
+              },
+            },
+          },
+          `gatsby-plugin-catch-links`,
+          `gatsby-remark-lazy-load`,
+          `gatsby-remark-prismjs`,
+          `gatsby-remark-external-links`,
+          `gatsby-remark-smartypants`,
+        ],
       },
     },
     {
@@ -73,6 +118,22 @@ module.exports = {
       options: {
         path: `${ __dirname }/src/img`,
         name: 'img'
+      }
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${ __dirname }/static/assets`,
+        name: `assets`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-algolia`,
+      options: {
+        appId: '2001TEZ445',
+        apiKey: '5dca5a3e614ed3e17cb1dd222a4e24fb',
+        queries,
+        chunkSize: 10000
       }
     }
   ]
