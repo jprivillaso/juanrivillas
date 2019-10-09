@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const HeaderSocial = styled.div`
   margin: 0 auto;
-  padding: 1.45rem 1.0875rem;
+  padding: 1.45rem;
   position: absolute;
   right: 0;
 `;

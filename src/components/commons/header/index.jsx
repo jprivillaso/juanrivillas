@@ -19,8 +19,17 @@ class Header extends React.Component {
         if (prevScrollpos >= currentScrollPos) {
           $header.style.top = '0';
         } else {
-          $header.style.top = '-5.0rem';
+          $header.style.top = '-6rem';
         }
+
+        if (currentScrollPos === 0) {
+          $header.classList.add('top');
+          $header.classList.remove('notTop');
+        } else {
+          $header.classList.add('notTop');
+          $header.classList.remove('top');
+        }
+
         prevScrollpos = currentScrollPos;
       }
     });

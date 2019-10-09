@@ -16,7 +16,7 @@ export const HeaderLink = styled(Link)`
 
 export const HeaderLinks = styled.div`
   margin: 0 auto;
-  padding: 1.45rem 1.0875rem;
+  padding: 1.45rem 0px 0px 0px;
   display: flex;
   width: 100%;
   max-width: 100%;
