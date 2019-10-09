@@ -2,7 +2,7 @@
 title: A Importância das estruturas de dados !
 description : Entenda por que é importante aprender estruturas de dados e alguns links úteis
 date: '2019-09-21'
-tags: ['carrera']
+tags: ['carreira']
 ---
 
 ## Estruturas de Dados

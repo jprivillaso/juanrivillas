@@ -39,9 +39,9 @@ Repassar o conhecimento aos outros é talvez uma das coisas mais difíceis de se
 
 Existe um conceito chamado *The bus factor* que diz o seguinte:
 
-> *Quantas pessoas no seu time devem ser atropeladas por um onibus para você estar completamente ferrado no seu projeto?*
+> *Quantas pessoas no seu time devem ser atropeladas por um ônibus para você estar completamente ferrado no seu projeto?*
 
-Isto tem a ver com a concentração de conhecimento em uma pessoa só. Assim, se existe só uma pessoa com muito conhecimento no seu time, e essa pessoa é atropelada por um onibus, *voilá*, você está ferrado!
+Isto tem a ver com a concentração de conhecimento em uma pessoa só. Assim, se existe só uma pessoa com muito conhecimento no seu time, e essa pessoa é atropelada por um ônibus, *voilá*, você está ferrado!
 
 Um bom líder sabe reconhecer as aptidões das pessoas, em conjunto com a vontade delas para aprender. Uma boa prática é dar oportunidade às pessoas que estão abertas para aprender, uma tarefa nova em um tema que essa pessoa não é tão boa, porém, tem a vontade de se tornar melhor.
 
