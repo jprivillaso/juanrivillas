@@ -3,7 +3,7 @@ import React from 'react';
 import {
   View, Title, Date, Content, Tag, Flex
 } from './article_UI';
-import { COLORS } from '../../../utils/colors';
+import { COLORS } from 'utils/colors';
 
 const getColor = tag => {
   if (COLORS[tag]) return COLORS[tag];

@@ -1,9 +1,11 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import Layout from '../components/commons/layouts/default';
-import Metatags from '../components/commons/meta_tags';
-import Home from '../components/views/home';
+import Layout from 'components/DefaultLayout';
+import Metatags from 'components/MetaTags';
+import FullScreen from 'components/FullScreen';
+import HomeImage from 'components/HomeImage';
+import WelcomeImage from 'components/WelcomeImage';
 
 export const homeMetadataQuery = graphql`
   query HomeMetadataQuery {
@@ -12,19 +14,6 @@ export const homeMetadataQuery = graphql`
         title
         siteUrl
         description
-      }
-    }
-
-    homeImage: imageSharp(original: { src: { regex: "/home/" } }) {
-      fluid(maxWidth: 1920, quality: 100) {
-        ...GatsbyImageSharpFluid
-      }
-    }
-
-    welcomeImage: imageSharp(original: { src: { regex: "/welcome/" } }) {
-      fluid(maxWidth: 500, quality: 100) {
-        ...GatsbyImageSharpFluid
-        presentationWidth
       }
     }
   }
@@ -39,7 +28,11 @@ const IndexPage = ({ data, location }) => {
         url={ data.site.siteMetadata.siteUrl }
         pathname={ location.pathname }
       />
-      <Home data={ data } />
+      <FullScreen>
+        <HomeImage />
+        <WelcomeImage />
+      </FullScreen>
+
     </Layout>
   );
 };

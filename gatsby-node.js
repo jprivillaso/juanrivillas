@@ -3,6 +3,7 @@ const { createFilePath } = require('gatsby-source-filesystem');
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions;
+  const blogTemplate = path.resolve('./src/components/BlogPost/index.jsx');
 
   return new Promise((resolve, reject) => {
     const markdownConfig = `
@@ -30,8 +31,6 @@ exports.createPages = ({ actions, graphql }) => {
         if (result.errors) {
           return reject(result.errors);
         }
-
-        const blogTemplate = path.resolve('./src/components/views/blog-post/index.jsx');
 
         result.data.allMarkdownRemark.edges.forEach(({ node }) => {
           createPage({

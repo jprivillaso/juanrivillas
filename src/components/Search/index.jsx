@@ -1,5 +1,6 @@
 import React, { useState, useEffect, createRef } from 'react';
 import {
+  Configure,
   InstantSearch,
   Index,
   Hits,
@@ -67,6 +68,7 @@ export default function Search({ indices, collapse, hitsAsGrid }) {
         onSearchStateChange={({ query }) => setQuery(query)}
         root={{ Root, props: { ref } }}
       >
+        <Configure hitsPerPage={10} distinct />
         <Input />
         <HitsWrapper
           show={ query.length > 0 && focus }

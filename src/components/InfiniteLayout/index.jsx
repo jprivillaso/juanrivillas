@@ -4,12 +4,13 @@ import {
   InfiniteLayout,
   Content
 } from './index_UI';
-import Header from '../../header';
+import Header from 'components/Header';
 
-import '../main.css';
+import GlobalStyles from 'styles/global';
 
 const Layout = ({ children }) => (
   <InfiniteLayout>
+    <GlobalStyles />
     <Header/>
     <Content>
       { children }

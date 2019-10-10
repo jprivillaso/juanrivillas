@@ -3,9 +3,8 @@ import Img from 'gatsby-image';
 import { graphql } from 'gatsby';
 import { DiscussionEmbed } from 'disqus-react';
 
-import Metatags from '../../commons/meta_tags';
-import Layout from '../../commons/layouts/infinite';
-import Icon from '../../../img/favicon.png';
+import Metatags from 'components/MetaTags';
+import Layout from 'components/InfiniteLayout';
 
 import {
   PostWrapper
@@ -55,7 +54,6 @@ const BlogPost = props => {
       <Metatags
         title={ title }
         description={ description }
-        thumbnail={ thumbnail ? url + thumbnail : url + Icon }
         url={ url }
         pathname={ props.location.pathname }
       />

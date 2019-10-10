@@ -67,7 +67,7 @@ export const Form = styled.form`
 `;
 
 export const HitsWrapper = styled.div`
-  display: ${ props => (props.show ? `grid` : `none`) };
+  display: grid;
   max-height: 80vh;
   min-height: 300px;
   overflow: scroll;
@@ -84,6 +84,10 @@ export const HitsWrapper = styled.div`
 
   a, span, p, li {
     font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  }
+
+  .ais-Hits-item {
+
   }
 `;
 
