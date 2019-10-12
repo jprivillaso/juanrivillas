@@ -1,9 +1,9 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import Metatags from 'components/commons/meta_tags';
-import Layout from 'components/commons/layouts/default';
-import NotFound from 'components/views/notFound';
+import Metatags from 'components/MetaTags';
+import Layout from 'components/DefaultLayout';
+import NotFound from 'components/NotFound';
 
 export const homeMetadataQuery = graphql`
   query NotFoundMetadataQuery {

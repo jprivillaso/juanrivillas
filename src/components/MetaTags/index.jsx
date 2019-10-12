@@ -18,7 +18,7 @@ function Metatags(props) {
         },
         {
           property: 'og:image',
-          content: props.thumbnail && props.thumbnail,
+          content: props.thumbnail,
         },
         {
           property: 'og:description',
