@@ -128,6 +128,18 @@ const GlobalStyles = createGlobalStyle`
       transition: none;
     }
   }
+
+  body {
+    --bg: ${ V.Color.white };
+    --bgSolid: ${ V.Color.whiteSolid };
+    --bgSecondary: ${ V.Color.grayWhite };
+    --borderColor: ${ V.Color.grayWhite };
+    --highlightColor: ${ V.Color.blue };
+    --primaryColor: ${ V.Color.black };
+    --secondaryColor: ${ V.Color.gray };
+    --boxShadow: rgba(18, 18, 18, .12);
+
+  }
 `;
 
 export default GlobalStyles;

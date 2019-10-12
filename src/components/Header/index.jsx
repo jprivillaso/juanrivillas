@@ -2,7 +2,6 @@ import React from 'react';
 
 import HeaderLogo from './logo';
 import HeaderLinks from './links';
-import HeaderSocial from './social';
 import {
   HeaderContainer
 } from './index_UI';
@@ -44,7 +43,6 @@ class Header extends React.Component {
       <HeaderContainer className="header">
         <HeaderLogo siteTitle={'JR'} />
         <HeaderLinks />
-        <HeaderSocial />
       </HeaderContainer>
     );
   }

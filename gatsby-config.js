@@ -153,6 +153,7 @@ module.exports = {
       linkedinLink: `https://www.linkedin.com/in/jprivillaso/`,
       githubLink: `https://github.com/jprivillaso`,
       mediumLink: `https://medium.com/@jprivillaso`,
+      stackoverflowLink: `https://stackoverflow.com/users/2599811/jprivillaso`,
     },
   },
   plugins

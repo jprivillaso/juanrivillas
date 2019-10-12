@@ -3,7 +3,6 @@ import { Link } from 'gatsby';
 
 export const HeaderLogo = styled.div`
   margin: 0 auto;
-  padding: 1.45rem;
   position: absolute;
 `;
 

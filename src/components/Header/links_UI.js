@@ -1,10 +1,14 @@
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 
-export const LinkText = styled.h5``;
+import * as T from 'styles/typography';
+
+export const LinkText = styled.h5`
+  ${ T.MenuTitle }
+`;
 
 export const HeaderLink = styled(Link)`
-  color: black;
+  color: var(--primaryColor);
   text-decoration: none;
   text-decoration: none;
   text-transform: uppercase;
@@ -12,11 +16,15 @@ export const HeaderLink = styled(Link)`
   font-weight: 300;
   letter-spacing: 1.2px;
   font-size: 12px;
+
+  &:focus,
+  &:hover {
+    color: var(--highlightColor);
+  }
 `;
 
 export const HeaderLinks = styled.div`
   margin: 0 auto;
-  padding: 1.45rem 0px 0px 0px;
   display: flex;
   width: 100%;
   max-width: 100%;

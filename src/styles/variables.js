@@ -35,10 +35,10 @@ export const Height = {
 
 export const Color = {
   white: `rgba(255, 255, 255, .9)`,
-  black: `rgba(15, 15, 15, .95)`,
+  black: `#4F484B`,
   whiteSolid: `#ffffff`,
   blackSolid: `#000000`,
-  blue: `#187888`,
+  blue: `#68A9B2`,
   blueLight: `#a1ecf7`,
   grayDarker: `#1d1d1d`,
   grayDark: `#2d2d2d`,
