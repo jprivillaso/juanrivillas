@@ -10,6 +10,33 @@ import DisqusWrapper from 'components/DisqusWrapper';
 import PostHeader from 'components/PostHeader';
 import PostNav from 'components/PostNav';
 
+export const query = graphql`
+  query Post($slug: String!) {
+    markdownRemark(fields: { slug: { eq: $slug } }) {
+      html
+      fields {
+        slug
+      }
+      frontmatter {
+        date(locale: "pt-br", formatString: "DD [de] MMMM [de] YYYY")
+        description
+        title
+        tags
+        image {
+          id
+          publicURL
+          childImageSharp {
+            fluid(maxWidth: 1280, quality: 60) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+      timeToRead
+    }
+  }
+`;
+
 const BlogPost = props => {
   const post = props.data.markdownRemark;
   const next = props.pageContext.next;
@@ -44,30 +71,3 @@ const BlogPost = props => {
 };
 
 export default BlogPost;
-
-export const query = graphql`
-  query Post($slug: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
-      html
-      fields {
-        slug
-      }
-      frontmatter {
-        date(locale: "pt-br", formatString: "DD [de] MMMM [de] YYYY")
-        description
-        title
-        tags
-        image {
-          id
-          publicURL
-          childImageSharp {
-            fluid(maxWidth: 1280, quality: 60) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-      }
-      timeToRead
-    }
-  }
-`;

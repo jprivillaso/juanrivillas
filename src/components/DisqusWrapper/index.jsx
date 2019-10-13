@@ -4,7 +4,7 @@ import ReactDisqusComments from 'react-disqus-comments';
 import * as S from './styled';
 
 const DisqusWrapper = ({ slug, title }) => {
-  const url = `https://juanrivillas.com/blog${ slug }`;
+  const url = `https://juanrivillas.com${ slug }`;
 
   return (
     <S.DisqusWrapper>
