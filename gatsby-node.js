@@ -1,59 +1,99 @@
-const path = require('path');
-const { createFilePath } = require('gatsby-source-filesystem');
+const path = require(`path`);
+const { createFilePath } = require(`gatsby-source-filesystem`);
+const { fmImagesToRelative } = require('gatsby-remark-relative-images');
 
-exports.createPages = ({ actions, graphql }) => {
+exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
-  const blogTemplate = path.resolve('./src/components/BlogPost/index.jsx');
+  const blogPost = path.resolve(`./src/templates/blog-post.jsx`);
 
-  return new Promise((resolve, reject) => {
-    const markdownConfig = `
-      {
-        allMarkdownRemark(
-          sort: { order: DESC, fields: [frontmatter___date] }
-          limit: 1000
-        ) {
-          edges {
-            node {
-              fields {
-                slug
-              }
-              frontmatter {
-                title
-              }
+  return graphql(
+    `{
+      allMarkdownRemark(
+        sort: { fields: [frontmatter___date], order: DESC }
+        limit: 1000
+      ) {
+        edges {
+          node {
+            fields {
+              slug
+            }
+            frontmatter {
+              date(locale: "pt-br", formatString: "DD MMM[,] YYYY")
+              description
+              title
+              tags
+            }
+          }
+          next {
+            fields {
+              slug
+            }
+            frontmatter {
+              title
+              date(locale: "pt-br", formatString: "DD MMM[,] YYYY")
+            }
+          }
+          previous {
+            fields {
+              slug
+            }
+            frontmatter {
+              title
+              date(locale: "pt-br", formatString: "DD MMM[,] YYYY")
             }
           }
         }
       }
-    `;
+    }
+  `).then(result => {
+    if (result.errors) throw result.errors;
 
-    resolve(
-      graphql(markdownConfig).then(result => {
-        if (result.errors) {
-          return reject(result.errors);
+    // Create blog posts pages.
+    const posts = result.data.allMarkdownRemark.edges;
+
+    posts.forEach(({ node, next, previous }) => {
+      createPage({
+        path: node.fields.slug,
+        component: blogPost,
+        context: {
+          slug: node.fields.slug,
+          // the order is different here because of the DESC order
+          previous: next,
+          next: previous
         }
+      });
+    });
 
-        result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-          createPage({
-            path: node.fields.slug,
-            component: blogTemplate,
-            context: {
-              slug: node.fields.slug,
-            }
-          });
-        });
-      })
-    );
+    // Create blog post list pages
+    const postsPerPage = 30;
+    const numPages = Math.ceil(posts.length / postsPerPage);
+
+    Array.from({ length: numPages }).forEach((_, i) => {
+      createPage({
+        path: i === 0 ? `/blog/` : `/blog/${ i + 1 }`,
+        component: path.resolve('./src/templates/blog-list.jsx'),
+        context: {
+          limit: postsPerPage,
+          skip: i * postsPerPage,
+          numPages,
+          currentPage: i + 1
+        }
+      });
+    });
   });
 };
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions;
-  if (node.internal.type === 'MarkdownRemark') {
-    const slug = createFilePath({ node, getNode, basePath: 'articles' });
+
+  fmImagesToRelative(node);
+
+  if (node.internal.type === `MarkdownRemark`) {
+    const slug = createFilePath({ node, getNode, basePath: `blog` });
     createNodeField({
       node,
-      name: 'slug',
-      value: slug,
+      name: `slug`,
+      value: `blog/${ slug.slice(12) }`
     });
   }
 };

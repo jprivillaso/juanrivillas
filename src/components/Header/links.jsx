@@ -11,7 +11,7 @@ const menuItems = [
   },
   {
     label: 'Articles',
-    path: '/articles',
+    path: '/blog',
   }
 ];
 

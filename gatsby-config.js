@@ -4,26 +4,76 @@ require('dotenv').config({
 
 const queries = require('./src/utils/algolia');
 
-const plugins = [
-  `gatsby-transformer-json`,
-  'gatsby-plugin-resolve-src',
-  `gatsby-plugin-svgr`,
-  `gatsby-plugin-sitemap`,
-  'gatsby-plugin-react-helmet',
-  'gatsby-plugin-sharp',
-  'gatsby-image',
-  'gatsby-transformer-sharp',
-  'gatsby-plugin-offline',
-  'gatsby-plugin-eslint',
-  'gatsby-plugin-styled-components',
-  `gatsby-plugin-netlify-cms`,
-  `gatsby-plugin-netlify`,
+const feeds = [
   {
-    resolve: 'gatsby-plugin-netlify-cache',
+    serialize: ({ query: { site, allMarkdownRemark } }) => {
+      return allMarkdownRemark.edges.map(edge => {
+        return Object.assign({}, edge.node.frontmatter, {
+          description: edge.node.frontmatter.description,
+          date: edge.node.frontmatter.date,
+          url: site.siteMetadata.siteUrl + edge.node.fields.slug,
+          guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+          custom_elements: [{ 'content:encoded': edge.node.html }]
+        });
+      });
+    },
+    query: `
+      {
+        allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}) {
+          edges {
+            node {
+              fields {
+                slug
+              }
+              frontmatter {
+                title
+                description
+                date
+              }
+              excerpt(truncate: true, pruneLength: 500, format: HTML)
+            }
+          }
+        }
+      }
+    `,
+    output: '/feed.xml',
+    title: 'Felipe Fialho - RSS Feed'
+  }
+];
+
+const plugins = [
+  `gatsby-plugin-sharp`,
+  `gatsby-transformer-sharp`,
+  {
+    // keep as first gatsby-source-filesystem plugin for gatsby image support
+    resolve: 'gatsby-source-filesystem',
     options: {
-      cachePublic: true
+      path: `${ __dirname }/static/assets`,
+      name: 'uploads'
     }
   },
+  {
+    resolve: `gatsby-source-filesystem`,
+    options: {
+      path: `${ __dirname }/static/assets`,
+      name: `assets`,
+    },
+  },
+  {
+    resolve: `gatsby-source-filesystem`,
+    options: {
+      path: `${ __dirname }/articles`,
+      name: `blog`,
+    },
+  },
+  `gatsby-transformer-json`,
+  'gatsby-plugin-resolve-src',
+  `gatsby-plugin-styled-components`,
+  `gatsby-plugin-svgr`,
+  `gatsby-plugin-transition-link`,
+  `gatsby-plugin-offline`,
+  `gatsby-plugin-react-helmet`,
+  `gatsby-plugin-sitemap`,
   {
     resolve: `gatsby-transformer-remark`,
     options: {
@@ -80,80 +130,91 @@ const plugins = [
     },
   },
   {
-    resolve: `gatsby-plugin-google-analytics`,
+    resolve: `gatsby-plugin-feed`,
     options: {
-      trackingId: process.env.GATSBY_GOOGLE_ANALYTICS_ID
+      query: `
+        {
+          site {
+            siteMetadata {
+              title
+              description
+              siteUrl
+              site_url: siteUrl
+            }
+          }
+        }
+      `,
+      feeds
     }
   },
   {
-    resolve: 'gatsby-plugin-manifest',
+    resolve: 'gatsby-plugin-i18n',
     options: {
-      name: 'Juan Rivillas',
-      short_name: 'juanrivillas.com',
-      start_url: '/',
-      background_color: '#663399',
-      theme_color: '#663399',
-      display: 'minimal-ui',
-      icon: 'static/assets/favicon.png'
+      langKeyDefault: 'pt-br',
+      useLangKeyLayout: false
+    }
+  },
+  {
+    resolve: `gatsby-plugin-manifest`,
+    options: {
+      name: `Felipe Fialho`,
+      short_name: `felipefialho.com`,
+      start_url: `/`,
+      background_color: `#fcfcfc`,
+      theme_color: `#111111`,
+      display: `minimal-ui`,
+      icon: `static/assets/favicon.png`,
     },
   },
+  `gatsby-plugin-netlify-cms`,
+  `gatsby-plugin-netlify`,
   {
-    resolve: 'gatsby-transformer-remark',
+    resolve: 'gatsby-plugin-netlify-cache',
     options: {
-      plugins: [
-        'gatsby-remark-prismjs'
-      ]
+      cachePublic: true
     }
   },
-  {
-    resolve: 'gatsby-source-filesystem',
-    options: {
-      path: `${ __dirname }/src/pages`,
-      name: 'pages'
-    }
-  },
-  {
-    resolve: 'gatsby-source-filesystem',
-    options: {
-      path: `${ __dirname }/articles`,
-      name: 'articles'
-    }
-  },
-  {
-    resolve: 'gatsby-source-filesystem',
-    options: {
-      path: `${ __dirname }/static/assets`,
-      name: 'images'
-    }
-  },
-  {
-    resolve: `gatsby-plugin-algolia`,
-    options: {
-      appId: '2001TEZ445',
-      apiKey: '5dca5a3e614ed3e17cb1dd222a4e24fb',
-      queries,
-      chunkSize: 10000
-    }
-  }
 ];
+
+if (process.env.CONTEXT === 'production') {
+  const algolia = {
+    resolve: `gatsby-plugin-algolia-search`,
+    options: {
+      appId: process.env.GATSBY_ALGOLIA_APP_ID,
+      apiKey: process.env.ALGOLIA_ADMIN_KEY,
+      queries,
+      chunkSize: 10000, // default: 1000
+      enablePartialUpdates: true
+    }
+  };
+
+  const analytics = {
+    resolve: `gatsby-plugin-google-analytics`,
+    options: {
+      trackingId: process.env.GOOGLE_ANALYTICS_ID,
+      head: false
+    }
+  };
+
+  plugins.push(algolia);
+  plugins.push(analytics);
+}
 
 module.exports = {
   siteMetadata: {
-    title: 'Juan Rivillas Personal Website',
-    author: 'Juan Rivillas',
-    position: 'Technical Leader',
-    siteUrl: 'http://juanrivillas.com',
-    description: `
-      Personal website of Juan Pablo Rivillas Ospina. Contains articles related to
-      technology and programming.
-    `,
+    title: `Felipe Fialho - Front-end Developer`,
+    author: `Felipe Fialho`,
+    position: 'Front-end Developer',
+    description: `Site pessoal e blog de um desenvolvedor Front-end apaixonado por criar coisas e compartilhar boas idéias.`,
+    descriptionEn: `Personal website of a Front End developer passionate about create things and sharing good ideas.`,
+    siteUrl: `https://felipefialho.com/`,
     social: {
-      twitter: `jprivillaso`,
-      twitterLink: `https://twitter.com/jprivillaso`,
-      linkedinLink: `https://www.linkedin.com/in/jprivillaso/`,
-      githubLink: `https://github.com/jprivillaso`,
-      mediumLink: `https://medium.com/@jprivillaso`,
-      stackoverflowLink: `https://stackoverflow.com/users/2599811/jprivillaso`,
+      twitter: `felipefialho_`,
+      twitterLink: `https://twitter.com/felipefialho_`,
+      linkedinLink: `https://www.linkedin.com/in/felipefialho/`,
+      githubLink: `https://github.com/felipefialho`,
+      stackoverflowLink: `https://codepen.io/felipefialho`,
+      mediumLink: `https://medium.com/@felipefialho`,
     },
   },
   plugins

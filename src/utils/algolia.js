@@ -5,15 +5,17 @@ const postQuery = `{
     edges {
       node {
         objectID: id
-        fields{
+        fields {
           slug
         }
-        excerpt(pruneLength: 250)
         frontmatter {
+          date(locale: "pt-br", formatString: "DD MMM[,] YYYY")
+          description
           title
-          date(formatString: "MMM D, YYYY")
           tags
         }
+        timeToRead
+        excerpt(pruneLength: 5000)
       }
     }
   }
@@ -32,8 +34,8 @@ const queries = [
   {
     query: postQuery,
     transformer: ({ data }) => flatten(data.posts.edges),
-    indexName: `Posts`,
-    settings
+    indexName: process.env.GATSBY_ALGOLIA_INDEX_NAME,
+    settings,
   },
 ];
 

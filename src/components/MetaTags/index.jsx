@@ -1,28 +1,48 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import { useStaticQuery, graphql } from 'gatsby';
 
-function Metatags(props) {
+function Metatags({ description, pathname, title, image }) {
+  const { site } = useStaticQuery(
+    graphql`
+      query {
+        site {
+          siteMetadata {
+            title
+            description
+            author
+            siteUrl
+          }
+        }
+      }
+    `
+  );
+
+  const metaDescription = description || site.siteMetadata.description;
+  const ogImage = image || 'https://felipefialho.com/assets/og-image.jpg';
+  const ogUrl = pathname || site.siteMetadata.siteUrl;
+
   return (
     <Helmet
-      title={props.title}
+      title={title}
       meta={[
-        { name: 'title', content: props.title },
-        { name: 'description', content: props.description },
+        { name: 'title', content: title },
+        { name: 'description', content: description },
         {
           property: 'og:title',
-          content: props.title,
+          content: title,
         },
         {
           property: 'og:url',
-          content: props.pathname ? props.url + props.pathname : props.url,
+          content: ogUrl,
         },
         {
           property: 'og:image',
-          content: props.thumbnail,
+          content: ogImage,
         },
         {
           property: 'og:description',
-          content: props.description,
+          content: metaDescription,
         },
         {
           property: 'og:image:width',
@@ -45,14 +65,14 @@ function Metatags(props) {
           content: 'es_CO',
         },
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: props.title },
+        { name: 'twitter:title', content: title },
         {
           name: 'twitter:description',
-          content: props.description,
+          content: description,
         },
         {
           name: 'twitter:image',
-          content: props.thumbnail && props.thumbnail,
+          content: ogImage,
         },
         { property: 'og:type', content: 'website' },
         { name: 'robots', content: 'index, follow' },
