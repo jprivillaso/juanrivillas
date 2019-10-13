@@ -34,19 +34,26 @@ export const Height = {
 // --------------------------------------------------
 
 export const Color = {
-  white: `rgba(255, 255, 255, .9)`,
-  black: `#4F484B`,
-  whiteSolid: `#ffffff`,
-  blackSolid: `#000000`,
-  blue: `#68A9B2`,
-  blueLight: `#a1ecf7`,
-  grayDarker: `#1d1d1d`,
-  grayDark: `#2d2d2d`,
-  gray: `#757575`,
-  grayLight: `#aaaaaa`,
-  grayLighter: `#efefef`,
-  grayWhite: `#f1f1f1`,
-  yellow: `#e6af05`,
+  white: 'rgba(255, 255, 255, .9)',
+  black: '#4F484B',
+  whiteSolid: '#ffffff',
+  blackSolid: '#000000',
+  blue: '#68A9B2',
+  blueLight: '#a1ecf7',
+  grayDarker: '#1d1d1d',
+  grayDark: '#2d2d2d',
+  gray: '#757575',
+  grayLight: '#aaaaaa',
+  grayLighter: '#efefef',
+  grayWhite: '#f1f1f1',
+  yellow: '#e6af05',
+  orangeLight: '#FFAD6F',
+  devops: '#38A69B',
+  random: '#FF3F63',
+  carreira: '#F28C0F',
+  liderança: '#07D9B2',
+  js: '#F28C0F',
+  default: '#F28C0F'
 };
 
 // --------------------------------------------------

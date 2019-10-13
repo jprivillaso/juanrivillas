@@ -32,7 +32,7 @@ export const Menu = styled.nav`
       ${ T.LinkTransition }
 
       &:after {
-        background-color: ${ V.Color.blueLight };
+        background-color: var(--highlightColor);
         margin-top: 0;
         top: calc(100% - 2px);
       }
@@ -43,12 +43,12 @@ export const Menu = styled.nav`
     }
 
     &.active {
-      color: ${ V.Color.blueLight };
+      color: var(--highlightColor);
     }
 
     &:focus,
     &:hover {
-      color: ${ V.Color.blueLight };
+      color: var(--highlightColor);
     }
   }
 `;

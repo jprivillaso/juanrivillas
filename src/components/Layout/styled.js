@@ -13,10 +13,8 @@ export const Layout = styled.section`
 export const Main = styled.main.attrs({
   role: 'main',
 })`
-  margin-bottom: ${ V.Height.footer };
   margin-top: ${ V.Height.headerSm };
   min-height: 100vh;
-  padding-bottom: ${ V.Space.xlg };
   padding-top: ${ V.Height.mainTop };
   width: 100%;
 

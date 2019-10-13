@@ -1,18 +1,25 @@
 import React from 'react';
 
 import * as S from './styled';
+import { Color as C } from 'styles/variables';
 
-const Tags = ({ tags, isLink }) => {
-  return (
-    <S.Tags>
-      <S.TagIcon />
-      {tags.map((tag, i) => (
-        <S.TagHolder key={i}>
+const getColor = tag => (
+  C[tag] || C.default
+);
+
+const Tags = ({ tags }) => (
+  <S.Tags>
+    {tags.map((tag, i) => (
+      <React.Fragment key={`tag-${ i }`} >
+        <S.TagIcon
+          color={getColor(tag)}
+        />
+        <S.TagHolder>
           <S.TagItem>{tag}</S.TagItem>
         </S.TagHolder>
-      ))}
-    </S.Tags>
-  );
-};
+      </React.Fragment>
+    ))}
+  </S.Tags>
+);
 
 export default Tags;

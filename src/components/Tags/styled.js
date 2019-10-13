@@ -57,4 +57,6 @@ export const TagIcon = styled(Tag)`
   display: block;
   margin-right: ${ V.Space.xs };
   width: ${ V.Space.sm };
+  stroke: ${ props => props.color || '#FFAD6F' };
+  fill: ${ props => props.color || '#FFAD6F' };
 `;
