@@ -8,6 +8,13 @@ import Header from 'components/Header';
 import * as S from './styled';
 
 const Layout = ({ children }) => {
+  // eslint-disable-next-line no-undef
+  if (typeof location !== 'undefined' && location.pathname === '/') {
+    document.getElementsByTagName('body')[0].classList.add('noScroll');
+  } else {
+    document.getElementsByTagName('body')[0].classList.remove('noScroll');
+  }
+
   return (
     <S.Layout>
       <GlobalStyles />

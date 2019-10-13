@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 
 import Metatags from 'components/MetaTags';
-import Layout from 'components/DefaultLayout';
+import Layout from 'components/Layout';
 import NotFound from 'components/NotFound';
 
 export const homeMetadataQuery = graphql`

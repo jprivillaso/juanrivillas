@@ -133,6 +133,10 @@ const GlobalStyles = createGlobalStyle`
     --primaryColor: ${ V.Color.black };
     --secondaryColor: ${ V.Color.gray };
     --boxShadow: rgba(18, 18, 18, .12);
+
+    &.noScroll {
+      overflow: hidden;
+    }
   }
 
   p a {

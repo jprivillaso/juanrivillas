@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import qs from 'qs';
 import ReactGA from 'react-ga';
-
-import { InstantSearch, SearchBox, Stats, Configure, Hits } from 'react-instantsearch-dom';
+import {
+  InstantSearch,
+  SearchBox,
+  Stats,
+  Configure,
+  Hits
+} from 'react-instantsearch-dom';
 
 import Hit from './Hit';
 import * as S from './styled';

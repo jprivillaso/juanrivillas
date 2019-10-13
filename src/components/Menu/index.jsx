@@ -17,7 +17,7 @@ const trackClick = item => {
 
 const getCurrentPage = () => {
   // eslint-disable-next-line no-undef
-  return location.pathname;
+  return typeof location !== 'undefined' && location.pathname;
 };
 
 const Menu = () => {

@@ -23,6 +23,7 @@ const PostNav = ({ next, previous }) => {
             slug={previous.fields.slug}
             date={previous.frontmatter.date}
             title={previous.frontmatter.title}
+            description={previous.frontmatter.description}
             timeToRead={previous.timeToRead}
             isMini={true}
             gaLabel='Post Navigation'
