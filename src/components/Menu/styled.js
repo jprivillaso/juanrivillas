@@ -6,14 +6,20 @@ import * as T from 'styles/typography';
 
 export const Menu = styled.nav`
   display: flex;
+  width: 100%;
+  justify-content: center;
 
   > a {
     align-items: center;
     color: ${ V.Color.white };
     cursor: pointer;
     display: inline-flex;
-    font-size: 1.7rem;
-    font-weight: 600;
+    font-size: 1.3rem;
+    font-weight: 300;
+    letter-spacing: 1.2px;
+    font-family: -apple-system,system-ui,Segoe UI,Roboto,
+      Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+    text-transform: initial;
     height: ${ V.Height.headerSm };
     letter-spacing: .05rem;
     padding-left: ${ V.Space.xs };

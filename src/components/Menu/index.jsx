@@ -15,23 +15,31 @@ const trackClick = item => {
   });
 };
 
+const getCurrentPage = () => {
+  // eslint-disable-next-line no-undef
+  return location.pathname;
+};
+
 const Menu = () => {
   return (
     <S.Menu>
-      {menuLinks.map((link, i) => (
-        <AniLink
-          partiallyActive={true}
-          key={i}
-          cover
-          bg={getActiveTheme()}
-          direction="down"
-          duration={1}
-          to={link.url}
-          onClick={() => trackClick(link.label)}
-          activeClassName="active">
-          {link.label}
-        </AniLink>
-      ))}
+      {
+        menuLinks.map((link, i) => (
+          <AniLink
+            partiallyActive={true}
+            key={i}
+            cover
+            bg={getActiveTheme()}
+            direction="down"
+            duration={1}
+            to={link.url}
+            onClick={() => trackClick(link.label)}
+            activeClassName={ link.url === getCurrentPage() ? 'active' : '' }
+          >
+            {link.label}
+          </AniLink>
+        ))
+      }
     </S.Menu>
   );
 };

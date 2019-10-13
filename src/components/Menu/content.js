@@ -1,10 +1,10 @@
 const menuLinks = [
   {
-    label: 'Home',
+    label: 'HOME',
     url: '/'
   },
   {
-    label: 'Articles',
+    label: 'ARTICLES',
     url: '/blog/'
   },
 ];
