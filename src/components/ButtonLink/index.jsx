@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { getActiveTheme } from 'utils/themes';
 
@@ -16,11 +15,6 @@ const ButtonLink = ({ children, to }) => {
       { children }
     </S.ButtonLink>
   );
-};
-
-ButtonLink.propTypes = {
-  children: PropTypes.node.isRequired,
-  to: PropTypes.node.isRequired
 };
 
 export default ButtonLink;

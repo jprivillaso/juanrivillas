@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import qs from 'qs';
 import ReactGA from 'react-ga';
 
@@ -40,7 +39,7 @@ const Search = ({ algolia, callback, props }) => {
             onSearchStateChange={onSearchStateChange}>
             <Configure hitsPerPage={100} distinct />
             <SearchBox
-              translations={{ placeholder: 'Pesquisar no blog...' }} />
+              translations={{ placeholder: 'Pesquisar' }} />
             {searchState && searchState.query ? (
               <>
                 <Stats translations={{
@@ -62,11 +61,6 @@ const Search = ({ algolia, callback, props }) => {
       }
     </S.Search>
   );
-};
-
-Search.propTypes = {
-  algolia: PropTypes.object.isRequired,
-  callback: PropTypes.node
 };
 
 export default Search;

@@ -4,7 +4,7 @@ import Header from 'components/Header';
 import {
   DefaultLayout,
   Content
-} from './index_UI';
+} from './styled';
 
 import GlobalStyles from 'styles/global';
 

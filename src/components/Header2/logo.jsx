@@ -1,7 +1,8 @@
 import React from 'react';
 
+import ButtonLink from 'components/ButtonLink';
 import {
-  HeaderLogo, HeaderText, HeaderLink
+  HeaderLogo, HeaderText
 } from './logo_UI';
 
 const headerLogo = ({ siteTitle }) => (
@@ -9,11 +10,9 @@ const headerLogo = ({ siteTitle }) => (
     className="header_logo"
   >
     <HeaderText>
-      <HeaderLink
-        to="/"
-      >
+      <ButtonLink rel="prev" to="/">
         {siteTitle}
-      </HeaderLink>
+      </ButtonLink>
     </HeaderText>
   </HeaderLogo>
 );

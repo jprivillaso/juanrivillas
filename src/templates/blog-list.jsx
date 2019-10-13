@@ -1,12 +1,37 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import Layout from 'components/InfiniteLayout';
+import Layout from 'components/Layout';
 import SEO from 'components/MetaTags';
 import BlogItem from 'components/BlogItem';
 import GridTemplate from 'components/GridTemplate';
 import Pagination from 'components/Pagination';
 import Search from 'components/Search';
+
+export const BlogListQuery = graphql`
+  query BlogListQuery($skip: Int!, $limit: Int!) {
+    allMarkdownRemark(
+      sort: { fields: frontmatter___date, order: DESC }
+      limit: $limit
+      skip: $skip
+    ) {
+      edges {
+        node {
+          fields {
+            slug
+          }
+          frontmatter {
+            date(locale: "pt-br", formatString: "DD MMM[,] YYYY")
+            description
+            title
+            tags
+          }
+          timeToRead
+        }
+      }
+    }
+  }
+`;
 
 const BlogList = props => {
   const { currentPage, numPages } = props.pageContext;
@@ -66,30 +91,5 @@ const BlogList = props => {
     </Layout>
   );
 };
-
-export const BlogListQuery = graphql`
-  query BlogListQuery($skip: Int!, $limit: Int!) {
-    allMarkdownRemark(
-      sort: { fields: frontmatter___date, order: DESC }
-      limit: $limit
-      skip: $skip
-    ) {
-      edges {
-        node {
-          fields {
-            slug
-          }
-          frontmatter {
-            date(locale: "pt-br", formatString: "DD MMM[,] YYYY")
-            description
-            title
-            tags
-          }
-          timeToRead
-        }
-      }
-    }
-  }
-`;
 
 export default BlogList;

@@ -54,8 +54,8 @@ const GlobalStyles = createGlobalStyle`
 
   img {
     display: block;
-    height: auto;
-    max-width: 100%;
+  	height: auto;
+  	max-width: 100%;
   }
 
   svg {
@@ -102,8 +102,7 @@ const GlobalStyles = createGlobalStyle`
   body {
     background-color: var(--bg);
     color: var(--primaryColor);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-      "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-size: 2rem;
     min-height: calc(100vh);
     -webkit-overflow-scrolling: touch;
@@ -111,6 +110,28 @@ const GlobalStyles = createGlobalStyle`
     text-rendering: optimizeLegibility;
     transition: background-color ${ V.Transition.default };
     will-change: background-color;
+  }
+
+  body.theme-dark {
+    --bg: ${ V.Color.grayDarker };
+    --bgSolid: ${ V.Color.blackSolid };
+    --bgSecondary: ${ V.Color.grayDark };
+    --borderColor: ${ V.Color.grayDark };
+    --highlightColor: ${ V.Color.blueLight };
+    --primaryColor: ${ V.Color.white };
+    --secondaryColor: ${ V.Color.grayLight };
+    --boxShadow: rgba(250, 250, 250, .12);
+  }
+
+  body {
+    --bg: ${ V.Color.white };
+    --bgSolid: ${ V.Color.whiteSolid };
+    --bgSecondary: ${ V.Color.grayWhite };
+    --borderColor: ${ V.Color.grayWhite };
+    --highlightColor: ${ V.Color.blue };
+    --primaryColor: ${ V.Color.black };
+    --secondaryColor: ${ V.Color.gray };
+    --boxShadow: rgba(18, 18, 18, .12);
   }
 
   p a {
@@ -127,18 +148,6 @@ const GlobalStyles = createGlobalStyle`
       animation: none;
       transition: none;
     }
-  }
-
-  body {
-    --bg: ${ V.Color.white };
-    --bgSolid: ${ V.Color.whiteSolid };
-    --bgSecondary: ${ V.Color.grayWhite };
-    --borderColor: ${ V.Color.grayWhite };
-    --highlightColor: ${ V.Color.blue };
-    --primaryColor: ${ V.Color.black };
-    --secondaryColor: ${ V.Color.gray };
-    --boxShadow: rgba(18, 18, 18, .12);
-
   }
 `;
 

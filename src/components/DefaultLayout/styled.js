@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 import Img from 'gatsby-image';
 
+import * as V from 'styles/variables';
+
 export const DefaultLayout = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
+  transition: background-color ${ V.Transition.default };
+  will-change: background-color;
+  background-color: var(--bg);
 `;
 
 export const Content = styled.section`

@@ -1,51 +1,42 @@
 import React from 'react';
+import AniLink from 'gatsby-plugin-transition-link/AniLink';
 
-import HeaderLogo from './logo';
-import HeaderLinks from './links';
-import {
-  HeaderContainer
-} from './index_UI';
+import { getActiveTheme } from 'utils/themes';
 
-class Header extends React.Component {
-  componentDidMount() {
-    let prevScrollpos = window.pageYOffset;
+import Menu from 'components/Menu';
+import Container from 'components/Container';
+// import LightButton from 'components/LightButton'
 
-    window.addEventListener('scroll', function () {
-      if (typeof window !== 'undefined') {
-        const $header = document.getElementsByClassName('header')[0];
-        let currentScrollPos = window.pageYOffset;
+import * as R from 'components/Responsive';
 
-        if (prevScrollpos >= currentScrollPos) {
-          $header.style.top = '0';
-        } else {
-          $header.style.top = '-6rem';
-        }
+import * as S from './styled';
 
-        if (currentScrollPos === 0) {
-          $header.classList.add('top');
-          $header.classList.remove('notTop');
-        } else {
-          $header.classList.add('notTop');
-          $header.classList.remove('top');
-        }
-
-        prevScrollpos = currentScrollPos;
-      }
-    });
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', () => {});
-  }
-
-  render() {
-    return (
-      <HeaderContainer className="header">
-        <HeaderLogo siteTitle={'JR'} />
-        <HeaderLinks />
-      </HeaderContainer>
-    );
-  }
-}
+const Header = () => {
+  return (
+    <S.Header>
+      <Container>
+        <S.Main>
+          <AniLink
+            cover
+            bg={getActiveTheme()}
+            direction="down"
+            duration={1}
+            to="/"
+            title="Voltar para home">
+            <S.Brand>
+              <R.GreaterThanSmallMobile>
+                <S.Title>Juan Rivillas</S.Title>
+              </R.GreaterThanSmallMobile>
+            </S.Brand>
+          </AniLink>
+          <S.Menu>
+            <Menu />
+            {/* <LightButton /> */}
+          </S.Menu>
+        </S.Main>
+      </Container>
+    </S.Header>
+  );
+};
 
 export default Header;

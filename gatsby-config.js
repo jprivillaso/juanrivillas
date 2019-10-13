@@ -157,8 +157,8 @@ const plugins = [
   {
     resolve: `gatsby-plugin-manifest`,
     options: {
-      name: `Felipe Fialho`,
-      short_name: `felipefialho.com`,
+      name: `Juan Rivillas`,
+      short_name: `juanrivillas.com`,
       start_url: `/`,
       background_color: `#fcfcfc`,
       theme_color: `#111111`,
@@ -202,19 +202,18 @@ if (process.env.CONTEXT === 'production') {
 
 module.exports = {
   siteMetadata: {
-    title: `Felipe Fialho - Front-end Developer`,
-    author: `Felipe Fialho`,
-    position: 'Front-end Developer',
-    description: `Site pessoal e blog de um desenvolvedor Front-end apaixonado por criar coisas e compartilhar boas idéias.`,
-    descriptionEn: `Personal website of a Front End developer passionate about create things and sharing good ideas.`,
-    siteUrl: `https://felipefialho.com/`,
+    title: `Juan Pablo Rivillas - Software Engineer`,
+    author: `Juan Rivillas`,
+    position: 'Release Manager - Technical Lead',
+    description: ``,
+    siteUrl: `https://juanrivillas.com/`,
     social: {
-      twitter: `felipefialho_`,
-      twitterLink: `https://twitter.com/felipefialho_`,
-      linkedinLink: `https://www.linkedin.com/in/felipefialho/`,
-      githubLink: `https://github.com/felipefialho`,
-      stackoverflowLink: `https://codepen.io/felipefialho`,
-      mediumLink: `https://medium.com/@felipefialho`,
+      twitter: `jprivillaso`,
+      twitterLink: `https://twitter.com/jprivillaso`,
+      linkedinLink: `https://www.linkedin.com/in/jprivillaso/`,
+      githubLink: `https://github.com/jprivillaso`,
+      stackoverflowLink: `https://stackoverflow.com/users/2599811/jprivillaso`,
+      mediumLink: `https://medium.com/@jprivillaso`,
     },
   },
   plugins

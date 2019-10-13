@@ -24,9 +24,9 @@ const WelcomeImg = () => {
     style: {
       ...image.style,
       maxWidth: image.childImageSharp.fluid.presentationWidth,
-      width: window.outerWidth > 1280
-        ? image.childImageSharp.fluid.presentationWidth
-        : image.childImageSharp.fluid.presentationWidth * 0.5
+      width: typeof window !== 'undefined' && window.outerWidth < 1280
+        ? image.childImageSharp.fluid.presentationWidth * 0.5
+        : image.childImageSharp.fluid.presentationWidth
     }
   };
 

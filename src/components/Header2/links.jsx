@@ -1,8 +1,10 @@
 import React from 'react';
 
 import {
-  LinkText, HeaderLink, HeaderLinks
+  LinkText, HeaderLinks
 } from './links_UI';
+
+import ButtonLink from 'components/ButtonLink';
 
 const menuItems = [
   {
@@ -21,12 +23,13 @@ const items = menuItems.map(item => {
       key={`${ item.label }-h5`}
       className="header_menu_item"
     >
-      <HeaderLink
+      <ButtonLink
         key={item.label}
+        rel="prev"
         to={`/${ item.path.toLowerCase() }`}
       >
         {item.label}
-      </HeaderLink>
+      </ButtonLink>
     </LinkText>
   );
 });

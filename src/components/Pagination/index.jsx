@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ReactGA from 'react-ga';
 
 import ButtonLink from 'components/ButtonLink';
@@ -42,14 +41,5 @@ const Pagination = ({
     )}
   </S.Pagination>
 );
-
-Pagination.propTypes = {
-  numPages: PropTypes.number.isRequired,
-  prevPage: PropTypes.string.isRequired,
-  nextPage: PropTypes.string.isRequired,
-  isFirst: PropTypes.bool.isRequired,
-  isLast: PropTypes.bool.isRequired,
-  currentPage: PropTypes.number.isRequired
-};
 
 export default Pagination;

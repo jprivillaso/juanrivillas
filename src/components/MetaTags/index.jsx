@@ -19,7 +19,7 @@ function Metatags({ description, pathname, title, image }) {
   );
 
   const metaDescription = description || site.siteMetadata.description;
-  const ogImage = image || 'https://felipefialho.com/assets/og-image.jpg';
+  const ogImage = image || 'https://juanrivillas.com/assets/favicon.png';
   const ogUrl = pathname || site.siteMetadata.siteUrl;
 
   return (

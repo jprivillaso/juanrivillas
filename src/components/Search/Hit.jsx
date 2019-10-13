@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import BlogItem from 'components/BlogItem';
 
@@ -16,10 +15,6 @@ const Hit = props => {
       timeToRead={hit.timeToRead}
     />
   );
-};
-
-Hit.propTypes = {
-  hit: PropTypes.object.isRequired
 };
 
 export default Hit;
