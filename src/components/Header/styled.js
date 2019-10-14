@@ -30,11 +30,15 @@ export const Header = styled.header.attrs({
   ` }
 
   > div {
-    min-width: 65rem;
     display: flex;
     align-items: space-between;
     padding-left: 0;
     padding-right: 0;
+    width: 80%;
+
+    ${ media.greaterThan('medium')`
+      min-width: 65rem;
+    ` }
   }
 
 `;

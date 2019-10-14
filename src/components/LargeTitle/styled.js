@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import media from 'styled-media-query';
 
 import * as V from 'styles/variables';
 
@@ -12,4 +13,8 @@ export const LargeTitle = styled.h1`
   font-weight: 30;
   text-transform: uppercase;
   margin-bottom: ${ V.Space.default }
+
+  ${ media.lessThan('medium')`
+    font-size: 5rem;
+  ` }
 `;
