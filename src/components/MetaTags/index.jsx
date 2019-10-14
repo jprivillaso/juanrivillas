@@ -27,7 +27,7 @@ function Metatags({ description, pathname, title, image }) {
       title={title}
       meta={[
         { name: 'title', content: title },
-        { name: 'description', content: description },
+        { name: 'description', content: metaDescription },
         {
           property: 'og:title',
           content: title,
@@ -68,7 +68,7 @@ function Metatags({ description, pathname, title, image }) {
         { name: 'twitter:title', content: title },
         {
           name: 'twitter:description',
-          content: description,
+          content: metaDescription,
         },
         {
           name: 'twitter:image',

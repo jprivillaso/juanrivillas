@@ -12,7 +12,9 @@ import SEO from 'components/MetaTags';
 const IndexPage = () => {
   return (
     <Layout>
-      <SEO title='Home' />
+      <SEO
+        title='Home'
+      />
       <GridTemplate>
         <FullScreen>
           <AbsoluteCenter>
