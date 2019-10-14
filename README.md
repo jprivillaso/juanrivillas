@@ -1,6 +1,6 @@
 # Juan Rivillas Blog
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/5fdb28bb-8fc2-4fe5-93fd-aaaedec9afba/deploy-status)](https://app.netlify.com/sites/sad-curie-231a50/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/acf5fee0-2da7-4f11-9e85-e6d45d4b87a3/deploy-status)](https://app.netlify.com/sites/jprivillaso/deploys)
 
 Welcome :)
 
