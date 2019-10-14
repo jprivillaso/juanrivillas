@@ -40,16 +40,26 @@ const isDarkModeSet = () => {
   }
 };
 
+const getCheckboxElement = theme => (
+  <input
+    type="checkbox"
+    id="dark-mode-toggle"
+    checked={ theme === 'dark' ? true : undefined }
+    onClick={e => toggleDarkMode(e)}
+  />
+);
+
 const DarkModeToggle = () => {
   return (
     <S.ThemeSwitchWrapper className="theme-switch-wrapper">
       <label className="theme-switch" htmlFor="dark-mode-toggle">
-        <input
-          type="checkbox"
-          id="dark-mode-toggle"
-          checked={isDarkModeSet() ? true : undefined}
-          onClick={e => toggleDarkMode(e)}
-        />
+        {
+          isDarkModeSet() ? (
+            getCheckboxElement('dark')
+          ) : (
+            getCheckboxElement()
+          )
+        }
         <div className="slider round"></div>
       </label>
     </S.ThemeSwitchWrapper>
