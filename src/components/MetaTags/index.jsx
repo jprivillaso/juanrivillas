@@ -83,7 +83,6 @@ function Metatags({ description, pathname, title, image }) {
     >
       <html lang="en" />
       <noscript>{`Enable your JS please`}</noscript>
-      <link href="https://fonts.googleapis.com/css?family=Anton|Roboto" rel="stylesheet" />
     </Helmet>
   );
 }
