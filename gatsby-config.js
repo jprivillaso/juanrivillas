@@ -202,18 +202,18 @@ plugins.push(analytics);
 
 module.exports = {
   siteMetadata: {
-    title: `Juan Pablo Rivillas - Software Engineer`,
-    author: `Juan Rivillas`,
+    title: 'Juan Pablo Rivillas - Software Engineer',
+    author: 'Juan Rivillas',
     position: 'Release Manager - Technical Lead',
-    description: ``,
-    siteUrl: `https://juanrivillas.com/`,
+    description: 'Juan Rivillas Personal Blog. This site has articles related to computer science.',
+    siteUrl: 'https://juanrivillas.com/',
     social: {
-      twitter: `jprivillaso`,
-      twitterLink: `https://twitter.com/jprivillaso`,
-      linkedinLink: `https://www.linkedin.com/in/jprivillaso/`,
-      githubLink: `https://github.com/jprivillaso`,
-      stackoverflowLink: `https://stackoverflow.com/users/2599811/jprivillaso`,
-      mediumLink: `https://medium.com/@jprivillaso`,
+      twitter: 'jprivillaso',
+      twitterLink: 'https://twitter.com/jprivillaso',
+      linkedinLink: 'https://www.linkedin.com/in/jprivillaso/',
+      githubLink: 'https://github.com/jprivillaso',
+      stackoverflowLink: 'https://stackoverflow.com/users/2599811/jprivillaso',
+      mediumLink: 'https://medium.com/@jprivillaso',
     },
   },
   plugins
