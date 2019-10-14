@@ -17,7 +17,7 @@ const IndexPage = () => {
         <FullScreen>
           <AbsoluteCenter>
             <LargeTitle>
-              Bem-Vindo!
+              Bem Vindo!
             </LargeTitle>
             <Paragraph>
               Oi, meu nome é Juan. Sou um Engenheiro de Software que ama criar coisas novas.
