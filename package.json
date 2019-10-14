@@ -2,7 +2,7 @@
   "name": "gatsby-starter-default",
   "description": "Gatsby default starter",
   "version": "1.0.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Juan Rivillas <jprivillaso@gmail.com>",
   "dependencies": {
     "@raae/gatsby-remark-oembed": "^0.1.1",
     "@svgr/webpack": "^4.3.3",
@@ -87,6 +87,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/jprivillaso/juanrivillas"
   }
 }
