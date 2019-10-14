@@ -79,6 +79,7 @@ const BlogList = props => {
     <Layout>
       <SEO
         title='Blog'
+        description={ `List of articles from Juan Rivillas' personal blog` }
         pathname={ props.location.pathname }
       />
       <GridTemplate>
