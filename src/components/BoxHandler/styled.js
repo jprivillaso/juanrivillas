@@ -7,6 +7,7 @@ export const BoxHandler = styled.article`
   border: ${ V.Border.box };
   border-radius: ${ V.BorderRadius.box };
   box-shadow: ${ V.BoxShadow.box };
+  box-sizing: border-box;
   color: var(--primaryColor);
   display: block;
   height: 100%;
@@ -30,12 +31,14 @@ export const BoxHandler = styled.article`
   }
 
   &:before {
+    border-radius: ${ V.BorderRadius.box };
     border-left: 1px solid var(--highlightColor);
     border-right: 1px solid var(--highlightColor);
     transform: scaleY(0);
   }
 
   &:after {
+    border-radius: ${ V.BorderRadius.box };
     border-bottom: 1px solid var(--highlightColor);
     border-top: 1px solid var(--highlightColor);
     transform: scaleX(0);
@@ -43,6 +46,7 @@ export const BoxHandler = styled.article`
 
   &:hover {
     box-shadow: none;
+    border: solid 1px transparent;
 
     &:before {
       transform: scaleY(1)

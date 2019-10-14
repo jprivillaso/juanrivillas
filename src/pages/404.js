@@ -20,7 +20,7 @@ export const homeMetadataQuery = graphql`
 
 const NotFoundPage = props => {
   // eslint-disable-next-line no-undef
-  if (typeof location !== 'undefined' && location.pathname === '/3_leadership/') {
+  if (typeof location !== 'undefined' && location.pathname === '/3_leadership') {
     // eslint-disable-next-line no-undef
     location.href = `${ location.origin }/blog/leadership`;
   }

@@ -1,17 +1,22 @@
 import React from 'react';
 
 import Menu from 'components/Menu';
+import DarkModeToggle from 'components/DarkModeToggle';
+import Container from 'components/Container';
 
 import * as S from './styled';
 
 const Header = () => {
   return (
     <S.Header>
-      <S.Main>
-        <S.Menu>
-          <Menu />
-        </S.Menu>
-      </S.Main>
+      <Container>
+        <S.Main>
+          <S.Menu>
+            <Menu />
+          </S.Menu>
+        </S.Main>
+        <DarkModeToggle />
+      </Container>
     </S.Header>
   );
 };

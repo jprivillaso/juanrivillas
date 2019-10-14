@@ -3,7 +3,6 @@ import React from 'react';
 import Layout from 'components/Layout';
 import GridTemplate from 'components/GridTemplate';
 import FullScreen from 'components/FullScreen';
-import HomeImage from 'components/HomeImage';
 import WelcomeImage from 'components/WelcomeImage';
 import AbsoluteCenter from 'components/AbsoluteCenter';
 import AboutMe from 'components/AboutMe';
@@ -16,7 +15,6 @@ const IndexPage = () => {
       <SEO title='Home' />
       <GridTemplate>
         <FullScreen>
-          <HomeImage />
           <AbsoluteCenter>
             <WelcomeImage />
             <AboutMe />

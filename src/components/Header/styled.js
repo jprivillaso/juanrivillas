@@ -6,7 +6,7 @@ import * as V from 'styles/variables';
 export const Header = styled.header.attrs({
   role: 'banner',
 })`
-  background-color: ${ V.Color.black };
+  background-color: ${ V.Color.brown };
   color: ${ V.Color.white };
   display: block;
   left: 0;
@@ -26,8 +26,17 @@ export const Header = styled.header.attrs({
               background-color 0.3s ease-out;
 
   ${ media.greaterThan('medium')`
-    background-color: ${ V.Color.black };
+    background-color: ${ V.Color.brown };
   ` }
+
+  > div {
+    min-width: 65rem;
+    display: flex;
+    align-items: space-between;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
 `;
 
 export const Main = styled.div`

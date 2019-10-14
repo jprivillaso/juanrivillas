@@ -113,30 +113,32 @@ const GlobalStyles = createGlobalStyle`
     will-change: background-color;
   }
 
-  body.theme-dark {
-    --bg: ${ V.Color.grayDarker };
-    --bgSolid: ${ V.Color.blackSolid };
-    --bgSecondary: ${ V.Color.grayDark };
-    --borderColor: ${ V.Color.grayDark };
-    --highlightColor: ${ V.Color.orangeLight };
-    --primaryColor: ${ V.Color.white };
-    --secondaryColor: ${ V.Color.grayLight };
-    --boxShadow: rgba(250, 250, 250, .12);
-  }
-
   body {
     --bg: ${ V.Color.white };
     --bgSolid: ${ V.Color.whiteSolid };
     --bgSecondary: ${ V.Color.grayWhite };
     --borderColor: ${ V.Color.grayWhite };
     --highlightColor: ${ V.Color.orangeLight };
-    --primaryColor: ${ V.Color.black };
+    --primaryColor: ${ V.Color.brown };
     --secondaryColor: ${ V.Color.gray };
+    --transition: ${ V.Color.brown };
     --boxShadow: rgba(18, 18, 18, .12);
 
     &.noScroll {
       overflow: hidden;
     }
+  }
+
+  body.theme-dark {
+    --bg: ${ V.Color.brown };
+    --bgSolid: ${ V.Color.brown };
+    --bgSecondary: ${ V.Color.brown };
+    --borderColor: ${ V.Color.grayWhite };
+    --highlightColor: ${ V.Color.orangeLight };
+    --primaryColor: ${ V.Color.white };
+    --secondaryColor: ${ V.Color.grayLight };
+    --transition: ${ V.Color.brown };
+    --boxShadow: rgba(250, 250, 250, .12);
   }
 
   p a {
