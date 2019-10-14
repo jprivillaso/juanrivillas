@@ -1,45 +1,34 @@
 import React from 'react';
-import { graphql } from 'gatsby';
 
-import Layout from '../components/commons/layouts/default';
-import Metatags from '../components/commons/meta_tags';
-import Home from '../components/views/home';
+import Layout from 'components/Layout';
+import GridTemplate from 'components/GridTemplate';
+import FullScreen from 'components/FullScreen';
+import LargeTitle from 'components/LargeTitle';
+import AbsoluteCenter from 'components/AbsoluteCenter';
+import Paragraph from 'components/Paragraph';
+import Social from 'components/Social';
+import SEO from 'components/MetaTags';
 
-export const homeMetadataQuery = graphql`
-  query HomeMetadataQuery {
-    site {
-      siteMetadata {
-        title
-        siteUrl
-        description
-      }
-    }
-
-    homeImage: imageSharp(original: { src: { regex: "/home/" } }) {
-      fluid(maxWidth: 1920, quality: 100) {
-        ...GatsbyImageSharpFluid
-      }
-    }
-
-    welcomeImage: imageSharp(original: { src: { regex: "/welcome/" } }) {
-      fluid(maxWidth: 500, quality: 100) {
-        ...GatsbyImageSharpFluid
-        presentationWidth
-      }
-    }
-  }
-`;
-
-const IndexPage = ({ data, location }) => {
+const IndexPage = () => {
   return (
     <Layout>
-      <Metatags
-        title="Home"
-        description={ data.site.siteMetadata.description }
-        url={ data.site.siteMetadata.siteUrl }
-        pathname={ location.pathname }
-      />
-      <Home data={ data } />
+      <SEO title='Home' />
+      <GridTemplate>
+        <FullScreen>
+          <AbsoluteCenter>
+            <LargeTitle>
+              Bem-Vindo!
+            </LargeTitle>
+            <Paragraph>
+              Oi, meu nome é Juan. Sou um Engenheiro de Software que ama criar coisas novas.
+              Obrigado por visitar meu blog! Esse é um lugar onde experimento tecnologias novas
+              e escrevo conteúdo relacionado à computação.
+              Saiba mais sobre mim:
+            </Paragraph>
+            <Social />
+          </AbsoluteCenter>
+        </FullScreen>
+      </GridTemplate>
     </Layout>
   );
 };
