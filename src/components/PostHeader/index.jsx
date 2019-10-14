@@ -2,7 +2,7 @@ import React from 'react';
 
 import Tags from 'components/Tags';
 import DateTime from 'components/DateTime';
-import ButtonLink from 'components/ButtonLink';
+import GoToLink from 'components/GoToLink';
 
 import * as R from 'components/Responsive';
 import * as S from './styled';
@@ -24,11 +24,7 @@ const PostHeader = ({
           </div>
         </R.GreaterThanTablet>
       )}
-      <S.ButtonBack>
-        <ButtonLink rel="prev" to="/blog/">
-          ← Ver todos os Posts
-        </ButtonLink>
-      </S.ButtonBack>
+      <GoToLink url='/blog/' text='← Voltar à lista de Artigos' />
       <DateTime>
         <span itemProp="datePublished">{date}</span>
         {timeToRead && (

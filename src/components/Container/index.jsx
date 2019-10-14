@@ -2,9 +2,9 @@ import React from 'react';
 
 import * as S from './styled';
 
-const Container = ({ children }) => {
+const Container = ({ children, fullscreen }) => {
   return (
-    <S.Container>
+    <S.Container fullscreen={ fullscreen }>
       { children }
     </S.Container>
   );

@@ -25,7 +25,7 @@ Quando eu estava na faculdade, meu sonho sempre foi ser *Arquiteto de Software!*
 
 Estagiário - Desenvolvedor Júnior - Pleno - Sênior - Líder
 
-![Escada para o sucesso!](/assets/happiness.jpg)*Crédito da imagem: [Photo by bruce mars on Unsplash](https://unsplash.com/photos/AndE50aaHn4)*
+![Escada para o sucesso!](assets/happiness.jpg)*Crédito da imagem: [Photo by bruce mars on Unsplash](https://unsplash.com/photos/AndE50aaHn4)*
 
 Mas o caminho foi algo completamente inesperado. Apesar de eu ter me esforçado sempre em melhorar técnicamente, as caracteristicas mais necessárias nos cargos de liderança não são propriamente as ténicas, e sim as de relações interpessoais. Essa pode não ser a maior descoberta do século XXI, mas para mim foi uma grande surpresa.
 

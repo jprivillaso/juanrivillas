@@ -11,7 +11,7 @@ const Icon = `
 
 export const Social = styled.div`
   display: flex;
-  margin-top: 50px;
+  margin-top: 1rem;
 `;
 
 export const SocialItem = styled.a.attrs(props => ({

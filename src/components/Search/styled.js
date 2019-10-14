@@ -6,6 +6,7 @@ import * as T from 'styles/typography';
 
 export const Search = styled.section`
   display: block;
+  margin-top: 2rem;
 
   .ais {
     &-InstantSearch__root {
@@ -28,6 +29,7 @@ export const Search = styled.section`
         padding-left: ${ V.Space.sm };
         padding-right: ${ V.Space.xxlg };
         width: 100%;
+        outline: none;
 
         &:active,
         &:focus {

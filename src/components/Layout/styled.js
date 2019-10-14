@@ -13,12 +13,12 @@ export const Layout = styled.section`
 export const Main = styled.main.attrs({
   role: 'main',
 })`
-  margin-top: ${ V.Height.headerSm };
+  margin-top: ${ props => props.fullscreen ? '0' : V.Height.headerSm };
   min-height: 100vh;
   padding-top: ${ V.Height.mainTop };
   width: 100%;
 
   ${ media.greaterThan('medium')`
-    margin-top: ${ V.Height.headerLg };
+    margin-top: ${ props => props.fullscreen ? '0' : V.Height.headerLg };
   ` }
 `;

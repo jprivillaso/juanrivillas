@@ -2,7 +2,7 @@ import React from 'react';
 
 import {
   View
-} from './notFound_UI';
+} from './styled';
 
 const NotFound = () => (
   <View>

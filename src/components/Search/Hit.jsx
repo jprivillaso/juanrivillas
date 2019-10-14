@@ -7,7 +7,7 @@ const Hit = props => {
 
   return (
     <BlogItem
-      slug={hit.fields.slug}
+      slug={`${ hit.fields.slug }`}
       date={hit.date}
       title={hit.title}
       description={hit.description}

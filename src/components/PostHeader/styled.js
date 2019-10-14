@@ -10,16 +10,6 @@ export const PostHeader = styled.header`
   }
 `;
 
-export const ButtonBack = styled.div`
-  &:not(:first-child) {
-    margin-top: ${ V.Space.default };
-  }
-
-  &:not(:last-child) {
-    margin-bottom: ${ V.Space.default };
-  }
-`;
-
 export const PostImage = styled(Img).attrs({
   alt: 'Imagem de introdução',
   'aria-hidden': 'true'

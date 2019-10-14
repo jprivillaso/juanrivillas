@@ -6,7 +6,7 @@ import SEO from 'components/MetaTags';
 import GridTemplate from 'components/GridTemplate';
 import Content from 'components/Content';
 import DisqusWrapper from 'components/DisqusWrapper';
-
+import GoToLink from 'components/GoToLink';
 import PostHeader from 'components/PostHeader';
 import PostNav from 'components/PostNav';
 
@@ -62,6 +62,7 @@ const BlogPost = props => {
             <div itemProp="articleBody" dangerouslySetInnerHTML={{ __html: post.html }} />
           </Content>
           <PostNav previous={previous} next={next} />
+          <GoToLink url='/blog/' text='← Voltar à lista de Artigos' />
           <DisqusWrapper title={post.frontmatter.title} slug={post.fields.slug} />
         </div>
       </GridTemplate>
