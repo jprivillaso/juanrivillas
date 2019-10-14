@@ -10,7 +10,6 @@ export const BoxHandler = styled.article`
   color: var(--primaryColor);
   display: block;
   height: 100%;
-  min-height: 15rem;
   padding: ${ V.Space.sm };
   position: relative;
   will-change: border-color;
@@ -43,6 +42,8 @@ export const BoxHandler = styled.article`
   }
 
   &:hover {
+    box-shadow: none;
+
     &:before {
       transform: scaleY(1)
     }

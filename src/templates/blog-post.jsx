@@ -61,7 +61,6 @@ const BlogPost = props => {
           <Content>
             <div itemProp="articleBody" dangerouslySetInnerHTML={{ __html: post.html }} />
           </Content>
-
           <PostNav previous={previous} next={next} />
           <DisqusWrapper title={post.frontmatter.title} slug={post.fields.slug} />
         </div>

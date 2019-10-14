@@ -28,6 +28,16 @@ export const Search = styled.section`
         padding-left: ${ V.Space.sm };
         padding-right: ${ V.Space.xxlg };
         width: 100%;
+
+        &:active,
+        &:focus {
+          border-color: var(--highlightColor);
+
+          ~ button {
+            border-left-color: var(--highlightColor);
+          }
+
+        }
       }
 
       &-reset,
