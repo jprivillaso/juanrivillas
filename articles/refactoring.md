@@ -70,7 +70,9 @@ Em conclusão, para manter uma boa qualidade no código é preciso um trabalho c
 
 Finalmente, deixo um link de uma palestra fantástica chamada *All the little things*. Nessa palestra, Sandi Metz explica alguns conceitos muito importantes na hora de fazer *refactoring* no seu código. Eventualmente a complexidade do seu código vai aumentar, mas aplicando a metodologia certa, você tera um código mais fácil de entender e de se manter no futuro.
 
-[All the little thigns, Sandi Metz, RailsConf 2014](https://youtube.com/watch?v=8bZh5LMaSmE)
+[All the little thigns, Sandi Metz, RailsConf 2014](https://www.youtube.com/watch?v=8bZh5LMaSmE)
+
+`video: https://www.youtube.com/watch?v=8bZh5LMaSmE`
 
 Nos próximos artigos, vou entrar mais em detalhe sobre as mêtricas de complexidade de código e análise de complexidade. Fique ligado!
 

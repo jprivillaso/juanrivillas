@@ -110,7 +110,8 @@ const plugins = [
             providers: {
               include: [
                 'Twitter',
-                'Youtube'
+                'YouTube',
+                'Codepen'
               ],
               exclude: [
                 'Reddit',
