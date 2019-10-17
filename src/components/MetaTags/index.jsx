@@ -18,11 +18,7 @@ function Metatags({ description, pathname, title, image }) {
     `
   );
 
-  // eslint-disable-next-line no-undef
-  const origin = typeof location !== 'undefined' ? location.origin : '';
-  const ogImage = image
-    ? `${ origin }${ image.publicURL }`
-    : 'https://juanrivillas.com/assets/favicon.png';
+  const ogImage = 'https://juanrivillas.com/assets/code-icon.png';
   const metaDescription = description || site.siteMetadata.description;
   const ogUrl = pathname || site.siteMetadata.siteUrl;
 
