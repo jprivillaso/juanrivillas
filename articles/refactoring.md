@@ -54,7 +54,7 @@ Tenho o costume de adicionar tarefas de *refactoring* pelo menos uma vez no mês
 
 Quando você analisa constantemente a qualidade do código e toma ações rápidas, fica muito mais fácil de mudar. Um exemplo análogo é um jardim. Se você corta as pontinhas das suas plantas toda semana, será muito melhor do que revisar a cada 3 meses o estado da sua planta e perceber que existem muitos galhos podres.
 
-Envolver todo o time de desenvolvimento é muito importante também, para incentivar a cultura de qualidade com uma pergunta muito simples:
+Envolver todo o time de desenvolvimento é muito importante também, para incentivar a cultura de qualidade com perguntas simples como:
 
 > Essa é a melhor forma de fazer o que estou fazendo?
 
