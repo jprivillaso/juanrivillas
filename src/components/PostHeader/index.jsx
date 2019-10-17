@@ -17,13 +17,13 @@ const PostHeader = ({
 }) => {
   return (
     <S.PostHeader>
-      {image && (
+      {/* {image && (
         <R.GreaterThanTablet>
           <div>
             <S.PostImage fluid={image.childImageSharp.fluid} />
           </div>
         </R.GreaterThanTablet>
-      )}
+      )} */}
       <GoToLink url='/blog/' text='← Voltar à lista de Artigos' />
       <DateTime>
         <span itemProp="datePublished">{date}</span>
