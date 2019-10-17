@@ -67,7 +67,7 @@ Em conclusão, para manter uma boa qualidade no código é preciso um trabalho c
 
 ---------
 
-Finalmente, deixo um link de uma palestra fantástica chamada *All the little things*. Nessa palestra, Sandi Metz explica alguns conceitos muito importantes na hora de fazer *refactoring* no seu código. Eventualmente a complexidade do seu código vai aumentar, mas aplicando a metodologia certa, você tera um código mais fácil de entender e de se manter no futuro.
+Finalmente, deixo um link de uma palestra fantástica chamada *All the little things*. Nessa palestra, Sandi Metz explica alguns conceitos muito importantes na hora de fazer *refactoring*. Eventualmente a complexidade vai aumentar, mas aplicando a metodologia certa, você tera um código mais fácil de entender e de se manter no futuro.
 
 **All the little thigns, Sandi Metz, RailsConf 2014**
 
