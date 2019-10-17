@@ -1,9 +1,8 @@
 ---
 title: Como manter a qualidade do código
 description: Dicas para manter a qualidade do código durante seu ciclo de vida
-date: '2019-10-16'
+date: '2019-10-17'
 tags: [ 'liderança' ]
-image: /assets/code-icon.png
 ---
 
 ## Refactoring
