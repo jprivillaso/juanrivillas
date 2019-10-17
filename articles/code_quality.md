@@ -21,7 +21,7 @@ Em geral, o propósito é tornar o código melhor.
 
 O maior problema do processo de *refactor*, baseado nas experiências que eu tive, é que ele só é feito em um ponto do jogo onde é extremamente caro de se fazer. Sim! Basicamente todo mundo vai deixando para o futuro as melhorias necessárias, pois o cliente precisa urgentemente de uma funcionalidade nova e não há tempo para "perder".
 
-É seu papel como líder técnico ou desenvolvedor, explicar as necessidades da **melhoria continua** aos seus superiores. Se você perguntar para o seu chefe se você poderia tirar um tempo da semana para se dedicar à melhoria da qualidade do código, provavelmente a resposta será **não**. É por isso que você deve mostrar a necessidade do processo de *refactor* e deixar claro que nunca é perder tempo. Isso faz parte de um processo de transformação cultural de um time, mas sinto dizer que tal vez você não consiga convencer os seus superiores.
+É sua tarefa como líder técnico ou desenvolvedor, explicar as necessidades da **melhoria contínua** aos seus superiores. Se você perguntar para o seu chefe se você poderia tirar um tempo da semana para se dedicar à melhoria da qualidade do código, provavelmente a resposta será **não**. É por isso que você deve mostrar a necessidade do processo de *refactor* e deixar claro que nunca é perder tempo. Isso faz parte de um processo de transformação cultural de um time, mas sinto dizer que tal vez você não consiga convencer os seus superiores.
 
 O processo de *refactor* está muito relacionado à um conceito chamado débito técnico.
 
