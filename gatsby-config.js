@@ -106,12 +106,11 @@ const plugins = [
         {
           resolve: `@raae/gatsby-remark-oembed`,
           options: {
-            usePrefix: true,
+            usePrefix: false,
             providers: {
               include: [
                 'Twitter',
-                'YouTube',
-                'Codepen'
+                'YouTube'
               ],
               exclude: [
                 'Reddit',
