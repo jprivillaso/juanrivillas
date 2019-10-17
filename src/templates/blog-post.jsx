@@ -49,7 +49,7 @@ const BlogPost = props => {
         description={post.frontmatter.description}
         image={post.frontmatter.image}
         // eslint-disable-next-line
-        pathname={ typeof location !== undefined ? location.href : null }
+        pathname={ typeof location !== 'undefined' ? location.href : null }
       />
       <GridTemplate>
         <div itemScope itemType="http://schema.org/Article">
