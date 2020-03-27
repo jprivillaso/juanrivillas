@@ -54,7 +54,8 @@ export const Color = {
   carreira: '#F28C0F',
   liderança: '#07D9B2',
   js: '#F28C0F',
-  default: '#F28C0F'
+  default: '#F28C0F',
+  algoritmos: '#F2D852'
 };
 
 // --------------------------------------------------

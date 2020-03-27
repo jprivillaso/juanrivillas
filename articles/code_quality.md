@@ -23,15 +23,15 @@ O maior problema do processo de *refactor*, baseado nas experiências que eu tiv
 
 É sua tarefa como líder técnico ou desenvolvedor, explicar as necessidades da **melhoria contínua** aos seus superiores. Se você perguntar para o seu chefe se você poderia tirar um tempo da semana para se dedicar à melhoria da qualidade do código, provavelmente a resposta será **não**. É por isso que você deve mostrar a necessidade do processo de *refactor* e deixar claro que nunca é perder tempo. Isso faz parte de um processo de transformação cultural de um time, mas sinto dizer que tal vez você não consiga convencer os seus superiores.
 
-O processo de *refactor* está muito relacionado à um conceito chamado débito técnico.
+O processo de *refactor* está muito relacionado a um conceito chamado débito técnico.
 
-O Débito Técnico é um conceito que indica quão custoso é corrigir um problema ou adicionar uma nova funcionalidade na sua aplicação. Um débito téncico baixo é **bom**, e alto quer dizer: **ruim**.
+O Débito Técnico é um conceito que indica quão custoso é corrigir um problema ou adicionar uma nova funcionalidade na sua aplicação. Um débito técnico baixo é **bom**, e alto quer dizer: **ruim**.
 
 ![Débito Técnico](/assets/technical_debt.png)*Crédito da imagem: [techblog](http://techblog.kuka-atx.com/index.php/2017/03/08/its-never-too-early-to-do-the-right-thing/)*
 
 A imagem anterior mostra que a medida que o débito técnico aumenta, a produtividade do desenvolvimento cai, tornando-se cada vez mais difícil mudar a estrutura do seu código ou introduzir novas funcionalidades.
 
-A gente faz *refactoring* para tentar manter o débito técnico baixo e a produtividade alta. Em outras palavras, má qualidade no código se traduz em débito técnico alto ao longo do tempo.
+É comum fazer *refactoring* para tentar manter o débito técnico baixo e a produtividade alta. Em outras palavras, má qualidade no código se traduz em débito técnico alto ao longo do tempo.
 
 ## Existe uma solução ?
 
@@ -39,19 +39,19 @@ Existem duas ações extremamente importantes para manter ou tentar manter uma b
 
 Como tudo na vida, requer-se disciplina e constância no processo. Não é algo que você vai aplicar uma ou duas vezes e pronto. Será sim algo que deve tornar-se um hábito na sua rotina de planejamento de tarefas nas suas *sprints*.
 
-Cabe ressaltar que a maior parte da minha vida trabalhei para empresas que possuem **produtos** e não projetos. Isso faz muita diferença, embora o ideal é que você consiga manter boa qualidade no código em ambos casos.
+Esse ponto de vista foi criado diante da minha experiência atuando em empresas que possuem **produtos** e não projetos. Isso faz muita diferença, embora o ideal é que você consiga manter boa qualidade em ambos casos.
 
 ### 1. Cobertura de testes
 
-Cobertura de testes é um assunto muito extenso, embora quero deixar claro que ter cobertura de testes ajuda MUITO em um processo de *refactoring*.
+Cobertura de testes é um assunto muito extenso, embora quero deixar claro que ter cobertura de testes auxilia de forma muito relevante em um processo de *refactoring*.
 
-A idea dos testes é exatamente garantir que sempre que você muda o seu código, os resultados continuem se mantendo iguais. Assim, durante um processo de *refactor* é muito comum trocar alguma parte do código, atualizar a versão de uma biblioteca ou refazer do zero uma parte da sua aplicação, e imediatamente olhar os testes que falharam. Dessa forma você garante que a qualidade fica intacta, e vai corrigindo conforme necessário.
+A idea dos testes é exatamente garantir que sempre que você muda o seu código, os resultados continuem se mantendo iguais. Assim, durante um processo de *refactor* é muito comum trocar alguma parte do código, atualizar a versão de uma biblioteca ou refazer do zero uma parte da sua aplicação, e imediatamente olhar os testes que falharam. Dessa forma você garante que a qualidade fica intacta, e corrige conforme necessário.
 
 ### 2. Refactoring constante
 
-Tenho o costume de adicionar tarefas de *refactoring* pelo menos uma vez no mês. Assim, fico muito de olho em como cresce a aplicação e sua complexidade depois de cada sprint. Dessa forma, é nítido quando começa a ficar difícil a introdução de uma nova funcionalidade ou a mudança de uma funcionalidade já existente. Nesse momento, já crio uma tarefa de revisão de arquitetura e qualidade para ver o motivo pelo qual está sendo tão complicado executar alguma das ações mencionadas.
+Tenho o costume de adicionar tarefas de *refactoring* pelo menos uma vez no mês. Assim, fico atento ao crescimento da aplicação e sua complexidade. Dessa forma, é nítido quando começa a ficar difícil a introdução de uma nova funcionalidade ou a mudança de uma funcionalidade já existente. Nesse momento, crio uma tarefa de revisão de arquitetura e qualidade para ver o motivo pelo qual está sendo tão complicado executar alguma das ações mencionadas.
 
-Quando você analisa constantemente a qualidade do código e toma ações rápidas, fica muito mais fácil de mudar. Um exemplo análogo é um jardim. Se você corta as pontinhas das suas plantas toda semana, será muito melhor do que revisar a cada 3 meses o estado da sua planta e perceber que existem muitos galhos podres.
+Quando você analisa constantemente a qualidade do código e toma ações rápidas, fica muito mais fácil de mudar. Um exemplo análogo é um jardim. Se você poda os galhos das plantas do jardim toda semana, será muito melhor do que revisar a cada 3 meses o estado da sua planta e perceber que existem muitos galhos podres.
 
 Envolver todo o time de desenvolvimento é muito importante também, para incentivar a cultura de qualidade com perguntas simples como:
 
@@ -63,11 +63,11 @@ ou
 
 Sou um dos que acredita que você deve resolver os problemas que tem **HOJE**, mas sempre se perguntando se essa é a melhor forma para fazer o que está fazendo.
 
-Em conclusão, para manter uma boa qualidade no código é preciso um trabalho constante. Não deixe que o tempo passe, revise constantemente seu código e exija tempo para ter uma *limpeza constante* do seu código. Entre mais tempo passa, mais caro vai lhe custar!
+Em conclusão, para manter uma boa qualidade no código é preciso um trabalho constante. Não deixe que o tempo passe, revise periodicamente seu código e exija tempo para ter uma *limpeza constante*. Entre mais tempo passa, mais caro vai lhe custar!
 
 ---------
 
-Finalmente, deixo um link de uma palestra fantástica chamada *All the little things*. Nessa palestra, Sandi Metz explica alguns conceitos muito importantes na hora de fazer *refactoring*. Eventualmente a complexidade vai aumentar, mas aplicando a metodologia certa, você tera um código mais fácil de entender e de se manter no futuro.
+Finalmente, deixo um link de uma palestra fantástica chamada *All the little things*. Nessa palestra, a Sandi Metz explica alguns conceitos muito importantes na hora de fazer *refactoring*. Eventualmente a complexidade vai aumentar, mas aplicando a metodologia certa, você tera um código mais fácil de entender e de se manter no futuro.
 
 **All the little thigns, Sandi Metz, RailsConf 2014**
 
