@@ -172,4 +172,21 @@ export const Content = styled.article`
   .support-title {
     ${ T.Subtitle1 }
   }
+
+  iframe {
+    width: 100%;
+  }
+
+  table {
+    width: 100%;
+
+    thead th {
+      color: var(--highlightColor);
+      text-align: center;
+    }
+
+    tbody td {
+      text-align: center;
+    }
+  }
 `;
