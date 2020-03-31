@@ -21,13 +21,13 @@ Esse tipo de plataformas possui milhares de problemas de programação baseados 
 Assim como mencionei acima, eu estava em um período de muito serviço e não consegui parar para estudar para a entrevista física. Essa fase consiste em múltiplas entrevistas, onde vários funcionários da empresa te entrevistam e são em total umas 5 entrevistas. Pois bem, eu cheguei no escritório da Amazon supermotivado, mas infelizmente o meu desempenho nas entrevistas foi bem ruim. Cobra-se muito o conhecimento em estruturas de dados e algoritmos, e finalmente tem uma entrevista de _system design_ (design de sistemas e arquitetura). Nessa última eu fui muito bem, porque uma das minhas tarefas hoje como líder do time, é pensar na arquitetura do sistema e já estou acostumado com esse tipo de tarefas.
 Eu saí de lá arrasado pelo cansaço e porque sabia que não tinha ido muito bem.
 
-Embora tenha sido um resultado negativo, esse dia mudou minha carreira, pois fiquei muito motivado para aprender aquilo que eu não sabia. Eu já feito um processo de seleção na [Toptal](https://www.toptal.com/), onde também falhei por causa do mesmo motivo.
+Embora tenha sido um resultado negativo, esse dia mudou minha carreira, pois fiquei muito motivado para aprender aquilo que eu não sabia. Eu já tinha passado por um processo de seleção na [Toptal](https://www.toptal.com/), onde também falhei por causa do mesmo motivo.
 
 Esse é um tema bastante polêmico, e já tive conversas infinitas com meus colegas sobre se as empresas deveriam aplicar este tipo de provas para determinar se um candidato é apto ou não. Pois bem, esse dia decidi tomar vergonha na cara e começar a estudar tudo que eu não sabia. Eu estava muito curioso e queria muito aprender a resolver esse tipo de problemas. Virou um desafio pessoal.
 
 > Depois da tormenta, vem a calma
 
-Uma das coisas mais interessantes desse primeiro processo de seleção não foi só o aprendizado de vida e a motivação que me deu para aprender sobre temas que não conhecia até então. Mas, as pessoas que conheci nesse processo seletivo foi o mais incrível da história!
+Uma das coisas mais interessantes desse primeiro processo de seleção não foi só o aprendizado de vida e a motivação que me deu para estudar sobre temas que não conhecia até então. Mas, as pessoas que conheci nesse processo seletivo foi o mais incrível da história!
 Conheci pessoas do Brasil inteiro que se prepararam MUITO para essa entrevista, e até hoje mantenho contato com vários deles. Isso é incrível! Somente com um dia, consegui estabelecer conexões que tenho certeza que levarei para vida toda!
 
 ## Segunda tentativa: Um buscador muito famoso
