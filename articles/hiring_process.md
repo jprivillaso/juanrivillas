@@ -1,6 +1,6 @@
 ---
-title: Processos de Entrevista em empresa da lista TOP 5
-description: Vou te contar como foram os processos seletivos em 3 das 5 maiores empresas do mundo, os desafios e o aprendizado.
+title: Processo de entrevista em 3 das 5 maiores empresas do mundo
+description: Vou te contar como foram os processos seletivos, os desafios e o aprendizado.
 date: '2020-03-30'
 tags: [ 'carreira' ]
 ---
@@ -43,7 +43,7 @@ Comecei os meus estudos sobre estruturas de dados e algoritmos. Criei uma planil
 
 Existem milhares de cursos, tutoriais, livros, etc. com conteúdo para aprender sobre estruturas de dados e algoritmos. Mas, eu acredito que não funciona bem se você começa a estudar em vários lugares. (Minha opinião!). Preferi me focar em poucos!
 
-Assisti também um curso da MIT cujo acesso é gratuito. Esse curso me ensinou muito, e consegui aprender bastantes tópicos avançados. Quem tiver interesse, [pode encontrar ele aqui] (https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/lecture-videos/).
+Assisti também um curso da MIT cujo acesso é gratuito. Esse curso me ensinou muito, e consegui aprender bastantes tópicos avançados. Quem tiver interesse, [pode encontrar ele aqui](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/lecture-videos/).
 
 Finalizei esse curso, implementei todas as estruturas de dados em Javascript, decorei as complexidades algorítmicas de cada um, fiz centenas de exercícios, e só pensava em código, grafos, listas, pilhas, etc.
 
