@@ -52,7 +52,7 @@ Foram quase dois meses estudando fortemente, e eu acreditava que já estava bem 
 Cheguei no escritório da Google extremamente assustado. Aquele escritório realmente deixa você intimidado!
 Começamos as entrevistas e de cara quando o entrevistador me passava o problema, eu já tinha uma ideia de como resolver. Fui bem! Bom, eu acho que eu fui bem, consegui resolver todos os problemas e eu saí bastante satisfeito da entrevista porque tinha sido um resultado bem melhor que na entrevista da Amazon, e minha sensação foi de dever cumprido. Infelizmente, recebi uma ligação uma semana depois me informando que não tinha passado.
 
-## Terceira tentativa: Uma fruta muita saborosa
+## Terceira tentativa: Uma fruta muito saborosa
 
 Eu estava satisfeito, mas muito cansado. Achava que eu merecia ter passado na Google, mas enfim! Sabe aquela sensação de "Está faltando alguma coisa"? Eu fiz uma retrospectiva, e cheguei à conclusão que o meu primeiro objetivo tinha sido cumprido. Aqueles problemas esquisitos, eu já sabia resolver, ou pelo menos tinha uma ideia boa da estrutura que deveria ser utilizada e isso me deixou bem feliz.
 
