@@ -66,7 +66,7 @@ Depois de 7 meses em processo de seleção com quase tudo pronto, quase um ano d
 
 ## 5 Aprendizados
 
-Quero deixar vários aprendizados para você que quer começar uma empreitada parecida. Ou para você que quer um emprego novo também, independentemente do tamanho da empresa.
+Quero deixar vários aprendizados para você que quer começar uma empreitada parecida ou para você que quer um emprego novo também, independentemente do tamanho da empresa.
 
 1. Busque uma empresa com seu perfil. Empresas como Amazon, Google, Microsoft, entre outras. tem processos de seleção bastante complicados. Focam-se muito em estruturas de dados, algoritmos, programação orientada a objetos, design de sistemas, arquitetura, escalabilidade e por fim, claro, suas skills interpessoais mesmo. A pergunta que você deve se fazer é:
 
