@@ -1,7 +1,7 @@
 ---
 title: DevOps e Automatização
 description: Cultura DevOps e os três pilares de um projeto de Software.
-date: '2020-04-15'
+date: '2020-04-27'
 tags: [ 'devops' ]
 ---
 
