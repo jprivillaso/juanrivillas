@@ -55,9 +55,9 @@ Sugiro uma estrutura básica de documentação assim:
 
 ## 2. Processos de Integração e Entrega Continua (CI/CD)
 
-Hoje é bastante comum a formação de times pequenos. Muitas empresas como a Amazon, usam uma regra chamada [The Two Pizza Rule](http://blog.idonethis.com/two-pizza-team/), que consiste em que o tamanho de um time dever ser aquele que pode ser alimentado com duas pizzas. Acredita-se que Jeff Bezos foi o primeiro a utilizar esse termo e aplicar ele dentro dos times da Amazon.
+Hoje é bastante comum a formação de times pequenos. Empresas como a Amazon usam uma regra chamada [The Two Pizza Rule](http://blog.idonethis.com/two-pizza-team/), que consiste em que o tamanho de um time dever ser aquele que pode ser alimentado com duas pizzas. Acredita-se que Jeff Bezos foi o primeiro a utilizar esse termo e aplicar ele dentro dos times da Amazon.
 
-Empresas de porte médio e pequeno contam com um número limitado de colaboradores que acabam tendo múltiplas responsabilidades dentro de um time. É muito importante que os desenvolvedores e desenvolvedoras foquem no que agrega mais valor para empresa: O código. A filosofia de várias empresas como Heroku, Zeit, Netlify, entre outras, é reduzir a complexidade da implantação de um software na nuvem, e permitir que todo mundo seja capaz de escrever uma aplicação e disponibiliza-la rapidamente.
+Empresas de porte médio e pequeno contam com um número limitado de colaboradores que acabam tendo múltiplas responsabilidades dentro de um time. É muito importante que os desenvolvedores e desenvolvedoras foquem no que agrega mais valor para empresa: O código. A filosofia de várias empresas como Heroku, Zeit, Netlify, entre outras, é reduzir a complexidade da implantação de um software na nuvem, e permitir que todo mundo seja capaz de escrever uma aplicação e disponibilizá-la rapidamente.
 
 Essa facilidade se logra através de processos de Integração continua (CI) e Entrega continua (CD), usando ferramentas como Jenkins e AWS Pipeline. Existe também a possibilidade de você escrever a sua infraestrutura como recursos escritos em forma de código, usando ferramentas/linguagens como Terraform, CloudFormation, entre outras.
 
@@ -81,7 +81,7 @@ Em teoria, tudo isso funciona muito bem. Mas na prática, nem sempre é fácil d
 
 Pensando nisso, eu crio ferramentas que automatizam parte do meu trabalho, documento a forma em que qualquer pessoa pode utilizá-la, e encorajo cada integrante do time a que utilize as ferramentas que desenvolvemos internamente na empresa. Isso reduz as dependências de conhecimento e aumenta a nossa produtividade e a velocidade com que entregamos novas funcionalidades.
 
-Para dar um exemplo mais específico, desenvolvi recentemente um processo de _release_ de novas versões de maneira automática, e funciona da seguinte maneira:
+Para dar um exemplo mais específico, desenvolvi recentemente um processo de _release_ de novas versões de maneira automática, e funciona assim:
 
 1. Uma pessoa trabalha em uma tarefa XYZ e deve trabalhar em uma _branch_ do git separada da _branch_ DEV.
 
