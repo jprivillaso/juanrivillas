@@ -11,7 +11,7 @@
     "disqus-react": "^1.0.7",
     "dotenv": "^8.1.0",
     "gatsby": "^2.0.0",
-    "gatsby-cli": "^2.7.49",
+    "gatsby-cli": "^2.11.2",
     "gatsby-image": "^2.0.29",
     "gatsby-plugin-algolia": "^0.3.4",
     "gatsby-plugin-algolia-search": "^0.5.6",
