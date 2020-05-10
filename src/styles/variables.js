@@ -55,7 +55,8 @@ export const Color = {
   liderança: '#07D9B2',
   js: '#F28C0F',
   default: '#F28C0F',
-  algoritmos: '#F2D852'
+  algoritmos: '#F2D852',
+  arquitetura: '#CC0066'
 };
 
 // --------------------------------------------------
