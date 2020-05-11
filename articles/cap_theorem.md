@@ -23,7 +23,7 @@ Um sistema distribuído está conformado por um ou mais componentes que atendem 
 
 O sistema distribuído recebe requisições de leitura e escrita. Assim, quando um valor é escrito, cada componente precisa ficar ciente daquela mudança. Da mesma forma, quando um dos componentes recebe uma requisição de leitura, ele precisa retornar o valor atualizado.
 
-Existem vários desafios na hora de construir sistemas distribuidos. Entre os mais importantes estão: Escalabilidade, segurança, concorrência, heteoreneidade, tratamento de falhas, entre outros.
+Existem vários desafios na hora de construir sistemas distribuidos. Entre os mais importantes estão: Escalabilidade, segurança, concorrência, heterogeneidade, tratamento de falhas, entre outros.
 
 ------------
 
@@ -42,7 +42,7 @@ Agora vamos explicar as variáveis do CAP
 ## Consistência
 
 Consistência é a variável que garante que se um dado foi alterado, você irá receber a versão mais recente desse dado, independentemente de qual for o *node* que vai responder a sua requisição.
-Para que a consistência aconteça, deve existir uma sincronização de nodes toda vez que algum valor for alterado. Podemos dizer que cada *node* deve manter uma cópia do estado do sistema ou de alguma maneira ter acesso ao estado mais atualizado do mesmo.
+Para que a consistência aconteça, deve existir uma sincronização dos *nodes* toda vez que algum valor for alterado. Podemos dizer que cada *node* deve manter uma cópia do estado do sistema ou de alguma maneira ter acesso ao estado mais atualizado do mesmo.
 
 Qual é o maior problema? Eu diria que o tempo: O tempo necessário para que todos os componentes estejam sincronizados vai definir a forma em que você deve construir ou utilizar o seu sistema distribuído.
 
@@ -79,7 +79,7 @@ Vamos pensar em vários cenários para entender melhor:
 
 1. Se eu quiser um sistema consistente e disponível, quer dizer que a replicação de mensagens nos *nodes* tem que existir e ainda, o sistema tem que responder a todas as minhas requisições. Nesse caso, é impossível que ele seja tolerante a falha.
 
-2. Se eu quiser um sistema disponível e tolerante a falha, quer dizer que o sistema tem que atender todas as minhas mensagens e ele pode continuar funcionando normalmente se a conexão interna entre alguns *nodes* cair. Embora, ele não vai conseguir ser consistente.
+2. Se eu quiser um sistema altamente disponível e tolerante a falha, quer dizer que o sistema tem que atender todas as minhas mensagens e ele pode continuar funcionando normalmente se a conexão interna entre alguns *nodes* cair. Embora, ele não vai conseguir ser consistente.
 
 3. Se eu quiser um sistema tolerante a falha e consistente, ele precisa continuar funcionando apesar dos problemas de conexão entre *nodes* e tem que garantir que os dados retornados vão ser os mais atualizados. Nesse caso ele não conseguirá atender a disponibilidade.
 
@@ -97,11 +97,11 @@ Em segundo lugar, se você está consumindo um sistema **CA**, **CP** ou **CD**,
 
 A AWS tem um banco de dados chamado DynamoDB. Ele é um banco NoSQL que trabalha muito bem e está otimizado para escalar horizontalmente de uma maneira bem rápida. Acontece que, por design, o DynamoDB é um Sistema **AP**. Ou seja, ele é um Sistema que escolheu estar disponível e ser tolerante a falha. Embora, a consistência foi sacrificada.
 
-Por que é importante isso para mim como usuário? Pois bem! Toda vez que eu alterar um dado, eu tenho que entender que talvez o banco de dados vai responder com um dado não atualizado.
+Por que é importante isso para mim como usuário? Pois bem! Toda vez que eu quiser alterar um dado, e logo após essa alteração alguém requisitar o mesmo, devo que entender que talvez o banco de dados vai responder com um dado não atualizado.
 
-> Não existe uma bala de prata, a escolha vai depender 100% da sua necessidade e os requisitos do seu negócio. Por exemplo, não é o mesmo construir um sistema Bancário que um sistema de controle automático de um avião. As variáveis mudam e da mesma forma você precisa entender quais variáveis foram escolhidas para você atender a sua necessidade.
+> Não existe uma bala de prata, a escolha vai depender 100% da sua necessidade e os requisitos do seu negócio. Por exemplo, não é o mesmo construir um sistema Bancário que um sistema de controle automático de um avião. As variáveis mudam para cada um dos cenários!
 
-Espero que tenha ficado um pouco claro a importância das variáveis e quando escolher cada uma.
+Espero que tenham ficado claro os conceitos e a importância de cada variável.
 
 Obrigado 😀
 
