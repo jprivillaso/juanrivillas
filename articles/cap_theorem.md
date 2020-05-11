@@ -19,11 +19,13 @@ Antes de explicar a sua importância, vamos explicar alguns conceitos:
 
 ## Sistema Distruidos
 
-Um sistema distribuído está formado por um ou mais componentes que atendem requisições para diversos clientes. O mais importante é que essa comunicação entre cliente e servidor seja transparente. O cliente não sabe exatamente quantos componentes existem dentro do sistema distribuído. Essa lógica é transparente e a ideia é que pareça somente um componente só.
+Um sistema distribuído está conformado por um ou mais componentes que atendem requisições para diversos clientes. O cliente não sabe exatamente quantos componentes existem dentro do sistema distribuído. Essa lógica é transparente e a ideia é que pareça um componente só.
 
 O sistema distribuído recebe requisições de leitura e escrita. Assim, quando um valor é escrito, cada componente precisa ficar ciente daquela mudança. Da mesma forma, quando um dos componentes recebe uma requisição de leitura, ele precisa retornar o valor atualizado.
 
-Qual é o problema? Eu diria que o tempo: O tempo necessário para que todos os componentes sejam sincronizados vai definir a forma em que você deve construir ou utilizar o seu sistema distribuído.
+Existem vários desafios na hora de construir sistemas distribuidos. Entre os mais importantes estão: Escalabilidade, segurança, concorrência, heteoreneidade, tratamento de falhas, entre outros.
+
+------------
 
 A partir desse ponto será usada a palavra *node* para descrever os componentes do sistema distribuído. Esse é o termo usado em inglês.
 
@@ -41,6 +43,8 @@ Agora vamos explicar as variáveis do CAP
 
 Consistência é a variável que garante que se um dado foi alterado, você irá receber a versão mais recente desse dado, independentemente de qual for o *node* que vai responder a sua requisição.
 Para que a consistência aconteça, deve existir uma sincronização de nodes toda vez que algum valor for alterado. Podemos dizer que cada *node* deve manter uma cópia do estado do sistema ou de alguma maneira ter acesso ao estado mais atualizado do mesmo.
+
+Qual é o maior problema? Eu diria que o tempo: O tempo necessário para que todos os componentes estejam sincronizados vai definir a forma em que você deve construir ou utilizar o seu sistema distribuído.
 
 ![Consistência](assets/consistency_1.png)
 
