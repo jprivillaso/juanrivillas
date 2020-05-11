@@ -99,6 +99,10 @@ A AWS tem um banco de dados chamado DynamoDB. Ele é um banco NoSQL que trabalha
 
 Por que é importante isso para mim como usuário? Pois bem! Toda vez que eu quiser alterar um dado, e logo após essa alteração alguém requisitar o mesmo, devo que entender que talvez o banco de dados vai responder com um dado não atualizado.
 
+Outro exemplo para você imaginar é: O que acontece quando alguém da like em um video no Youtube no Japão? Quanto tempo demora sua tela para atualizar se você está na Espanha, por exemplo? No caso do Youtube, é algo tão rápido que você nem percebe que houve uma sincronização pelo mundo inteiro para todo mundo ver o +1 naquele video.
+
+Todas essas considerações são necessárias na hora de você construir um sistema distribuído!
+
 > Não existe uma bala de prata, a escolha vai depender 100% da sua necessidade e os requisitos do seu negócio. Por exemplo, não é o mesmo construir um sistema Bancário que um sistema de controle automático de um avião. As variáveis mudam para cada um dos cenários!
 
 Espero que tenham ficado claro os conceitos e a importância de cada variável.
