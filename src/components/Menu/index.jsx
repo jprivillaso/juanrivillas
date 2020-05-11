@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactGA from 'react-ga';
-import AniLink from 'gatsby-plugin-transition-link/AniLink';
+import TransitionLink from 'gatsby-plugin-transition-link';
 
 import { getActiveTheme } from 'utils/themes';
 
@@ -25,10 +25,9 @@ const Menu = () => {
     <S.Menu>
       {
         menuLinks.map((link, i) => (
-          <AniLink
+          <TransitionLink
             partiallyActive={true}
             key={i}
-            fade
             bg={getActiveTheme()}
             direction="down"
             duration={1}
@@ -37,7 +36,7 @@ const Menu = () => {
             activeClassName={ link.url === getCurrentPage() ? 'active' : '' }
           >
             {link.label}
-          </AniLink>
+          </TransitionLink>
         ))
       }
     </S.Menu>
