@@ -28,7 +28,7 @@ const BlogItem = ({
   return (
     <S.BlogItem
       to={`/${ slug }`}
-      cover
+      fade
       direction="down"
       duration={1}
       title={title}

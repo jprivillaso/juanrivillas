@@ -28,7 +28,7 @@ const Menu = () => {
           <AniLink
             partiallyActive={true}
             key={i}
-            cover
+            fade
             bg={getActiveTheme()}
             direction="down"
             duration={1}
