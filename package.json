@@ -88,5 +88,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/jprivillaso/juanrivillas"
+  },
+  "engines": {
+    "node": "10.13.0"
   }
 }
