@@ -8,7 +8,7 @@ const ButtonLink = ({ children, to }) => {
   return (
     <S.ButtonLink
       to={to}
-      cover
+      fade
       direction="down"
       duration={1}
       bg={getActiveTheme()}>
