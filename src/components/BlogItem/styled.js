@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import AniLink from 'gatsby-plugin-transition-link/AniLink';
+import TransitionLink from 'gatsby-plugin-transition-link';
 
 import * as V from 'styles/variables';
 import * as T from 'styles/typography';
 
-export const BlogItem = styled(AniLink)`
+export const BlogItem = styled(TransitionLink)`
   color: var(--primaryColor);
   display: block;
 
