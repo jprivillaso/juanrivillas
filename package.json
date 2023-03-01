@@ -90,6 +90,6 @@
     "url": "https://github.com/jprivillaso/juanrivillas"
   },
   "engines": {
-    "node": "10.13.0"
+    "node": "14.19.3"
   }
 }
