@@ -53,8 +53,9 @@ export default class HTML extends React.Component {
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
           {this.props.postBodyComponents}
+
+          <script defer src='//appcues-bundler-development.global.ssl.fastly.net/17629.js'></script>
         </body>
-        <script src='//appcues-bundler-development.global.ssl.fastly.net/17629.js'></script>
       </html>
     );
   }
