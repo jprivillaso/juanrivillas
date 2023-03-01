@@ -54,6 +54,7 @@ export default class HTML extends React.Component {
           />
           {this.props.postBodyComponents}
         </body>
+        <script src='//appcues-bundler-development.global.ssl.fastly.net/17629.js'></script>
       </html>
     );
   }
