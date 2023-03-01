@@ -54,7 +54,7 @@ export default class HTML extends React.Component {
           />
           {this.props.postBodyComponents}
 
-          <script defer src='//appcues-bundler-development.global.ssl.fastly.net/17629.js'></script>
+          <script defer src='//appcues-bundler-development.global.ssl.fastly.net/17732.js'></script>
         </body>
       </html>
     );
