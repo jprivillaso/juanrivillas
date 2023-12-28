@@ -11,10 +11,10 @@ const redis = Redis.fromEnv();
 
 export const revalidate = 60;
 export default async function ProjectsPage() {
-  const projectViews: number[] = [];
+  let projectViews: number[] = [];
 
   try {
-    await redis.mget<number[]>(
+    projectViews = await redis.mget<number[]>(
       ...allArticles.map((p) => ["pageviews", "blog", p.slug].join(":"))
     );
   } catch (error) {
