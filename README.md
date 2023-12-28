@@ -12,14 +12,6 @@ Visit his cool [blog](https://www.felipefialho.com/) with lots of interesting ar
 
 ## Stack Used
 
-- [Gatsby](https://www.gatsbyjs.org/)
-- [GraphQL](https://graphql.org/)
-- [Styled Components](https://www.styled-components.com/)
-- [Algolia Instant Search](https://www.algolia.com/products/instantsearch/)
-- [Netlify CMS](https://www.netlifycms.org/)
-
-For build media queries uses [styled-media-query](https://github.com/morajabi/styled-media-query) with some help from [gatsby-plugin-transition-link](https://www.gatsbyjs.org/packages/gatsby-plugin-transition-link/) for animations and [gatsby-image](https://www.gatsbyjs.org/packages/gatsby-image/) for responsive images.
-
 ## License
 
 [MIT License](/license) © Juan Rivillas
