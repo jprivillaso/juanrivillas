@@ -7,7 +7,7 @@ import { Analytics } from "./components/analytics";
 export const metadata: Metadata = {
   title: {
     default: "juanrivillas.com",
-    template: "%s | chronark.com",
+    template: "%s | juanrivillas.com",
   },
   description: "Juan Rivillas personal website",
   openGraph: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     siteName: "juanrivillas.com",
     images: [
       {
-        url: "https://chronark.com/og.png",
+        url: "https://www.juanrivillas.com/og.png",
         width: 1920,
         height: 1080,
       },
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: "Chronark",
+    title: "jprivillaso",
     card: "summary_large_image",
   },
   icons: {
