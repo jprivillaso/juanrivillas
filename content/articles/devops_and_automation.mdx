@@ -1,0 +1,116 @@
+---
+title: DevOps e Automatização
+description: Cultura DevOps e os três pilares de um projeto de Software.
+date: "2020-04-27"
+published: true
+---
+
+Hoje vivemos em uma das melhores épocas da história para se trabalhar com ciências da computação. Ferramentas, linguagens, processos e capacidade de máquinas não parece ser mais o mesmo problema que enfrentavam os desenvolvedores e desenvolvedoras do século passado.
+
+Uma das melhorias que apareceu nos últimos anos foi o provisionamento de servidores através da nuvem, melhor conhecido como Cloud Computing. Cada vez fica mais fácil criar recursos na nuvem e permite que os times se preocupem mais com o desenvolvimento e menos em "como implantar o sistema". Claro, isso não é válido para todos os projetos, mas em termos gerais, melhorou muito para os desenvolvedores e desenvolvedoras que se aventuram a fazer protótipos de aplicações e simplesmente querem ver um resultado rápido disponibilizado na internet.
+
+Uma das áreas relacionadas com Cloud Computing é um termo denominado DevOps. Junto com os serviços na nuvem, vem de mão dada um termo chamado DevOps. Muitas pessoas definem DevOps de diversas maneiras, e hoje eu vou contar como eu o entendo.
+
+## DevOps como cultura
+
+DevOps em si, é um termo bastante utilizado no mercado de TI, mas não há uma utilização padrão para o mesmo.
+
+Por exemplo, DevOps é utilizado para referir-se a perfis de trabalho (_DevOps Engineer_), áreas dentro de uma empresa que substituem aquilo que conhecemos como Infraestrutura (_Devops Area_) ou então como uma cultura mesmo. No entanto, DevOps é um conceito mais de alto nível e torna-se algo difícil de explicar.
+
+> Eu entendo DevOps mais como uma cultura e um conjunto de práticas adotadas dentro de um time que permitem atingir um ciclo de vida mais eficiente em um projeto de desenvolvimento de Software.
+
+## DEV VS OPS
+
+Você já deve ter ouvido que o time de Desenvolvimento (_DEV_) e o time de Operações (_OPS_) sempre tiveram um atrito. Muitos descrevem essa relação como dois times por um grande muro. Assim que um desenvolvedor finaliza uma tarefa, joga-se uma mensagem por cima do muro para o time de _OPS_, e assim que o time de _OPS_ analisa a qualidade do código ou então da versão final de um pacote de software, normalmente chamado de _bundle_, joga-se novamente uma mensagem por cima do muro para o time de _DEV_, rejeitando as mudanças implementadas, e torna-se uma briga eterna gerada porque o time de desenvolvimento não se preocupou com as variáveis que afetariam a implantação e vice-versa.
+
+> DevOps como cultura muda esse cenário de atrito, convertendo-o em um cenário mais harmônico. Afinal, todos jogam no mesmo time e é de interesse comum tanto a qualidade do código escrito assim como a disponibilização do mesmo, através de _Pipelines_ de integração continua.
+
+As melhorias na área de infraestrutura facilitaram a interação por parte do time _DEV_ nos quesitos do time de _OPS_. Com as novas camadas de abstração, qualquer integrante de um time pode monitorar, visualizar e analisar problemas que ocorrem em produção, e também gerar valor de uma forma mais rápida e eficiente.
+
+> Como isso ajuda no desenvolvimento de um projeto de Software?
+
+Na minha opinião, existem 3 fatores que vão levar seu produto ao sucesso:
+
+1. Documentação
+2. Processos de Integração e Entrega Continua (CI/CD) (práticas DevOps)
+3. Reduzir dependências
+
+Se você garantir que esses três pilares funcionam e estão coordenados na sua empresa, você já está a caminho do sucesso do seu projeto.
+
+## 1. Documentação
+
+Documentação é algo que poucos querem fazer e poucos dão valor. Em empresas que possuem uma estrutura remota, como é meu caso, a documentação torna-se um aliado de muita relevância dado que os integrantes do time trabalham em fusos horários diferentes e nem sempre existe uma pessoa que saiba tudo dentro de um time. Seu time deve ter muito claro qual lugar procurar quando algum erro acontece. A definição de processos, planos de ação contra eventualidades, e a própria descrição do funcionamento do sistema deve ter fácil acesso e ser do conhecimento de todos os integrantes do time.
+
+Eu uso [Notion](https://www.notion.so/). Particularmente, acho uma ferramenta muito fácil de usar, com muitos elementos visuais que facilitam o armazenamento de informação em diferentes formatos.
+
+Sugiro uma estrutura básica de documentação assim:
+
+- Infrastructure: Documentação de scripts e rotinas que mantém a infraestrutura.
+- Frontend: Documentação de componentes do frontend. É bom ter essa documentação junto como um storybook.
+- Backend: Documentação de rotinas no backend
+- Conventions: Convenções do seu projeto. Aqui é interessante colocar todas as regras que vocês usam no seu projeto
+- Onboarding: Todo material necessário para os novos funcionários
+- Design Docs: Toda documentação de design do seu projeto
+- Application Docs: Documentação da sua aplicação. Aqui é interessante ter pastas separando a documentação da API, fluxo de dados, integrações, etc.
+
+## 2. Processos de Integração e Entrega Continua (CI/CD)
+
+Hoje é bastante comum a formação de times pequenos. Empresas como a Amazon usam uma regra chamada [The Two Pizza Rule](http://blog.idonethis.com/two-pizza-team/), que consiste em que o tamanho de um time dever ser aquele que pode ser alimentado com duas pizzas. Acredita-se que Jeff Bezos foi o primeiro a utilizar esse termo e aplicar ele dentro dos times da Amazon.
+
+Empresas de porte médio e pequeno contam com um número limitado de colaboradores que acabam tendo múltiplas responsabilidades dentro de um time. É muito importante que os desenvolvedores e desenvolvedoras foquem no que agrega mais valor para empresa: O código. A filosofia de várias empresas como Heroku, Zeit, Netlify, entre outras, é reduzir a complexidade da implantação de um software na nuvem, e permitir que todo mundo seja capaz de escrever uma aplicação e disponibilizá-la rapidamente.
+
+Essa facilidade se logra através de processos de Integração continua (CI) e Entrega continua (CD), usando ferramentas como Jenkins e AWS Pipeline. Existe também a possibilidade de você escrever a sua infraestrutura como recursos escritos em forma de código, usando ferramentas/linguagens como Terraform, CloudFormation, entre outras.
+
+PS. Não tenho certeza se podemos considerar Terraform e Cloudformation como linguagens, mas me atreveria a dizer que são.
+
+Após a definição do processo de implantação, basta um click para gerar uma nova versão de uma aplicação ou então simplesmente um _push_ em uma _branch_ específica para acionar a nova implantação. A automatização desses processos permite entregar valor para o cliente _RÁPIDO_!
+
+## 3. Reduzir dependências
+
+Quando uso a frase "Reduzir dependências" me refiro explicitamente à pessoas. Um termo que expliquei em um dos artigos anteriores, _THE BUS FACTOR_, baseia-se em um indicador que mede quanto você depende de uma pessoa específica no seu time.
+
+> Quão concentrado é o conhecimento no seu time?
+
+Reduzir a dependência de conhecimento é muito importante, e cabe a você documentar e criar os processos necessários para que todo mundo possa escrever código, saber o que fazer se acontece um imprevisto, e saber como gerar uma nova versão da sua aplicação. Você não pode depender só de uma pessoa para que os itens que acabo de mencionar sejam acionados.
+
+## Como posso fazer isso na prática
+
+Em teoria, tudo isso funciona muito bem. Mas na prática, nem sempre é fácil de implementar. Eu me faço uma pergunta todo dia:
+
+> O que posso fazer para facilitar a vida dos integrantes do meu time?
+
+Pensando nisso, eu crio ferramentas que automatizam parte do meu trabalho, documento a forma em que qualquer pessoa pode utilizá-la, e encorajo cada integrante do time a que utilize as ferramentas que desenvolvemos internamente na empresa. Isso reduz as dependências de conhecimento e aumenta a nossa produtividade e a velocidade com que entregamos novas funcionalidades.
+
+Para dar um exemplo mais específico, desenvolvi recentemente um processo de _release_ de novas versões de maneira automática, e funciona assim:
+
+1. Uma pessoa trabalha em uma tarefa XYZ e deve trabalhar em uma _branch_ do git separada da _branch_ DEV.
+
+2. Após finalizar a tarefa, cria-se um _pull request_. É muito importante a utilização de nomes apropriados, que informem o que foi realizado na tarefa específica.
+
+3. Os itens 1 e 2 acontecem várias vezes durante cada _sprint_. Nós geramos um release após cada _sprint_, que dura uma semana. A frequência não interessa no fim das contas.
+
+4. Após finalizar a _sprint_, uma pessoa é responsável por fazer merge do código que está em _dev_ no _master_ e criar um _pull request_ com o formato "RELEASE $NUMERO_DA_VERSÃO". Esse formato de nome é muito importante, pois será usado pelo script.
+
+5. Executamos um script em Python que busca todos os _pull requests_ aceitos desde o último _pull request_ cujo nome contém a palavra `RELEASE`, e monta uma tabela em formato Markdown contendo o nome do _pull request_, o ID, e o link. Finalmente, o script gera uma _tag_ e um _release_ desde a _branch_ `master`. Isso tudo, com um click.
+
+Publiquei no meu repositório o script que automatiza esse processo. Eu gastava anteriormente ao redor de 10 a 15 minutos para gerar uma nova _release_, criar uma _tag_ na branch master, e fazer uma lista com todos os itens implementados na _release_ atual. Agora em questão de segundos, consigo fazer isso.
+
+Confira a descrição detalhada do processo e o script que faz isso para você [nesse link](https://github.com/jprivillaso/python_release_and_tag).
+
+## Conclusão
+
+Boas práticas são a fundação do seu projeto. Convido-o a que se faça as seguintes perguntas:
+
+1. Qual parte do meu trabalho é repetitiva ?
+2. Como posso gastar menos tempo nessas tarefas repetitivas ?
+3. O que posso fazer para que meu trabalho seja menos propenso a erros e garantir a qualidade do meu projeto ?
+
+A resposta disso é automatização, documentação e uma cultura DevOps.
+
+O que você acha disso? Na sua empresa também implementam práticas desse tipo?
+
+## Uma pequena ajuda
+
+Se achou algum erro de português 📙, por favor me avise. Não sou nativo e sempre passa alguma coisa batida 😃
+
+Gostou ? Compartilhe e comente!
