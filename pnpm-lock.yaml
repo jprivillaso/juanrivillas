@@ -38,6 +38,9 @@ dependencies:
   contentlayer:
     specifier: ^0.3.4
     version: 0.3.4(esbuild@0.19.10)(markdown-wasm@1.2.0)
+  follow-redirects:
+    specifier: ^1.15.4
+    version: 1.15.4
   framer-motion:
     specifier: ^10.16.4
     version: 10.16.16(react-dom@18.2.0)(react@18.2.0)
@@ -933,7 +936,7 @@ packages:
       chokidar: 3.5.3
       destr: 1.2.2
       execa: 5.1.1
-      follow-redirects: 1.15.3
+      follow-redirects: 1.15.4
       fs-extra: 10.1.0
       globby: 11.1.0
       merge-stream: 2.0.0
@@ -2330,8 +2333,8 @@ packages:
       to-regex-range: 5.0.1
     dev: false
 
-  /follow-redirects@1.15.3:
-    resolution: {integrity: sha512-1VzOtuEM8pC9SFU1E+8KfTjZyMztRsgEfwQl44z8A25uy13jSzTj6dyK2Df52iV0vgHCfBwLhDWevLn95w5v6Q==}
+  /follow-redirects@1.15.4:
+    resolution: {integrity: sha512-Cr4D/5wlrb0z9dgERpUL3LrmPKVDsETIJhaCMeDfuFYcqa5bldGV6wBsAN6X/vxlXQtFBMrXdXxdL8CbDTGniw==}
     engines: {node: '>=4.0'}
     peerDependencies:
       debug: '*'
