@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@netlify/blobs':
+    specifier: ^6.3.1
+    version: 6.3.1
   '@netlify/plugin-nextjs':
     specifier: ^4.41.3
     version: 4.41.3(@upstash/redis@1.27.1)
@@ -652,6 +655,11 @@ packages:
 
   /@netlify/blobs@2.2.0:
     resolution: {integrity: sha512-j2C0+IvWj9CLNGPoiA7ETquMFDExZTrv4CarjfE6Au0eY3zlinnnTVae7DE+VQFK+U0CDM/O0VvelNy1QbsdwQ==}
+    engines: {node: ^14.16.0 || >=16.0.0}
+    dev: false
+
+  /@netlify/blobs@6.3.1:
+    resolution: {integrity: sha512-JjLz3WW7Wp6NVwQtDxPpWio4L3u9pnnDXnQ7Q16zgAFE9IA1rSjZVSsyOQrtkiBQIxaJ1Zr5eky8vrXJ5mdRWg==}
     engines: {node: ^14.16.0 || >=16.0.0}
     dev: false
 
