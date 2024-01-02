@@ -20,6 +20,7 @@
     "@upstash/redis": "^1.23.3",
     "autoprefixer": "^10.4.16",
     "contentlayer": "^0.3.4",
+    "follow-redirects": "^1.15.4",
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.284.0",
     "markdown-wasm": "^1.2.0",
