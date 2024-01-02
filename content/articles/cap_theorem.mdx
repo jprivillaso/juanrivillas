@@ -13,7 +13,7 @@ O Teorema CAP, também chamado de Teorema de Brewer, diz que em um sistema distr
 - **A**vailability (Disponibilidade)
 - **P**artition Tolerance (Tolerância a falha)
 
-![Teorema CAP!](assets/cap_theorem.png)
+![Teorema CAP!](/assets/cap_theorem.png)
 
 Antes de explicar a sua importância, vamos explicar alguns conceitos:
 
@@ -29,7 +29,7 @@ Existem vários desafios na hora de construir sistemas distribuidos. Entre os ma
 
 A partir desse ponto será usada a palavra _node_ para descrever os componentes do sistema distribuído. Esse é o termo usado em inglês.
 
-![Sistema distribuído](assets/distributed_sys.png)_Sistema distribuído_
+![Sistema distribuído](/assets/distributed_sys.png)_Sistema distribuído_
 
 ### Qual é a necessidade de um sistema distribuído
 
@@ -46,15 +46,15 @@ Para que a consistência aconteça, deve existir uma sincronização dos _nodes_
 
 Qual é o maior problema? Eu diria que o tempo: O tempo necessário para que todos os componentes estejam sincronizados vai definir a forma em que você deve construir ou utilizar o seu sistema distribuído.
 
-![Consistência](assets/consistency_1.png)
+![Consistência](https://www.juanrivillas.com/assets/consistency_1.png)
 
-![Consistência](assets/consistency_2.png)
+![Consistência](https://www.juanrivillas.com/assets/consistency_2.png)
 
 O cliente fará requisições e a resposta pode vir de qualquer _node_. O mais importante é que esse valor deve ser o mesmo, independente de quem responde à requisição.
 
-![Consistência](assets/consistency_3.png)
+![Consistência](https://www.juanrivillas.com/assets/consistency_3.png)
 
-![Consistência](assets/consistency_4.png)
+![Consistência](https://www.juanrivillas.com/assets/consistency_4.png)
 
 ## Disponibilidade
 
@@ -64,7 +64,7 @@ Disponibilidade é uma variável que garante que seu sistema estará disponível
 
 A Tolerância a falha é uma variável que garante que se algum dos _nodes_ no seu sistema cai, o seu sistema ainda será capaz de atender as requisições.
 
-![Tolerância a falha](assets/partition_tolerance.png)
+![Tolerância a falha](https://www.juanrivillas.com/assets/partition_tolerance.png)
 
 ---
 
