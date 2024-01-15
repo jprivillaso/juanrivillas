@@ -9,7 +9,7 @@ type CommentsProps = {
 
 const Comments = ({ title, slug }: CommentsProps) => {
   const disqusShortname = 'juanrivillas'
-  const url = `https://juanrivillas.com/${ slug }`
+  const url = `https://juanrivillas.com/blog/${ slug }`
 
   const disqusConfig = {
     identifier: url,
