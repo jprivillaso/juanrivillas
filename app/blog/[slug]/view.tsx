@@ -4,6 +4,8 @@ import { useEffect } from "react";
 
 export const ReportView: React.FC<{ slug: string }> = ({ slug }) => {
 	useEffect(() => {
+		if (window.location.hostname.includes('localhost')) return
+
 		fetch("/api/incr", {
 			method: "POST",
 			headers: {
