@@ -71,9 +71,6 @@ dependencies:
   react:
     specifier: ^18.2.0
     version: 18.2.0
-  react-disqus-comments:
-    specifier: ^1.4.0
-    version: 1.4.0(react-dom@18.2.0)(react@18.2.0)
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
@@ -4228,16 +4225,6 @@ packages:
       ini: 1.3.8
       minimist: 1.2.8
       strip-json-comments: 2.0.1
-    dev: false
-
-  /react-disqus-comments@1.4.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-NkCNsnBSujliii5N2HbA6Wy5z2s6GtCtPaJ0D6GWNMSKnP8wmEtQ3u2qAeG9+xHJE2cMRFmfqMpDeJtBay38RA==}
-    peerDependencies:
-      react: '>=15.0.1 < 17.0.0'
-      react-dom: '>=15.0.1 < 17.0.0'
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react-dom@18.2.0(react@18.2.0):
