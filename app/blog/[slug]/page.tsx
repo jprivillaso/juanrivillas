@@ -1,10 +1,12 @@
-import { notFound } from "next/navigation";
-import { allArticles } from "contentlayer/generated";
+import DisqusWrapper from "@/app/components/DisqussWrapper";
 import { Mdx } from "@/app/components/mdx";
-import { Header } from "./header";
-import "./mdx.css";
-import { ReportView } from "./view";
 import { Redis } from "@upstash/redis";
+import { allArticles } from "contentlayer/generated";
+import { notFound } from "next/navigation";
+import { Header } from "./header";
+import { ReportView } from "./view";
+
+import "./mdx.css";
 
 export const revalidate = 60;
 
@@ -42,8 +44,6 @@ export default async function PostPage({ params }: Props) {
     console.error(`Error fetching views from Upstash for article ${slug}`);
   }
 
-  console.log(project);
-
   return (
     <div className="bg-zinc-50 min-h-screen">
       <Header project={project} views={views} />
@@ -52,6 +52,8 @@ export default async function PostPage({ params }: Props) {
       <article className="px-4 py-12 mx-auto prose prose-zinc prose-quoteless">
         <Mdx code={project.body.code} />
       </article>
+
+      <DisqusWrapper title={project.title} slug={project.slug} />
     </div>
   );
 }
