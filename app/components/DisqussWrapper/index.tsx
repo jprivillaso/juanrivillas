@@ -12,7 +12,7 @@ const Comments = ({ title, slug }: CommentsProps) => {
 
   const disqusConfig = {
     url: "https://www.juanrivillas.com",
-    identifier: slug,
+    identifier: `/blog/${slug}`,
     title
   }
 
