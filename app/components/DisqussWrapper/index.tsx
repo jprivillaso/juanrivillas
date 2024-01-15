@@ -11,7 +11,7 @@ const Comments = ({ title, slug }: CommentsProps) => {
   const disqusShortname = 'juanrivillas'
 
   const disqusConfig = {
-    url: "https://juanrivillas.com",
+    url: "https://www.juanrivillas.com",
     identifier: slug,
     title
   }
