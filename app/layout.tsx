@@ -1,8 +1,8 @@
-import "../global.css";
+import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import LocalFont from "next/font/local";
-import { Metadata } from "next";
 import Script from "next/script";
+import "../global.css";
 
 export const metadata: Metadata = {
   title: {
@@ -61,7 +61,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
+    <html
+      lang="en"
+      className={`${[inter.variable, calSans.variable].join(" ")} h-full`}
+    >
       <head>
         <Script
           strategy="lazyOnload"
@@ -83,8 +86,10 @@ export default function RootLayout({
           })(window, document, "script", "dataLayer", "GTM-MST2QXML")
         `}
         </Script>
+
+        <link rel="stylesheet" href="./custom_styles.css"></link>
       </head>
-      <body className="bg-black">
+      <body className="bg-black h-full overflow-y-auto">
         {children}
         <noscript>
           <iframe
