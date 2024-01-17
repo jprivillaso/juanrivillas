@@ -86,8 +86,6 @@ export default function RootLayout({
           })(window, document, "script", "dataLayer", "GTM-MST2QXML")
         `}
         </Script>
-
-        <link rel="stylesheet" href="./custom_styles.css"></link>
       </head>
       <body className="bg-black h-full overflow-y-auto">
         {children}
