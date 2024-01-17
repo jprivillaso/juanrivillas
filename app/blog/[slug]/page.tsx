@@ -1,5 +1,5 @@
 import DisqusWrapper from "@/app/components/DisqussWrapper";
-import { Mdx } from "@/app/components/mdx";
+import { Mdx } from "@/app/components/Mdx";
 import { Redis } from "@upstash/redis";
 import { allArticles } from "contentlayer/generated";
 import { notFound } from "next/navigation";

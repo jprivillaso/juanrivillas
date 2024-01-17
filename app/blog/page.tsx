@@ -1,11 +1,10 @@
-import Link from "next/link";
-import React from "react";
-import { allArticles } from "contentlayer/generated";
-import { Navigation } from "../components/nav";
-import { Card } from "../components/card";
-import { Article } from "./article";
 import { Redis } from "@upstash/redis";
+import { allArticles } from "contentlayer/generated";
 import { Eye } from "lucide-react";
+import Link from "next/link";
+import { Card } from "../components/Card";
+import { Navigation } from "../components/Nav";
+import { Article } from "./article";
 
 const redis = Redis.fromEnv();
 
