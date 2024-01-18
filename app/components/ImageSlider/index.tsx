@@ -8,7 +8,7 @@ type ImageSliderProps = {
 
 export const ImageSlider = ({ children }: ImageSliderProps) => {
   return (
-    <section className="slider w-[500px] text-center overflow-hidden">
+    <section className="slider w-[300px] md:w-[500px] text-center overflow-hidden">
       {children.map((c, idx) => (
         <a
           href={`#slide-${idx + 1}`}
@@ -21,7 +21,7 @@ export const ImageSlider = ({ children }: ImageSliderProps) => {
       <div className="slides flex overflow-x-auto snap-x scroll-smooth">
         {children.map((c, idx) => (
           <div
-            className="snap-start shrink-0 bg-[#eee] w-[500px] h-[500px] mr-[50px] rounded-xl origin-center scale-100	transition transform delay-500 flex relative justify-center items-center	"
+            className="snap-start shrink-0 bg-[#eee] w-[300px] md:w-[500px] h-[500px] mr-[50px] rounded-xl origin-center scale-100	transition transform delay-500 flex relative justify-center items-center	"
             id={`slide-${idx + 1}`}
           >
             {c}
