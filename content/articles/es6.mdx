@@ -1,0 +1,200 @@
+---
+title: Two ES6 features you might not know
+description: Let's meet Proxy and Reflect
+date: "2017-10-01"
+published: true
+language: en
+---
+
+Ecmascript is defined as a Standard for scripting languages. Languages like Javascript are built on top of Ecmascript specification, ruled by an entity called [Ecma International](http://www.ecma-international.org/).
+
+We lived so long with the same features of Javascript, and the web kept evolving and while we created web applications, the entire ecosystem of Javascript started to demand more and more features of a language that was not intended to be as used as it is.
+
+The latest survey made by Stackoverflow shows that Javascript is the most popular programming language nowadays.
+
+![Most Popular technologies](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*3QEfbTvRsYmcpEv9IDxHlQ.png)
+
+In 2015, Ecmascript6 was released and a bunch of new features came out, preparing us for the next generation of Javascript applications. Features like Classes, arrow functions, template literals, generators, etc. appeared in this version.
+
+However, recently I found myself reading a page that contains all the es6 features called [es6-features.org](http://es6-features.org/) and I found two guys that I've never seen before, and that's what I am going to explain right away. Even in 2017, I think it's worth to spread the existence of these features 😊
+
+### The Proxy object
+
+The proxy object is defined by the MDN Web Docs as follows
+
+> The **Proxy** object is used to define custom behavior for fundamental operations (e.g. property lookup, assignment, enumeration, function invocation, etc).
+
+The proxy object may have a lot of applications, but I will focus in one that I find really interesting:
+
+- Multiple Inheritance
+
+Multiple Inheritance, in object oriented languages, is the ability to extend features, methods, etc. from more than one parent. Since languages like Java, this is not possible natively.
+
+[Andre Staltz](https://twitter.com/andrestaltz) posted recently a tweet that forwarded to a thread in Stack Overflow that showed how we can have Multiple Inheritance in Javascript through ES6 Proxy and Prototype-based OOP. [Link here](https://stackoverflow.com/questions/9163341/multiple-inheritance-prototypes-in-javascript/31236132#31236132).
+
+Basically, the proxy object has a concept called trap, that is analogous to the operating systems traps. In the Proxy world, traps are methods that are called when some operation is called. So for example, if I use the proxy object within an iterator, it may use the get, set, and has traps.
+
+To illustrate the behavior of the Proxy object, look at the following snippet
+
+```javascript
+// Taken from https://stackoverflow.com/questions/9163341/multiple-inheritance-prototypes-in-javascript
+
+function getDesc(obj, prop) {
+  let desc = Object.getOwnPropertyDescriptor(obj, prop);
+  return (
+    desc || (obj = Object.getPrototypeOf(obj) ? getDesc(obj, prop) : void 0)
+  );
+}
+
+function multiInherit(...protos) {
+  return Object.create(
+    new Proxy(Object.create(null), {
+      has: (target, prop) => protos.some((obj) => prop in obj),
+      get(target, prop, receiver) {
+        let obj = protos.find((obj) => prop in obj);
+        return obj ? Reflect.get(obj, prop, receiver) : void 0;
+      },
+      set(target, prop, value, receiver) {
+        let obj = protos.find((obj) => prop in obj);
+        return Reflect.set(obj || Object.create(null), prop, value, receiver);
+      },
+      *enumerate(target) {
+        yield* this.ownKeys(target);
+      },
+      ownKeys(target) {
+        let hash = Object.create(null);
+        for (let obj of protos) for (let p in obj) if (!hash[p]) hash[p] = true;
+        return Object.getOwnPropertyNames(hash);
+      },
+      getOwnPropertyDescriptor(target, prop) {
+        let obj = protos.find((obj) => prop in obj);
+        let desc = obj ? getDesc(obj, prop) : void 0;
+        if (desc) desc.configurable = true;
+        return desc;
+      },
+      preventExtensions: (target) => false,
+      defineProperty: (target, prop, desc) => false,
+    })
+  );
+}
+```
+
+The function multiInherit will create an object with properties that come from different parents. We can use it as follows
+
+```javascript
+let o1,
+  o2,
+  o3,
+  obj = multiInherit((o1 = { a: 1 }), (o2 = { b: 2 }), (o3 = { a: 3, b: 3 }));
+```
+
+Some interesting facts:
+
+- The type of the variable obj will be Object
+- The value of the variable obj.a is 1
+- The value of the variable obj.b is 2
+- The value of the variable obj.c is undefined
+- The last three calls will trigger the get trap because we wanted to get the value of some object property. If we try to use the basic operation in, the has trap will be triggered.
+
+### The Reflect Object
+
+The Reflect object is defined by the MDN Web Docs as follows
+
+> **Reflect** is a built-in object that provides methods for interceptable JavaScript operations. The methods are the same as those of proxy handlers. Reflect is not a function object, so it's not constructible.
+
+For those who came from languages like Java or C#, you should know that reflection is the way of finding methods and attributes of classes dynamically. This can be very useful when we have to call methods dynamically, or get and set the value of some attributes that are defined at runtime.
+
+While learning and using React, I found myself building classes that inside constructors had a lot of method bindings in order to be able to use the this keyword with the same context.
+
+```javascript
+class App extends React.Component {
+  constructor() {
+    super();
+    this.methodA = this.methodA.bind(this);
+    this.methodB = this.methodB.bind(this);
+    this.methodC = this.methodC.bind(this);
+  }
+
+  componentDidMount() {
+    //...
+  }
+
+  componentDidUpdate() {
+    //...
+  }
+
+  methodA() {
+    //...
+  }
+
+  methodB() {
+    //...
+  }
+
+  methodC() {
+    //...
+  }
+
+  render() {
+    //...
+  }
+}
+```
+
+Well, you may disagree that the repetition of bindings inside the constructor is verbose, but I think it is. Using the power of reflection I refactored the component to be as follows
+
+```javascript
+const DEFAULT_METHODS = [
+  "constructor",
+  "render",
+  "componentDidMount",
+  "componentDidUpdate",
+];
+
+class App extends React.Component {
+  constructor() {
+    super();
+    this.bindMethodsWithContext(this);
+  }
+
+  componentDidMount() {
+    //...
+  }
+
+  componentDidUpdate() {
+    //...
+  }
+
+  bindMethodsWithContext($this) {
+    Object.getOwnPropertyNames(App.prototype).forEach((func) => {
+      if (DEFAULT_METHODS.indexOf(func) === -1) {
+        $this[func] = $this[func].bind($this);
+      }
+    });
+  }
+
+  methodA() {
+    //...
+  }
+
+  methodB() {
+    //...
+  }
+
+  methodC() {
+    //...
+  }
+
+  render() {
+    //...
+  }
+}
+```
+
+With the method bindMethodsWithContext I won't worry anymore with binding every new created method of my class with the this context.
+
+Furthermore, you can put this method in a BaseClass that is extended from every component of your app, and keep out future binding bugs.
+
+These were a small set of applications of the objects Reflect and Proxy, and I will be happy if this article helped you somehow. If you are using one of these objects differently, please share with us too!
+
+Thanks for reading and leave some feedback 😊

@@ -1,10 +1,15 @@
 import type { Article as GeneratedArticle } from "@/.contentlayer/generated";
-import Link from "next/link";
 import { Eye } from "lucide-react";
+import Link from "next/link";
 
 type Props = {
   project: GeneratedArticle;
   views: number;
+};
+
+export const getBlogPostFlag = (language: string) => {
+  if (language === "en") return <div className="text-xl">🇺🇸</div>;
+  return <div className="text-xl">🇧🇷</div>;
 };
 
 export const Article: React.FC<Props> = ({ project, views }) => {
@@ -23,7 +28,8 @@ export const Article: React.FC<Props> = ({ project, views }) => {
               <span>SOON</span>
             )}
           </span>
-          <span className="text-zinc-500 text-xs  flex items-center gap-1">
+          <span className="text-zinc-500 text-xs flex items-center gap-1">
+            {getBlogPostFlag(project.language)}
             <Eye className="w-4 h-4" />{" "}
             {Intl.NumberFormat("en-US", { notation: "compact" }).format(views)}
           </span>

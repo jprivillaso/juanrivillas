@@ -2,13 +2,14 @@ import { Redis } from "@upstash/redis";
 import { allArticles } from "contentlayer/generated";
 import { Eye } from "lucide-react";
 import Link from "next/link";
+
 import { Card } from "../components/Card";
 import { Navigation } from "../components/Nav";
-import { Article } from "./article";
-
-const redis = Redis.fromEnv();
+import { Article, getBlogPostFlag } from "./article";
 
 export const revalidate = 60;
+const redis = Redis.fromEnv();
+
 export default async function ProjectsPage() {
   let projectViews: number[] = [];
 
@@ -44,7 +45,7 @@ export default async function ProjectsPage() {
       <div className="px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
         <div className="max-w-2xl mx-auto lg:mx-0">
           <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
-            Articles
+            Posts
           </h2>
         </div>
         <div className="w-full h-px bg-zinc-800" />
@@ -66,6 +67,7 @@ export default async function ProjectsPage() {
                     )}
                   </div>
                   <span className="flex items-center gap-1 text-xs text-zinc-500">
+                    {getBlogPostFlag(featured.language)}
                     <Eye className="w-4 h-4" />{" "}
                     {Intl.NumberFormat("en-US", { notation: "compact" }).format(
                       views[featured.slug] ?? 0
