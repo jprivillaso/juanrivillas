@@ -19,8 +19,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "https://www.juanrivillas.com/og.png",
-        width: 1920,
-        height: 1080,
+        width: 500,
+        height: 91,
       },
     ],
     locale: "en-US",
