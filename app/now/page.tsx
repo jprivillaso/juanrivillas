@@ -130,11 +130,9 @@ export default function Now() {
 
             <p className="text-md duration-1000 text-zinc-500 group-hover:text-zinc-200">
               After almost five years working as an Engineering lead, I came
-              back to being an individual contributor. Leading teams left a big
-              burden on my shoulders and it affected me a lot. I'm not sure if I
-              will ever work again on a leadership role, but for the moment, I
-              need a break and learn more about how can I work on any of these
-              roles without compromising my wellbeing.
+              back to being an individual contributor which is where I think I excel. I do
+              want to continue pursuing the technical ladder, even though, I enjoyed having
+              the opportunity to lead a remote engineering team for a couple of years.
             </p>
           </section>
         </div>
