@@ -7,7 +7,7 @@ type Props = {
   views: number;
 };
 
-export const getBlogPostFlag = (language: string) => {
+export const getBlogPostFlag = (language: string | undefined) => {
   if (language === "en") return <div className="text-xl">🇺🇸</div>;
   return <div className="text-xl">🇧🇷</div>;
 };
