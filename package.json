@@ -22,7 +22,7 @@
     "autoprefixer": "^10.4.16",
     "contentlayer": "^0.3.4",
     "disqus-react": "^1.1.5",
-    "follow-redirects": "^1.15.4",
+    "follow-redirects": "^1.15.6",
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.284.0",
     "markdown-wasm": "^1.2.0",
