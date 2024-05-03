@@ -68,7 +68,7 @@ export default function RootLayout({
       <head>
         <Script
           strategy="lazyOnload"
-          src="//appcues-bundler-development.global.ssl.fastly.net/211150.js"
+          src="//fast.appcues.com/211150.js"
         ></Script>
 
         {/* Google Tag Manager */}
