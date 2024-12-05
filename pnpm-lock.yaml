@@ -45,8 +45,8 @@ dependencies:
     specifier: ^1.1.5
     version: 1.1.5(react-dom@18.2.0)(react@18.2.0)
   follow-redirects:
-    specifier: ^1.15.4
-    version: 1.15.4
+    specifier: ^1.15.6
+    version: 1.15.6
   framer-motion:
     specifier: ^10.16.4
     version: 10.16.16(react-dom@18.2.0)(react@18.2.0)
@@ -219,10 +219,6 @@ packages:
     peerDependencies:
       '@effect-ts/otel-node': '*'
     peerDependenciesMeta:
-      '@effect-ts/core':
-        optional: true
-      '@effect-ts/otel':
-        optional: true
       '@effect-ts/otel-node':
         optional: true
     dependencies:
@@ -948,7 +944,7 @@ packages:
       chokidar: 3.5.3
       destr: 1.2.2
       execa: 5.1.1
-      follow-redirects: 1.15.4
+      follow-redirects: 1.15.6
       fs-extra: 10.1.0
       globby: 11.1.0
       merge-stream: 2.0.0
@@ -2365,8 +2361,8 @@ packages:
       to-regex-range: 5.0.1
     dev: false
 
-  /follow-redirects@1.15.4:
-    resolution: {integrity: sha512-Cr4D/5wlrb0z9dgERpUL3LrmPKVDsETIJhaCMeDfuFYcqa5bldGV6wBsAN6X/vxlXQtFBMrXdXxdL8CbDTGniw==}
+  /follow-redirects@1.15.6:
+    resolution: {integrity: sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==}
     engines: {node: '>=4.0'}
     peerDependencies:
       debug: '*'
