@@ -9,7 +9,7 @@
     "start": "next start"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.14.0"
   },
   "dependencies": {
     "@netlify/blobs": "^6.5.0",
