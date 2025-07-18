@@ -8,6 +8,9 @@
     "fmt": "pnpm rome check . --apply-unsafe && pnpm rome format . --write",
     "start": "next start"
   },
+  "engines": {
+    "node": ">=22.14.0"
+  },
   "dependencies": {
     "@netlify/blobs": "^6.5.0",
     "@netlify/plugin-nextjs": "^4.41.3",
