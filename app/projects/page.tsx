@@ -15,7 +15,7 @@ export default function Example() {
 
         <div>
           <Card customClass="!h-auto">
-            <Link href={`/projects/family-tree`}>
+            <Link href={`/projects/family_tree`}>
               <div className="text-zinc-100 p-8"> 
                 <h2
                   id="featured-post"
