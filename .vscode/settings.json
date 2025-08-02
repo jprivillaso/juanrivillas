@@ -2,7 +2,7 @@
   "editor.defaultFormatter": "rome.rome",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.rome": true
+    "source.fixAll.rome": "explicit"
   },
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
@@ -20,7 +20,7 @@
     "editor.tabSize": 2
   },
   "[javascriptreact]": {
-    "editor.defaultFormatter": "rome.rome", 
+    "editor.defaultFormatter": "rome.rome",
     "editor.tabSize": 2
   }
-} 
+}
