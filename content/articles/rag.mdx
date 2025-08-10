@@ -8,14 +8,13 @@ language: en
 
 ## Implementing a RAG system in Elixir
 
-As part of my blog, I wanted to have a mechanism to answer questions about my family. I'm working on a project to render a data visualization graph of my
-family and I will implement a drawer where people can ask questions about me or my relatives.
+I'm working on a project to render a data visualization graph of my family. This project will be part of this blog and
+it will have the classical drawer where people can ask questions about me or my relatives.
 
-It goes without saying that Python is the default language when it comes to data science and ML. However, I wanted to start implementing LLM-related
-things using the Elixir language. The first two tools that appeared in my research were Nx and Bumblebee.
+It goes without saying that Python is the default language when it comes to data science and ML. However, I wanted to implement LLM-related
+things using the Elixir language. This blog post explores my journey while doing so, as well as the challenges I faced.
 
-As part of that, I thought that implementing a RAG system would be interesting for learning purposes and also to see how easy things could be
-implemented in Elixir. So I started this journey.
+---
 
 As a recap, these are the steps required in a RAG system:
 
@@ -27,49 +26,51 @@ As a recap, these are the steps required in a RAG system:
 
 ## Defining the knowledge base format
 
-Originally I thought about using markdown but decided to change it to JSON. Markdown is a nice format to render custom content, but the structured nature of JSON was better and easier for my case. Since this will be a read-only data visualization tree, JSON felt right.
+Originally I thought about using markdown to organize the information. Each markdown file would be a consolidated file for each person of my family.
+However, I decided to use JSON because Markdown is more limited in terms of metadata and structured information. Since I know the structure and initially I'm the one who'll produce all the content, JSON felt right.
 
 ## Splitting content into chunks
 
-The benefit of RAG is that you can grab some content and insert it into a vector database. However, you won't insert the whole content. You need to insert chunks of it.
+The whole idea of using RAG is that you can grab some content, insert it into a vector database, and query that later using natural language. There will be a mechanism that will find the closely related context in your vector database, based on your input.
+
 When we think about chunking, we have a few options:
 
-- Use a naive text splitter
-- Use a library that split the text for you
-- Define another alternative
+- Using a naive text splitter
+- Using a library that splits the text for you
+- Another alternative
 
-Usually you define a few parameters for chunking
+Usually, you define a few parameters for chunking
 
-- length: The length defines each chunk length
+- length: Defines the length of each chunk length
 - overlap: Defines how many characters will overlap between each chunk
 
-As you may imagine, a proper chunking is not about randomly splitting and inserting chunks. You want chunks to have the most relevant context so that when you query certain information,
-the proper context will come back and then you can use it to respond questions about it.
+A proper chunking is not about randomly splitting strings. You want chunks to have the most relevant context together so that when you query certain information, the appropriate context will come back and then you can use it to respond to questions about it.
 
-With that in mind, we kind of immediately reject the first naive split option.
+With that in mind, we immediately reject the first naive split option.
 
-Second, libraries like Python have smart mechanisms to split the content. In Elixir, I found two libraries
+Second, one can find libraries with more innovative mechanisms to split the content semantically. In Elixir, I saw two libraries
 
-- [Chunks](https://github.com/preciz/chunx) but it's not actively maintained. At the time of writing this post, it had been eight months without any changes.
-- [Text Chunker](https://github.com/revelrylabs/text_chunker_ex). More actively maintained and a better option.
+- [Chunx](https://github.com/preciz/chunx). At the time of writing this post, it had been eight months without any changes, so it gives me the impression
+that it's not actively maintained.
+- [Text Chunker](https://github.com/revelrylabs/text_chunker_ex). Has more options and looks like a good choice based on the features it has.
 
-Finally, after chatting with my friend Yugo Sakamoto, he suggested that every chunk in my app could also be an entire JSON map. A JSON map in my application represents a person with information
-about their biography as well as hobbies, birth date, and relationships with other members of the family.
+Finally, after chatting with my friend Yugo Sakamoto, he suggested that every chunk in my app could also be an _stringified_ JSON map. A JSON map in my application represents a person with information
+about their biography as well as hobbies, birth date, and relationships with other members of the family. So that fits.
 
 ## Defining an embedding model
 
 I chose `sentence-transformers/all-MiniLM-L6-v2` as an embedding model for several reasons:
 
-- **Size**: At 80MB, it's lightweight enough for local deployment
+- **Size**: At 80MB, it's lightweight enough for local development and testing
 - **Performance**: Despite its small size, it captures semantic information effectively
-- **Dimensions**: Produces 384-dimensional vectors, which is manageable for in-memory storage
+- **Dimensions**: Produces 384-dimensional vectors, which are manageable for in-memory storage
 - **Community adoption**: Well-tested and widely used in the community
 
-In this step, you feed the text chunks to the embedding model. The output of this phase will be 384-dimensional vectors that you'll save into the vector database in the next step.
+In this step, the input is the text chunks and the output will be 384-dimensional vectors.
 
-## Defining what vector database
+## Defining a vector database
 
-At this point, it looked to me that I had to deal with so many pieces. As a result, I decided to go for an in-memory vector database. That way I could get to an MVP point faster.
+I decided to go for an in-memory vector database to get to an MVP point faster.
 
 The trade-offs of this approach:
 
@@ -83,22 +84,22 @@ The trade-offs of this approach:
 - Limited scalability compared to dedicated vector databases like Pinecone or Weaviate
 - All vectors must fit in memory
 
-For computing similarity, I implemented cosine similarity in Elixir using Nx tensors, which provides efficient vector operations similar to NumPy in Python.
+I implemented a cosine similarity in Elixir using Nx tensors, which provides efficient vector operations similar to NumPy in Python.
 
 ## Selecting the chat model
 
-We need a chat model to feed the top-K best results from the similarity search. The idea is that a GPT-like model will grab that information and extract the proper information based on the user's question.
+Finally, we need a chat model to feed the top-K best results from the similarity search. The idea is that a GPT-like model grabs that information and extracts the proper information based on the user's question.
 
 I chose `google/gemma-2b` for several reasons:
 
 - **Size**: At 2B parameters, it's small enough to run locally on most machines
 - **Performance**: Provides good text generation quality for its size
 - **Licensing**: Permissive license allows for commercial use
-- **Bumblebee Support**: Well-supported in the Elixir ecosystem through Bumblebee
+- **Bumblebee Support**: Well-supported in the Elixir ecosystem through Bumblebee since it's available via Hugging Faces
 
 For example:
 
-This is the output of the vector search. I was interested in the top 3 results
+The following snippet describes the vector search looks output. I was interested in the top 3 results
 
 ```
 1. (Score: 0.138) {"bio":"Person A bio.","birth_date":"1980-01-15" ...}
@@ -108,7 +109,8 @@ This is the output of the vector search. I was interested in the top 3 results
 3. (Score: 0.106) {"bio":"Person C bio.","birth_date":"1950-03-09" ...}
 ```
 
-When we give this information to the chat model, a model like `GPT-4` or in my case `google/gemma-2b` will be able to extract the relevant information and answer your question using natural language. So when somebody asks "Tell me about person A", the model will respond something like:
+When we feed this information to the chat model, a model like `GPT-4` or in my case `google/gemma-2b` will be able to extract the relevant information and answer your question using natural language.
+When somebody asks "Tell me about person A", the model will respond something like:
 
 ```
 Person A is a software engineer. He is married to Jane Doe and has two children, Alice and Bob. He lives in San Francisco
@@ -120,28 +122,28 @@ The implementation combines several Elixir libraries to create a functional RAG 
 
 ### Key Components
 
+**JSON Processing**: Using Jason for parsing family member data and converting it into searchable chunks.
+
 **Nx and Bumblebee**: Used for loading and running the embedding model locally. Bumblebee provides a high-level API for transformer models, while Nx handles the tensor operations.
 
-**GenServer**: The RAG system runs as a GenServer process, maintaining the vector database in memory and handling concurrent queries efficiently.
-
-**JSON Processing**: Using Jason for parsing family member data and converting it into searchable chunks.
+**GenServer**: The RAG system runs as a GenServer process, maintaining the vector database in memory and handling concurrent queries efficiently, while keeping the system fault-tolerant.
 
 ### Basic Pipeline
 
-```elixir
+```Elixir
 # Simplified flow
-query -> embed_query -> similarity_search -> top_k_results -> chat_model -> response
+  query -> embed_query -> similarity_search -> top_k_results -> chat_model -> response
 ```
 
 ### Challenges Faced
 
-1. **Memory Management**: Loading both embedding and chat models requires careful memory management, especially with larger models.
+1. **Model Loading**: Initial model loading time can be significant. Using a GenServer allows for lazy loading and model caching. Moreover, it will enable your application to stay fault-tolerant, following the Elixir principles.
 
-2. **Concurrency**: Ensuring thread-safe access to the in-memory vector store while maintaining good performance.
+2. **Resources**: There are not many resources online about LLM implementations in the Elixir ecosystem. So, I often found myself needing to understand the basic principles first and then trying to translate a Python implementation.
 
-3. **Model Loading**: Initial model loading time can be significant. Using a GenServer allows for lazy loading and model caching.
+## The implementation
 
-The complete implementation will be open-sourced soon! Stay tuned.
+Check out the full implementation [here](https://github.com/jprivillaso/family-tree-agent)
 
 ## Summary
 
@@ -152,6 +154,7 @@ Key takeaways from this project:
 - **Architecture matters**: Decisions about chunking strategy, model selection, and data storage significantly impact the system's effectiveness
 - **Elixir viability**: The Elixir ML ecosystem, while younger than Python's, is capable of handling real-world RAG implementations
 - **Performance considerations**: Local model inference requires careful memory management and optimization
-- **Integration challenges**: Connecting an Elixir backend with a React/Next.js frontend required thoughtful API design
+- **Elixir ecosystem**: Although there are not as many resources in the Elixir ecosystem as in the Python ecosystem, the Elixir ecosystem still proves to be solid and mature enough to allow one to implement a variety of systems, including LLMs.
+- **Concept first!**: Understand the concept first, and then it'll be easier to map the steps required to implement a system like this one in Elixir.
 
-The most valuable lesson was that the architectural decisions—how to structure the data, which models to choose, and how to integrate with existing systems—were far more important than the actual prediction code. This reinforces my belief that system design knowledge remains a critical human skill, even in an AI-driven world.
+To me, the most valuable lesson was that the architectural decisions—how to structure the data, which models to choose, and how to integrate with existing systems—were far more critical than the actual LLM code,  reinforcing my belief that system design knowledge remains a vital human skill, even in an AI-driven world.
