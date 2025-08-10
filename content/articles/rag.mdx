@@ -126,7 +126,7 @@ The implementation combines several Elixir libraries to create a functional RAG 
 
 **Nx and Bumblebee**: Used for loading and running the embedding model locally. Bumblebee provides a high-level API for transformer models, while Nx handles the tensor operations.
 
-**GenServer and Supervisor **: The RAG system runs as a GenServer process, maintaining the vector database in memory and handling concurrent queries efficiently, while keeping the system fault-tolerant. Also,
+**GenServer and Supervisor**: The RAG system runs as a GenServer process, maintaining the vector database in memory and handling concurrent queries efficiently, while keeping the system fault-tolerant. Also,
 I added a specific RAG supervisor to handle failures gracefully.
 
 ### Basic Pipeline
