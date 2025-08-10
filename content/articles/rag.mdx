@@ -126,7 +126,8 @@ The implementation combines several Elixir libraries to create a functional RAG 
 
 **Nx and Bumblebee**: Used for loading and running the embedding model locally. Bumblebee provides a high-level API for transformer models, while Nx handles the tensor operations.
 
-**GenServer**: The RAG system runs as a GenServer process, maintaining the vector database in memory and handling concurrent queries efficiently, while keeping the system fault-tolerant.
+**GenServer and Supervisor **: The RAG system runs as a GenServer process, maintaining the vector database in memory and handling concurrent queries efficiently, while keeping the system fault-tolerant. Also,
+I added a specific RAG supervisor to handle failures gracefully.
 
 ### Basic Pipeline
 
@@ -141,9 +142,15 @@ The implementation combines several Elixir libraries to create a functional RAG 
 
 2. **Resources**: There are not many resources online about LLM implementations in the Elixir ecosystem. So, I often found myself needing to understand the basic principles first and then trying to translate a Python implementation.
 
+3. **Inference time**: For some reason, the inference is taking a lot of time to run. I'm still investigating the root cause.
+
 ## The implementation
 
-Check out the full implementation [here](https://github.com/jprivillaso/family-tree-agent)
+Check out the full implementation [here](https://github.com/jprivillaso/family-tree-agent/blob/main/lib/family_tree_agent/ai/familiy_tree_rag.ex)
+
+As you may have seen above, I mentioned using GenServer and a Supervisor. I took leverage of Elixir's powerful capabilities and implemented a supervisor
+to make the application fault tolerant. This way, you can fail gracefully and implement a fallback mechanism. In my case, I'm responding with an error
+when a request needs the RAG system and this one is not available yet. That's the beauty of Elixir.
 
 ## Summary
 
