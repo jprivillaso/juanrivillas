@@ -159,7 +159,14 @@ Once I had a decent version #1 working, I decided to focus on the architecture, 
 5. An In-Memory-Vector-Store module to handle with all the embeddings and cosine similarity
 6. A RAG Client (Bumblebee and later Ollama) to orchestrate all that logic
 
-As you see, these are all well-known software engineering decisions that focus more on the architecture and exposing abstractions rather than how we will implement the code itself.
+Out of those six items I want to focus on items 1 and 2. Elixir has a beautiful mechanism called Supervisor. Supervisors allow to orchestrate processes and
+allows one to define a strategy to handle unexpected errors. In this case, I have a whole API that can't go down just because I couldn't load the model. So I
+created an optimistic behavior, where we can start the API in a degraded version. The Supervisor alongside a GenServer allows me to respond to the client requests
+asking them to retry later. This is very useful in many systems, as one single component cannot bring down your whole application. Maybe one could have a fallback
+mechanism as well, if the main RAG system is not working. For example, one could have some cached information and attempt to respond the request based on the latest
+known information.
+
+The rest of the items are all well-known software engineering decisions that focus more on the architecture and exposing abstractions rather than how we will implement the code itself.
 
 ## Summary
 
