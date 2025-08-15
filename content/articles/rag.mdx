@@ -142,15 +142,24 @@ I added a specific RAG supervisor to handle failures gracefully.
 
 2. **Resources**: There are not many resources online about LLM implementations in the Elixir ecosystem. So, I often found myself needing to understand the basic principles first and then trying to translate a Python implementation.
 
-3. **Inference time**: For some reason, the inference is taking a lot of time to run. I'm still investigating the root cause.
+3. **Inference time**: The inference time was taking too long. Here I'm considering both the similarity search part and the chat interpretation about the top K results, outcome of the RAG process
 
 ## The implementation
 
 Check out the full implementation [here](https://github.com/jprivillaso/family-tree-agent/blob/main/lib/family_tree_agent/ai/familiy_tree_rag.ex)
 
-As you may have seen above, I mentioned using GenServer and a Supervisor. I took leverage of Elixir's powerful capabilities and implemented a supervisor
-to make the application fault tolerant. This way, you can fail gracefully and implement a fallback mechanism. In my case, I'm responding with an error
-when a request needs the RAG system and this one is not available yet. That's the beauty of Elixir.
+The first implementation took a bit until I understood what were the pieces required to make this work. Once I had a working version, it became a slowly iterative process where I started analyzing how each part was performing. Aside from the AI core, I wanted to ensure I could have this API integrated in a deployed environment with low costs. Finally, I wanted to follow Elixir's principles about fault-tolerance.
+
+Once I had a decent version #1 working, I decided to focus on the architecture, so I created the following modules:
+
+1. A RAG supervisor
+2. A RAG GenServer
+3. A RAG Behavior to instruct the RAG Clients what functions to expose
+4. A File Processor to focus on reading and chunking the documents
+5. An In-Memory-Vector-Store module to handle with all the embeddings and cosine similarity
+6. A RAG Client (Bumblebee and later Ollama) to orchestrate all that logic
+
+As you see, these are all well-known software engineering decisions that focus more on the architecture and exposing abstractions rather than how we will implement the code itself.
 
 ## Summary
 
