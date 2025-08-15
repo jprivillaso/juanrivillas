@@ -126,7 +126,7 @@ The implementation combines several Elixir libraries to create a functional RAG 
 
 **Nx and Bumblebee**: Used for loading and running the embedding model locally. Bumblebee provides a high-level API for transformer models, while Nx handles the tensor operations.
 
-**GenServer and Supervisor **: The RAG system runs as a GenServer process, maintaining the vector database in memory and handling concurrent queries efficiently, while keeping the system fault-tolerant. Also,
+**GenServer and Supervisor**: The RAG system runs as a GenServer process, maintaining the vector database in memory and handling concurrent queries efficiently, while keeping the system fault-tolerant. Also,
 I added a specific RAG supervisor to handle failures gracefully.
 
 ### Basic Pipeline
@@ -142,15 +142,31 @@ I added a specific RAG supervisor to handle failures gracefully.
 
 2. **Resources**: There are not many resources online about LLM implementations in the Elixir ecosystem. So, I often found myself needing to understand the basic principles first and then trying to translate a Python implementation.
 
-3. **Inference time**: For some reason, the inference is taking a lot of time to run. I'm still investigating the root cause.
+3. **Inference time**: The inference time was taking too long. Here I'm considering both the similarity search part and the chat interpretation about the top K results, outcome of the RAG process
 
 ## The implementation
 
 Check out the full implementation [here](https://github.com/jprivillaso/family-tree-agent/blob/main/lib/family_tree_agent/ai/familiy_tree_rag.ex)
 
-As you may have seen above, I mentioned using GenServer and a Supervisor. I took leverage of Elixir's powerful capabilities and implemented a supervisor
-to make the application fault tolerant. This way, you can fail gracefully and implement a fallback mechanism. In my case, I'm responding with an error
-when a request needs the RAG system and this one is not available yet. That's the beauty of Elixir.
+The first implementation took a bit until I understood what were the pieces required to make this work. Once I had a working version, it became a slowly iterative process where I started analyzing how each part was performing. Aside from the AI core, I wanted to ensure I could have this API integrated in a deployed environment with low costs. Finally, I wanted to follow Elixir's principles about fault-tolerance.
+
+Once I had a decent version #1 working, I decided to focus on the architecture, so I created the following modules:
+
+1. A RAG supervisor
+2. A RAG GenServer
+3. A RAG Behavior to instruct the RAG Clients what functions to expose
+4. A File Processor to focus on reading and chunking the documents
+5. An In-Memory-Vector-Store module to handle with all the embeddings and cosine similarity
+6. A RAG Client (Bumblebee and later Ollama) to orchestrate all that logic
+
+Out of those six items I want to focus on items 1 and 2. Elixir has a beautiful mechanism called Supervisor. Supervisors allow to orchestrate processes and
+allows one to define a strategy to handle unexpected errors. In this case, I have a whole API that can't go down just because I couldn't load the model. So I
+created an optimistic behavior, where we can start the API in a degraded version. The Supervisor alongside a GenServer allows me to respond to the client requests
+asking them to retry later. This is very useful in many systems, as one single component cannot bring down your whole application. Maybe one could have a fallback
+mechanism as well, if the main RAG system is not working. For example, one could have some cached information and attempt to respond the request based on the latest
+known information.
+
+The rest of the items are all well-known software engineering decisions that focus more on the architecture and exposing abstractions rather than how we will implement the code itself.
 
 ## Summary
 
