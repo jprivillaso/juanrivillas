@@ -1,0 +1,113 @@
+---
+title: Naive RAG VS Graph RAG
+description: RAG with super powers
+date: "2025-08-24"
+published: false
+language: en
+---
+
+## Recap
+
+If you're just arriving here, let me get you up to speed in a few sentences. I'm working on a project to render a family visualization tree
+and I'm implementing an AI system that responds to questions about my family. In the first implementation, I tried a naive RAG system with
+embeddings. In [this post](https://juanrivillas.com/blog/rag) I talk about my experience while building that feature. In this blog post,
+I expand that implementation to use Graph RAG and share my key findings during this process. Bear with me.
+
+## RAG VS Graph RAG
+
+As we learned before, RAG is an excellent way for you to have a system that responds to questions about a piece of content. That content is stored
+in a vector database, which also can be implemented in-memory and that is very powerful. However, when I started exploring the questions I could ask to my API, I noticed
+immediately that there were some limitations. As a recap, the base content of my family-tree agent is a person, whose information looks like this
+
+```json
+{
+  "name": "Juan Pablo Rivillas Ospina",
+  "birth_date": "1991-11-18",
+  "death_date": null,
+  "bio": "Loves to travel with his family, learn about new technologies and write in his blog. ...",
+  "relationships": {
+    "spouse": "Alessandra Magalhes de Souza Lima",
+    "parents": ["Rolsalba del Consuelo Ospina Montoya", "Tulio Mario Rivillas Zapata"]
+  },
+  "metadata": {
+    "occupation": "Software Engineer",
+    "location": "Belo Horizonte, Brazil"
+  }
+}
+```
+
+From now on I will refer to RAG as _naive_ RAG to differentiate it from Graph RAG. Using naive RAG I was able to ask questions about a single person, but something I am really interested in, is
+asking questions about relationships between people. RAG helped my API find the most relevant person based on a prompt, but when I asked about further relationships
+that expanded that single structure, it started to struggle. For example, I wanted answers for the following questions:
+
+- Who's Juan Rivillas' grandfather ?
+- Does David Rivillas have uncles or aunts ?
+
+As you can see, those questions require answers that should be inferred from the knowledge. Having an attribute for all the possible relationships someone can have
+would not only be tedious but extremely time-consuming and definitely, not scalable. 
+
+During my journey exploring other alternatives, I stumbled upon something that was enlightening: Graph RAG. If we think about a family-tree, it's evident that we can
+represent it with a graph. By definition, trees are subsets graphs. So I went ahead and started exploring how I could replace my default RAG with this new tool.
+
+## Graph RAG
+
+Graphs are super powerful data structures. With them, we can model complex relationships and get multiple information from a node using a single query. That looked
+like a natural fit to respond to the questions I was interested in. It would be a matter of just identifying how to ask questions to a graph.
+
+Before digging into that part, let's talk about how to store graph's data and what type of graph to use.
+
+### Defining a graph database
+
+I saw a few options of graph databases but when it comes to graph databases, the default choice is Neo4j. I explored a bit Kuzu, but I didn't find anything on the Elixir ecosystem.
+
+### Exploring Graph Types
+
+There are graphs like colors in the world (exaggerating a bit). However, the type of graphs we'll use are knowledge graphs. Knowledge graphs organize real-world information about
+concepts, objects, and events by representing them as nodes and their relationships as edges. They differ from other types of graphs as their main purpose is to hold semantic information about
+the relationships between the nodes and one of their main aspects is how we label the edges. Those nodes don't necessarily need to be of the same type. For example, I can have the following edges
+between nodes
+
+- Juan -> Belo Horizonte
+- David -> Belo Horizonte
+
+Despite "Juan" is a person and "Belo Horizonte" is a location, we can have connection between these two nodes to tell who lives in that particular city, for example. I believe the edges are derived
+from the access patterns you'll need to respond to. In my case, it's evident that I'll need the following relationships
+
+- Juan --spouse   --> Alessandra
+- Juan --parent_of--> David and Joao
+
+Note how the labeling is not only dynamic but also, the main aspect of this data structure modeling.
+
+### Integrating the Graph idea into my AI Setup
+
+Graph Databases use a query language called Cypher. First, I converted my context JSON file into cypher queries to seed my database. That part was relatively easy.
+
+Next, I integrated Neo4j but that required a bit more of work on my AI Setup. I refactored the code and created some tools that allowed me route the queries. I added a new _family_tree_graph_rag_
+module that initialized the models in a similar way to what I did before, and then followed an execution plan that goes as follows:
+
+- Read the prompt
+- Convert it into a valid Cypher query
+- Execute the query in Neo4j
+- Feed the results to Ollama
+- Respond using Natural Language
+
+Here, I opted for letting the LLM generate the cypher query but that's not the only way I could've solved this problem. An alternative to it would be to have different tools 
+that would be called depending on the question aksed. Each tool would perform a specific query to Neo4J, in a more controlled environment. However, this approach worked fine 
+for what I wanted to achieve.
+
+### The roadblocks
+
+Graph databases use a protocol called Bolt, that runs over TCP. Initially I was looking for a lib client that allowed me to interact with Neo4J via this protocol, but noticed that one of the main
+repositories is currently unmaintained (bolt_sips). I explored a few other libs like boltx and ecto_neo4j but the integration wasn't as smooth as I wanted. So I followed up with an HTTP client
+to query Neo4J. That's one of the trade-offs you face when working with Elixir. It's a really powerful language but sometimes you'll find groundbreaking areas and you'll need to pave the ground. 
+It surprises me that there isn't a bigger adoption of Neo4J and graph databases as a whole. Graphs are really powerful data structures and I see that people often don't understand how they work or 
+just lack the opportunities to apply them in real projects.
+
+## Results
+
+The results of using this novel approach was really satisfying. With Graphs I was able to give my default RAG super powers. Instead of feeding the search with embeddings, we have a way to ask
+questions to a graph. But one of the main insights of this process was that when using graphs, the secret sauce is how you model. What information you'll store and how you will connect your nodes 
+is the real deal. Once you have a strong setup, the rest goes well naturally.
+
+In summary, introducing Graph RAG enabled me to have more depth and a wider spectrum to explore when asking questions about somebody in my family. If you're interested in taking a look at the code,
+[this is the link](https://github.com/jprivillaso/family-tree-agent).
