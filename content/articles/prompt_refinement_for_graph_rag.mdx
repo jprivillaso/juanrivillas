@@ -1,0 +1,122 @@
+---
+title: Prompt Fine-tuning
+description: How to get better results with prompt fine-tuning.
+date: "2025-09-26"
+published: true
+language: en
+---
+
+## Recap
+
+If you're just arriving here, let me get you up to speed in a few sentences. I'm working on a project to render a family visualization tree, and I'm implementing an AI system that responds to questions about my family. In the first implementation, I tried a naive RAG system with embeddings. In [this post](https://juanrivillas.com/blog/rag), I discuss my experience while building that feature. Then, I modified the original
+implementation to use Graph RAG. In [this post (https://www.juanrivillas.com/blog/naive_rag_vs_graph_rag), I compare both implementations. In this blog post, I will discuss how I enhanced the responses from the Graph RAG implementation through prompt fine-tuning.
+
+## Prompt fine-tuning
+
+Prompt fine-tuning is the process of using different techniques to enrich the context of your LLM call with information relevant to the problem you're trying to solve.
+
+A few examples are one-shot and few-shot prompting. In my case, I used prompt fine-tuning in every tool to instruct my model on the purpose of each tool. This technique is an underrated feature because it plays a crucial role in the process of solving problems with LLMs. The context and instructions you provide are paramount for a successful prediction.
+
+In my implementation, I used two tools:
+- One to generate a Cypher query
+- Another one to execute that Cypher query into Neo4J
+
+The latter was trivial. The former, though, was a bit more complex. Since I was using a general-purpose chat model, such as `gemma3n:latest`, the outcome of a call attempting to generate a query was somewhat unpredictable. It could work, but it could not work too. Oftentimes, it didn't by the way. Therefore, I had two options
+
+- Fine-tune my prompt
+- Convert the existing `cypher_generator_tool` into an agent, and create multiple tools for every access pattern
+
+I wanted to learn and explore the first option further, so that's what I chose. In another situation, such as a production-ready environment, I would have gone for the second option, as it creates a more predictable outcome. However, I wanted to see how far I could get with prompt fine-tuning.
+
+## The process of fine-tuning
+
+I planned my problem as follows.
+
+- I created a list of access patterns, similar to what we do in real applications with REST endpoints and controllers. If you're not familiar with the concept of an access pattern, I'm referring to considering how users will access your data. I anticipated questions like
+  1. What's the relationship between person A and person B
+  2. Who's person A grandfather/grandmother
+  3. Who are person A's siblings
+  4. and more..
+
+The questions that can be answered directly from the graph labels are trivial so that I won't explore them right now. Instead, I wanted to focus on indirect relationships that had to be inferred through multiple calls or more complex queries, such as `let's find the shortest path between person A and person B`, which are derived from graph theory and supported by Neo4J.
+
+The first step was to instruct my LLM about the DB schema. For the family-tree problem, that part was easy because the schema was small and concise.
+
+```
+Node Types:
+- Person: Represents a family member
+  Properties: name (string), birth_date (date), death_date (date), bio (string), occupation (string), location (string)
+
+Relationship Types (Keep it Simple):
+- PARENT_OF: Connects a parent to their child (directional: parent -> child)
+- MARRIED_TO: Connects spouses (bidirectional)
+```
+
+Next, I informed some of the known access patterns.
+
+```
+Smart Query Patterns (Derive Complex Relationships from Basic Ones):
+
+1. Find a person by name (exact match):
+    MATCH (p:Person {name: "Juan Pablo Rivillas Ospina"}) RETURN p
+
+2. Find a person by name (partial match):
+    MATCH (p:Person) WHERE p.name CONTAINS "Juan Pablo" RETURN p
+
+3. Find all children of a person:
+    MATCH (parent:Person {name: "Juan Pablo Rivillas Ospina"})-[:PARENT_OF]->(child:Person) RETURN child
+
+4. Find parents of a person:
+    MATCH (parent:Person)-[:PARENT_OF]->(child:Person {name: "Joao Rivillas de Magalhaes"}) RETURN parent
+
+5. Find spouse of a person:
+    MATCH (p1:Person {name: "Juan Pablo Rivillas Ospina"})-[:MARRIED_TO]-(p2:Person) RETURN p2
+
+6. Find siblings (children of same parents):
+    MATCH (person:Person {name: "Joao Rivillas de Magalhaes"})<-[:PARENT_OF]-(parent:Person)
+    MATCH (parent)-[:PARENT_OF]->(sibling:Person)
+    WHERE sibling <> person
+    RETURN DISTINCT sibling
+
+...
+```
+
+See how I also pointed the LLM to infer the more complex access patterns from the simple ones. What we're building here is much more than context. It's a tool set for the LLM to use in its favor!
+
+Finally, I provided a list of what I considered advanced patterns.
+
+```
+Advanced Patterns:
+- Use variable-length paths [:PARENT_OF*1..10] for recursive queries
+- Use OPTIONAL MATCH for relationships that might not exist
+- Use UNION to combine multiple relationship patterns
+- Use collect() and DISTINCT to group related results
+- Use length() to calculate relationship distance
+- Use ORDER BY to sort by generation distance
+```
+
+This approach suits my problem because the scope is well-defined.
+
+## Results
+
+A few insights from this process were:
+
+1. Letting the LLM decide what query to generate based on the schema was enough for the obvious queries:
+- Who's person A' spouse?
+- Who is person B?
+- What are the hobbies of person C?
+
+However, for complex relationships, it would likely fail. When I say 'fail,' I mean that the query would run, but the outcome was not what I desired. The LLM indeed generated a syntactically valid query but not a semantically correct one.
+
+As a result, this process would fail most of the time for complex queries.
+
+2. Some access patterns required special wording, such as
+```
+Find relationship path between two people (CRITICAL - copy this EXACTLY):
+```
+
+I wanted the LLM to use the query I provided precisely.
+
+3. Although I decided not to use proper tool calls for this step, it is something I would definitely use in a production environment because it also allows one to extend the architecture more easily. Let's recall that the context has a character limit that depends on the model. So use this technique wisely.
+
+4. Using prompt fine-tuning is not mutually exclusive with tools calls. In fact, real production systems use both.
