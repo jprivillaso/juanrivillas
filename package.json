@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@netlify/blobs": "^6.5.0",
-    "@netlify/plugin-nextjs": "^4.41.3",
+    "@netlify/plugin-nextjs": "^5.13.3",
     "@next/mdx": "^13.5.11",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/typography": "^0.5.19",
@@ -47,5 +47,12 @@
   },
   "engines": {
     "node": ">=22.14.0"
+  },
+  "overrides": {
+    "next-contentlayer": {
+      "next": "$next"
+    },
+    "esbuild": "^0.25.10",
+    "estree-util-value-to-estree": "^3.3.3"
   }
 }
