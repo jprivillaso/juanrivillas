@@ -22,12 +22,12 @@ interface FamilyTreeData {
 }
 
 async function fetchFamilyMembers(): Promise<FamilyTreeData> {
-  const username = process.env.NEXT_PUBLIC_FAMILY_API_USERNAME;
-  const password = process.env.NEXT_PUBLIC_FAMILY_API_PASSWORD;
+  const apiUrl = process.env.API_URL || 'http://localhost:4000/api';
+  const username = process.env.API_USERNAME;
+  const password = process.env.API_PASSWORD;
 
   try {
-    const response = await fetch('http://localhost:4000/api/family_members', {
-    // const response = await fetch('https://family-tree-agent.fly.dev/api/family_members', {
+    const response = await fetch(`${apiUrl}/family_members`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
