@@ -38,9 +38,7 @@ export default async function PostPage({ params }: Props) {
   let views = 0;
 
   try {
-    views = (await redis.get<number>(
-      ["pageviews", "blog", slug].join(":")
-    )) as number;
+    views = (await redis.get<number>(["pageviews", "blog", slug].join(":"))) as number;
   } catch (error) {
     console.error(`Error fetching views from Upstash for article ${slug}`);
   }

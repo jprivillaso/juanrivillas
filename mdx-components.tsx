@@ -9,9 +9,7 @@ export function useMDXComponents(components: ReactElement[]) {
         {children}
       </h1>
     ),
-    h2: ({ children }: PropsWithChildren) => (
-      <h2 className="text-zinc-50">{children}</h2>
-    ),
+    h2: ({ children }: PropsWithChildren) => <h2 className="text-zinc-50">{children}</h2>,
     ...components,
   };
 }

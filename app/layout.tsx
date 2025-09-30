@@ -62,15 +62,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${[inter.variable, calSans.variable].join(" ")} h-full`}
-    >
+    <html lang="en" className={`${[inter.variable, calSans.variable].join(" ")} h-full`}>
       <head>
-        <Script
-          strategy="lazyOnload"
-          src="//fast.appcues.com/211150.js"
-        ></Script>
+        <Script strategy="lazyOnload" src="//fast.appcues.com/211150.js" />
 
         {/* Google Tag Manager */}
         <Script id="google-tag-manager" strategy="afterInteractive">
@@ -95,11 +89,12 @@ export default function RootLayout({
             src="https://www.googletagmanager.com/ns.html?id=GTM-MST2QXML"
             height="0"
             width="0"
+            title="Google Tag Manager"
             style={{
               display: "none",
               visibility: "hidden",
             }}
-          ></iframe>
+          />
         </noscript>
       </body>
     </html>

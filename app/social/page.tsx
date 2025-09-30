@@ -22,7 +22,7 @@ const socials = [
     href: "https://github.com/jprivillaso",
     label: "Github",
     handle: "jprivillaso",
-  }
+  },
   // {
   //   icon: <Linkedin size={20} />,
   //   href: "https://www.linkedin.com/in/jprivillaso",

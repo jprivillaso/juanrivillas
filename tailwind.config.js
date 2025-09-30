@@ -2,11 +2,7 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
-    "./mdx-components.tsx",
-    "content/**/*.mdx",
-  ],
+  content: ["./app/**/*.{js,ts,jsx,tsx}", "./mdx-components.tsx", "content/**/*.mdx"],
 
   theme: {
     extend: {
@@ -33,8 +29,7 @@ module.exports = {
         display: ["var(--font-calsans)"],
       },
       backgroundImage: {
-        "gradient-radial":
-          "radial-gradient(50% 50% at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-radial": "radial-gradient(50% 50% at 50% 50%, var(--tw-gradient-stops))",
       },
       animation: {
         "quick-fade-in": "quick-fade-in 1s ease-in forwards",
@@ -113,8 +108,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require("@tailwindcss/typography"),
-    require("tailwindcss-debug-screens"),
-  ],
+  plugins: [require("@tailwindcss/typography"), require("tailwindcss-debug-screens")],
 };
