@@ -15,9 +15,17 @@ export default async function familyMembers(req: NextRequest): Promise<NextRespo
     const username = process.env.API_USERNAME;
     const password = process.env.API_PASSWORD;
 
+    // Debug logging (safe for production)
+    console.log("Environment check:", {
+      hasApiUrl: !!apiUrl,
+      hasUsername: !!username,
+      hasPassword: !!password,
+      apiUrl: apiUrl, // Safe to log URL
+    });
+
     if (!username || !password) {
-      console.error("Missing API credentials");
-      return new NextResponse("Server configuration error", { status: 500 });
+      console.error("Missing API credentials - username:", !!username, "password:", !!password);
+      return new NextResponse(`Server configuration error: Missing ${!username ? 'username' : 'password'}`, { status: 500 });
     }
 
     // Make the request to your family tree API with server-side credentials
@@ -54,9 +62,17 @@ export default async function familyMembers(req: NextRequest): Promise<NextRespo
     return NextResponse.json(data);
   } catch (error) {
     console.error("Error in family members API:", error);
+    console.error("Error details:", {
+      name: error instanceof Error ? error.name : 'Unknown',
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : 'No stack trace'
+    });
+
     if (error instanceof Error && error.name === 'AbortError') {
       return new NextResponse("Request timeout", { status: 408 });
     }
-    return new NextResponse("Internal server error", { status: 500 });
+
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    return new NextResponse(`Internal server error: ${errorMessage}`, { status: 500 });
   }
 }
