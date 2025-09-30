@@ -1,9 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, Eye } from "lucide-react";
 import { Navigation } from "../../components/Nav";
 import { FamilyGraph } from "../../components/FamilyGraph";
 import { AISidebar } from "../../components/AISidebar";
+import { ReportView } from "./view";
 
 interface FamilyMember {
   name: string;
@@ -67,6 +68,7 @@ export default function FamilyTreePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [views, setViews] = useState<number | null>(null);
 
   const loadFamilyData = async () => {
     try {
@@ -82,8 +84,21 @@ export default function FamilyTreePage() {
     }
   };
 
+  const loadViewCount = async () => {
+    try {
+      const response = await fetch("/api/views?slug=family_tree");
+      if (response.ok) {
+        const data = await response.json();
+        setViews(data.views);
+      }
+    } catch (err) {
+      console.error("Error fetching view count:", err);
+    }
+  };
+
   useEffect(() => {
     loadFamilyData();
+    loadViewCount();
   }, []);
 
   return (
@@ -142,9 +157,12 @@ export default function FamilyTreePage() {
 
           {familyData && !loading && !error && (
             <>
-              <div className="text-zinc-400 text-sm mb-4">
-                Total family members: {familyData.data.total_members}
-              </div>
+              {views !== null && (
+                <div className="flex items-center text-zinc-400 text-sm mb-4">
+                  <Eye className="w-4 h-4 mr-2" />
+                  <span>{views.toLocaleString()} visits</span>
+                </div>
+              )}
               <FamilyGraph data={familyData} />
             </>
           )}
@@ -153,6 +171,9 @@ export default function FamilyTreePage() {
 
       {/* AI Sidebar */}
       <AISidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+
+      {/* Report View for Analytics */}
+      <ReportView />
     </div>
   );
 }
