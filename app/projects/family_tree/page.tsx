@@ -24,19 +24,14 @@ interface FamilyTreeData {
 }
 
 async function fetchFamilyMembers(): Promise<FamilyTreeData> {
-  const apiUrl = process.env.API_URL || "http://localhost:4000/api";
-  const username = process.env.API_USERNAME;
-  const password = process.env.API_PASSWORD;
-
   try {
-    const response = await fetch(`${apiUrl}/family_members`, {
+    // Use our secure server-side API route instead of calling external API directly
+    const response = await fetch("/api/family-members", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Basic ${btoa(`${username}:${password}`)}`,
       },
-      // Add timeout and other fetch options
-      signal: AbortSignal.timeout(10000), // 10 second timeout
+      signal: AbortSignal.timeout(10000),
     });
 
     if (!response.ok) {
