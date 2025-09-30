@@ -39,6 +39,15 @@ export default async function incr(req: NextRequest): Promise<NextResponse> {
       new NextResponse(null, { status: 202 });
     }
   }
-  await redis.incr(["pageviews", "blog", slug].join(":"));
+  // Determine the key based on the slug
+  let key: string;
+  if (slug === "family_tree") {
+    key = ["pageviews", "projects", "family_tree"].join(":");
+  } else {
+    // For blog posts, use the existing format
+    key = ["pageviews", "blog", slug].join(":");
+  }
+
+  await redis.incr(key);
   return new NextResponse(null, { status: 202 });
 }
