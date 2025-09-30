@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* React Flow styles */
+@import 'reactflow/dist/style.css';
+
 @layer base {
   .text-edge-outline {
     -webkit-text-stroke: 1px rgba(255,255,255,0.3);
@@ -26,4 +29,34 @@
 /* Handle on hover */
 .slides::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+/* Family Tree Styles */
+.family-tree-container .rd3t-link {
+  stroke: #52525b !important;
+  stroke-width: 2px !important;
+}
+
+.family-tree-container .rd3t-node {
+  cursor: pointer;
+}
+
+/* React Flow Edge Styles */
+.react-flow__edge {
+  pointer-events: all !important;
+}
+
+.react-flow__edge-path {
+  stroke-width: 4px !important;
+}
+
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: 5;
+  animation: dashdraw 0.5s linear infinite;
+}
+
+@keyframes dashdraw {
+  to {
+    stroke-dashoffset: -10;
+  }
 }
