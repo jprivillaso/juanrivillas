@@ -48,6 +48,9 @@
     "tailwindcss-debug-screens": "^2.2.1",
     "typescript": "^5.9.2"
   },
+  "devDependencies": {
+    "@types/dagre": "^0.7.53"
+  },
   "engines": {
     "node": ">=22.14.0"
   },
@@ -57,8 +60,5 @@
     },
     "esbuild": "^0.25.10",
     "estree-util-value-to-estree": "^3.3.3"
-  },
-  "devDependencies": {
-    "@types/dagre": "^0.7.53"
   }
 }
