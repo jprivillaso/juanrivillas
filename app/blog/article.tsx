@@ -21,7 +21,7 @@ export const Article: React.FC<Props> = ({ project, views }) => {
             {project.date ? (
               <time dateTime={new Date(project.date).toISOString()}>
                 {Intl.DateTimeFormat(undefined, { dateStyle: "medium" }).format(
-                  new Date(project.date)
+                  new Date(project.date),
                 )}
               </time>
             ) : (

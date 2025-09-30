@@ -33,48 +33,35 @@ export default function Now() {
           </h3>
 
           <section className="flex items-center gap-1.5">
-            <FlagTriangleRight
-              className="text-zinc-200"
-              size={20}
-              style={{ minWidth: 30 }}
-            />
+            <FlagTriangleRight className="text-zinc-200" size={20} style={{ minWidth: 30 }} />
 
             <p className="mt-4 text-md duration-1000 text-zinc-500 group-hover:text-zinc-200">
-              Ich lerne Deutsch 🇩🇪 Yes, I'm learing a fifth language! Learning
-              new languages is one of my hobbies and despite I worked for almost
-              five years with a German company, I never learned it (shame on
-              me). I already speak English 🇺🇸, Portuguese 🇧🇷, Spanish (CO) 🇨🇴,
-              and I have a basic French 🇫🇷. So far, learning German has been
-              really fun.
+              Ich lerne Deutsch 🇩🇪 Yes, I'm learing a fifth language! Learning new languages is one
+              of my hobbies and despite I worked for almost five years with a German company, I
+              never learned it (shame on me). I already speak English 🇺🇸, Portuguese 🇧🇷, Spanish
+              (CO) 🇨🇴, and I have a basic French 🇫🇷. So far, learning German has been really fun.
             </p>
           </section>
 
           <section className="flex items-center gap-1.5">
-            <FlagTriangleRight
-              className="text-zinc-200"
-              size={20}
-              style={{ minWidth: 30 }}
-            />
+            <FlagTriangleRight className="text-zinc-200" size={20} style={{ minWidth: 30 }} />
 
             <p className="mt-4 text-md duration-1000 text-zinc-500 group-hover:text-zinc-200">
-              I have two beautiful kids named João and David! In my spare time
-              you can find me playing with them in the parks near my house,
-              riding a bike or just chasing them 😅! Aren't they adorable ?{" "}
-              <a
-                className="text-sky-500 cursor-pointer hover:text-white"
+              I have two beautiful kids named João and David! In my spare time you can find me
+              playing with them in the parks near my house, riding a bike or just chasing them 😅!
+              Aren't they adorable ?{" "}
+              <button
+                type="button"
+                className="text-sky-500 cursor-pointer hover:text-white bg-transparent border-none p-0 underline"
                 onClick={() => handleModalOpen(true)}
               >
                 Click here
-              </a>
+              </button>
             </p>
           </section>
 
           <section className="flex items-center gap-1.5">
-            <FlagTriangleRight
-              className="text-zinc-200"
-              size={20}
-              style={{ minWidth: 30 }}
-            />
+            <FlagTriangleRight className="text-zinc-200" size={20} style={{ minWidth: 30 }} />
 
             <p className="mt-4 text-md duration-1000 text-zinc-500 group-hover:text-zinc-200">
               I'm not haiving much time to read but I'm in the middle of{" "}
@@ -97,31 +84,22 @@ export default function Now() {
           </h3>
 
           <section className="mt-4 flex items-center gap-1.5">
-            <FlagTriangleRight
-              className="text-zinc-200"
-              size={20}
-              style={{ minWidth: 30 }}
-            />
+            <FlagTriangleRight className="text-zinc-200" size={20} style={{ minWidth: 30 }} />
 
             <p className="text-md duration-1000 text-zinc-500 group-hover:text-zinc-200">
-              I'm working as a Senior Platform Engineer at Appcues, where I
-              write a bunch of Elixir and Node. We work with GraphQL, Absinthe
-              and Phoenix.
+              I'm working as a Senior Platform Engineer at Appcues, where I write a bunch of Elixir
+              and Node. We work with GraphQL, Absinthe and Phoenix.
             </p>
           </section>
 
           <section className="mt-4 flex items-center gap-1.5">
-            <FlagTriangleRight
-              className="text-zinc-200"
-              size={20}
-              style={{ minWidth: 30 }}
-            />
+            <FlagTriangleRight className="text-zinc-200" size={20} style={{ minWidth: 30 }} />
 
             <p className="text-md duration-1000 text-zinc-500 group-hover:text-zinc-200">
-              After almost five years working as an Engineering lead, I came
-              back to being an individual contributor which is where I think I excel. I do
-              want to continue pursuing the technical ladder, even though, I enjoyed having
-              the opportunity to lead a remote engineering team for a couple of years.
+              After almost five years working as an Engineering lead, I came back to being an
+              individual contributor which is where I think I excel. I do want to continue pursuing
+              the technical ladder, even though, I enjoyed having the opportunity to lead a remote
+              engineering team for a couple of years.
             </p>
           </section>
         </div>
@@ -129,11 +107,15 @@ export default function Now() {
 
       <Modal isOpen={modalIsOpen} onClose={() => handleModalOpen(false)}>
         <ImageSlider>
-          <img className="max-h-full" src="/assets/kids-1.jpeg" />
-          <img className="max-h-full" src="/assets/kids-2.jpeg" />
-          <img className="max-h-full" src="/assets/kids-3.jpeg" />
-          <img className="max-h-full" src="/assets/kids-6.jpeg" />
-          <img className="max-h-full" src="/assets/kids-7.jpeg" />
+          <img className="max-h-full" src="/assets/kids-1.jpeg" alt="João and David playing" />
+          <img className="max-h-full" src="/assets/kids-2.jpeg" alt="João and David at the park" />
+          <img className="max-h-full" src="/assets/kids-3.jpeg" alt="João and David having fun" />
+          <img className="max-h-full" src="/assets/kids-6.jpeg" alt="João and David together" />
+          <img
+            className="max-h-full"
+            src="/assets/kids-7.jpeg"
+            alt="João and David outdoor activities"
+          />
         </ImageSlider>
       </Modal>
     </div>

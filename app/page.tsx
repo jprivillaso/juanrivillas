@@ -4,7 +4,7 @@ import Particles from "./components/Particles";
 const navigation = [
   { name: "Now", href: "/now" },
   { name: "Blog", href: "/blog" },
-  { name: "Projects", href: "/projects" }, 
+  { name: "Projects", href: "/projects" },
   { name: "Social", href: "/social" },
 ];
 
@@ -25,13 +25,11 @@ export default function Home() {
         </ul>
       </nav>
       <div className="hidden w-screen h-px animate-glow md:block animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
-      <Particles
-        className="absolute inset-0 -z-10 animate-fade-in"
-        quantity={100}
-      />
+      <Particles className="absolute inset-0 -z-10 animate-fade-in" quantity={100} />
 
       <img
         src="https://ca.slack-edge.com/T02JL4BUK-U02LFTY70GK-591af2226f8f-512"
+        alt="Juan Rivillas"
         className="rounded-full w-48 mb-8"
       />
 
@@ -42,10 +40,9 @@ export default function Home() {
       <div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
       <div className="my-16 text-center animate-fade-in">
         <h2 className="text-md text-zinc-500 max-w-2xl">
-          I'm a Senior Software Engineer working with Elixir, distributed
-          systems, and AWS. I am personally interested in data visualization,
-          astronomy, and algorithms. In the past decade, I've had the
-          opportunity to work with Serverless architecture, React, Vue, D3.js,
+          I'm a Senior Software Engineer working with Elixir, distributed systems, and AWS. I am
+          personally interested in data visualization, astronomy, and algorithms. In the past
+          decade, I've had the opportunity to work with Serverless architecture, React, Vue, D3.js,
           among other tools and frameworks.
         </h2>
       </div>
