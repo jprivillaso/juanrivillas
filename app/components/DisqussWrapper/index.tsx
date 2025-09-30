@@ -1,30 +1,27 @@
-"use client"
+"use client";
 
-import { DiscussionEmbed } from "disqus-react"
+import { DiscussionEmbed } from "disqus-react";
 
 type CommentsProps = {
-  title: string
-  slug: string
-}
+  title: string;
+  slug: string;
+};
 
 const Comments = ({ title, slug }: CommentsProps) => {
-  const disqusShortname = 'juanrivillas'
-  const url = `https://juanrivillas.com/blog/${ slug }`
+  const disqusShortname = "juanrivillas";
+  const url = `https://juanrivillas.com/blog/${slug}`;
 
   const disqusConfig = {
     identifier: url,
     title,
-    url
-  }
+    url,
+  };
 
   return (
     <div className="w-4/5 m-auto">
-      <DiscussionEmbed
-        shortname={disqusShortname}
-        config={disqusConfig}
-      />
+      <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
     </div>
-  )
-}
+  );
+};
 
 export default Comments;

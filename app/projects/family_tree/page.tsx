@@ -22,16 +22,16 @@ interface FamilyTreeData {
 }
 
 async function fetchFamilyMembers(): Promise<FamilyTreeData> {
-  const apiUrl = process.env.API_URL || 'http://localhost:4000/api';
+  const apiUrl = process.env.API_URL || "http://localhost:4000/api";
   const username = process.env.API_USERNAME;
   const password = process.env.API_PASSWORD;
 
   try {
     const response = await fetch(`${apiUrl}/family_members`, {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Basic ' + btoa(`${username}:${password}`)
+        "Content-Type": "application/json",
+        Authorization: `Basic ${btoa(`${username}:${password}`)}`,
       },
       // Add timeout and other fetch options
       signal: AbortSignal.timeout(10000), // 10 second timeout
@@ -39,11 +39,13 @@ async function fetchFamilyMembers(): Promise<FamilyTreeData> {
 
     if (!response.ok) {
       if (response.status === 401) {
-        throw new Error('Authentication failed. Please check your credentials.');
+        throw new Error("Authentication failed. Please check your credentials.");
       } else if (response.status === 404) {
-        throw new Error('Family members API endpoint not found.');
+        throw new Error("Family members API endpoint not found.");
       } else {
-        throw new Error(`Failed to fetch family members: ${response.status} ${response.statusText}`);
+        throw new Error(
+          `Failed to fetch family members: ${response.status} ${response.statusText}`,
+        );
       }
     }
 
@@ -51,7 +53,7 @@ async function fetchFamilyMembers(): Promise<FamilyTreeData> {
 
     // Validate the response structure
     if (!data || !data.data || !Array.isArray(data.data.family_members)) {
-      throw new Error('Invalid response format from family members API');
+      throw new Error("Invalid response format from family members API");
     }
 
     return data;
@@ -59,7 +61,7 @@ async function fetchFamilyMembers(): Promise<FamilyTreeData> {
     if (error instanceof Error) {
       throw error;
     }
-    throw new Error('Network error: Unable to fetch family members');
+    throw new Error("Network error: Unable to fetch family members");
   }
 }
 
@@ -75,8 +77,8 @@ export default function FamilyTreePage() {
       const data = await fetchFamilyMembers();
       setFamilyData(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load family data');
-      console.error('Error fetching family data:', err);
+      setError(err instanceof Error ? err.message : "Failed to load family data");
+      console.error("Error fetching family data:", err);
     } finally {
       setLoading(false);
     }
@@ -95,7 +97,8 @@ export default function FamilyTreePage() {
             Family Tree
           </h1>
           <p className="mt-4 text-zinc-400">
-            Interactive visualization of my family tree. Click on any member to learn more about them.
+            Interactive visualization of my family tree. Click on any member to learn more about
+            them.
           </p>
         </div>
         <div className="w-full h-px bg-zinc-800" />
@@ -104,7 +107,7 @@ export default function FamilyTreePage() {
           {loading && (
             <div className="flex items-center justify-center h-64">
               <div className="text-zinc-400 text-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-zinc-400 mx-auto mb-4"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-zinc-400 mx-auto mb-4" />
                 Loading family tree...
               </div>
             </div>
@@ -115,11 +118,12 @@ export default function FamilyTreePage() {
               <h3 className="text-red-400 font-semibold mb-2">Error Loading Family Tree</h3>
               <p className="text-red-300 text-sm">{error}</p>
               <button
+                type="button"
                 onClick={loadFamilyData}
                 className="mt-4 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md text-sm transition-colors"
                 disabled={loading}
               >
-                {loading ? 'Retrying...' : 'Retry'}
+                {loading ? "Retrying..." : "Retry"}
               </button>
             </div>
           )}

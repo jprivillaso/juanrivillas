@@ -25,10 +25,7 @@ export default async function incr(req: NextRequest): Promise<NextResponse> {
   const ip = req.ip;
   if (ip) {
     // Hash the IP in order to not store it directly in your db.
-    const buf = await crypto.subtle.digest(
-      "SHA-256",
-      new TextEncoder().encode(ip)
-    );
+    const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(ip));
     const hash = Array.from(new Uint8Array(buf))
       .map((b) => b.toString(16).padStart(2, "0"))
       .join("");
