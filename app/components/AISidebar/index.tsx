@@ -28,9 +28,8 @@ export const AISidebar: React.FC<AISidebarProps> = ({ isOpen, onClose }) => {
     setIsLoading(true);
 
     try {
-      const baseUrl = process.env.API_URL || "http://localhost:4000/api";
-
-      const response = await fetch(`${baseUrl}/family_members/answer`, {
+      // Use our secure server-side API route instead of calling external API directly
+      const response = await fetch("/api/family-chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
