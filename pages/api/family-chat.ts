@@ -39,7 +39,10 @@ export default async function familyChat(req: NextRequest): Promise<NextResponse
 
     if (!username || !password) {
       console.error("Missing API credentials - username:", !!username, "password:", !!password);
-      return new NextResponse(`Server configuration error: Missing ${!username ? 'username' : 'password'}`, { status: 500 });
+      return new NextResponse(
+        `Server configuration error: Missing ${!username ? "username" : "password"}`,
+        { status: 500 },
+      );
     }
 
     // Make the request to your family tree API with server-side credentials
