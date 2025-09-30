@@ -1,7 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
+import { MessageCircle } from "lucide-react";
 import { Navigation } from "../../components/Nav";
 import { FamilyGraph } from "../../components/FamilyGraph";
+import { AISidebar } from "../../components/AISidebar";
 
 interface FamilyMember {
   name: string;
@@ -69,6 +71,7 @@ export default function FamilyTreePage() {
   const [familyData, setFamilyData] = useState<FamilyTreeData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const loadFamilyData = async () => {
     try {
@@ -91,6 +94,20 @@ export default function FamilyTreePage() {
   return (
     <div className="relative pb-16">
       <Navigation />
+
+      {/* AI Chat Button */}
+      <button
+        type="button"
+        onClick={() => setIsSidebarOpen(true)}
+        className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 shadow-lg transition-colors z-30 group"
+        title="Ask AI about family tree"
+      >
+        <MessageCircle className="w-6 h-6" />
+        <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-zinc-800 text-zinc-100 px-3 py-1 rounded-md text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+          Ask AI about family tree
+        </span>
+      </button>
+
       <div className="px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
         <div className="max-w-2xl mx-auto lg:mx-0">
           <h1 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
@@ -138,6 +155,9 @@ export default function FamilyTreePage() {
           )}
         </div>
       </div>
+
+      {/* AI Sidebar */}
+      <AISidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
     </div>
   );
 }
