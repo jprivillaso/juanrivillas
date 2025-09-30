@@ -15,14 +15,6 @@ export default async function familyMembers(req: NextRequest): Promise<NextRespo
     const username = process.env.API_USERNAME;
     const password = process.env.API_PASSWORD;
 
-    // Debug logging (safe for production)
-    console.log("Environment check:", {
-      hasApiUrl: !!apiUrl,
-      hasUsername: !!username,
-      hasPassword: !!password,
-      apiUrl: apiUrl, // Safe to log URL
-    });
-
     if (!username || !password) {
       console.error("Missing API credentials - username:", !!username, "password:", !!password);
       return new NextResponse(`Server configuration error: Missing ${!username ? 'username' : 'password'}`, { status: 500 });
