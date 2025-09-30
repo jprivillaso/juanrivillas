@@ -45,7 +45,8 @@ export const AISidebar: React.FC<AISidebarProps> = ({ isOpen, onClose }) => {
       console.log("API Response:", data);
 
       // Handle the specific response format: { data: { answer: "...", question: "..." }, success: true }
-      const answerText = data.data?.answer || data.answer || "Sorry, I couldn't generate an answer.";
+      const answerText =
+        data.data?.answer || data.answer || "Sorry, I couldn't generate an answer.";
 
       const newQA: QAPair = {
         id: Date.now().toString(),
@@ -81,7 +82,7 @@ export const AISidebar: React.FC<AISidebarProps> = ({ isOpen, onClose }) => {
           className="fixed inset-0 bg-black bg-opacity-50 z-40"
           onClick={onClose}
           onKeyDown={(e) => {
-            if (e.key === 'Escape') {
+            if (e.key === "Escape") {
               onClose();
             }
           }}

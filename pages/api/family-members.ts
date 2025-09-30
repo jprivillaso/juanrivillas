@@ -17,7 +17,10 @@ export default async function familyMembers(req: NextRequest): Promise<NextRespo
 
     if (!username || !password) {
       console.error("Missing API credentials - username:", !!username, "password:", !!password);
-      return new NextResponse(`Server configuration error: Missing ${!username ? 'username' : 'password'}`, { status: 500 });
+      return new NextResponse(
+        `Server configuration error: Missing ${!username ? "username" : "password"}`,
+        { status: 500 },
+      );
     }
 
     // Make the request to your family tree API with server-side credentials
@@ -55,16 +58,16 @@ export default async function familyMembers(req: NextRequest): Promise<NextRespo
   } catch (error) {
     console.error("Error in family members API:", error);
     console.error("Error details:", {
-      name: error instanceof Error ? error.name : 'Unknown',
+      name: error instanceof Error ? error.name : "Unknown",
       message: error instanceof Error ? error.message : String(error),
-      stack: error instanceof Error ? error.stack : 'No stack trace'
+      stack: error instanceof Error ? error.stack : "No stack trace",
     });
 
-    if (error instanceof Error && error.name === 'AbortError') {
+    if (error instanceof Error && error.name === "AbortError") {
       return new NextResponse("Request timeout", { status: 408 });
     }
 
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
     return new NextResponse(`Internal server error: ${errorMessage}`, { status: 500 });
   }
 }
