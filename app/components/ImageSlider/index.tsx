@@ -8,7 +8,7 @@ type ImageSliderProps = {
 
 export const ImageSlider = ({ children }: ImageSliderProps) => {
   return (
-    <section className="slider w-[300px] md:w-[500px] text-center overflow-hidden">
+    <section className="slider w-[300px] md:w-[500px] text-center overflow-hidden p-6">
       {children.map((c, idx) => (
         <a
           href={`#slide-${idx + 1}`}

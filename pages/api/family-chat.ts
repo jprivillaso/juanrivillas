@@ -53,6 +53,7 @@ export default async function familyChat(req: NextRequest): Promise<NextResponse
         Authorization: `Basic ${btoa(`${username}:${password}`)}`,
       },
       body: JSON.stringify({ question: body.question }),
+      signal: AbortSignal.timeout(30000), // 30 seconds for Fly.io cold starts
     });
 
     if (!response.ok) {
@@ -66,6 +67,17 @@ export default async function familyChat(req: NextRequest): Promise<NextResponse
     return NextResponse.json(data);
   } catch (error) {
     console.error("Error in family chat API:", error);
-    return new NextResponse("Internal server error", { status: 500 });
+    console.error("Error details:", {
+      name: error instanceof Error ? error.name : "Unknown",
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : "No stack trace",
+    });
+
+    if (error instanceof Error && error.name === "AbortError") {
+      return new NextResponse("Request timeout - The AI service may be starting up. Please try again in a few seconds.", { status: 408 });
+    }
+
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    return new NextResponse(`Internal server error: ${errorMessage}`, { status: 500 });
   }
 }

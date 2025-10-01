@@ -31,7 +31,7 @@ async function fetchFamilyMembers(): Promise<FamilyTreeData> {
       headers: {
         "Content-Type": "application/json",
       },
-      signal: AbortSignal.timeout(10000),
+      signal: AbortSignal.timeout(35000), // 35 seconds to account for API + Fly.io cold start
     });
 
     if (!response.ok) {
@@ -75,7 +75,17 @@ export default function FamilyTreePage() {
       const data = await fetchFamilyMembers();
       setFamilyData(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load family data");
+      let errorMessage = "Failed to load family data";
+
+      if (err instanceof Error) {
+        if (err.name === 'AbortError' || err.message.includes('signal timed out')) {
+          errorMessage = "Request timeout - The API service may be starting up. Please try again in a few seconds.";
+        } else {
+          errorMessage = err.message;
+        }
+      }
+
+      setError(errorMessage);
       console.error("Error fetching family data:", err);
     } finally {
       setLoading(false);
@@ -129,6 +139,11 @@ export default function FamilyTreePage() {
             <div className="bg-red-900/20 border border-red-500/30 rounded-lg p-6">
               <h3 className="text-red-400 font-semibold mb-2">Error Loading Family Tree</h3>
               <p className="text-red-300 text-sm">{error}</p>
+              {error.includes("timeout") || error.includes("starting up") ? (
+                <p className="text-yellow-300 text-xs mt-2">
+                  💡 The API service may be waking up from sleep. This usually takes 10-15 seconds.
+                </p>
+              ) : null}
               <button
                 type="button"
                 onClick={loadFamilyData}
