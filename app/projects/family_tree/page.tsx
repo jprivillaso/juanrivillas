@@ -78,8 +78,9 @@ export default function FamilyTreePage() {
       let errorMessage = "Failed to load family data";
 
       if (err instanceof Error) {
-        if (err.name === 'AbortError' || err.message.includes('signal timed out')) {
-          errorMessage = "Request timeout - The API service may be starting up. Please try again in a few seconds.";
+        if (err.name === "AbortError" || err.message.includes("signal timed out")) {
+          errorMessage =
+            "Request timeout - The API service may be starting up. Please try again in a few seconds.";
         } else {
           errorMessage = err.message;
         }

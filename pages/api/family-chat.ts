@@ -74,7 +74,10 @@ export default async function familyChat(req: NextRequest): Promise<NextResponse
     });
 
     if (error instanceof Error && error.name === "AbortError") {
-      return new NextResponse("Request timeout - The AI service may be starting up. Please try again in a few seconds.", { status: 408 });
+      return new NextResponse(
+        "Request timeout - The AI service may be starting up. Please try again in a few seconds.",
+        { status: 408 },
+      );
     }
 
     const errorMessage = error instanceof Error ? error.message : "Unknown error";

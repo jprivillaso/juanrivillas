@@ -423,9 +423,9 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
       </ReactFlow>
 
       {/* Member Details Modal */}
-             <Modal isOpen={isModalOpen} onClose={closeModal}>
-               {selectedMember && (
-                 <div className="p-8 max-w-lg mx-auto bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-white/20">
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        {selectedMember && (
+          <div className="p-8 max-w-lg mx-auto bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-white/20">
             <div className="flex items-center space-x-4 mb-6">
               <img
                 src={generateAvatar(selectedMember.name)}

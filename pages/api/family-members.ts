@@ -64,7 +64,10 @@ export default async function familyMembers(req: NextRequest): Promise<NextRespo
     });
 
     if (error instanceof Error && error.name === "AbortError") {
-      return new NextResponse("Request timeout - The API service may be starting up. Please try again in a few seconds.", { status: 408 });
+      return new NextResponse(
+        "Request timeout - The API service may be starting up. Please try again in a few seconds.",
+        { status: 408 },
+      );
     }
 
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
