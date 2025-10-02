@@ -12,8 +12,12 @@ import ReactFlow, {
   BackgroundVariant,
   Position,
   Handle,
+  ConnectionLineType
 } from "reactflow";
 import { Modal } from "../Modal";
+// Import some spiritual/memorial icons from react-icons
+import { GiFeatheredWing } from "react-icons/gi";
+import dagre from "dagre";
 
 interface FamilyMember {
   name: string;
@@ -23,6 +27,8 @@ interface FamilyMember {
   location?: string;
   occupation?: string;
   spouse?: string | null;
+  death_date?: string | null;
+  gender?: string;
 }
 
 interface FamilyTreeData {
@@ -40,6 +46,8 @@ interface FamilyNodeData {
   location?: string;
   occupation?: string;
   spouse?: string | null;
+  death_date?: string | null;
+  gender?: string;
   avatar: string;
   onClick: () => void;
 }
@@ -48,160 +56,73 @@ interface FamilyGraphProps {
   data: FamilyTreeData;
 }
 
-// Generate a fake avatar URL based on the person's name (happy avatars only)
-const generateAvatar = (name: string): string => {
+// Generate a gender-appropriate avatar URL based on the person's name and gender
+const generateAvatar = (name: string, gender?: string): string => {
   const seed = name.replace(/\s+/g, "").toLowerCase();
-  return `https://api.dicebear.com/7.x/avataaars/svg?seed=${seed}&backgroundColor=b6e3f4,c0aede,d1d4f9&radius=50&mouth=smile,twinkle&eyes=happy,hearts,squint,wink`;
+
+  // Base parameters for happy avatars
+  const baseParams = `seed=${seed}&backgroundColor=b6e3f4,c0aede,d1d4f9&radius=50&mouth=smile,twinkle&eyes=happy,hearts,squint,wink`;
+
+  // Simple gender differentiation using only well-documented parameters
+  if (gender === 'female') {
+    // Female: no facial hair, longer hair styles
+    return `https://api.dicebear.com/7.x/avataaars/svg?${baseParams}&facialHair=blank`;
+  } else if (gender === 'male') {
+    // Male: allow facial hair options
+    return `https://api.dicebear.com/7.x/avataaars/svg?${baseParams}&facialHair=blank,beard,beardLight`;
+  } else {
+    // Default: no specific gender styling
+    return `https://api.dicebear.com/7.x/avataaars/svg?${baseParams}`;
+  }
 };
 
-// Custom layout that positions spouses horizontally
-const getLayoutedElements = (nodes: Node[], edges: Edge[], familyData: FamilyMember[]) => {
-  const memberMap = new Map(familyData.map((m) => [m.name, m]));
-  const nodeMap = new Map(nodes.map((n) => [n.id, n]));
+// Auto layout using dagre with improved spacing and edge routing
+const getLayoutedElements = (nodes: Node[], edges: Edge[]) => {
+  const dagreGraph = new dagre.graphlib.Graph();
+  dagreGraph.setDefaultEdgeLabel(() => ({}));
 
-  // Find spouse pairs
-  const spousePairs = new Set<string>();
-  const spouseMap = new Map<string, string>();
-
-  familyData.forEach((member) => {
-    if (
-      member.spouse &&
-      !spousePairs.has(`${member.name}-${member.spouse}`) &&
-      !spousePairs.has(`${member.spouse}-${member.name}`)
-    ) {
-      spousePairs.add(`${member.name}-${member.spouse}`);
-      spouseMap.set(member.name, member.spouse);
-      spouseMap.set(member.spouse, member.name);
-    }
+  // Set graph direction and spacing - significantly increased to prevent overlaps
+  dagreGraph.setGraph({
+    rankdir: 'TB', // Top to Bottom
+    nodesep: 250,  // Much more horizontal spacing between nodes
+    ranksep: 250,  // Much more vertical spacing between ranks
+    marginx: 120,  // Larger graph margins
+    marginy: 120,
+    edgesep: 50,   // Spacing between edges
+    acyclicer: 'greedy', // Better cycle removal
+    ranker: 'tight-tree'  // Better ranking algorithm
   });
 
-  // Build generation hierarchy
-  const generations = new Map<string, number>();
-  const childToParentsMap = new Map<string, string[]>();
-
-  // Build parent-child map
-  familyData.forEach((member) => {
-    member.children.forEach((child) => {
-      if (!childToParentsMap.has(child)) {
-        childToParentsMap.set(child, []);
-      }
-      childToParentsMap.get(child)?.push(member.name);
-    });
-  });
-
-  // Find roots and calculate generations
-  const rootMembers = familyData.filter((member) => !childToParentsMap.has(member.name));
-
-  const calculateGeneration = (memberName: string, gen: number) => {
-    if (generations.has(memberName)) return;
-    generations.set(memberName, gen);
-
-    const member = memberMap.get(memberName);
-    if (member) {
-      member.children.forEach((child) => {
-        calculateGeneration(child, gen + 1);
-      });
-    }
-  };
-
-  rootMembers.forEach((root) => calculateGeneration(root.name, 0));
-
-  // Group by generation and position spouses side by side
-  const generationGroups = new Map<number, string[]>();
-  generations.forEach((gen, name) => {
-    if (!generationGroups.has(gen)) {
-      generationGroups.set(gen, []);
-    }
-    generationGroups.get(gen)?.push(name);
-  });
-
-  // Position nodes with proper spacing
-  const nodeWidth = 150;
-  const nodeHeight = 100;
-  const spouseSpacing = 200; // Space between spouses in a pair
-  const pairSpacing = 400; // Space between different pairs/singles
-  const verticalSpacing = 200;
-
-  // Calculate total width needed for each generation and center them
-  const generationWidths = new Map<number, number>();
-
-  generationGroups.forEach((members, generation) => {
-    const processedInGeneration = new Set<string>();
-    let totalWidth = 0;
-    let pairCount = 0;
-
-    members.forEach((memberName) => {
-      if (processedInGeneration.has(memberName)) return;
-
-      const spouse = spouseMap.get(memberName);
-
-      if (spouse && members.includes(spouse)) {
-        // This is a spouse pair
-        totalWidth += spouseSpacing + nodeWidth;
-        processedInGeneration.add(memberName);
-        processedInGeneration.add(spouse);
-        pairCount++;
-      } else {
-        // Single person
-        totalWidth += nodeWidth;
-        processedInGeneration.add(memberName);
-        pairCount++;
-      }
-    });
-
-    // Add spacing between pairs/singles
-    if (pairCount > 1) {
-      totalWidth += (pairCount - 1) * (pairSpacing - nodeWidth);
-    }
-
-    generationWidths.set(generation, totalWidth);
-  });
-
-  // Position nodes centered for each generation
-  generationGroups.forEach((members, generation) => {
-    const processedInGeneration = new Set<string>();
-    const totalWidth = generationWidths.get(generation) || 0;
-    let currentX = -totalWidth / 2; // Start from left edge of centered layout
-
-    members.forEach((memberName) => {
-      if (processedInGeneration.has(memberName)) return;
-
-      const node = nodeMap.get(memberName);
-      if (!node) return;
-
-      const spouse = spouseMap.get(memberName);
-      const spouseNode = spouse ? nodeMap.get(spouse) : null;
-
-      if (spouse && spouseNode && members.includes(spouse)) {
-        // Position spouse pair
-        node.position = {
-          x: currentX,
-          y: generation * verticalSpacing,
-        };
-
-        spouseNode.position = {
-          x: currentX + spouseSpacing,
-          y: generation * verticalSpacing,
-        };
-
-        processedInGeneration.add(memberName);
-        processedInGeneration.add(spouse);
-        currentX += spouseSpacing + nodeWidth + (pairSpacing - nodeWidth);
-      } else {
-        // Single person
-        node.position = {
-          x: currentX,
-          y: generation * verticalSpacing,
-        };
-
-        processedInGeneration.add(memberName);
-        currentX += nodeWidth + (pairSpacing - nodeWidth);
-      }
-    });
-  });
-
-  // Set source/target positions
+  // Add nodes to dagre graph with updated dimensions for angel wings
   nodes.forEach((node) => {
+    // Check if this node has angel wings (deceased member)
+    const hasWings = node.data.death_date && node.data.death_date.trim() !== "";
+    const nodeWidth = hasWings ? 160 : 120;  // Even wider spacing for wings
+    const nodeHeight = 100;  // Taller nodes
+
+    dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
+  });
+
+  // Add all edges to dagre graph (now only parent-child relationships)
+  edges.forEach((edge) => {
+    dagreGraph.setEdge(edge.source, edge.target, {
+      minlen: 1,  // Minimum edge length
+      weight: 1   // Edge weight for routing
+    });
+  });
+
+  // Calculate layout
+  dagre.layout(dagreGraph);
+
+  // Apply calculated positions to nodes
+  nodes.forEach((node) => {
+    const nodeWithPosition = dagreGraph.node(node.id);
+    node.position = {
+      x: nodeWithPosition.x - nodeWithPosition.width / 2,
+      y: nodeWithPosition.y - nodeWithPosition.height / 2,
+    };
+
+    // Set source/target positions for cleaner edge routing
     node.sourcePosition = Position.Bottom;
     node.targetPosition = Position.Top;
   });
@@ -210,9 +131,17 @@ const getLayoutedElements = (nodes: Node[], edges: Edge[], familyData: FamilyMem
 };
 
 // Custom node component for family members
+
 const FamilyNode = ({ data }: { data: FamilyNodeData }) => {
+  const isDeceased = data.death_date && data.death_date.trim() !== "";
+
   return (
-    <div className="family-node bg-zinc-800 border-2 border-zinc-600 rounded-lg p-3 min-w-[120px] cursor-pointer hover:border-blue-400 transition-colors">
+    <div className={`family-node bg-zinc-800 border-2 rounded-lg p-3 min-w-[120px] cursor-pointer transition-colors relative ${
+      isDeceased
+        ? 'border-yellow-400/50 hover:border-yellow-300'
+        : 'border-zinc-600 hover:border-blue-400'
+    }`}>
+
       {/* Handle for incoming connections (from parents) */}
       <Handle
         type="target"
@@ -256,15 +185,49 @@ const FamilyNode = ({ data }: { data: FamilyNodeData }) => {
       />
 
       <div className="flex flex-col items-center space-y-2">
-        <img
-          src={data.avatar}
-          alt={data.name}
-          className="w-12 h-12 rounded-full border-2 border-zinc-500"
-        />
+        {isDeceased ? (
+          /* Angel Layout: Left Wing - Avatar - Right Wing */
+          <div className="relative flex items-center justify-center w-20 h-12">
+            {/* Left Wing */}
+            <div className="absolute left-0 top-1/2 transform -translate-y-1/2 text-white opacity-90">
+              <GiFeatheredWing className="w-6 h-6 drop-shadow-lg" />
+            </div>
+
+            {/* Avatar in center */}
+            <img
+              src={data.avatar}
+              alt={data.name}
+              className="w-12 h-12 rounded-full border-2 border-white/60 relative z-10 shadow-lg shadow-white/20"
+            />
+
+            {/* Right Wing */}
+            <div className="absolute right-0 top-1/2 transform -translate-y-1/2 text-white opacity-90">
+              <GiFeatheredWing className="w-6 h-6 drop-shadow-lg transform -scale-x-100" />
+            </div>
+
+            {/* Subtle glow for deceased members */}
+            <div className="absolute inset-0 rounded-full bg-white/10 animate-pulse" />
+          </div>
+        ) : (
+          /* Normal Avatar for living members */
+          <img
+            src={data.avatar}
+            alt={data.name}
+            className="w-12 h-12 rounded-full border-2 border-zinc-500"
+          />
+        )}
+
         <div className="text-center">
-          <div className="text-zinc-100 font-semibold text-sm">{data.name.split(" ")[0]}</div>
+          <div className={`font-semibold text-sm ${
+            isDeceased ? 'text-yellow-100' : 'text-zinc-100'
+          }`}>
+            {data.name.split(" ")[0]}
+          </div>
           <div className="text-zinc-400 text-xs">
             {data.birth_date ? new Date(data.birth_date).getFullYear() : ""}
+            {isDeceased && data.death_date && (
+              <span className="text-yellow-300"> - {new Date(data.death_date).getFullYear()}</span>
+            )}
           </div>
           {data.occupation && data.occupation !== "None" && (
             <div className="text-zinc-500 text-xs truncate max-w-[100px]">{data.occupation}</div>
@@ -301,7 +264,7 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
         position: { x: 0, y: 0 }, // Will be overridden by layout
         data: {
           ...member,
-          avatar: generateAvatar(member.name),
+          avatar: generateAvatar(member.name, member.gender),
           onClick: () => {
             setSelectedMember(member);
             setIsModalOpen(true);
@@ -312,71 +275,41 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
       });
     });
 
-    // Create edges for parent-child relationships
+    // Create edges for parent-child relationships with unique routing
+    let edgeCounter = 0;
     members.forEach((member) => {
-      member.children.forEach((childName) => {
+      member.children.forEach((childName, childIndex) => {
         // Make sure both nodes exist before creating edge
         if (memberMap.has(childName)) {
+          // Add slight offset to prevent edge combining
+          const offset = childIndex * 10;
+
           edges.push({
-            id: `parent-${member.name}-${childName}`,
+            id: `parent-${member.name}-${childName}-${edgeCounter}`,
             source: member.name,
             target: childName,
-            sourceHandle: "bottom",
-            targetHandle: "top",
+            type: "default",
+            // Remove specific handles to let React Flow route automatically
             style: {
               stroke: "#3b82f6",
               strokeWidth: 2,
             },
             animated: false,
+            // Add custom data to force unique rendering
+            data: {
+              offset: offset,
+              parentName: member.name,
+              childName: childName,
+              edgeIndex: edgeCounter
+            },
           });
+          edgeCounter++;
         }
       });
     });
 
-    // Create edges for spouse relationships
-    const processedSpouses = new Set<string>();
-    members.forEach((member) => {
-      if (
-        member.spouse &&
-        memberMap.has(member.spouse) &&
-        !processedSpouses.has(member.name) &&
-        !processedSpouses.has(member.spouse)
-      ) {
-        // Try different handle combinations for better visibility
-        edges.push({
-          id: `spouse-${member.name}-${member.spouse}`,
-          source: member.name,
-          target: member.spouse,
-          type: "straight",
-          sourceHandle: "right",
-          targetHandle: "left-target",
-          style: {
-            stroke: "#ef4444",
-            strokeWidth: 3,
-            strokeDasharray: "8,4",
-          },
-          animated: true,
-          label: "💕",
-          labelStyle: { fontSize: 16 },
-        });
-        processedSpouses.add(member.name);
-        processedSpouses.add(member.spouse);
-      }
-    });
-
-    console.log("Created nodes:", nodes.length);
-    console.log("Created edges:", edges.length);
-    console.log(
-      "Spouse edges:",
-      edges.filter((e) => e.id.startsWith("spouse-")),
-    );
-    console.log(
-      "Parent edges:",
-      edges.filter((e) => e.id.startsWith("parent-")),
-    );
-
-    // Apply custom layout with family data
-    const layouted = getLayoutedElements(nodes, edges, members);
+    // Apply auto layout with dagre
+    const layouted = getLayoutedElements(nodes, edges);
 
     return layouted;
   }, [data]);
@@ -411,12 +344,20 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
         onNodeClick={onNodeClick}
         nodeTypes={nodeTypes}
         fitView
+        fitViewOptions={{
+          padding: 0.2,  // More padding around the graph
+          minZoom: 0.3,  // Allow zooming out more
+          maxZoom: 1.2   // Limit zoom in
+        }}
         attributionPosition="bottom-left"
         style={{ width: "100%", height: "100%" }}
-        defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
+        defaultViewport={{ x: 0, y: 0, zoom: 0.6 }}  // Start more zoomed out
         nodesDraggable={false}
         nodesConnectable={false}
         elementsSelectable={false}
+        connectionLineType={ConnectionLineType.SmoothStep}
+        edgesFocusable={false}
+        nodesFocusable={true}
       >
         <Controls className="bg-zinc-800 border-zinc-600" />
         <Background variant={BackgroundVariant.Dots} gap={20} size={1} color="#52525b" />
@@ -428,7 +369,7 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
           <div className="p-8 max-w-lg mx-auto bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-white/20">
             <div className="flex items-center space-x-4 mb-6">
               <img
-                src={generateAvatar(selectedMember.name)}
+                src={generateAvatar(selectedMember.name, selectedMember.gender)}
                 alt={selectedMember.name}
                 className="w-20 h-20 rounded-full border-2 border-gray-200"
               />
@@ -441,6 +382,13 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
                       ? new Date(selectedMember.birth_date).toLocaleDateString()
                       : "Unknown"}
                   </p>
+                  {selectedMember.death_date && selectedMember.death_date.trim() !== "" && (
+                    <p className="text-gray-600 text-sm">
+                      Died:{" "}
+                      {new Date(selectedMember.death_date).toLocaleDateString()}
+                      <span className="ml-2 text-yellow-600">👼</span>
+                    </p>
+                  )}
                   {selectedMember.spouse && (
                     <p className="text-gray-600 text-sm">Spouse: {selectedMember.spouse}</p>
                   )}
