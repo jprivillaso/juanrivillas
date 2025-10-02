@@ -151,15 +151,15 @@ const getLayoutedElements = (nodes: Node[], edges: Edge[], members: FamilyMember
 
       // Only process each pair once (use alphabetical order to be consistent)
       if (node.id < spouseName && !nodePositions.has(node.id)) {
-        // Position current node slightly to the left
-        nodePositions.set(node.id, { x: baseX - 80, y: baseY });
-        // Position spouse slightly to the right
-        nodePositions.set(spouseName, { x: baseX + 80, y: baseY });
+        // Position current node slightly to the left (increased spacing)
+        nodePositions.set(node.id, { x: baseX - 120, y: baseY });
+        // Position spouse slightly to the right (increased spacing)
+        nodePositions.set(spouseName, { x: baseX + 120, y: baseY });
       } else if (!nodePositions.has(node.id)) {
         // This spouse was already positioned, use existing position
         const existingPos = nodePositions.get(spouseName);
         if (existingPos) {
-          nodePositions.set(node.id, { x: existingPos.x + 160, y: existingPos.y });
+          nodePositions.set(node.id, { x: existingPos.x + 240, y: existingPos.y });
         } else {
           nodePositions.set(node.id, { x: baseX, y: baseY });
         }
@@ -278,7 +278,7 @@ const FamilyNode = ({ data }: { data: FamilyNodeData }) => {
             {data.name.split(" ").slice(0, 2).join(" ")}
           </div>
           {data.occupation && data.occupation !== "None" && (
-            <div className="text-zinc-500 text-xs truncate max-w-[100px]">{data.occupation}</div>
+            <div className="text-zinc-500 text-xs truncate max-w-[100px] text-center">{data.occupation}</div>
           )}
         </div>
       </div>
