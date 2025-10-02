@@ -14,6 +14,8 @@ interface FamilyMember {
   location?: string;
   occupation?: string;
   spouse?: string | null;
+  death_date?: string | null;
+  gender?: string;
 }
 
 interface FamilyTreeData {
