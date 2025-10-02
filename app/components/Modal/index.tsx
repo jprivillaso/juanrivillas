@@ -18,6 +18,7 @@ export const Modal = ({ isOpen, children, onClose }: ModalProps) => {
       <div
         className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[90] animate-quick-fade-in"
         onClick={onClose}
+        onKeyUp={(e) => e.key === "Escape" && onClose()}
       />
 
       {/* Modal Container */}
