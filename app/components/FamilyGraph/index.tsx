@@ -12,7 +12,7 @@ import ReactFlow, {
   BackgroundVariant,
   Position,
   Handle,
-  ConnectionLineType
+  ConnectionLineType,
 } from "reactflow";
 import { Modal } from "../Modal";
 // Import some spiritual/memorial icons from react-icons
@@ -60,10 +60,10 @@ interface FamilyGraphProps {
 const formatDate = (dateString: string): string => {
   try {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
     });
   } catch {
     return dateString; // Return original if parsing fails
@@ -78,10 +78,10 @@ const generateAvatar = (name: string, gender?: string): string => {
   const baseParams = `seed=${seed}&backgroundColor=b6e3f4,c0aede,d1d4f9&radius=50&mouth=smile,twinkle&eyes=happy,hearts,squint,wink`;
 
   // Simple gender differentiation using only well-documented parameters
-  if (gender === 'female') {
+  if (gender === "female") {
     // Female: no facial hair
     return `https://api.dicebear.com/7.x/avataaars/svg?${baseParams}&facialHair=blank`;
-  } else if (gender === 'male') {
+  } else if (gender === "male") {
     // Male: allow facial hair options
     return `https://api.dicebear.com/7.x/avataaars/svg?${baseParams}&facialHair=blank,beard,beardLight`;
   } else {
@@ -97,7 +97,11 @@ const getLayoutedElements = (nodes: Node[], edges: Edge[], members: FamilyMember
   const processedSpouses = new Set<string>();
 
   members.forEach((member) => {
-    if (member.spouse && !processedSpouses.has(member.name) && !processedSpouses.has(member.spouse)) {
+    if (
+      member.spouse &&
+      !processedSpouses.has(member.name) &&
+      !processedSpouses.has(member.spouse)
+    ) {
       spousePairs.set(member.name, member.spouse);
       spousePairs.set(member.spouse, member.name);
       processedSpouses.add(member.name);
@@ -110,7 +114,7 @@ const getLayoutedElements = (nodes: Node[], edges: Edge[], members: FamilyMember
   dagreGraph.setDefaultEdgeLabel(() => ({}));
 
   dagreGraph.setGraph({
-    rankdir: 'TB',
+    rankdir: "TB",
     nodesep: 200,
     ranksep: 200,
     marginx: 100,
@@ -126,11 +130,11 @@ const getLayoutedElements = (nodes: Node[], edges: Edge[], members: FamilyMember
   });
 
   // Add only parent-child edges to dagre for hierarchical structure
-  const parentChildEdges = edges.filter(edge => edge.id.startsWith('parent-'));
+  const parentChildEdges = edges.filter((edge) => edge.id.startsWith("parent-"));
   parentChildEdges.forEach((edge) => {
     dagreGraph.setEdge(edge.source, edge.target, {
       minlen: 1,
-      weight: 1
+      weight: 1,
     });
   });
 
@@ -138,7 +142,7 @@ const getLayoutedElements = (nodes: Node[], edges: Edge[], members: FamilyMember
   dagre.layout(dagreGraph);
 
   // Apply positions and adjust for spouse pairs
-  const nodePositions = new Map<string, { x: number, y: number }>();
+  const nodePositions = new Map<string, { x: number; y: number }>();
 
   nodes.forEach((node) => {
     const nodeWithPosition = dagreGraph.node(node.id);
@@ -147,7 +151,8 @@ const getLayoutedElements = (nodes: Node[], edges: Edge[], members: FamilyMember
 
     // If this node has a spouse, position them side by side
     if (spousePairs.has(node.id)) {
-      const spouseName = spousePairs.get(node.id)!;
+      const spouseName = spousePairs.get(node.id);
+      if (!spouseName) return;
 
       // Only process each pair once (use alphabetical order to be consistent)
       if (node.id < spouseName && !nodePositions.has(node.id)) {
@@ -190,12 +195,13 @@ const FamilyNode = ({ data }: { data: FamilyNodeData }) => {
   const isDeceased = data.death_date && data.death_date.trim() !== "";
 
   return (
-    <div className={`family-node bg-zinc-800 border-2 rounded-lg p-3 min-w-[120px] cursor-pointer transition-colors relative ${
-      isDeceased
-        ? 'border-yellow-400/50 hover:border-yellow-300'
-        : 'border-zinc-600 hover:border-blue-400'
-    }`}>
-
+    <div
+      className={`family-node bg-zinc-800 border-2 rounded-lg p-3 min-w-[120px] cursor-pointer transition-colors relative ${
+        isDeceased
+          ? "border-yellow-400/50 hover:border-yellow-300"
+          : "border-zinc-600 hover:border-blue-400"
+      }`}
+    >
       {/* Handle for incoming connections (from parents) */}
       <Handle
         type="target"
@@ -272,13 +278,13 @@ const FamilyNode = ({ data }: { data: FamilyNodeData }) => {
         )}
 
         <div className="text-center">
-          <div className={`font-semibold text-sm ${
-            isDeceased ? 'text-white' : 'text-zinc-100'
-          }`}>
+          <div className={`font-semibold text-sm ${isDeceased ? "text-white" : "text-zinc-100"}`}>
             {data.name.split(" ").slice(0, 2).join(" ")}
           </div>
           {data.occupation && data.occupation !== "None" && (
-            <div className="text-zinc-500 text-xs truncate max-w-[100px] text-center">{data.occupation}</div>
+            <div className="text-zinc-500 text-xs truncate max-w-[100px] text-center">
+              {data.occupation}
+            </div>
           )}
         </div>
       </div>
@@ -335,13 +341,17 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
           const offset = childIndex * 10;
 
           const edgeId = `parent-${member.name}-${childName}-${edgeCounter}`;
-          const isHighlighted = selectedEdges.includes(edgeId) ||
-                               highlightedNode === member.name ||
-                               highlightedNode === childName;
+          const isHighlighted =
+            selectedEdges.includes(edgeId) ||
+            highlightedNode === member.name ||
+            highlightedNode === childName;
 
           // Debug logging
-          if (highlightedNode && (highlightedNode === member.name || highlightedNode === childName)) {
-            console.log('Highlighting edge:', edgeId, 'for node:', highlightedNode);
+          if (
+            highlightedNode &&
+            (highlightedNode === member.name || highlightedNode === childName)
+          ) {
+            console.log("Highlighting edge:", edgeId, "for node:", highlightedNode);
           }
 
           edges.push({
@@ -362,7 +372,7 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
               parentName: member.name,
               childName: childName,
               edgeIndex: edgeCounter,
-              relationship: 'parent-child'
+              relationship: "parent-child",
             },
           });
           edgeCounter++;
@@ -401,9 +411,10 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
         const rightSpouse = member.name < member.spouse ? member.spouse : member.name;
 
         const spouseEdgeId = `spouse-${leftSpouse}-${rightSpouse}`;
-        const isSpouseHighlighted = selectedEdges.includes(spouseEdgeId) ||
-                                   highlightedNode === leftSpouse ||
-                                   highlightedNode === rightSpouse;
+        const isSpouseHighlighted =
+          selectedEdges.includes(spouseEdgeId) ||
+          highlightedNode === leftSpouse ||
+          highlightedNode === rightSpouse;
 
         edges.push({
           id: spouseEdgeId,
@@ -423,14 +434,14 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
           labelStyle: {
             fontSize: isSpouseHighlighted ? 20 : 16,
             color: isSpouseHighlighted ? "#fbbf24" : spouseColor,
-            fontWeight: 'bold'
+            fontWeight: "bold",
           },
           data: {
-            relationship: 'spouse',
+            relationship: "spouse",
             color: spouseColor,
             leftSpouse: leftSpouse,
-            rightSpouse: rightSpouse
-          }
+            rightSpouse: rightSpouse,
+          },
         });
 
         processedSpouses.add(`${member.name}-${member.spouse}`);
@@ -450,13 +461,14 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
 
   // Update edge styles when highlighting changes
   React.useEffect(() => {
-    setEdges(currentEdges =>
-      currentEdges.map(edge => {
-        const isHighlighted = selectedEdges.includes(edge.id) ||
-                             highlightedNode === edge.source ||
-                             highlightedNode === edge.target;
+    setEdges((currentEdges) =>
+      currentEdges.map((edge) => {
+        const isHighlighted =
+          selectedEdges.includes(edge.id) ||
+          highlightedNode === edge.source ||
+          highlightedNode === edge.target;
 
-        const isSpouseEdge = edge.id.startsWith('spouse-');
+        const isSpouseEdge = edge.id.startsWith("spouse-");
 
         if (isSpouseEdge) {
           const originalColor = edge.data?.color || "#ef4444";
@@ -473,7 +485,7 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
               ...edge.labelStyle,
               fontSize: isHighlighted ? 20 : 16,
               color: isHighlighted ? "#fbbf24" : originalColor,
-            }
+            },
           };
         } else {
           // Parent-child edge
@@ -488,7 +500,7 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
             animated: isHighlighted,
           };
         }
-      })
+      }),
     );
   }, [selectedEdges, highlightedNode, setEdges]);
 
@@ -497,44 +509,50 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
     [setEdges],
   );
 
-  const onNodeClick = useCallback((event: React.MouseEvent, node: Node) => {
-    // Check if Ctrl/Cmd key is pressed for highlighting mode
-    if (event.ctrlKey || event.metaKey) {
-      // Toggle node highlighting
-      if (highlightedNode === node.id) {
-        setHighlightedNode(null);
-        setSelectedEdges([]);
+  const onNodeClick = useCallback(
+    (event: React.MouseEvent, node: Node) => {
+      // Check if Ctrl/Cmd key is pressed for highlighting mode
+      if (event.ctrlKey || event.metaKey) {
+        // Toggle node highlighting
+        if (highlightedNode === node.id) {
+          setHighlightedNode(null);
+          setSelectedEdges([]);
+        } else {
+          setHighlightedNode(node.id);
+          // Find all edges connected to this node using current edges
+          const connectedEdges = edges
+            .filter((edge) => edge.source === node.id || edge.target === node.id)
+            .map((edge) => edge.id);
+          console.log("Node clicked:", node.id, "Connected edges:", connectedEdges);
+          setSelectedEdges(connectedEdges);
+        }
       } else {
-        setHighlightedNode(node.id);
-        // Find all edges connected to this node using current edges
-        const connectedEdges = edges
-          .filter(edge => edge.source === node.id || edge.target === node.id)
-          .map(edge => edge.id);
-        console.log('Node clicked:', node.id, 'Connected edges:', connectedEdges);
-        setSelectedEdges(connectedEdges);
+        // Normal click - open modal
+        if (node.data.onClick) {
+          node.data.onClick();
+        }
       }
-    } else {
-      // Normal click - open modal
-      if (node.data.onClick) {
-        node.data.onClick();
-      }
-    }
-  }, [highlightedNode, edges]);
+    },
+    [highlightedNode, edges],
+  );
 
-  const onEdgeClick = useCallback((event: React.MouseEvent, edge: any) => {
-    event.stopPropagation();
+  const onEdgeClick = useCallback(
+    (event: React.MouseEvent, edge: { id: string }) => {
+      event.stopPropagation();
 
-    // Toggle edge selection
-    if (selectedEdges.includes(edge.id)) {
-      setSelectedEdges(prev => prev.filter(id => id !== edge.id));
-      if (selectedEdges.length === 1) {
+      // Toggle edge selection
+      if (selectedEdges.includes(edge.id)) {
+        setSelectedEdges((prev) => prev.filter((id) => id !== edge.id));
+        if (selectedEdges.length === 1) {
+          setHighlightedNode(null);
+        }
+      } else {
+        setSelectedEdges([edge.id]);
         setHighlightedNode(null);
       }
-    } else {
-      setSelectedEdges([edge.id]);
-      setHighlightedNode(null);
-    }
-  }, [selectedEdges]);
+    },
+    [selectedEdges],
+  );
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -554,13 +572,22 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
           <div className="flex items-center justify-between gap-3">
             <div className="text-sm text-zinc-200">
               {highlightedNode && (
-                <div>Showing connections for: <span className="font-semibold text-green-400">{highlightedNode}</span></div>
+                <div>
+                  Showing connections for:{" "}
+                  <span className="font-semibold text-green-400">{highlightedNode}</span>
+                </div>
               )}
               {selectedEdges.length > 0 && !highlightedNode && (
-                <div>Selected: <span className="font-semibold text-blue-400">{selectedEdges.length} edge(s)</span></div>
+                <div>
+                  Selected:{" "}
+                  <span className="font-semibold text-blue-400">
+                    {selectedEdges.length} edge(s)
+                  </span>
+                </div>
               )}
             </div>
             <button
+              type="button"
               onClick={clearSelection}
               className="text-zinc-400 hover:text-white transition-colors"
               title="Clear selection"
@@ -585,13 +612,13 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
         nodeTypes={nodeTypes}
         fitView
         fitViewOptions={{
-          padding: 0.2,  // More padding around the graph
-          minZoom: 0.3,  // Allow zooming out more
-          maxZoom: 1.2   // Limit zoom in
+          padding: 0.2, // More padding around the graph
+          minZoom: 0.3, // Allow zooming out more
+          maxZoom: 1.2, // Limit zoom in
         }}
         attributionPosition="bottom-left"
         style={{ width: "100%", height: "100%" }}
-        defaultViewport={{ x: 0, y: 0, zoom: 0.6 }}  // Start more zoomed out
+        defaultViewport={{ x: 0, y: 0, zoom: 0.6 }} // Start more zoomed out
         nodesDraggable={false}
         nodesConnectable={false}
         elementsSelectable={false}
@@ -618,14 +645,11 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
                 <div className="space-y-1">
                   <p className="text-gray-600 text-sm">
                     Born:{" "}
-                    {selectedMember.birth_date
-                      ? formatDate(selectedMember.birth_date)
-                      : "Unknown"}
+                    {selectedMember.birth_date ? formatDate(selectedMember.birth_date) : "Unknown"}
                   </p>
                   {selectedMember.death_date && selectedMember.death_date.trim() !== "" && (
                     <p className="text-gray-600 text-sm">
-                      Died:{" "}
-                      {formatDate(selectedMember.death_date)}
+                      Died: {formatDate(selectedMember.death_date)}
                       <span className="ml-2 text-yellow-600">👼</span>
                     </p>
                   )}
