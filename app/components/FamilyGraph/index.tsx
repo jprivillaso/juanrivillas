@@ -76,53 +76,93 @@ const generateAvatar = (name: string, gender?: string): string => {
   }
 };
 
-// Auto layout using dagre with improved spacing and edge routing
-const getLayoutedElements = (nodes: Node[], edges: Edge[]) => {
+// Custom layout that positions spouses next to each other
+const getLayoutedElements = (nodes: Node[], edges: Edge[], members: FamilyMember[]) => {
+  // First, identify spouse pairs
+  const spousePairs = new Map<string, string>();
+  const processedSpouses = new Set<string>();
+
+  members.forEach((member) => {
+    if (member.spouse && !processedSpouses.has(member.name) && !processedSpouses.has(member.spouse)) {
+      spousePairs.set(member.name, member.spouse);
+      spousePairs.set(member.spouse, member.name);
+      processedSpouses.add(member.name);
+      processedSpouses.add(member.spouse);
+    }
+  });
+
+  // Use dagre for initial hierarchical layout (parent-child only)
   const dagreGraph = new dagre.graphlib.Graph();
   dagreGraph.setDefaultEdgeLabel(() => ({}));
 
-  // Set graph direction and spacing - significantly increased to prevent overlaps
   dagreGraph.setGraph({
-    rankdir: 'TB', // Top to Bottom
-    nodesep: 250,  // Much more horizontal spacing between nodes
-    ranksep: 250,  // Much more vertical spacing between ranks
-    marginx: 120,  // Larger graph margins
-    marginy: 120,
-    edgesep: 50,   // Spacing between edges
-    acyclicer: 'greedy', // Better cycle removal
-    ranker: 'tight-tree'  // Better ranking algorithm
+    rankdir: 'TB',
+    nodesep: 200,
+    ranksep: 200,
+    marginx: 100,
+    marginy: 100,
   });
 
-  // Add nodes to dagre graph with updated dimensions for angel wings
+  // Add nodes to dagre
   nodes.forEach((node) => {
-    // Check if this node has angel wings (deceased member)
     const hasWings = node.data.death_date && node.data.death_date.trim() !== "";
-    const nodeWidth = hasWings ? 160 : 120;  // Even wider spacing for wings
-    const nodeHeight = 100;  // Taller nodes
-
+    const nodeWidth = hasWings ? 160 : 120;
+    const nodeHeight = 100;
     dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
   });
 
-  // Add all edges to dagre graph (now only parent-child relationships)
-  edges.forEach((edge) => {
+  // Add only parent-child edges to dagre for hierarchical structure
+  const parentChildEdges = edges.filter(edge => edge.id.startsWith('parent-'));
+  parentChildEdges.forEach((edge) => {
     dagreGraph.setEdge(edge.source, edge.target, {
-      minlen: 1,  // Minimum edge length
-      weight: 1   // Edge weight for routing
+      minlen: 1,
+      weight: 1
     });
   });
 
-  // Calculate layout
+  // Calculate initial layout
   dagre.layout(dagreGraph);
 
-  // Apply calculated positions to nodes
+  // Apply positions and adjust for spouse pairs
+  const nodePositions = new Map<string, { x: number, y: number }>();
+
   nodes.forEach((node) => {
     const nodeWithPosition = dagreGraph.node(node.id);
-    node.position = {
-      x: nodeWithPosition.x - nodeWithPosition.width / 2,
-      y: nodeWithPosition.y - nodeWithPosition.height / 2,
-    };
+    const baseX = nodeWithPosition.x - nodeWithPosition.width / 2;
+    const baseY = nodeWithPosition.y - nodeWithPosition.height / 2;
 
-    // Set source/target positions for cleaner edge routing
+    // If this node has a spouse, position them side by side
+    if (spousePairs.has(node.id)) {
+      const spouseName = spousePairs.get(node.id)!;
+
+      // Only process each pair once (use alphabetical order to be consistent)
+      if (node.id < spouseName && !nodePositions.has(node.id)) {
+        // Position current node slightly to the left
+        nodePositions.set(node.id, { x: baseX - 80, y: baseY });
+        // Position spouse slightly to the right
+        nodePositions.set(spouseName, { x: baseX + 80, y: baseY });
+      } else if (!nodePositions.has(node.id)) {
+        // This spouse was already positioned, use existing position
+        const existingPos = nodePositions.get(spouseName);
+        if (existingPos) {
+          nodePositions.set(node.id, { x: existingPos.x + 160, y: existingPos.y });
+        } else {
+          nodePositions.set(node.id, { x: baseX, y: baseY });
+        }
+      }
+    } else {
+      // Single person, use dagre position
+      nodePositions.set(node.id, { x: baseX, y: baseY });
+    }
+  });
+
+  // Apply final positions
+  nodes.forEach((node) => {
+    const pos = nodePositions.get(node.id);
+    if (pos) {
+      node.position = pos;
+    }
+
     node.sourcePosition = Position.Bottom;
     node.targetPosition = Position.Top;
   });
@@ -308,8 +348,69 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
       });
     });
 
-    // Apply auto layout with dagre
-    const layouted = getLayoutedElements(nodes, edges);
+    // Create edges for spouse relationships with unique colors and proper handle connections
+    const spouseColors = [
+      "#ef4444", // red
+      "#f97316", // orange
+      "#eab308", // yellow
+      "#22c55e", // green
+      "#06b6d4", // cyan
+      "#3b82f6", // blue
+      "#8b5cf6", // violet
+      "#ec4899", // pink
+      "#f59e0b", // amber
+      "#10b981", // emerald
+    ];
+
+    const processedSpouses = new Set<string>();
+    let spouseColorIndex = 0;
+
+    members.forEach((member) => {
+      if (
+        member.spouse &&
+        memberMap.has(member.spouse) &&
+        !processedSpouses.has(`${member.name}-${member.spouse}`) &&
+        !processedSpouses.has(`${member.spouse}-${member.name}`)
+      ) {
+        const spouseColor = spouseColors[spouseColorIndex % spouseColors.length];
+
+        // Determine which spouse is on the left (alphabetically first) to connect properly
+        const leftSpouse = member.name < member.spouse ? member.name : member.spouse;
+        const rightSpouse = member.name < member.spouse ? member.spouse : member.name;
+
+        edges.push({
+          id: `spouse-${leftSpouse}-${rightSpouse}`,
+          source: leftSpouse,
+          target: rightSpouse,
+          type: "straight", // Use straight for clean horizontal connections
+          sourceHandle: "right", // Connect from right side of left spouse
+          targetHandle: "left-target", // Connect to left side of right spouse
+          style: {
+            stroke: spouseColor,
+            strokeWidth: 3,
+            strokeDasharray: "8,4",
+          },
+          animated: true,
+          label: "💕",
+          labelStyle: {
+            fontSize: 16,
+            color: spouseColor,
+            fontWeight: 'bold'
+          },
+          data: {
+            relationship: 'spouse',
+            color: spouseColor
+          }
+        });
+
+        processedSpouses.add(`${member.name}-${member.spouse}`);
+        processedSpouses.add(`${member.spouse}-${member.name}`);
+        spouseColorIndex++;
+      }
+    });
+
+    // Apply custom layout that positions spouses next to each other
+    const layouted = getLayoutedElements(nodes, edges, members);
 
     return layouted;
   }, [data]);
