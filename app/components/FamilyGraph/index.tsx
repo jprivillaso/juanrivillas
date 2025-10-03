@@ -13,6 +13,7 @@ import ReactFlow, {
   Position,
   Handle,
   ConnectionLineType,
+  ReactFlowInstance,
 } from "reactflow";
 import { Modal } from "../Modal";
 // Import some spiritual/memorial icons from react-icons
@@ -124,8 +125,8 @@ const getLayoutedElements = (nodes: Node[], edges: Edge[], members: FamilyMember
   // Add nodes to dagre
   nodes.forEach((node) => {
     const hasWings = node.data.death_date && node.data.death_date.trim() !== "";
-    const nodeWidth = hasWings ? 160 : 120;
-    const nodeHeight = 100;
+    const nodeWidth = hasWings ? 180 : 160; // Increased width for full names
+    const nodeHeight = 110; // Slightly taller for multi-line names
     dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
   });
 
@@ -193,13 +194,16 @@ const getLayoutedElements = (nodes: Node[], edges: Edge[], members: FamilyMember
 
 const FamilyNode = ({ data }: { data: FamilyNodeData }) => {
   const isDeceased = data.death_date && data.death_date.trim() !== "";
+  const isCreator = data.name === "Juan Pablo Rivillas Ospina";
 
   return (
     <div
-      className={`family-node bg-zinc-800 border-2 rounded-lg p-3 min-w-[120px] cursor-pointer transition-colors relative ${
-        isDeceased
-          ? "border-yellow-400/50 hover:border-yellow-300"
-          : "border-zinc-600 hover:border-blue-400"
+      className={`family-node rounded-lg p-3 min-w-[140px] max-w-[160px] cursor-pointer transition-colors relative ${
+        isCreator
+          ? "bg-gradient-to-br from-blue-600 to-purple-700 border-2 border-blue-400 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
+          : isDeceased
+          ? "bg-zinc-800 border-2 border-yellow-400/50 hover:border-yellow-300"
+          : "bg-zinc-800 border-2 border-zinc-600 hover:border-blue-400"
       }`}
     >
       {/* Handle for incoming connections (from parents) */}
@@ -278,11 +282,19 @@ const FamilyNode = ({ data }: { data: FamilyNodeData }) => {
         )}
 
         <div className="text-center">
-          <div className={`font-semibold text-sm ${isDeceased ? "text-white" : "text-zinc-100"}`}>
-            {data.name.split(" ").slice(0, 2).join(" ")}
+          <div className={`font-semibold text-sm leading-tight max-w-[140px] mx-auto ${
+            isCreator
+              ? "text-white drop-shadow-sm"
+              : isDeceased
+              ? "text-white"
+              : "text-zinc-100"
+          }`}>
+            {data.name}
           </div>
           {data.occupation && data.occupation !== "None" && (
-            <div className="text-zinc-500 text-xs truncate max-w-[100px] text-center">
+            <div className={`text-xs mt-1 max-w-[140px] mx-auto text-center ${
+              isCreator ? "text-blue-100" : "text-zinc-500"
+            }`}>
               {data.occupation}
             </div>
           )}
@@ -302,6 +314,8 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEdges, setSelectedEdges] = useState<string[]>([]);
   const [highlightedNode, setHighlightedNode] = useState<string | null>(null);
+  const [longPressTimer, setLongPressTimer] = useState<NodeJS.Timeout | null>(null);
+  const [isLongPress, setIsLongPress] = useState(false);
 
   // Transform family data into nodes and edges
   const { nodes: initialNodes, edges: initialEdges } = useMemo(() => {
@@ -331,7 +345,7 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
       });
     });
 
-    // Create edges for parent-child relationships with unique routing
+    // Create edges for parent-child relationships
     let edgeCounter = 0;
     members.forEach((member) => {
       member.children.forEach((childName, childIndex) => {
@@ -345,14 +359,6 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
             selectedEdges.includes(edgeId) ||
             highlightedNode === member.name ||
             highlightedNode === childName;
-
-          // Debug logging
-          if (
-            highlightedNode &&
-            (highlightedNode === member.name || highlightedNode === childName)
-          ) {
-            console.log("Highlighting edge:", edgeId, "for node:", highlightedNode);
-          }
 
           edges.push({
             id: edgeId,
@@ -458,6 +464,22 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [reactFlowInstance, setReactFlowInstance] = useState<ReactFlowInstance | null>(null);
+
+  // Focus on Juan Pablo's node after the graph is initialized
+  React.useEffect(() => {
+    if (reactFlowInstance && nodes.length > 0) {
+      const juanPabloNode = nodes.find(node => node.id === "Juan Pablo Rivillas Ospina");
+      if (juanPabloNode) {
+        // Center the view on Juan Pablo's node
+        reactFlowInstance.setCenter(
+          juanPabloNode.position.x + 60, // Add half node width for centering
+          juanPabloNode.position.y + 50, // Add half node height for centering
+          { zoom: 0.8, duration: 800 } // Smooth animation to focus
+        );
+      }
+    }
+  }, [reactFlowInstance, nodes]);
 
   // Update edge styles when highlighting changes
   React.useEffect(() => {
@@ -504,28 +526,51 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
     );
   }, [selectedEdges, highlightedNode, setEdges]);
 
+  // Cleanup timer on unmount
+  React.useEffect(() => {
+    return () => {
+      if (longPressTimer) {
+        clearTimeout(longPressTimer);
+      }
+    };
+  }, [longPressTimer]);
+
   const onConnect = useCallback(
     (params: Connection) => setEdges((eds) => addEdge(params, eds)),
     [setEdges],
   );
 
+  // Helper function to highlight node connections
+  const highlightNodeConnections = useCallback(
+    (nodeId: string) => {
+      if (highlightedNode === nodeId) {
+        setHighlightedNode(null);
+        setSelectedEdges([]);
+      } else {
+        setHighlightedNode(nodeId);
+        // Find all edges connected to this node using current edges
+        const connectedEdges = edges
+          .filter((edge) => edge.source === nodeId || edge.target === nodeId)
+          .map((edge) => edge.id);
+        console.log("Node highlighted:", nodeId, "Connected edges:", connectedEdges);
+        setSelectedEdges(connectedEdges);
+      }
+    },
+    [highlightedNode, edges],
+  );
+
   const onNodeClick = useCallback(
     (event: React.MouseEvent, node: Node) => {
-      // Check if Ctrl/Cmd key is pressed for highlighting mode
+      // If this was a long press, handle highlighting
+      if (isLongPress) {
+        setIsLongPress(false);
+        highlightNodeConnections(node.id);
+        return;
+      }
+
+      // Check if Ctrl/Cmd key is pressed for highlighting mode (desktop)
       if (event.ctrlKey || event.metaKey) {
-        // Toggle node highlighting
-        if (highlightedNode === node.id) {
-          setHighlightedNode(null);
-          setSelectedEdges([]);
-        } else {
-          setHighlightedNode(node.id);
-          // Find all edges connected to this node using current edges
-          const connectedEdges = edges
-            .filter((edge) => edge.source === node.id || edge.target === node.id)
-            .map((edge) => edge.id);
-          console.log("Node clicked:", node.id, "Connected edges:", connectedEdges);
-          setSelectedEdges(connectedEdges);
-        }
+        highlightNodeConnections(node.id);
       } else {
         // Normal click - open modal
         if (node.data.onClick) {
@@ -533,8 +578,47 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
         }
       }
     },
-    [highlightedNode, edges],
+    [isLongPress, highlightNodeConnections],
   );
+
+  // Touch event handlers for mobile long press
+  const onNodeMouseDown = useCallback(
+    (event: React.MouseEvent, node: Node) => {
+      // Clear any existing timer
+      if (longPressTimer) {
+        clearTimeout(longPressTimer);
+      }
+
+      // Start long press timer (500ms)
+      const timer = setTimeout(() => {
+        setIsLongPress(true);
+        // Provide haptic feedback if available
+        if (navigator.vibrate) {
+          navigator.vibrate(50);
+        }
+      }, 500);
+
+      setLongPressTimer(timer);
+    },
+    [longPressTimer],
+  );
+
+  const onNodeMouseUp = useCallback(() => {
+    // Clear the long press timer
+    if (longPressTimer) {
+      clearTimeout(longPressTimer);
+      setLongPressTimer(null);
+    }
+  }, [longPressTimer]);
+
+  const onNodeMouseLeave = useCallback(() => {
+    // Clear the long press timer if mouse/touch leaves the node
+    if (longPressTimer) {
+      clearTimeout(longPressTimer);
+      setLongPressTimer(null);
+    }
+    setIsLongPress(false);
+  }, [longPressTimer]);
 
   const onEdgeClick = useCallback(
     (event: React.MouseEvent, edge: { id: string }) => {
@@ -596,7 +680,12 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
             </button>
           </div>
           <div className="text-xs text-zinc-400 mt-1">
-            Click edges to select • Ctrl+Click nodes to highlight connections
+            <span className="hidden sm:inline">
+              Click edges to select • Ctrl+Click nodes to highlight connections
+            </span>
+            <span className="sm:hidden">
+              Tap edges to select • Long press nodes to highlight connections
+            </span>
           </div>
         </div>
       )}
@@ -608,7 +697,11 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         onNodeClick={onNodeClick}
+        onNodeMouseEnter={onNodeMouseDown}
+        onNodeMouseLeave={onNodeMouseLeave}
         onEdgeClick={onEdgeClick}
+        onMouseUp={onNodeMouseUp}
+        onInit={setReactFlowInstance}
         nodeTypes={nodeTypes}
         fitView
         fitViewOptions={{
@@ -618,7 +711,7 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
         }}
         attributionPosition="bottom-left"
         style={{ width: "100%", height: "100%" }}
-        defaultViewport={{ x: 0, y: 0, zoom: 0.6 }} // Start more zoomed out
+        defaultViewport={{ x: 0, y: 0, zoom: 0.6 }} // Initial view before focusing
         nodesDraggable={false}
         nodesConnectable={false}
         elementsSelectable={false}

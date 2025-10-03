@@ -124,7 +124,7 @@ export const AISidebar: React.FC<AISidebarProps> = ({ isOpen, onClose }) => {
                 <MessageCircle className="w-12 h-12 mx-auto mb-4 opacity-50" />
                 <p className="text-sm">Ask me anything about the family tree!</p>
                 <p className="text-xs mt-2 opacity-75">
-                  Try questions like "Who are Juan's children?" or "Tell me about David"
+                  Try questions like "Who are Juan Pablo Rivillas Ospina's children?" or "Tell me about David Rivillas de Magalhaes". You must use the full name.
                 </p>
               </div>
             )}
