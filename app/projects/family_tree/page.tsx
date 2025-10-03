@@ -118,16 +118,27 @@ export default function FamilyTreePage() {
     <div className="relative pb-16">
       <Navigation />
 
-      {/* AI Chat Button */}
+      {/* Enhanced AI Chat Button */}
       <button
         type="button"
         onClick={() => setIsSidebarOpen(true)}
-        className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 shadow-lg transition-colors z-30 group"
-        title="Ask AI about family tree"
+        className="fixed bottom-6 right-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 z-30 group animate-pulse hover:animate-none transform hover:scale-110"
+        title="Chat with AI about your family tree"
       >
-        <MessageCircle className="w-6 h-6" />
-        <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-zinc-800 text-zinc-100 px-3 py-1 rounded-md text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-          Ask AI about family tree
+        <div className="relative">
+          <MessageCircle className="w-6 h-6" />
+          {/* AI Badge - positioned more on the edge */}
+          <div className="absolute -top-5 -right-5 bg-green-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full border-2 border-white shadow-sm">
+            AI
+          </div>
+        </div>
+
+        {/* Enhanced Tooltip */}
+        <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-zinc-900 text-zinc-100 px-4 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg border border-zinc-700">
+          <div className="font-semibold text-blue-400">💬 Chat with AI</div>
+          <div className="text-xs text-zinc-400 mt-1">Ask questions about the family tree</div>
+          {/* Tooltip Arrow */}
+          <div className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-zinc-900"></div>
         </span>
       </button>
 
