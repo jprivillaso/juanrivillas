@@ -1,0 +1,122 @@
+---
+title: Family Tree Project Learnings
+description: Final insights about what I learned during this project and how I deployed it
+date: "2025-10-03"
+published: true
+language: en
+---
+
+## Project Overview
+
+The Family Tree project is an interactive web application that visualizes family relationships using React Flow, powered by an AI chatbot that can answer questions about family members using Graph RAG (Retrieval-Augmented Generation) with Neo4j and Elixir. What started as a pet project turned out to be one of the most enjoyable personal projects I've ever worked on, so it was worth the time. However, it wasn't as easy as I initially imagined!
+
+You can explore the [live demo here](https://juanrivillas.com/projects/family_tree) and check out the [source code on GitHub](https://github.com/jprivillaso/family-tree-agent).
+
+## Series Recap
+
+This post concludes a 4-part series on building an AI-powered family tree:
+
+1. [RAG in Elixir](https://juanrivillas.com/blog/rag) - Initial implementation with naive RAG
+2. [Naive RAG vs Graph RAG](https://juanrivillas.com/blog/naive_rag_vs_graph_rag) - Upgrading to graph-based retrieval
+3. [Prompt Fine-tuning](https://juanrivillas.com/blog/prompt_fine_tuning_for_graph_rag) - Optimizing Graph RAG performance
+4. **Family Tree Learnings** (this post) - Deployment and final insights
+
+## Deployment Architecture Decisions
+
+During the whole project I was working with local Ollama and Neo4j instances. When I reached the final stage, I had to think about how to deploy this project in a way that wouldn't incur high costs. This isn't different from evaluating tools in your job: Should I pay for a cloud service, go for in-house hosting, or implement my own solution?
+
+The application had three main components:
+- The API (Elixir/Phoenix)
+- Neo4j database
+- LLM hosting
+
+### API Deployment
+
+I chose Fly.io as the deployment platform because of its excellent integration with Elixir, and I believe it was an excellent choice. One of the key reasons, besides the Elixir integration, was how Fly.io automatically stops services when they're not being used. This resembled the serverless architecture I worked with years ago with AWS Lambda. The cold start time wasn't a problem for me since this was a pet project.
+
+### Database Strategy
+
+For Neo4j, I had several cloud providers to choose from or could spin up my own instance. Here it's important to note that the data I'm working with is static, so there was no need to think about data replication and durability. Even if someone managed to access my deployed service and corrupt the database, I could simply redeploy. Of course, this wouldn't be true for most real applications.
+
+Fly.io offered a feature that attracted me: having different services with their own availability configurations. My API stops after a few minutes of being unused, but my Neo4j service remains active since it requires a persistent connection. I chose the minimum machine configuration:
+
+```toml
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+
+[mounts]
+  source = 'neo4j_data'
+  destination = '/data'
+  initial_size = '1gb'
+```
+
+### LLM Hosting Decision
+
+Initially, I tried to host the models myself. However, when I looked at the minimum requirements needed to host those models, even for Small Language Models (SLMs), it wouldn't be cost-effective. So I added a compilation flag to my project where I can choose between OpenAI or Ollama as the LLM provider. For my expected usage, I believe I'll stay under the free tier.
+
+## Cost Optimization Strategy
+
+Here's my cost breakdown and strategy:
+
+| Component | Solution | Monthly Cost | Reasoning |
+|-----------|----------|--------------|-----------|
+| API | Fly.io | ~$10-15 | Serverless-like behavior, Elixir support |
+| Database | Neo4j on Fly.io | Included in API cost | Persistent storage needed |
+| LLM | OpenAI API | <$5 (free tier) | Usage-based pricing, no infrastructure overhead |
+
+Fly.io doesn't charge for monthly bills below $5, so initially I wasn't charged at all. Moving forward, I anticipate being charged between $10-15 per month, which is reasonable for a production-ready personal project.
+
+## Security Considerations
+
+I ensured that my API has proper authentication and rate limiting to prevent exploitation. This is often underrated, but you must really take care with these types of projects since they can become sources of vulnerability. Even personal projects need security measures when exposed to the internet.
+
+## Technical Lessons Learned
+
+### Graph RAG vs Traditional RAG
+- **Graph RAG excelled** at relationship queries ("Who is Juan's grandfather?", "What's the relationship between X and Y?")
+- **Traditional RAG was sufficient** for direct attribute queries ("What is Juan's occupation?")
+- **Prompt engineering was crucial** for generating accurate Cypher queries
+- **Schema definition** became the foundation for successful Graph RAG implementation
+
+### Deployment Insights
+- **Cold starts are acceptable** for pet projects but consider impact for production use
+- **Static data significantly simplifies** deployment architecture and reduces complexity
+- **Cost consciousness** from the beginning prevents projects from becoming financial burdens
+- **Security measures are essential** even for personal projects exposed to the internet
+
+### Elixir Ecosystem Learnings
+- **Limited Neo4j libraries** - had to use HTTP client instead of Bolt protocol
+- **Nx and Bumblebee** provide excellent ML capabilities in Elixir
+- **GenServer architecture** enables fault-tolerant AI systems
+- **Supervision trees** are crucial for maintaining system reliability
+
+## Key Takeaways
+
+### 1. Choose Fun Projects
+Learning while doing something you consider fun is amazing. I learned about RAG, Graph RAG, LLMs, SLMs, and mainly, how to integrate LLMs with real applications. My first takeaway: Pick something you consider fun and get your hands dirty.
+
+### 2. Take Cost Seriously
+Despite this being a pet project, I took cost decisions very seriously. Cost was always paramount because I consider this just one of the projects I'll work on this year. I don't want any project to become a financial burden. If it's a burden, you won't enjoy it and ideas won't progress.
+
+### 3. Embrace Emerging Technologies
+This exercise was excellent for learning new emerging technologies that will be essential for software professionals in the coming years. The intersection of traditional web development with AI capabilities is where the future lies.
+
+### 4. Architecture Matters
+Even in personal projects, thinking about architecture, security, and maintainability pays dividends. The decisions you make early on will determine how much you enjoy working on the project long-term.
+
+## What's Next?
+
+While this concludes the Family Tree series, the project continues to evolve. Future improvements I'm considering:
+- Converting to a proper agent architecture with specialized tools
+- Adding more sophisticated relationship inference
+- Implementing caching for better performance
+- Exploring other graph databases for comparison
+
+## Try It Yourself
+
+Interested in building something similar? The complete source code is available on [GitHub](https://github.com/jprivillaso/family-tree-agent), and you can interact with the live demo [here](https://juanrivillas.com/projects/family_tree).
+
+Take your ideas seriously - you never know, one might become your next source of income! I'd love to hear about your own AI projects, so feel free to reach out and share your experiences.
+
