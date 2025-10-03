@@ -54,7 +54,7 @@ Fly.io offered a feature that attracted me: having different services with their
 
 ### LLM Hosting Decision
 
-Initially, I tried to host the models myself. However, when I looked at the minimum requirements needed to host those models, even for Small Language Models (SLMs), it wouldn't be cost-effective. So I added a compilation flag to my project where I can choose between OpenAI or Ollama as the LLM provider. For my expected usage, I believe I'll stay under the free tier.
+Initially, I tried to host the models myself. However, when I looked at the minimum requirements needed to host those models, even for Small Language Models (SLMs), it wouldn't be cost-effective. So I added a compilation flag to my project where I can choose between OpenAI or Ollama as the LLM provider. For my expected usage, the tokens should last quite a while, and even after that, the pay-per-use pricing remains very affordable for a personal project.
 
 ## Cost Optimization Strategy
 
@@ -64,7 +64,7 @@ Here's my cost breakdown and strategy:
 |-----------|----------|--------------|-----------|
 | API | Fly.io | approx $10-15 | Serverless-like behavior, Elixir support |
 | Database | Neo4j on Fly.io | Included in API cost | Persistent storage needed |
-| LLM | OpenAI API | less than $5 (free tier) | Usage-based pricing, no infrastructure overhead |
+| LLM | OpenAI API | $1.250 for 1M tokens | Usage-based pricing, no infrastructure overhead |
 
 Fly.io doesn't charge for monthly bills below $5, so initially I wasn't charged at all. Moving forward, I anticipate being charged between $10-15 per month, which is reasonable for a production-ready personal project.
 
