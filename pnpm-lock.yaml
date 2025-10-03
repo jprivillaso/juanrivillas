@@ -12,8 +12,8 @@ importers:
         specifier: ^6.5.0
         version: 6.5.0
       '@netlify/plugin-nextjs':
-        specifier: ^5.13.3
-        version: 5.13.3
+        specifier: ^5.13.4
+        version: 5.13.4
       '@next/mdx':
         specifier: ^13.5.11
         version: 13.5.11
@@ -408,8 +408,8 @@ packages:
     resolution: {integrity: sha512-wRFlNnL/Qv3WNLZd3OT/YYqF1zb6iPSo8T31sl9ccL1ahBxW1fBqKgF4b1XL7Z+6mRIkatvcsVPkWBcO+oJMNA==}
     engines: {node: ^14.16.0 || >=16.0.0}
 
-  '@netlify/plugin-nextjs@5.13.3':
-    resolution: {integrity: sha512-QIEsiTLEySyXroAOhstY01xROokOFojTkhzqhewQAMddbqDrVaCUI6w649R/1MJ0XcD6cB3se/dn8KJXh40HLw==}
+  '@netlify/plugin-nextjs@5.13.4':
+    resolution: {integrity: sha512-F53b8FU49b3BXOvziiOLcgTxG6nLrQiieux4KvoBJo8YCCUu1IJRNncFw8/LfSG2IMpwWMe8fKBBKqSoi21EZA==}
     engines: {node: '>=18.0.0'}
 
   '@next/env@14.2.33':
@@ -2648,7 +2648,7 @@ snapshots:
 
   '@netlify/blobs@6.5.0': {}
 
-  '@netlify/plugin-nextjs@5.13.3': {}
+  '@netlify/plugin-nextjs@5.13.4': {}
 
   '@next/env@14.2.33': {}
 
