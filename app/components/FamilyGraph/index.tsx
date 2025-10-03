@@ -302,6 +302,8 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEdges, setSelectedEdges] = useState<string[]>([]);
   const [highlightedNode, setHighlightedNode] = useState<string | null>(null);
+  const [longPressTimer, setLongPressTimer] = useState<NodeJS.Timeout | null>(null);
+  const [isLongPress, setIsLongPress] = useState(false);
 
   // Transform family data into nodes and edges
   const { nodes: initialNodes, edges: initialEdges } = useMemo(() => {
@@ -504,28 +506,51 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
     );
   }, [selectedEdges, highlightedNode, setEdges]);
 
+  // Cleanup timer on unmount
+  React.useEffect(() => {
+    return () => {
+      if (longPressTimer) {
+        clearTimeout(longPressTimer);
+      }
+    };
+  }, [longPressTimer]);
+
   const onConnect = useCallback(
     (params: Connection) => setEdges((eds) => addEdge(params, eds)),
     [setEdges],
   );
 
+  // Helper function to highlight node connections
+  const highlightNodeConnections = useCallback(
+    (nodeId: string) => {
+      if (highlightedNode === nodeId) {
+        setHighlightedNode(null);
+        setSelectedEdges([]);
+      } else {
+        setHighlightedNode(nodeId);
+        // Find all edges connected to this node using current edges
+        const connectedEdges = edges
+          .filter((edge) => edge.source === nodeId || edge.target === nodeId)
+          .map((edge) => edge.id);
+        console.log("Node highlighted:", nodeId, "Connected edges:", connectedEdges);
+        setSelectedEdges(connectedEdges);
+      }
+    },
+    [highlightedNode, edges],
+  );
+
   const onNodeClick = useCallback(
     (event: React.MouseEvent, node: Node) => {
-      // Check if Ctrl/Cmd key is pressed for highlighting mode
+      // If this was a long press, handle highlighting
+      if (isLongPress) {
+        setIsLongPress(false);
+        highlightNodeConnections(node.id);
+        return;
+      }
+
+      // Check if Ctrl/Cmd key is pressed for highlighting mode (desktop)
       if (event.ctrlKey || event.metaKey) {
-        // Toggle node highlighting
-        if (highlightedNode === node.id) {
-          setHighlightedNode(null);
-          setSelectedEdges([]);
-        } else {
-          setHighlightedNode(node.id);
-          // Find all edges connected to this node using current edges
-          const connectedEdges = edges
-            .filter((edge) => edge.source === node.id || edge.target === node.id)
-            .map((edge) => edge.id);
-          console.log("Node clicked:", node.id, "Connected edges:", connectedEdges);
-          setSelectedEdges(connectedEdges);
-        }
+        highlightNodeConnections(node.id);
       } else {
         // Normal click - open modal
         if (node.data.onClick) {
@@ -533,8 +558,47 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
         }
       }
     },
-    [highlightedNode, edges],
+    [isLongPress, highlightNodeConnections],
   );
+
+  // Touch event handlers for mobile long press
+  const onNodeMouseDown = useCallback(
+    (event: React.MouseEvent, node: Node) => {
+      // Clear any existing timer
+      if (longPressTimer) {
+        clearTimeout(longPressTimer);
+      }
+
+      // Start long press timer (500ms)
+      const timer = setTimeout(() => {
+        setIsLongPress(true);
+        // Provide haptic feedback if available
+        if (navigator.vibrate) {
+          navigator.vibrate(50);
+        }
+      }, 500);
+
+      setLongPressTimer(timer);
+    },
+    [longPressTimer],
+  );
+
+  const onNodeMouseUp = useCallback(() => {
+    // Clear the long press timer
+    if (longPressTimer) {
+      clearTimeout(longPressTimer);
+      setLongPressTimer(null);
+    }
+  }, [longPressTimer]);
+
+  const onNodeMouseLeave = useCallback(() => {
+    // Clear the long press timer if mouse/touch leaves the node
+    if (longPressTimer) {
+      clearTimeout(longPressTimer);
+      setLongPressTimer(null);
+    }
+    setIsLongPress(false);
+  }, [longPressTimer]);
 
   const onEdgeClick = useCallback(
     (event: React.MouseEvent, edge: { id: string }) => {
@@ -596,7 +660,12 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
             </button>
           </div>
           <div className="text-xs text-zinc-400 mt-1">
-            Click edges to select • Ctrl+Click nodes to highlight connections
+            <span className="hidden sm:inline">
+              Click edges to select • Ctrl+Click nodes to highlight connections
+            </span>
+            <span className="sm:hidden">
+              Tap edges to select • Long press nodes to highlight connections
+            </span>
           </div>
         </div>
       )}
@@ -608,7 +677,10 @@ export const FamilyGraph: React.FC<FamilyGraphProps> = ({ data }) => {
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         onNodeClick={onNodeClick}
+        onNodeMouseEnter={onNodeMouseDown}
+        onNodeMouseLeave={onNodeMouseLeave}
         onEdgeClick={onEdgeClick}
+        onMouseUp={onNodeMouseUp}
         nodeTypes={nodeTypes}
         fitView
         fitViewOptions={{
