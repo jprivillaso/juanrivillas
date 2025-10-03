@@ -127,8 +127,8 @@ export default function FamilyTreePage() {
       >
         <div className="relative">
           <MessageCircle className="w-6 h-6" />
-          {/* AI Badge */}
-          <div className="absolute -top-1 -right-1 bg-green-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
+          {/* AI Badge - positioned more on the edge */}
+          <div className="absolute -top-5 -right-5 bg-green-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full border-2 border-white shadow-sm">
             AI
           </div>
         </div>
