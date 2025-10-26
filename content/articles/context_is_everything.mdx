@@ -1,0 +1,125 @@
+---
+title: Context is everything
+description: Two complementary approaches to mastering context engineering for AI agents
+date: '2025-10-26'
+published: true
+
+---
+
+## Context is everything
+
+It's really interesting how we're closing the gap between machines and human reasoning. After all, that's what
+many companies are chasing: AGI.
+
+As humans, context is everything. This reminds me of a time when I was an intern and every time I would speak to
+my PM, she would ask me to start over again -- every single time we talked. So, I noticed a pattern. Every time I
+approached her, she was concentrated during a task. I always said "Hey can we talk". She answered yes, then I would
+start talking about my problem or need at the moment. She would look at me and say: "Can you start over again, please?"
+
+The situation started to bother me so I thought about how could I improve that. And the solution was to start the conversation
+with: "This is the context of what I'm going to talk about. Remember that XYZ. So, it turns out that ABC". The tiny context I
+provided at the beginning of the conversation became fundamental to grab her attention and allow her to understand where my
+mind was sitting, since evidently, she was busy with many other tasks.
+
+This resembles how we work with tools and agents, don't you think? LLMs have this concept of context, which nowadays I describe as
+the set of instructions that allows the LLM understand what you want to achieve and more importantly, how. That context, though, is
+limited to a number of tokens depending on the model you use. For example, Claude Sonnet has a context window of 200K tokens. It seems like a
+lot, but there are problems with cluttering the context with so much information.
+
+The challenge isn't just about fitting information into the context window—it's about what happens to that information over time. Just like my PM needed the right context to switch her attention effectively, AI agents need carefully curated context to maintain focus and performance. But here's where it gets interesting: there are two fascinating approaches to solving this problem, and they complement each other beautifully.
+
+## The Two Schools of Context Engineering
+
+Engineers suffer from two problems: They either provide a very raw context or they provide a very specific context. Neither approach is optimal. But recently, two complementary research directions have emerged that address this challenge from different angles.
+
+## Anthropic's Approach: The Art of Concise Context
+
+According to Anthropic in their article about ["Effective Context Engineering for AI Agents"](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents), the key is calibrating context to be _just right_ in size. But how do you find that right balance? Easier said than done.
+
+Their approach focuses on treating context as a finite resource with diminishing returns. Just like humans have limited working memory, LLMs have an "attention budget" that gets depleted with every token. The more tokens you add, the harder it becomes for the model to focus on what's truly important.
+
+Anthropic identifies three core strategies for managing this attention budget:
+
+**Compaction**: This is like creating a summary of your conversation when you're approaching context limits. Think of it as the AI equivalent of taking meeting notes—you keep the essential decisions and discard the redundant back-and-forth. In my experience with Cursor, I've seen this in action when the AI summarizes previous code changes before continuing with new modifications.
+
+**Structured note-taking**: The agent maintains persistent memory outside the context window. You've probably seen Cursor generating those helpful To-Do lists while solving complex problems—that's structured note-taking in action. The agent writes down what it's learned and can reference it later without cluttering the immediate context.
+
+**Sub-agent architectures**: Instead of one agent trying to handle everything, you have specialized agents for focused tasks. Each sub-agent explores extensively but returns only condensed, distilled summaries. This is similar to how I approach complex projects—I break them into smaller, manageable pieces rather than trying to solve everything at once.
+
+What I find fascinating about Anthropic's approach is how it mirrors good software engineering practices. Just like we write clean, focused functions instead of monolithic code blocks, we should write clean, focused contexts.
+
+## The Context Collapse Problem
+
+But here's where things get interesting. While Anthropic focuses on keeping contexts concise, researchers have identified another critical issue: **context collapse**. This happens when you repeatedly summarize and rewrite context, gradually losing important details—like playing a game of telephone where the message gets distorted with each iteration.
+
+## The ACE Framework: Evolving Context Without Collapse
+
+This is where the Agentic Context Engineering (ACE) framework comes in. Instead of just keeping context short, ACE treats context as an evolving playbook that accumulates, refines, and organizes strategies over time.
+
+The ACE framework introduces a modular process:
+
+**Generation**: The agent creates new context based on experiences and outcomes
+**Reflection**: It analyzes what worked and what didn't
+**Curation**: It organizes and structures the knowledge for future use
+
+What's brilliant about this approach is that it prevents the gradual degradation that happens with naive summarization. Instead of losing details, the context becomes more sophisticated and organized over time.
+
+Think of it like building a personal knowledge base. When I work on similar projects, I don't start from scratch each time—I build upon previous learnings, refine my approaches, and create better mental models. The ACE framework does something similar for AI agents.
+
+## Bringing Both Approaches Together
+
+Here's what I find exciting: these two approaches aren't competing—they're complementary. Anthropic's focus on concise, high-signal contexts provides the foundation, while ACE's evolving framework ensures that context doesn't degrade over time.
+
+In my experience building AI systems, the best approach combines both philosophies:
+
+**Start with clarity**: Begin with concise, well-defined contexts following Anthropic's principles. Make your system prompts clear, your tools focused, and your examples canonical.
+
+**Evolve thoughtfully**: Implement structured updates using ACE's framework. As your agent learns and encounters new scenarios, let it build upon its knowledge without losing the essential details.
+
+**Maintain focus**: Use Anthropic's compaction and sub-agent strategies to prevent context bloat while leveraging ACE's reflection mechanisms to ensure important insights aren't lost.
+
+The approach that **has worked best for the projects I've worked on** is this hybrid model. I start with fine-grained, specialized tools (following Anthropic's sub-agent approach) but allow each tool to evolve its understanding over time (following ACE's principles). It's like having a team of specialists who get better at their jobs while maintaining clear communication channels.
+
+## Practical Examples from the Trenches
+
+Let me share some concrete examples from my recent work that illustrate these principles in action.
+
+**Family Tree Agent**: When I built my [family tree agent](https://github.com/jprivillaso/family-tree-agent), I initially used a naive RAG approach with embeddings. It worked fine for simple questions about individual people, but struggled with relationship queries like "Who's Juan's grandfather?" This is where I applied both frameworks:
+
+- **Anthropic's approach**: I created specialized tools—one for direct person queries, another for relationship traversal, and a third for graph operations. Each tool had a focused context and clear purpose.
+- **ACE principles**: Instead of starting fresh each time, the agent built up knowledge about family relationships, learning patterns about how people ask questions and what information is most relevant.
+
+The result? The agent went from struggling with complex relationships to confidently navigating multi-generational queries.
+
+**Code Review Agent**: In another project, I built an agent that helps with code reviews. Here's how both approaches played out:
+
+- **Compaction in action**: When reviewing large pull requests, the agent summarizes previous review comments and focuses only on new changes, preventing context overload.
+- **Evolving context**: Over time, the agent learned our team's coding standards and common issues, building a knowledge base that made reviews more consistent and insightful.
+
+**The Hackathon Experience**: During a recent hackathon, I experienced firsthand why context engineering matters. Initially, I was asking Cursor to do everything at once—scaffold the project, implement features, handle edge cases. The results were all over the place.
+
+Then I applied the principles: I broke down tasks into smaller, focused prompts (Anthropic's approach) while maintaining a running document of architectural decisions and learnings (ACE's approach). The difference was night and day. Instead of fighting with the AI, I was collaborating with it.
+
+## Key Takeaways for Practitioners
+
+Based on my experience combining these approaches, here are the practical insights that matter:
+
+**1. Start Small, Think Big**: Begin with focused, single-purpose contexts, but design them to evolve. Don't try to capture everything upfront—let your agent learn and build knowledge over time.
+
+**2. Context is a Conversation, Not a Monologue**: The best AI interactions feel like working with a knowledgeable colleague who remembers previous discussions. Use structured note-taking to maintain this continuity.
+
+**3. Specialize Your Tools**: Following Anthropic's sub-agent approach, create tools that do one thing well rather than Swiss Army knife solutions. It's easier to maintain and debug.
+
+**4. Embrace the Feedback Loop**: Use ACE's reflection principles. After each interaction, ask: What worked? What didn't? How can the context be improved for next time?
+
+**5. Know When to Reset**: Sometimes, despite your best efforts, context becomes cluttered. Don't be afraid to use compaction or start fresh—but always preserve the essential learnings.
+
+## The Future of Context Engineering
+
+As I reflect on my AI journey—from being skeptical about GitHub Copilot to building sophisticated agents—I see context engineering as the bridge between prompt engineering and true AI collaboration.
+
+We're moving from asking "How do I write the perfect prompt?" to "How do I create an evolving partnership with AI?" The combination of Anthropic's precision and ACE's adaptability gives us a roadmap for that future.
+
+The most important realization? Just like my PM needed the right context to switch her attention effectively, AI agents need thoughtfully engineered context to be truly useful. But unlike humans, they can maintain and evolve that context over time, becoming better partners with each interaction.
+
+Context isn't just everything—it's the foundation for building AI systems that don't just respond to our requests, but truly understand and grow with our needs. And that, to me, is where the real magic happens.
