@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@netlify/blobs": "^6.5.0",
-    "@netlify/plugin-nextjs": "^5.13.4",
+    "@netlify/plugin-nextjs": "^5.14.7",
     "@next/mdx": "^13.5.11",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/typography": "^0.5.19",
