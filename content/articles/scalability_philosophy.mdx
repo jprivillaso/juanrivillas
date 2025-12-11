@@ -1,70 +1,92 @@
 ---
 title: The Big-O mindset
-description: Scalability Reflections and how the Big-O mindset can help you scale your software.
+description: Scalability reflections and how the Big-O mindset can help you scale your software.
 date: "2025-12-11"
 published: true
 language: en
 ---
 
-As the year wraps, I was reflecting about what Scalability really means. After working on several products
-reaching millions of users every day, I was wondering what have been the most effective techniques and practices.
+As the year wraps up, I've been reflecting on what scalability really means. After working on several products
+reaching millions of users every day—and and my recent personal project [Momento](https://momento.baby/), an AI-powered photo app for families—I've been asking myself:
+**what are the habits that actually make software scalable and economically viable?**
 
 We can create an analogy between scalability and staying fit. Focusing only on a single thing won't take you there. Instead,
-we have to think about what good habits we can apply in our organizations in order to remain scalable. And fun enough,
-similarly to staying fit, having a scalable application is the desire of every org.
+we have to think about what good habits we can apply in our organizations in order to remain scalable. And, funnily enough,
+similar to staying fit, having a scalable application is the desire of everyone.
 
-While I was working on momento, an app that allows one to search photos using natural language, I faced a series of interesting
-challenges that I'd like to share with you. Those challenges made me think about what would it take to make my app more scalable
-and cost effective. Today, I'll start with one that I called the Big-O mindset.
+While I was working on Momento, I faced a series of interesting challenges that I'd like to share. Those challenges made me think about
+what it would take to make my app more scalable and cost-effective, especially in the context of AI where every call has a real dollar cost.
+Today, I'll start with one idea that has helped me a lot: **the Big-O mindset**.
 
 ## Big-O mindset, everywhere
 
-Big-O, if you don't recall, is a mathematical representation that allows one to tell how an algorithm will behave when the input changes. Algorithms
-usually have variables that drive the growth pace. For example, a function that counts always from one to ten is constant. It always do that. However,
-a function that returns all the users from a database relies exactly on the number of users. It means, the time it takes to process the function will
+Big-O, if you don't recall, is a mathematical representation that allows you to describe how an algorithm will behave when the input size changes. Algorithms
+usually have variables that drive the growth rate. For example, a function that always counts from one to ten is constant. It always does that. However,
+a function that returns all the users from a database depends directly on the number of users. It means the time it takes to process the function will
 grow linearly with respect to the number of users. If you are not familiar with this concept, go ahead and study it. [Geeks For Geeks](https://www.geeksforgeeks.org/dsa/analysis-algorithms-big-o-analysis/)
+is a good starting point.
 
-In the past decade, companies adopted coding challenges during interview processes and this became the standard process to evaluate an
-engineer's ability to solve real problems. The truth is, these interview processes are brutal and frustrating. Having the ability to
-solve data structure problems under pressure is something very unpleasant. However, the underlying idea is good. As an interviewer,
-I would like to see how an engineer approaches and think about problems. The caveat, though, is that this idea derailed completely and
-became a matter of memorizing all those common algorithms in order to get a job. Dijkstra, traversing graphs, binary trees and so on,
+In the past decade, companies adopted coding challenges during interview processes and this became the standard way to evaluate an
+engineer's ability to solve real problems. The truth is, these interview processes are brutal and frustrating. Solving data-structure problems under pressure
+is not fun. However, the underlying idea is good. As an interviewer, I would like to see how an engineer approaches and thinks about problems.
+
+The caveat, though, is that this idea has completely derailed and
+became a matter of memorizing all those common algorithms in order to get a job. Dijkstra's algorithm, graph traversal, binary trees, and so on,
 are common problems one would see during those interview processes.
 
-In contrast, I have seen so many companies struggling financially becauase of algorithms that scaled exponentially. When we have one, ten or a
-hundred users, usually those problems are barely unnoticeable. However, when the input (number of users) increases, the problems
+In contrast, I have seen so many companies struggling financially because of algorithms that scaled exponentially. When we have one, ten, or a
+hundred users, usually those problems are barely noticeable. However, when the input (number of users) increases, the problems
 come to the surface and the solutions are either fixing the algorithm or scaling the infra so the system can keep up with the demand. The problem is that
 fixing the algorithm is not always trivial.
 
-From the top to the bottom of the stack, these concepts are applicable. From the infrastructure to the queries that are hitting the database, everything can be benefited
-from the Big-O mindset, which I define as
+From the top to the bottom of the stack, these concepts are applicable. From the infrastructure to the queries that are hitting the database, everything can benefit
+from the Big-O mindset, which I define as:
 
-| Create software as if it will be used by millions of people
+> Create software as if it will be used by millions of people
 
-This does not suggest that you have to start companies with a Kubernetes Cluster, replicas, load balancers and all those beautiful concepts described in the System Design book
-from Alex Wu. It means, that you have to start your application with good practices from the beginning. Having a Big-O mindset solves the problem at the code layer. As an example,
-my colleague saved Appcues 1 million dollars after optimizing an algorithm that was used at scale.
+This does not suggest that you have to start your company with a Kubernetes cluster, replicas, load balancers, and all those beautiful concepts described in system design books.
+It means that you have to start your application with good practices from the beginning, especially in the core flows of your product.
 
-Another great example is pagintaion. We have several ways to handle pagination.
+Having a Big-O mindset mostly solves the problem at the code and data layers. As an example,
+my colleague saved Appcues one million dollars after optimizing an algorithm that ran at scale.
+In Momento, I'm taking a similar approach to avoid waking up to an OpenAI bill that makes the project unsustainable.
+
+## How Big-O shows up in real products
+
+In interview problems, Big-O is abstract. In real products, it shows up as:
+
+- **Slow requests**: that one endpoint that works locally but times out when you import 10,000 photos.
+- **Exploding cloud bills**: because an O(\(n^2\)) operation runs in the hot path of your app.
+- **Background jobs that never catch up**: imports, email campaigns, AI pipelines that always run behind.
+
+In Momento specifically, a few patterns immediately forced me to think in terms of complexity:
+
+- **Photo imports**: when a user imports hundreds or thousands of photos, each photo triggers multiple operations (compression, AI vision, embeddings, storage). If I'm not careful, the total work and cost grow faster than the number of photos.
+- **Search**: queries that feel instant with 100 photos can become painful with 100,000 if my indexing strategy is naive.
+- **Billing risk**: every AI call has a unit cost. Poor complexity at the code level becomes a very real invoice at the end of the month.
+
+## Pagination: a simple but powerful example
+
+Another great example is pagination. We have several ways to handle pagination:
 
 1. Load all the data and paginate in the frontend
 2. Load the data from the backend, asking for one specific page at a time
-3. Using Cursor Pagination
+3. Use cursor-based pagination
 
-I'm pretty sure you are familiar with 1 and 2. It is clear that 1 only works in small apps, demos, MVPs, etc. However, don't be surprised with companies that use it
+I'm pretty sure you are familiar with 1 and 2. It is clear that 1 only works in small apps, demos, MVPs, etc. However, don't be surprised by companies that use it
 in production.
 
 The second approach is the most common, where an application has a table with a footer that indicates the number of pages, and every time you change the page, a request is
-made to the backend.
+made to the backend using an offset (`page * limit`).
 
-The final one, though, is the most efficient and guarantees a O(1) complexity for fetching subsequent pages since it uses indexed pointers (cursors) to jump directly to the next data set,
-avoiding the database having to scan and discard millions of previously seen rows like offset pagination does, making query time consistent and fast regardless of page depth.
-This is an optimization that improves a lot the user experience since we can load the data faster, but we are so used to user interfaces with tables, that this is a rarely-used pattern.
+The final one, though, is the most efficient and guarantees an O(1) complexity for fetching subsequent pages since it uses indexed pointers (cursors) to jump directly to the next data set,
+avoiding the database having to scan and discard millions of previously seen rows like offset pagination does, making query times consistent and fast regardless of page depth.
+This is an optimization that improves the user experience a lot since we can load the data faster, but we are so used to user interfaces with tables that this is a rarely used pattern.
 
-Some databases, like DynamoDB for example, only work with cursor-based pagination. However, you can implement cursor-based pagination yourself in postgres.
-A simple snippet in Elixir would look like this
+Some databases, like DynamoDB for example, only work with cursor-based pagination. However, you can implement cursor-based pagination yourself in Postgres.
+A simple snippet in Elixir would look like this:
 
-```Elixir
+```elixir
 defmodule MyApp.Blog do
   import Ecto.Query
 
@@ -132,24 +154,37 @@ defmodule MyApp.Blog do
 end
 ```
 
-And this is how you would use it
+And this is how you would use it:
 
-```Elixir
+```elixir
 # First page
 page1 = MyApp.Blog.list_posts(%{"limit" => 10})
-# page1.entries
-# page1.next_cursor
-
-# Next page
 page2 = MyApp.Blog.list_posts(%{"limit" => 10, "after" => page1.next_cursor})
 ```
 
-When developing momento, I started with the best practices and certainly, cursor-based pagination was one of them.
+When developing Momento, I started with the best practices and certainly, cursor-based pagination was one of them.
+If I'm going to let users search through thousands of photos, I want the experience to remain fast as their library grows.
+
+## A practical Big-O checklist
+
+When I say "Big-O mindset", I mean asking a few simple questions whenever I touch important parts of the system:
+
+- **What grows here?** Number of users, photos, organizations, documents, events?
+- **What's the worst case?** What happens when a power user has 100x the usual amount of data?
+- **Am I looping more than I need?** Nested loops over large data sets are a red flag.
+- **Can the database do this better?** Push work to indexes and queries instead of loading everything into memory.
+- **Can I stream instead of load everything?** Avoid `SELECT *` over huge tables unless you have a very good reason.
+- **What does this cost in money, not just time?** Especially with AI calls, token usage and latency are not abstract—they show up on your invoice.
+
+This is not about premature optimization. It's about avoiding obviously bad complexity in the core paths of your product.
 
 ## Summary
 
-Scalability is a mindset composed of good practices at all the levels of our stack. The Big-O mindset allows us to write good software that will
-remain efficient no matter how many users are using it. Therefore, always think about your algorithm's behavior before deploying your code to
-production, otherwise, you'll need to face huge tech-debts to fix inefficient code that is consuming most of your infrastructure resources.
+Scalability is a mindset composed of good practices at every level of our stack. The Big-O mindset allows us to write good software that will
+remain efficient no matter how many users you have or how much data you store.
+
+Therefore, always think about your algorithm's behavior before deploying your code to
+production; otherwise, you'll need to face huge tech debt to fix inefficient code that consumes most of your infrastructure resources—or, in the case of AI-heavy apps like Momento,
+most of your API budget.
 
 Let me know your thoughts about it in the comments!
