@@ -1,0 +1,155 @@
+---
+title: The Big-O mindset
+description: Scalability Reflections and how the Big-O mindset can help you scale your software.
+date: "2025-12-11"
+published: true
+language: en
+---
+
+As the year wraps, I was reflecting about what Scalability really means. After working on several products
+reaching millions of users every day, I was wondering what have been the most effective techniques and practices.
+
+We can create an analogy between scalability and staying fit. Focusing only on a single thing won't take you there. Instead,
+we have to think about what good habits we can apply in our organizations in order to remain scalable. And fun enough,
+similarly to staying fit, having a scalable application is the desire of every org.
+
+While I was working on momento, an app that allows one to search photos using natural language, I faced a series of interesting
+challenges that I'd like to share with you. Those challenges made me think about what would it take to make my app more scalable
+and cost effective. Today, I'll start with one that I called the Big-O mindset.
+
+## Big-O mindset, everywhere
+
+Big-O, if you don't recall, is a mathematical representation that allows one to tell how an algorithm will behave when the input changes. Algorithms
+usually have variables that drive the growth pace. For example, a function that counts always from one to ten is constant. It always do that. However,
+a function that returns all the users from a database relies exactly on the number of users. It means, the time it takes to process the function will
+grow linearly with respect to the number of users. If you are not familiar with this concept, go ahead and study it. [Geeks For Geeks](https://www.geeksforgeeks.org/dsa/analysis-algorithms-big-o-analysis/)
+
+In the past decade, companies adopted coding challenges during interview processes and this became the standard process to evaluate an
+engineer's ability to solve real problems. The truth is, these interview processes are brutal and frustrating. Having the ability to
+solve data structure problems under pressure is something very unpleasant. However, the underlying idea is good. As an interviewer,
+I would like to see how an engineer approaches and think about problems. The caveat, though, is that this idea derailed completely and
+became a matter of memorizing all those common algorithms in order to get a job. Dijkstra, traversing graphs, binary trees and so on,
+are common problems one would see during those interview processes.
+
+In contrast, I have seen so many companies struggling financially becauase of algorithms that scaled exponentially. When we have one, ten or a
+hundred users, usually those problems are barely unnoticeable. However, when the input (number of users) increases, the problems
+come to the surface and the solutions are either fixing the algorithm or scaling the infra so the system can keep up with the demand. The problem is that
+fixing the algorithm is not always trivial.
+
+From the top to the bottom of the stack, these concepts are applicable. From the infrastructure to the queries that are hitting the database, everything can be benefited
+from the Big-O mindset, which I define as
+
+| Create software as if it will be used by millions of people
+
+This does not suggest that you have to start companies with a Kubernetes Cluster, replicas, load balancers and all those beautiful concepts described in the System Design book
+from Alex Wu. It means, that you have to start your application with good practices from the beginning. Having a Big-O mindset solves the problem at the code layer. As an example,
+my colleague saved Appcues 1 million dollars after optimizing an algorithm that was used at scale.
+
+Another great example is pagintaion. We have several ways to handle pagination.
+
+1. Load all the data and paginate in the frontend
+2. Load the data from the backend, asking for one specific page at a time
+3. Using Cursor Pagination
+
+I'm pretty sure you are familiar with 1 and 2. It is clear that 1 only works in small apps, demos, MVPs, etc. However, don't be surprised with companies that use it
+in production.
+
+The second approach is the most common, where an application has a table with a footer that indicates the number of pages, and every time you change the page, a request is
+made to the backend.
+
+The final one, though, is the most efficient and guarantees a O(1) complexity for fetching subsequent pages since it uses indexed pointers (cursors) to jump directly to the next data set,
+avoiding the database having to scan and discard millions of previously seen rows like offset pagination does, making query time consistent and fast regardless of page depth.
+This is an optimization that improves a lot the user experience since we can load the data faster, but we are so used to user interfaces with tables, that this is a rarely-used pattern.
+
+Some databases, like DynamoDB for example, only work with cursor-based pagination. However, you can implement cursor-based pagination yourself in postgres.
+A simple snippet in Elixir would look like this
+
+```Elixir
+defmodule MyApp.Blog do
+  import Ecto.Query
+
+  alias MyApp.Repo
+  alias MyApp.Post
+
+  @default_limit 10
+
+  def list_posts(params \\ %{}) do
+    limit = Map.get(params, "limit", @default_limit)
+    after_cursor = Map.get(params, "after")
+
+    base_query =
+      from p in Post,
+        order_by: [asc: p.id]
+
+    query =
+      case decode_cursor(after_cursor) do
+        nil -> base_query
+        last_id ->
+          from p in base_query,
+            where: p.id > ^last_id
+      end
+
+    # Fetch one extra to know if there's a next page
+    posts = Repo.all(from p in query, limit: ^(limit + 1))
+
+    {entries, next_cursor} =
+      case posts do
+        [] ->
+          {[], nil}
+
+        posts when length(posts) > limit ->
+          entries = Enum.take(posts, limit)
+          last = List.last(entries)
+          {entries, encode_cursor(last.id)}
+
+        posts ->
+          {posts, nil}
+      end
+
+    %{entries: entries, next_cursor: next_cursor}
+  end
+
+  # --- Cursor helpers ----
+
+  defp encode_cursor(nil), do: nil
+  defp encode_cursor(id) when is_integer(id) do
+    id
+    |> Integer.to_string()
+    |> Base.url_encode64(padding: false)
+  end
+
+  defp decode_cursor(nil), do: nil
+  defp decode_cursor(""), do: nil
+
+  defp decode_cursor(cursor) do
+    with {:ok, decoded} <- Base.url_decode64(cursor, padding: false),
+         {id, ""} <- Integer.parse(decoded) do
+      id
+    else
+      _ -> nil
+    end
+  end
+end
+```
+
+And this is how you would use it
+
+```Elixir
+# First page
+page1 = MyApp.Blog.list_posts(%{"limit" => 10})
+# page1.entries
+# page1.next_cursor
+
+# Next page
+page2 = MyApp.Blog.list_posts(%{"limit" => 10, "after" => page1.next_cursor})
+```
+
+When developing momento, I started with the best practices and certainly, cursor-based pagination was one of them.
+
+## Summary
+
+Scalability is a mindset composed of good practices at all the levels of our stack. The Big-O mindset allows us to write good software that will
+remain efficient no matter how many users are using it. Therefore, always think about your algorithm's behavior before deploying your code to
+production, otherwise, you'll need to face huge tech-debts to fix inefficient code that is consuming most of your infrastructure resources.
+
+Let me know your thoughts about it in the comments!
