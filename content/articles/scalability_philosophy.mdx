@@ -7,7 +7,7 @@ language: en
 ---
 
 As the year wraps up, I've been reflecting on what scalability really means. After working on several products
-reaching millions of users every day—and and my recent personal project [Momento](https://momento.baby/), an AI-powered photo app for families—I've been asking myself:
+reaching millions of users every day—and on my recent personal project [Momento](https://momento.baby/), an AI-powered photo app for families—I've been asking myself:
 **what are the habits that actually make software scalable and economically viable?**
 
 We can create an analogy between scalability and staying fit. Focusing only on a single thing won't take you there. Instead,
@@ -30,11 +30,15 @@ In the past decade, companies adopted coding challenges during interview process
 engineer's ability to solve real problems. The truth is, these interview processes are brutal and frustrating. Solving data-structure problems under pressure
 is not fun. However, the underlying idea is good. As an interviewer, I would like to see how an engineer approaches and thinks about problems.
 
-The caveat, though, is that this idea has completely derailed and
-became a matter of memorizing all those common algorithms in order to get a job. Dijkstra's algorithm, graph traversal, binary trees, and so on,
-are common problems one would see during those interview processes.
+I understand why many engineers feel rage toward this whole ecosystem of whiteboard interviews and LeetCode marathons. It often feels disconnected from the day-to-day reality of building products.
+But underneath the bad incentives and performative exercises, there is something genuinely useful: a shared language to reason about how things grow.
+Big-O should be less about impressing an interviewer and more about answering a simple question: *what happens when this thing gets big?*
 
-In contrast, I have seen so many companies struggling financially because of algorithms that scaled exponentially. When we have one, ten, or a
+Seen from that angle, Big-O becomes a practical tool instead of trivia. It helps you decide whether a seemingly harmless loop is fine or will melt your database
+when you have 10x the data. It gives you a way to talk about trade-offs with your team, estimate costs, and choose between "good enough for now" and
+"this will hurt us in six months." That's the part we rarely talk about during interviews, but it's where Big-O really matters.
+
+I have seen so many companies struggling financially because of algorithms that scaled exponentially. When we have one, ten, or a
 hundred users, usually those problems are barely noticeable. However, when the input (number of users) increases, the problems
 come to the surface and the solutions are either fixing the algorithm or scaling the infra so the system can keep up with the demand. The problem is that
 fixing the algorithm is not always trivial.
