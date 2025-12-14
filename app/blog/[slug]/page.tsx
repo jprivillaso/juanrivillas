@@ -53,12 +53,6 @@ export default async function PostPage({ params }: Props) {
         <Mdx code={project.body.code} />
       </article>
 
-      <div className="max-w-2xl mx-auto px-4 pb-8">
-        <div className="border-t border-zinc-200 pt-8">
-          <Newsletter variant="compact" />
-        </div>
-      </div>
-
       <DisqusWrapper title={project.title} slug={project.slug} />
     </div>
   );

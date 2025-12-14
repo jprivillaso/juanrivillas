@@ -102,7 +102,7 @@ export function Newsletter({ variant = "default" }: NewsletterProps) {
   }
 
   return (
-    <div className="relative py-16 px-6">
+    <div className="relative py-16 px-6 my-0">
       <div className="absolute inset-0 bg-gradient-to-r from-zinc-900/50 via-zinc-800/30 to-zinc-900/50 rounded-2xl" />
       <div className="relative max-w-2xl mx-auto text-center">
         <div className="inline-flex items-center justify-center w-12 h-12 mb-6 rounded-full bg-zinc-800">
@@ -111,9 +111,6 @@ export function Newsletter({ variant = "default" }: NewsletterProps) {
         <h3 className="text-2xl font-bold text-zinc-100 font-display sm:text-3xl">
           Stay in the loop
         </h3>
-        <p className="mt-3 text-zinc-400 max-w-md mx-auto">
-          Get notified when I publish new articles about AI, distributed systems and software engineering.
-        </p>
         <form onSubmit={handleSubmit} className="mt-8 flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
           <div className="relative flex-1">
             <input
