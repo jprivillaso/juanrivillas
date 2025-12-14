@@ -1,5 +1,6 @@
 import DisqusWrapper from "@/app/components/DisqussWrapper";
 import { Mdx } from "@/app/components/Mdx";
+import { Newsletter } from "@/app/components/Newsletter";
 import { Redis } from "@upstash/redis";
 import { allArticles } from "contentlayer/generated";
 import { notFound } from "next/navigation";
@@ -51,6 +52,12 @@ export default async function PostPage({ params }: Props) {
       <article className="px-4 py-12 mx-auto prose prose-zinc prose-quoteless">
         <Mdx code={project.body.code} />
       </article>
+
+      <div className="max-w-2xl mx-auto px-4 pb-8">
+        <div className="border-t border-zinc-200 pt-8">
+          <Newsletter variant="compact" />
+        </div>
+      </div>
 
       <DisqusWrapper title={project.title} slug={project.slug} />
     </div>

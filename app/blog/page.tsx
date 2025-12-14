@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { Card } from "../components/Card";
 import { Navigation } from "../components/Nav";
+import { Newsletter } from "../components/Newsletter";
 import { Article, getBlogPostFlag } from "./article";
 
 export const revalidate = 60;
@@ -131,6 +132,10 @@ export default async function ProjectsPage() {
               ))}
           </div>
         </div>
+
+        <div className="hidden w-full h-px md:block bg-zinc-800" />
+
+        <Newsletter />
       </div>
     </div>
   );
