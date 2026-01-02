@@ -1,0 +1,200 @@
+---
+title: Processing multimedia with AI in a resilient and fault-tolerant way
+description: Let's dive into how Oban pipelines can help you orchestrate AI workflows
+date: "2025-12-27"
+published: true
+language: en
+---
+
+When I was working on Momento Baby (https://momento.baby/), an AI search engine that allows one to leverage natural language to search for images and videos,
+I had a problem: How to process images and videos in a resilient and fault-tolerant way. It is well known that processing images and videos (multimedia in general) is complex and
+expensive. So, I followed one of the main scalability principles I discussed in my article about keeping apps scalable with the Big-O mindset
+(https://www.juanrivillas.com/blog/the_big_o_mindset).
+
+The naive solution would be to process everything in a function, iterating over the list of images one imported. However, I immediately thought about processing these images asynchronously.
+If you are an Elixir engineer you certainly have heard about Oban. Oban is one of the main tools from the Elixir ecosystem and it allows one to run asynchronous tasks in a simple and organized way.
+
+So, my first attempt followed this worflow:
+
+A user imported multiple images -> For each image, I created an Oban Job -> I would let Oban process the items from the Queue
+
+Each job had the following responsibility
+
+1. Download the image
+2. Generate a thumbnail
+3. Call OpenAI vision API to turn the image into a structured JSON
+4. Embed that JSON
+5. Save the embeddings into a postgres database
+
+Another thing that was clear to me was that I needed a transaction so that if anything from the process above failed, I could retry the job as long as necessary
+
+Locally, it worked perfectly. However, when I took this code to production, I immediately faced problems when I imported 40 images in a single shot. Luckily, I was still
+stressing the system to see where it would fail.
+
+## What Happened
+
+If you have followed my previous posts, you know that I use the least infrastructure required to run these experiments and I try to optimize the costs as much as possible. I was
+running my app in Fly.io with a 1GB machine. It is obvious that 1GB is such a low hardware these days but I thought this could work somehow. Once I opened the logs on PostHog, I
+saw hundreds of database connection errors. Specifically, timeouts!
+
+That threw me off a little bit because the database operations were not that complex. However, I was using a transaction for the whole job. That means, I was holding a connection for ~40
+seconds and the consequence was that many resources were fighting for the same resource. A.K.A: Connection Starvation!
+
+## An easy but smart solution
+
+After researching a bit what I could do, I found out that I should separate the connections into two database pools. One for the app itself, and one for the asynchronuos jobs. That way, the app
+would continue working no matter what was happening on the asynchronous world. In Elixir, creating two pools is super easy
+
+```elixir
+# Configure Ecto to use UUID7 for binary_id autogeneration
+config :momento,
+  ecto_repos: [Momento.Repo],
+  generators: [timestamp_type: :utc_datetime, binary_id: true]
+
+config :momento, Momento.Repo,
+  migration_primary_key: [type: :binary_id],
+  migration_foreign_key: [type: :binary_id]
+
+# ObanRepo uses same schema settings (migrations run through Momento.Repo)
+config :momento, Momento.ObanRepo,
+  migration_primary_key: [type: :binary_id],
+  migration_foreign_key: [type: :binary_id]
+
+# Configure Oban for background jobs
+# IMPORTANT: Uses ObanRepo (separate connection pool) to isolate worker traffic from web traffic
+config :momento, Oban,
+  repo: Momento.ObanRepo,
+  plugins: [...],
+  queues: [...]
+```
+
+The module definition for Oban's repo was trivial
+
+```elixir
+defmodule Momento.ObanRepo do
+  use Ecto.Repo,
+    otp_app: :momento,
+    adapter: Ecto.Adapters.Postgres
+
+  def after_connect(conn) do
+    # Simple ping query to test connection health
+    Postgrex.query(conn, "SELECT 1", [])
+  end
+end
+```
+
+With this quick fix, I had two separate database pools. The web traffic would never fight for connections with the asynchronous jobs. But that was not enough!
+
+## Database timeouts
+
+After separating the database pools I was in a better position, however, I was still facing the database connection errors. Let's take a look again at what happened
+inside a job
+
+1. Download the image
+2. Generate a thumbnail
+3. Call OpenAI vision API to turn the image into a structured JSON
+4. Embed that JSON
+5. Save the embeddings into a postgres database
+
+Steps 1 and 3 primarily took a lot of time. The whole job execution takes around 30 to 45 seconds. That means, one single job will hold the connection for such a long time. No Bueno at all!
+
+The fix to this problem was to architect differently the job. This single job had many responsibilities and the best practice is to reserve a database connection for a short time. So, what originally
+was a single job `PhotoImportWorker` became three jobs
+
+1. PhotoDownloadWorker
+2. PhotoAnalysisWorker
+3. PhotoStorageWorker
+
+### PhotoDownloadWorker
+
+This job's responsibility was to download the image and generate a thumbnail. After that point, I only needed the thumbanil so I saved it to S3 and passed the
+image to the next job.
+
+### PhotoAnalysisWorker
+
+This job's responsibility was to run the Vision and Embedding. Then, it passes the embedding to the next job.
+
+### PhotoStorageWorker
+
+Finally, this job updated the image's metadata, including the embedding in the postgres database so we could perform the queries later on. A tiny but super important
+step was to broadcast the photo import so that LiveView could become aware of that and update the gallery.
+
+```elixir
+Phoenix.PubSub.broadcast(
+  Momento.PubSub,
+  "photo_imports:#{email}",
+  {:photo_imported, image_metadata}
+)
+
+You might wondering: Why not using [Oban Workflows](https://oban.pro/docs/pro/Oban.Pro.Workers.Workflow.html)? I am using Oban's free tier and workflows are part of the
+Oban Pro tier. Again, I wanted a cost-effective solution and this worked perfectly for what I needed.
+```
+
+## The cherry on top of the cake
+
+The best part of separating the workflow into separate jobs was that I could also scale each job independently.
+
+So, my configuration looked like this in the end
+
+```elixir
+config :momento, Oban,
+  repo: Momento.ObanRepo,
+  plugins: [
+    # Keep jobs for 1 day
+    {Oban.Plugins.Pruner, max_age: 86_400},
+    {Oban.Plugins.Cron, crontab: []}
+  ],
+  queues: [
+    # Photo import pipeline with 3 separate queues (workflow pattern)
+    # Each queue optimized for its specific operation type
+
+    # Step 1: Download & Thumbnail (fast, 1-2s per job)
+    # High concurrency - these are fast and release connections quickly
+    photo_download: 10,
+
+    # Step 2: AI Analysis (slow, 2-3s per job, but no DB needed during processing)
+    # Medium concurrency - AI is the bottleneck, but workers don't hold DB connections
+    photo_analysis: 5,
+
+    # Step 3: Storage & DB Save (fast, 500ms per job)
+    # High concurrency - these are fast final steps
+    photo_storage: 10,
+  ]
+```
+
+These numbers are just examples of how you can configure the concurrency for each queue independently, given that the strees each step applies into the
+whole system is different. For example, the photo_analysis queue should be treated carefully, since one can hit OpenAI limit quotas. That's one of the
+downsides or important things to look at when working with external services.
+
+Finally, I configured how many jobs an acconut could run simultaneously. This ensures that the distribution of load is evenly distribution across the system.
+Otherwise, an account that has more usage can take over the entire system and we want a good user experience for everyone.
+
+## Fault-Tolerant systems
+
+We mentioned in the post title: Processing multimedia with AI in a resilient and fault-tolerant way. We have not mentioned it so far, but everything we mentioned
+is exactly how you make a system fault tolerant. Oban allows one to configure how many times each job should be run, in case of failures.
+
+```
+use Oban.Worker,
+    queue: :photo_storage,
+    max_attempts: 3
+```
+
+When a job fails, it will be re-run after some time. Usually, we use exponential back-off to avoid stressing the system too much. However, Oban is such a great
+tool and by allowing us to configure the `max_attempts`, we ensure that if anything fails, we can retry it. It is important to design the code run in each job
+in an idempotent way. This means that, no matter how many times we execute a job, it should produce the same result. E.g. Without creating duplicate entries in your
+database or something like that.
+
+## Conclusion
+
+Separate database connection pools allows one to reserve resources for each operation type in a system. This is a great practice when you have web traffic and
+asynchronous jobs.
+
+Splitting your tasks into workflows that run into different jobs is an excellent way to scale a system since each queue can be tweaked independently.
+
+Oban allows your system to be resilient and fault-tolerant by allowing to configure the maximum number of times a job should be run before being considered a failure. Oban will
+run your job X amount of times, using exponential backoff.
+
+It's quite easy to create resilient and fault-tolerant systems with Elixir, isn't it ?
+
+Let me know what you think and how you are using Oban in production.
