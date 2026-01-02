@@ -12,9 +12,9 @@ How do you process images and videos in a resilient and fault-tolerant way?
 Processing multimedia is complex and expensive. So, I followed one of the main scalability principles I discussed in my article about keeping apps scalable with the
 [Big-O mindset](https://www.juanrivillas.com/blog/the_big_o_mindset).
 
-**Key insight:** if a background job holds a database connection while doing slow I/O (downloads, external APIs), it can starve your connection pool even if your queries are simple.
+The naive solution would be to process everything in a single function, iterating over the list of images one imported. However, I immediately thought about processing these images asynchronously.
+That's the scalable mindset!
 
-The naive solution would be to process everything in a function, iterating over the list of images one imported. However, I immediately thought about processing these images asynchronously.
 If you are an Elixir engineer, you certainly have heard about Oban. Oban is one of the main tools from the Elixir ecosystem and it allows one to run asynchronous tasks in a simple and organized way.
 
 So, my first attempt followed this workflow:
@@ -50,7 +50,7 @@ In other words: a transaction checks out a database connection from the pool, an
 
 ## An easy but smart solution
 
-After researching a bit, I found out that I should separate the connections into two database pools: one for the app itself, and one for the asynchronous jobs.
+After researching a bit, I found out that I should separate the connections into two database pools: one for the web app, and one for the asynchronous jobs.
 That way, the app would continue working no matter what was happening in the background.
 
 In Elixir, creating two pools is super easy:
@@ -174,7 +174,7 @@ This pattern makes retries safe because the work is **idempotent**: the thumbnai
 
 ## The cherry on top of the cake
 
-The best part of separating the workflow into separate jobs was that I could also scale each job independently.
+The best part of separating the workflow into different jobs was that I could also scale each job independently.
 
 So, my configuration looked like this in the end
 
@@ -208,7 +208,7 @@ These numbers are just examples of how you can configure the concurrency for eac
 whole system is different. For example, the photo_analysis queue should be treated carefully, since one can hit OpenAI limit quotas. That's one of the
 downsides or important things to look at when working with external services.
 
-Finally, I configured how many jobs an account could run simultaneously. This ensures that the distribution of load is evenly distributed across the system.
+Finally, I configured how many jobs an account could run simultaneously. This ensures that the distribution of load is even across the system.
 Otherwise, an account that has more usage can take over the entire system and we want a good user experience for everyone.
 
 ## Fault-Tolerant systems
@@ -227,24 +227,17 @@ When a job fails, it will be re-run after some time. Usually, we use exponential
 
 It is also important to design the code that runs in each job to be idempotent. This means that no matter how many times we execute a job, it should produce the same result (e.g. without creating duplicate entries in your database).
 
-## Key Takeaways
+## Conclusion (Key takeaways)
+
+To build a resilient multimedia pipeline, you want to protect scarce resources (like DB connections), keep each background job small and retryable, and scale each step independently.
+Oban gives you the primitives to do that well—queues, retries, and backoff—while you keep each step idempotent.
+
+In practice, it comes down to:
 
 - Split DB pools to protect web traffic from worker traffic.
 - Don’t hold DB transactions open while doing slow I/O (downloads, external APIs).
 - Split long pipelines into multiple jobs so each step holds a DB connection for the shortest possible time.
 - Scale concurrency per queue; treat external API queues carefully to respect rate limits.
 - Make jobs idempotent so retries are safe (deterministic storage keys, upserts, and `unique` jobs where it makes sense).
-
-## Conclusion
-
-Separate database connection pools allow you to reserve resources for each operation type in a system. This is a great practice when you have web traffic and
-asynchronous jobs.
-
-Splitting your tasks into workflows that run into different jobs is an excellent way to scale a system since each queue can be tweaked independently.
-
-Oban allows your system to be resilient and fault-tolerant by letting you configure the maximum number of times a job should run before being considered a failure. Oban will
-run your job X amount of times, using exponential backoff.
-
-It's quite easy to create resilient and fault-tolerant systems with Elixir, isn't it?
 
 Let me know what you think and how you are using Oban in production.
