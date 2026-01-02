@@ -15,19 +15,21 @@ Processing multimedia is complex and expensive. So, I followed one of the main s
 **Key insight:** if a background job holds a database connection while doing slow I/O (downloads, external APIs), it can starve your connection pool even if your queries are simple.
 
 The naive solution would be to process everything in a function, iterating over the list of images one imported. However, I immediately thought about processing these images asynchronously.
-If you are an Elixir engineer you certainly have heard about Oban. Oban is one of the main tools from the Elixir ecosystem and it allows one to run asynchronous tasks in a simple and organized way.
+If you are an Elixir engineer, you certainly have heard about Oban. Oban is one of the main tools from the Elixir ecosystem and it allows one to run asynchronous tasks in a simple and organized way.
 
 So, my first attempt followed this workflow:
 
-A user imported multiple images -> For each image, I created an Oban Job -> I would let Oban process the items from the Queue
+- A user imported multiple images
+- For each image, I created an Oban job
+- I let Oban process items from the queue
 
-Each job had the following responsibility
+Each job had the following responsibilities:
 
 1. Download the image
 2. Generate a thumbnail
-3. Call OpenAI vision API to turn the image into a structured JSON
+3. Call the OpenAI Vision API to turn the image into structured JSON
 4. Embed that JSON
-5. Save the embeddings into a postgres database
+5. Save the embeddings into a Postgres database
 
 Another thing that was clear to me was that I needed a transaction so that if anything from the process above failed, I could retry the job as long as necessary.
 
@@ -37,11 +39,14 @@ stressing the system to see where it would fail.
 ## What Happened
 
 If you have followed my previous posts, you know that I use the least infrastructure required to run these experiments and I try to optimize the costs as much as possible. I was
-running my app in Fly.io with a 1GB machine. It is obvious that 1GB is such a low hardware these days but I thought this could work somehow. Once I opened the logs on PostHog, I
-saw hundreds of database connection errors. Specifically, timeouts!
+running my app in Fly.io with a 1GB machine. A 1GB machine isn't much these days, but I thought this could work somehow.
+
+Once I opened the logs on PostHog, I saw hundreds of database connection errors. Specifically, timeouts!
 
 That threw me off a little bit because the database operations were not that complex. However, I was using a transaction for the whole job. That means I was holding a connection for ~40
-seconds and many jobs were fighting for the same limited resource. A.K.A: connection starvation.
+seconds and many jobs were fighting for the same limited resource. AKA: connection starvation.
+
+In other words: a transaction checks out a database connection from the pool, and it holds it until the transaction completes. If the job spends most of its time doing slow I/O, that connection sits idle but unavailable to other parts of the system.
 
 ## An easy but smart solution
 
@@ -94,19 +99,18 @@ With this quick fix, I had two separate database pools. The web traffic would ne
 
 ## Database timeouts
 
-After separating the database pools I was in a better position, however, I was still facing the database connection errors. Let's take a look again at what happened
-inside a job
+After separating the database pools I was in a better position, however, I was still facing database connection errors. Let's take a look again at what happened inside a job:
 
 1. Download the image
 2. Generate a thumbnail
-3. Call OpenAI vision API to turn the image into a structured JSON
+3. Call the OpenAI Vision API to turn the image into structured JSON
 4. Embed that JSON
-5. Save the embeddings into a postgres database
+5. Save the embeddings into a Postgres database
 
 Steps 1 and 3 primarily took a lot of time. The whole job execution takes around 30 to 45 seconds. That means one single job will hold the connection for such a long time. No Bueno at all!
 
-The fix to this problem was to architect differently the job. This single job had many responsibilities and the best practice is to reserve a database connection for a short time. So, what originally
-was a single job `PhotoImportWorker` became three jobs
+The fix to this problem was to architect the job differently. This single job had too many responsibilities, and the best practice is to reserve a database connection for a short time. So what originally
+was a single job (`PhotoImportWorker`) became three jobs:
 
 1. PhotoDownloadWorker
 2. PhotoAnalysisWorker
@@ -123,7 +127,7 @@ This job's responsibility was to run the Vision and Embedding. Then, it passes t
 
 ### PhotoStorageWorker
 
-Finally, this job updated the image's metadata, including the embedding in the postgres database so we could perform the queries later on. A tiny but super important
+Finally, this job updated the image's metadata, including the embedding in the Postgres database so we could perform the queries later on. A tiny but super important
 step was to broadcast the photo import so that LiveView could become aware of that and update the gallery.
 
 ```elixir
@@ -136,6 +140,37 @@ Phoenix.PubSub.broadcast(
 
 You might be wondering: Why not use [Oban Workflows](https://oban.pro/docs/pro/Oban.Pro.Workers.Workflow.html)? I am using Oban's free tier and workflows are part of
 Oban Pro. Again, I wanted a cost-effective solution and this worked perfectly for what I needed.
+
+### Chaining jobs safely (free-tier workflow)
+
+The core idea is simple: each worker does **one thing**, persists the smallest artifact needed to continue, and then enqueues the next job.
+
+Here is a simplified example of how a download job can enqueue the analysis job:
+
+```elixir
+defmodule Momento.PhotoDownloadWorker do
+  use Oban.Worker, queue: :photo_download, max_attempts: 3
+
+  @impl Oban.Worker
+  def perform(%Oban.Job{args: %{"photo_id" => photo_id} = args}) do
+    # 1) Slow I/O: download + generate thumbnail (no DB transaction)
+    %{thumbnail_bytes: thumb} = Momento.Photos.fetch_and_thumbnail(args)
+
+    # 2) Fast I/O: store thumbnail under a deterministic key (idempotent)
+    thumb_key = "thumbnails/#{photo_id}.jpg"
+    :ok = Momento.S3.put_object(thumb_key, thumb)
+
+    # 3) Hand off to the next job
+    %{photo_id: photo_id, thumb_key: thumb_key}
+    |> Momento.PhotoAnalysisWorker.new(unique: [fields: [:args], period: 300])
+    |> Oban.insert()
+
+    :ok
+  end
+end
+```
+
+This pattern makes retries safe because the work is **idempotent**: the thumbnail key is deterministic (so a retry overwrites), and the next job is `unique` for a short window so you don't enqueue duplicates.
 
 ## The cherry on top of the cake
 
@@ -182,19 +217,27 @@ We mentioned in the post title: Processing multimedia with AI in a resilient and
 is exactly how you make a system fault tolerant. Oban allows one to configure how many times each job should run in case of failures.
 
 ```elixir
-use Oban.Worker,
-    queue: :photo_storage,
-    max_attempts: 3
+defmodule Momento.PhotoStorageWorker do
+  use Oban.Worker, queue: :photo_storage, max_attempts: 3
+end
 ```
 
-When a job fails, it will be re-run after some time. Usually, we use exponential back-off to avoid stressing the system too much. However, Oban is such a great
-tool and by allowing us to configure the `max_attempts`, we ensure that if anything fails, we can retry it. It is important to design the code run in each job
-in an idempotent way. This means that, no matter how many times we execute a job, it should produce the same result. E.g. Without creating duplicate entries in your
-database or something like that.
+When a job fails, it will be re-run after some time. Usually, we use exponential backoff to avoid stressing the system too much. Oban makes this easy: by configuring
+`max_attempts`, we ensure that transient failures can be retried safely.
+
+It is also important to design the code that runs in each job to be idempotent. This means that no matter how many times we execute a job, it should produce the same result (e.g. without creating duplicate entries in your database).
+
+## Key Takeaways
+
+- Split DB pools to protect web traffic from worker traffic.
+- Don’t hold DB transactions open while doing slow I/O (downloads, external APIs).
+- Split long pipelines into multiple jobs so each step holds a DB connection for the shortest possible time.
+- Scale concurrency per queue; treat external API queues carefully to respect rate limits.
+- Make jobs idempotent so retries are safe (deterministic storage keys, upserts, and `unique` jobs where it makes sense).
 
 ## Conclusion
 
-Separate database connection pools allows one to reserve resources for each operation type in a system. This is a great practice when you have web traffic and
+Separate database connection pools allow you to reserve resources for each operation type in a system. This is a great practice when you have web traffic and
 asynchronous jobs.
 
 Splitting your tasks into workflows that run into different jobs is an excellent way to scale a system since each queue can be tweaked independently.
