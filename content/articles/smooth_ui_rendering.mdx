@@ -1,0 +1,243 @@
+---
+title: Smooth UI rendering with LiveView and PubSub
+description: Learn how Phoenix PubSub + LiveView let you update a gallery in real time without polling or janky re-renders.
+date: "2026-01-07"
+published: true
+language: en
+---
+
+For many years I worked as a frontend engineer, building data visualization UIs: dashboards, tables, charts, and all sorts of interactive widgets.
+One of my primary concerns was always the same: **how do I keep the UI smooth when a lot of things are happening at once?**
+
+When I was architecting [Momento Baby](https://momento.baby) (a search engine for photos and videos), I wondered whether I should use React or LiveView.
+
+- React was the “obvious” choice. I’ve used it for years.
+- LiveView was the “curious” choice. I didn’t have much experience with it, and honestly, I was skeptical about server-side rendering and I wasn’t a big fan of the syntax.
+
+But let me tell you: **I do not regret choosing LiveView** for this particular problem.
+
+Today I want to explain the challenge and the solution: **how to keep a gallery UI updated in real time while a background pipeline is importing media**—without polling, without refresh buttons, and without re-rendering the whole page on every update.
+
+## The Problem
+
+To recap, [Momento Baby](https://momento.baby) has a Gallery where you can:
+
+- See your photos and videos
+- Filter by folder
+- Search by a term
+
+The tricky part is the import flow.
+
+When you import files, processing happens **asynchronously**. Each image/video goes through a pipeline of workers (download → thumbnail → AI analysis → storage, etc.).
+And while that pipeline is running, users are already inside the gallery.
+
+So the real question is:
+
+User visits gallery → render existing media → import new files → **what now?**
+
+The “what now” is the core of this post.
+
+In a regular imperative app, we usually re-fetch data upon a user action:
+
+- Should the user refresh the page?
+- Should we add a refresh button (like GitHub sometimes does mid-PR review)?
+- Should we poll every N seconds?
+
+I wanted a more reactive approach: **the UI should update itself** when background work completes.
+
+That’s when Phoenix PubSub enters the story.
+
+## The naive solutions (and why they don’t feel great)
+
+Before jumping into PubSub, let’s be honest: the naive options work.
+
+They just don’t feel great at scale or in terms of UX.
+
+- **Manual refresh**: simplest. Also the worst UX.
+- **Refresh button**: a bit better. Still forces the user to babysit the system.
+- **Polling**: easy to implement, but wasteful and laggy. If the poll interval is short, you waste resources. If it’s long, the UI feels stale.
+
+The best UI experience is: **updates appear as soon as they’re ready**.
+
+## PubSub: the missing glue
+
+Phoenix PubSub allows part of the system to **broadcast events**, while other parts **subscribe** to those events.
+
+In my import pipeline, when a worker finishes processing an image or video, it broadcasts an event:
+
+```elixir
+Phoenix.PubSub.broadcast(
+  Momento.PubSub,
+  "photo_imports:#{email}",
+  {:photo_imported, image_metadata}
+)
+```
+
+Two important details:
+
+- **Scope**: the topic is per user (`"photo_imports:#{email}"`), so only that user receives those updates.
+- **Payload**: the event carries `image_metadata` so the UI can update without guessing.
+
+Now, inside the LiveView, I subscribe on mount:
+
+```elixir
+defmodule MomentoWeb.GalleryLive do
+  @impl true
+  def mount(_params, _session, socket) do
+    email = socket.assigns.email
+
+    if connected?(socket) do
+      Phoenix.PubSub.subscribe(Momento.PubSub, "photo_imports:#{email}")
+    end
+
+    {:ok, socket}
+  end
+
+  @impl true
+  def handle_info({:photo_imported, _image_metadata}, socket) do
+    # refresh media gallery
+  end
+end
+```
+
+So far so good. But this is where “smooth rendering” matters.
+
+If `handle_info/2` does something like “re-query the whole gallery and assign it again” on every event, you’ll quickly end up with a UI that *works* but doesn’t *feel* smooth.
+
+## What “smooth rendering” means in LiveView
+
+For this gallery, “smooth” basically means:
+
+- **Incremental updates**: don’t re-render the whole list when only one photo changed.
+- **Minimal diffs**: let LiveView patch the DOM surgically.
+- **Backpressure**: avoid an event storm when 200 photos finish importing.
+
+## The easy but smart solution: stream inserts instead of full refreshes
+
+LiveView streams are perfect for this. The core idea is:
+
+- Load your initial gallery once.
+- Keep it as a stream.
+- When a new photo arrives, insert it into the stream.
+
+Here is a simplified version of how that looks:
+
+```elixir
+defmodule MomentoWeb.GalleryLive do
+  use MomentoWeb, :live_view
+
+  @impl true
+  def mount(_params, _session, socket) do
+    email = socket.assigns.email
+
+    if connected?(socket) do
+      Phoenix.PubSub.subscribe(Momento.PubSub, "photo_imports:#{email}")
+    end
+
+    media = Momento.Media.list_latest_for_user(email, limit: 60)
+
+    {:ok,
+     socket
+     |> assign(:email, email)
+     |> stream(:media, media)}
+  end
+
+  @impl true
+  def handle_info({:photo_imported, media_item}, socket) do
+    # Insert at the top so the new item appears immediately.
+    {:noreply, stream_insert(socket, :media, media_item, at: 0)}
+  end
+end
+```
+
+The important part is not the exact function names—it’s the behavior:
+
+- You insert a new item.
+- LiveView patches only the minimal part of the DOM.
+- The UI feels reactive, not “re-render everything and hope it’s fine.”
+
+## Avoiding the event storm (batch updates)
+
+If a user imports 200 photos, you will broadcast 200 events. Even if each update is small, the UI can still start to feel “busy.”
+
+The fix is to **coalesce events** for a short window (for example, 250ms), then apply them in one go.
+
+One simple pattern is:
+
+- collect imported ids in memory
+- schedule a single flush
+- fetch fresh records once
+- insert them as a batch
+
+In practice it looks like this:
+
+```elixir
+@flush_after_ms 250
+
+@impl true
+def mount(_params, _session, socket) do
+  # ...
+  {:ok, assign(socket, pending_import_ids: MapSet.new(), flush_ref: nil)}
+end
+
+@impl true
+def handle_info({:photo_imported, %{id: id}}, socket) do
+  socket = update(socket, :pending_import_ids, &MapSet.put(&1, id))
+
+  socket =
+    case socket.assigns.flush_ref do
+      nil ->
+        ref = Process.send_after(self(), :flush_imports, @flush_after_ms)
+        assign(socket, flush_ref: ref)
+
+      _ref ->
+        socket
+    end
+
+  {:noreply, socket}
+end
+
+@impl true
+def handle_info(:flush_imports, socket) do
+  ids = socket.assigns.pending_import_ids |> MapSet.to_list()
+  media_items = Momento.Media.get_many(ids)
+
+  socket =
+    socket
+    |> assign(pending_import_ids: MapSet.new(), flush_ref: nil)
+    |> then(fn sock ->
+      Enum.reduce(media_items, sock, fn item, acc ->
+        stream_insert(acc, :media, item, at: 0)
+      end)
+    end)
+
+  {:noreply, socket}
+end
+```
+
+This pattern makes the UI feel calm: imports can run hot in the background, but the gallery updates in controlled bursts.
+
+## Putting it all together (architecture)
+
+Here is the whole flow:
+
+- User imports photos
+- Workers process items asynchronously
+- Final worker broadcasts an event to the user topic
+- Gallery LiveView receives the event
+- LiveView updates a stream (incremental DOM patch)
+
+```
+Oban worker -> PubSub broadcast -> GalleryLive handle_info -> stream_insert -> minimal DOM patch
+```
+
+## Conclusion (Key takeaways)
+
+LiveView is an excellent choice for UIs that need coordination between background processes and a real-time UI.
+
+In practice, the recipe is:
+
+- Use PubSub to avoid polling and “refresh buttons.”
+- Scope topics per user to keep updates isolated.
+- Use streams to avoid full list re-renders.
+- Coalesce events to keep the UI smooth during large imports.
