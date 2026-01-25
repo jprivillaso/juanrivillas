@@ -36,10 +36,9 @@ export default function Now() {
             <FlagTriangleRight className="text-zinc-200" size={20} style={{ minWidth: 30 }} />
 
             <p className="mt-4 text-md duration-1000 text-zinc-500 group-hover:text-zinc-200">
-              Ich lerne Deutsch 🇩🇪 Yes, I'm learing a fifth language! Learning new languages is one
-              of my hobbies and despite I worked for almost five years with a German company, I
-              never learned it (shame on me). I already speak English 🇺🇸, Portuguese 🇧🇷, Spanish
-              (CO) 🇨🇴, and I have a basic French 🇫🇷. So far, learning German has been really fun.
+              I've been focused on getting better habits, reading more books and learning new things, specially about AI.
+              My family and I bought a farm, so we've been spending more time outside and setting that up. We have four
+              horses and a few cows. I'm pretty excited about the project and I'm learning a lot about the farming industry.
             </p>
           </section>
 
@@ -64,18 +63,10 @@ export default function Now() {
             <FlagTriangleRight className="text-zinc-200" size={20} style={{ minWidth: 30 }} />
 
             <p className="mt-4 text-md duration-1000 text-zinc-500 group-hover:text-zinc-200">
-              I'm not haiving much time to read but I'm in the middle of{" "}
-              <CustomLink
-                external
-                to="https://www.amazon.com/Innovation-Biome-Sustained-Business-Environment/dp/163299156X"
-                text="The Innovation Biome (Kumar Mehta)"
-              />{" "}
-              and I'm focused on resources about Distributed Systems such as{" "}
-              <CustomLink
-                external
-                to="https://www.distributed-systems.net/index.php/books/ds4/"
-                text="Distributed Systems (Maarten Van Steen and Andrew S. Tanenbaum)."
-              />
+              I'm reading AI Engeering by Chip Huyen. It's a great book that covers the basics of AI engineering. I'm applying most of the
+              concepts learned into Momento Baby, an AI-powered search engine for photos and videos. This project was born as an idea years ago
+              while my kids were toddlers and now it's finally coming to life. I'm really stoked about the shape it's taking and I'm excited to see where it goes
+              in 2026.
             </p>
           </section>
 
@@ -87,19 +78,8 @@ export default function Now() {
             <FlagTriangleRight className="text-zinc-200" size={20} style={{ minWidth: 30 }} />
 
             <p className="text-md duration-1000 text-zinc-500 group-hover:text-zinc-200">
-              I'm working as a Senior Platform Engineer at Appcues, where I write a bunch of Elixir
-              and Node. We work with GraphQL, Absinthe and Phoenix.
-            </p>
-          </section>
-
-          <section className="mt-4 flex items-center gap-1.5">
-            <FlagTriangleRight className="text-zinc-200" size={20} style={{ minWidth: 30 }} />
-
-            <p className="text-md duration-1000 text-zinc-500 group-hover:text-zinc-200">
-              After almost five years working as an Engineering lead, I came back to being an
-              individual contributor which is where I think I excel. I do want to continue pursuing
-              the technical ladder, even though, I enjoyed having the opportunity to lead a remote
-              engineering team for a couple of years.
+              I'm working as a Senior Platform Engineer, writing mostly Elixir. I'm focused on deepening my
+              knowledge on the Elixir ecosystem and AI while building production-grade systems.
             </p>
           </section>
         </div>

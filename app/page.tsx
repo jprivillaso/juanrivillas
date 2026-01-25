@@ -40,10 +40,11 @@ export default function Home() {
       <div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
       <div className="my-16 text-center animate-fade-in">
         <h2 className="text-md text-zinc-500 max-w-2xl">
-          I'm a Senior Software Engineer working with Elixir, distributed systems, and AWS. I am
-          personally interested in data visualization, astronomy, and algorithms. In the past
-          decade, I've had the opportunity to work with Serverless architecture, React, Vue, D3.js,
-          among other tools and frameworks.
+          I'm a Senior Platform Engineer working with Elixir, distributed systems, and AWS. Lately,
+          I've been building AI-powered products with a focus on
+          reliability, cost, and observability. I'm personally interested in astronomy and
+          algorithms, and over the past decade I've worked with serverless architecture, microservices, React, and
+          plenty of other tools and frameworks.
         </h2>
       </div>
     </div>
