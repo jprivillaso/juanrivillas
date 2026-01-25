@@ -1,0 +1,306 @@
+---
+title: Idempotent multimedia pipelines with Oban: dedupe, uniqueness, and safe retries
+description: How to make multimedia jobs retryable without creating duplicates in your database
+date: "2026-01-25"
+published: false
+language: en
+---
+
+When I was building [Momento Baby](https://momento.baby/)—an AI search engine for photos and videos—I thought I had the hard parts figured out:
+
+- download media from Google Photos
+- run `ffmpeg`/`ffprobe`
+- call OpenAI Vision
+- generate embeddings
+- store everything in Postgres
+
+It all worked beautifully… in development.
+
+Then I shipped it to production and started doing real imports. Not “one photo”, but “a real user import”: 40–100 photos, plus videos. That’s when the truth of multimedia pipelines hits you:
+
+**everything fails**, and it fails in ways you can’t reproduce locally.
+
+At first, I focused on fault tolerance (separate DB pools, split responsibilities, isolate retries). I wrote about that in [Designing Fault-Tolerant AI Pipelines](https://www.juanrivillas.com/blog/processing_multimedia_resiliently).
+
+But there was a second, sneakier problem that appeared once retries started working:
+
+> Retrying makes your system *correct*… and then it makes it *wrong* again if your side effects aren’t idempotent.
+
+This post is about that second problem: **idempotency**.
+
+How do you make a pipeline safe to retry without creating duplicates, breaking foreign keys, or wasting OpenAI money?
+
+## The symptom: retries that “work” but corrupt your data
+
+Here’s a fun production story.
+
+I added a “video chunking” feature to Momento: split a short video into 10-second chunks, run multi-frame vision analysis per chunk, generate an embedding, and store that chunk so you can search your memories with natural language.
+
+Conceptually:
+
+1. Import a video
+2. Insert the parent video row (e.g., into a `videos` table)
+3. For each chunk: analyze → embed → insert `video_chunk`
+
+Now add production reality:
+
+- network timeouts
+- `ffprobe` stalls
+- `ffmpeg` weirdness
+- OpenAI returns 5xx
+- tokens expire
+
+So of course you retry (Oban makes this easy).
+
+But then you get:
+
+- the same chunk inserted twice
+- a chunk insert that crashes because the parent video row is missing (FK violation)
+- jobs that keep retrying forever because we crash instead of classifying the failure (retry vs discard)
+- and my personal favorite: thumbnails that return `200 OK` but don’t render because the bytes are invalid
+
+In practice, the “invalid bytes” bug only stopped once I started **validating artifacts** (e.g., running `ffprobe` and rejecting partial/empty downloads) before persisting anything downstream.
+
+If that sounds chaotic, it is. The fix is not “more retries”.
+
+The fix is: **make retries safe**.
+
+## What “idempotent” means for a multimedia pipeline
+
+“Idempotent” is a fancy word for:
+
+> “You can run it multiple times and the end state is the same as running it once.”
+
+In pipelines, it helps to separate:
+
+- **idempotent compute**: you can recompute embeddings/metadata anytime
+- **idempotent side effects**: you must not create duplicate DB rows or upload infinite thumbnails
+
+The hard part is always the second one.
+
+## Principle 1: choose the right dedupe key
+
+Before you touch Oban, you need one thing: a stable identity.
+
+In Momento Baby, the natural keys were already there:
+
+- **Photo**: (`email`, `google_photos_id`)
+- **Video**: (`email`, `google_photos_id`)
+- **Video chunk (“moment”)**: (`video_id`, `start_ms`, `end_ms`)
+
+This matters because once you have a dedupe key, the database can help you enforce idempotency.
+
+## Principle 2: enforce idempotency in Postgres (unique index)
+
+The most common anti-pattern I see is:
+
+- check if row exists
+- if not, insert
+
+This works in development, and it fails the first time you have concurrency.
+
+Two workers can run at the same time, both see “no row”, and both insert. Race condition.
+
+The correct place to enforce idempotency is the **database**.
+
+For chunks, the rule is:
+
+> One chunk per (`video_id`, `start_ms`, `end_ms`)
+
+So the DB gets a unique index:
+
+```sql
+CREATE UNIQUE INDEX video_chunks_video_id_start_ms_end_ms_uniq
+ON video_chunks (video_id, start_ms, end_ms);
+```
+
+## Principle 3: treat constraint failures as expected outcomes (don’t crash jobs)
+
+Another fun one: foreign keys.
+
+At some point I started seeing this in Oban:
+
+> `Ecto.ConstraintError` on `video_chunks_video_id_fkey`
+
+Meaning: a chunk insert referenced a `video_id` that didn’t exist in the parent table that stores videos (often `videos`).
+
+In other words: the chunk job ran (or retried) before the parent video row existed—either because the parent insert failed, the parent job was still in progress, or the work got reordered by retries/concurrency.
+
+You can solve this in two steps:
+
+### 1) Tell Ecto about constraints
+
+If you don’t define constraints on a changeset, Postgres raises and Ecto raises too. Oban sees a crash and retries.
+
+Instead, you want:
+
+- a clean `{:error, changeset}` that you can classify as retryable vs discardable
+
+So add:
+
+- `foreign_key_constraint/3` for the FK
+- `unique_constraint/3` for the dedupe index
+
+Conceptually:
+
+```elixir
+changeset
+|> foreign_key_constraint(:video_id, name: "video_chunks_video_id_fkey")
+|> unique_constraint([:video_id, :start_ms, :end_ms],
+  name: "video_chunks_video_id_start_ms_end_ms_uniq"
+)
+```
+
+### 2) Make “duplicate insert” a successful no-op
+
+Once the database is enforcing uniqueness, your application should treat “already exists” as a normal outcome.
+
+In Ecto, that usually means inserting with a conflict rule:
+
+```elixir
+Repo.insert(changeset,
+  on_conflict: :nothing,
+  conflict_target: [:video_id, :start_ms, :end_ms]
+)
+```
+
+Now a retry (or concurrent insert) won’t create duplicates—and you don’t need “check then insert” logic.
+
+At the Oban layer, the key is: **don’t crash for known, non-retryable outcomes**.
+
+- If something is retryable (timeouts, 5xx), return `{:error, reason}` (or raise).
+- If something is not retryable in this job (e.g., missing parent row / auth), return `{:discard, reason}` so the job stops.
+
+### 3) Build an error taxonomy: retry vs discard
+
+Not every failure should be retried.
+
+My rules of thumb:
+
+- **Retry**:
+  - network timeouts
+  - OpenAI 5xx
+  - transient ffmpeg failures
+  - “download incomplete”
+- **Discard**:
+  - missing parent video (FK error)
+  - missing auth (no refresh token)
+  - invalid input
+
+This is huge in practice: it keeps your queues healthy.
+
+## Principle 4: one job = one unit of work
+
+This is where Oban shines.
+
+The monolithic job approach looks like this:
+
+> download → ffmpeg → vision → embedding → DB insert → storage upload
+
+When it fails, it retries everything. Worst case: you redo expensive work and create duplicates.
+
+In Momento Baby, I moved towards:
+
+- one job for **video ingestion** (create video record, store a single thumbnail)
+- one job per **chunk analysis**
+
+That gives you:
+
+- isolated retries (a chunk retry doesn’t redo the whole video)
+- natural backpressure (queue concurrency controls throughput)
+- better UX (video appears quickly, analysis happens in the background)
+
+## Principle 5: make retries cheap
+
+This is the part that saves money.
+
+Two changes had a huge effect in Momento Baby:
+
+### 1) “One thumbnail per video”
+
+Initially, each chunk had its own thumbnail. That’s a lot of extra ffmpeg + storage work.
+
+Then I realized: my UI doesn’t need per-chunk thumbnails. I only need a single thumbnail for the video card. Search quality is driven by **embeddings**, not thumbnails.
+
+So chunks just reuse the parent video’s thumbnail URL.
+
+### 2) Early exit if the chunk already exists
+
+If the chunk row exists, the worker should stop immediately.
+
+That’s idempotency at the application level, *backed by* the DB unique index.
+
+One nuance: this early exit is an **optimization** (it saves compute/money). The correctness guarantee still comes from the database constraint.
+
+## Principle 6: prevent duplicate enqueues (Oban `unique`)—but don’t rely on it for correctness
+
+There are two distinct “duplicate” problems:
+
+- **Duplicate writes** (DB rows, S3 objects): solve with database constraints and deterministic storage keys.
+- **Duplicate enqueues** (the same job inserted multiple times): solve with Oban’s `unique` option.
+
+Oban `unique` is great for reducing load and avoiding job storms, especially when your pipeline chains jobs (download → analyze → store).
+
+But it’s not a substitute for a DB uniqueness rule—because even a perfectly unique job can run twice in edge cases, and because uniqueness windows expire.
+
+If you chain jobs, I recommend:
+
+- `unique` to keep the queue clean
+- DB uniqueness + safe `on_conflict` handling to keep your data correct
+
+## Principle 7: make external side effects idempotent (deterministic keys + content validation)
+
+Databases are easy: they can enforce uniqueness.
+
+External side effects are where pipelines get messy:
+
+- writing thumbnails to object storage
+- saving downloaded files to disk
+- calling paid APIs (OpenAI)
+
+The pattern that holds up in production is: **make every side effect addressable by a deterministic key**.
+
+For example, instead of “upload a thumbnail”, upload to:
+
+> `thumbnails/videos/{video_id}.jpg`
+
+so a retry overwrites the same object rather than creating a new one.
+
+And because “200 OK” doesn’t mean “valid bytes”, validate artifacts before you persist references:
+
+- confirm the downloaded file is readable (`ffprobe` locally)
+- reject empty/partial downloads
+- only then proceed to chunking / analysis
+
+## Principle 8: instrument idempotency (retries, dedupes, and spend)
+
+Idempotency is a correctness concern, but in production it’s also a **cost** concern.
+
+If you can’t answer these, you’ll eventually pay for them:
+
+- What percentage of jobs are retries?
+- How often do you hit uniqueness constraints (i.e., “dedupe saved us”)?
+- Which step is burning the most OpenAI tokens?
+
+The simplest pattern is to attach a stable trace/correlation ID to each unit of work (video import, chunk analysis) and emit metrics/events per step.
+
+If you want a deeper dive on AI cost + tracing, I wrote about it in [Building AI Observability Before Your First Deploy](https://www.juanrivillas.com/blog/ai_production_analytics).
+
+## Closing: the checklist I use now
+
+- Pick stable dedupe keys (photo, video, chunk)
+- Enforce uniqueness in Postgres (unique indexes)
+- Convert DB constraint failures into changeset errors
+- Decide retry vs discard rules
+- Split monolithic work into smaller Oban jobs
+- Make retries cheap (reuse artifacts, early exits)
+- Prevent duplicate enqueues (Oban `unique`) to keep queues healthy
+- Make external side effects idempotent (deterministic storage keys + validation)
+- Instrument retries/dedupes/spend so you can see when idempotency is saving you
+
+If you do just one thing from this post, do this:
+
+> **Put the uniqueness rule in the database and teach your app to treat it as a successful outcome.**
+
+That’s how you get safe retries in the messy world of multimedia + AI.
+
