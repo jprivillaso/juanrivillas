@@ -1,9 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "./tailwind.config.js";
 
 /* React Flow styles */
-@import 'reactflow/dist/style.css';
+@import "reactflow/dist/style.css";
 
 @layer base {
   .text-edge-outline {
