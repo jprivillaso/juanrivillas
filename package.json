@@ -19,6 +19,7 @@
     "@netlify/blobs": "^10.5.0",
     "@netlify/plugin-nextjs": "^5.15.5",
     "@next/mdx": "^16.1.4",
+    "@tailwindcss/postcss": "^4.1.18",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tailwindcss/typography": "^0.5.19",
     "@types/dagre": "^0.7.53",
@@ -57,7 +58,6 @@
     "typescript": "^5.9.2"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.18",
     "concurrently": "^9.1.2",
     "patch-package": "^8.0.1"
   },
