@@ -4,7 +4,6 @@ import { Newsletter } from "@/app/components/Newsletter";
 import { allArticles } from "@/.contentlayer/generated";
 import { notFound } from "next/navigation";
 import { Header } from "./header";
-import { ReportView } from "./view";
 
 import "./mdx.css";
 
@@ -41,8 +40,7 @@ export default async function PostPage({ params }: Props) {
 
   return (
     <div className="bg-zinc-50 min-h-screen">
-      <Header project={project} views={0} />
-      <ReportView slug={project.slug} />
+      <Header project={project} slug={project.slug} />
 
       <article className="px-4 py-12 mx-auto prose prose-zinc prose-quoteless">
         <Mdx code={project.body.code} />
