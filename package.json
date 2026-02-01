@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "contentlayer build && next build",
-    "dev": "npx sort-package-json && concurrently -k \"contentlayer dev\" \"next dev --turbo -H 127.0.0.1\"",
+    "build": "contentlayer build --clearCache && next build",
+    "dev": "npx sort-package-json && concurrently -k \"contentlayer dev --clearCache\" \"next dev -H 127.0.0.1\"",
     "fmt": "pnpm rome check . --apply-unsafe && pnpm rome format . --write",
     "start": "next start"
   },
@@ -62,6 +62,6 @@
     "patch-package": "^8.0.1"
   },
   "engines": {
-    "node": ">=22.14.0"
+    "node": ">=18.20.0"
   }
 }

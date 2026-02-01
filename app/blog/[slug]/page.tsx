@@ -1,7 +1,7 @@
 import DisqusWrapper from "@/app/components/DisqussWrapper";
 import { Mdx } from "@/app/components/Mdx";
 import { Newsletter } from "@/app/components/Newsletter";
-import { allArticles } from "contentlayer/generated";
+import { allArticles } from "@/.contentlayer/generated";
 import { notFound } from "next/navigation";
 import { Header } from "./header";
 import { ReportView } from "./view";
