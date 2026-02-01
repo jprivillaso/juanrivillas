@@ -13,14 +13,17 @@ import "./mdx.css";
 export const dynamic = "force-static";
 export const dynamicParams = false;
 
-type Props = {
-  params: Promise<{
-    slug: string;
-    language?: string;
-  }>;
+type RouteParams = {
+  slug: string;
+  language?: string;
 };
 
-export async function generateStaticParams(): Promise<Props["params"][]> {
+type Props = {
+  // Next 16 treats `params` as async in Server Components.
+  params: Promise<RouteParams>;
+};
+
+export async function generateStaticParams(): Promise<RouteParams[]> {
   return allArticles
     .filter((p) => p.published)
     .map((p) => ({
