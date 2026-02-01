@@ -1,7 +1,6 @@
 import DisqusWrapper from "@/app/components/DisqussWrapper";
 import { Mdx } from "@/app/components/Mdx";
 import { Newsletter } from "@/app/components/Newsletter";
-import { Redis } from "@upstash/redis";
 import { allArticles } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 import { Header } from "./header";
@@ -9,16 +8,17 @@ import { ReportView } from "./view";
 
 import "./mdx.css";
 
-export const revalidate = 60;
+// These pages should be fully static so they render reliably on platforms
+// that may not support dynamic App Router routing for Turbopack builds.
+export const dynamic = "force-static";
+export const dynamicParams = false;
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
     language?: string;
-  };
+  }>;
 };
-
-const redis = Redis.fromEnv();
 
 export async function generateStaticParams(): Promise<Props["params"][]> {
   return allArticles
@@ -29,24 +29,16 @@ export async function generateStaticParams(): Promise<Props["params"][]> {
 }
 
 export default async function PostPage({ params }: Props) {
-  const slug = params?.slug;
+  const { slug } = await params;
   const project = allArticles.find((project) => project.slug === slug);
 
   if (!project) {
     notFound();
   }
 
-  let views = 0;
-
-  try {
-    views = (await redis.get<number>(["pageviews", "blog", slug].join(":"))) as number;
-  } catch (error) {
-    console.error(`Error fetching views from Upstash for article ${slug}`);
-  }
-
   return (
     <div className="bg-zinc-50 min-h-screen">
-      <Header project={project} views={views} />
+      <Header project={project} views={0} />
       <ReportView slug={project.slug} />
 
       <article className="px-4 py-12 mx-auto prose prose-zinc prose-quoteless">
