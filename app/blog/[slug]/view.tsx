@@ -18,21 +18,31 @@ export const ViewCounter: React.FC<Props> = ({ slug, isIntersecting }) => {
   useEffect(() => {
     const controller = new AbortController();
 
-    // 1) Increment (API no-ops on localhost / missing Upstash config)
-    fetch("/api/incr", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ slug }),
-      signal: controller.signal,
-    }).catch(() => {});
+    (async () => {
+      // 1) Increment (API no-ops on localhost / missing Upstash config)
+      try {
+        await fetch("/api/incr", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ slug }),
+          signal: controller.signal,
+        });
+      } catch {
+        // ignore
+      }
 
-    // 2) Fetch current views
-    fetch(`/api/views?slug=${encodeURIComponent(slug)}`, { signal: controller.signal })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((data: null | { views?: number }) => {
+      // 2) Fetch current views (after increment attempt so the number updates immediately)
+      try {
+        const r = await fetch(`/api/views?slug=${encodeURIComponent(slug)}`, {
+          signal: controller.signal,
+        });
+        if (!r.ok) return;
+        const data = (await r.json()) as { views?: number } | null;
         if (typeof data?.views === "number") setViews(data.views);
-      })
-      .catch(() => {});
+      } catch {
+        // ignore
+      }
+    })();
 
     return () => controller.abort();
   }, [slug]);
