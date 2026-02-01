@@ -1,0 +1,205 @@
+---
+title: Specs are the best prompt
+description: A practical spec template that makes AI coding agents work with less guessing
+date: "2026-02-01"
+published: true
+language: en
+---
+
+I was talking to a friend about how I’ve been using specs to interact with AI.
+I ask it to make changes, create code, design diagrams, etc. It’s my partner during development.
+
+And at some point I realized something embarrassingly simple:
+
+- The “prompt” that gets me the best results is rarely clever wording.
+- It’s **a good spec**.
+
+The better the spec, the better the outcome. That doesn’t sound new — it’s basically the promise of prompt engineering — but naming it matters because it changes how you work.
+
+During that discussion, I also became aware that this has a name: **Spec-Driven Development (SDD)**.
+
+In this post I’ll do two things:
+
+- Explain **what SDD means** (and what it doesn’t).
+- Share the **spec scaffold** I use to get consistently good results with AI coding agents — without adopting a heavyweight process.
+
+## The problem: “just do X” is not a task
+
+In the last twenty years, Scrum (or at least Scrum vocabulary) became the default in most companies.
+Even if not everyone follows all the ceremonies, we’re all used to daily standups, retros, planning poker, etc.
+And I do think that shift was positive compared to pure waterfall.
+
+But there’s a common failure mode: tasks turn into placeholders.
+
+- “Fix onboarding”
+- “Improve search”
+- “Refactor payments”
+
+If your “task” is basically a title and a vague intention, the *real* spec lives in people’s heads and in meetings.
+That works… until it doesn’t.
+
+Imagine someone joins the company three years later, finds a bug related to that work, and opens the ticket.
+What was the original purpose? What were the constraints? What tradeoffs were made? What was explicitly out of scope?
+
+If the task is just a placeholder, future-you is blind.
+
+Now add AI into the mix: an AI agent has **zero** of that meeting context unless you put it in writing.
+
+So yes, “more detail is better” is obvious. The interesting part is *what kind* of detail reliably produces good outcomes.
+
+## Specs as prompts (what I actually do)
+
+This is what I found myself doing in my conversations with Claude:
+
+- Paste the task definition (or write one if it doesn’t exist).
+- Paste URLs so it understands where changes must go (repo links, docs, screenshots, designs).
+- Paste “nearby” references (a module that’s similar, a component with the same pattern, an existing endpoint).
+- Paste constraints (“no new deps”, “keep this API stable”, “don’t change the DB schema”, etc.).
+- Paste acceptance criteria (“I’ll consider this done when…”).
+
+And the results are quite good.
+
+The funniest part is that I kept asking for things that *should have been in the spec already*:
+
+- “What’s the expected behavior on edge case X?”
+- “Should we keep backward compatibility?”
+- “Where is the canonical implementation of this pattern?”
+
+Once you notice that, you can close the loop: write those answers into the spec, and now both humans and machines can execute it.
+
+## SDD (Spec-Driven Development), properly
+
+After going through this process myself, I went ahead and tried to understand what SDD means.
+Quoting from [Martin Fowler’s post](https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html), there are three “implementation levels”:
+
+> **Spec-first**: a well thought-out spec is written first, and then used in the AI-assisted development workflow for the task at hand.
+>
+> **Spec-anchored**: the spec is kept even after the task is complete, to continue using it for evolution and maintenance of the respective feature.
+>
+> **Spec-as-source**: the spec is the main source file over time, and only the spec is edited by the human. The human never touches the code.
+
+That last one is the spicy one: specs become the source of truth and code becomes (more or less) generated output.
+
+There are tools that follow this philosophy — for example [Kiro](https://kiro.dev/).
+But I must confess: **the more vanilla, the more I like it**.
+
+Complex engineering processes are hard to adapt and teach.
+That’s also why I’m sympathetic to the “keep your setup simple” approach you’ll hear from people building these systems.
+For example, Boris (Claude’s creator) has a great post about not over-optimizing your agent setup:
+`https://x.com/bcherny/status/2007179832300581177?lang=en`
+
+My current stance is:
+
+- I’m very interested in **spec-first**.
+- I try to be **spec-anchored** when the feature is likely to evolve.
+- I’m not trying to do **spec-as-source** right now.
+
+I still like to see the code produced, touch it, refactor it, and understand it.
+But I truly believe that better specs are simply excellent engineering practice — for engineers, for QA, for future readers… and yes, for the AI coding agent.
+
+## The spec scaffold I keep reusing
+
+This is the scaffold I keep coming back to. It’s not fancy. It’s just the minimum amount of structure that prevents ambiguity.
+
+You can paste it into a ticket, a Notion page, a GitHub issue, or straight into your AI chat.
+
+```md
+## Context
+- What is the current behavior?
+- Where does this live? (links, files, modules)
+- Who is impacted?
+
+## Goal
+One sentence describing the end state.
+
+## Non-goals
+- What is explicitly out of scope?
+- What are we NOT changing?
+
+## Requirements
+- Functional requirements (behavior)
+- Edge cases
+- Error handling
+- Performance constraints (if relevant)
+
+## Constraints
+- Must not break API X
+- No DB migrations
+- No new dependencies
+- Must work on mobile
+- Whatever matters in your system
+
+## References
+- Similar existing implementation
+- Design or screenshots
+- Docs / RFCs / PRs
+
+## Acceptance criteria
+- Bullet list of observable outcomes
+
+## Test plan
+- How you will verify it works (manual + automated)
+```
+
+### Why this works so well with AI
+
+AI is great at turning constraints into code. It’s not great at guessing constraints you never wrote down.
+
+This scaffold forces you to answer the questions that usually cause rework:
+
+- **What is the goal vs the non-goal?**
+- **What are the constraints?**
+- **What does “done” look like?**
+
+And when you give that to an AI agent, it becomes a closed loop:
+
+- The agent proposes an implementation.
+- You review it against the spec.
+- If it diverges, you update the spec (not just the code).
+- Next iteration gets smarter.
+
+### Spec-first vs “writing a big essay”
+
+This isn’t about writing a novel. It’s about writing **just enough** to remove ambiguity.
+
+Sometimes it’s 10 lines.
+Sometimes it’s a full page with edge cases and a migration plan.
+
+But the shape stays the same.
+
+### A tiny example: placeholder task → spec
+
+If a ticket says:
+
+- “Add a quick search to the customer list”
+
+I’ll turn it into something like:
+
+- **Goal**: users can filter customers by name/email while typing.
+- **Non-goals**: fuzzy search, ranking, multi-field advanced search.
+- **Constraints**: keep current pagination; no new deps.
+- **Acceptance criteria**: typing “juan” shows matching customers within 200ms; clearing input restores original list; empty state has copy.
+- **Test plan**: manual check + one integration test for the query param.
+
+That’s it. Now both a human and an AI agent can execute without guessing.
+
+### Spec-anchored (where I keep them)
+
+If the change is likely to evolve, I keep the spec around:
+
+- In the ticket (if your org actually uses it as a record)
+- In the PR description (great for future archaeology)
+- Or in a simple `docs/` folder for bigger features
+
+The point isn’t the tool. It’s that the spec survives the meeting.
+
+## Conclusion (what I’m optimizing for)
+
+I’m not chasing a perfect workflow.
+I’m optimizing for a simple habit that keeps paying dividends:
+
+- Better tasks for humans.
+- Better prompts for AI.
+- Better artifacts for future you.
+
+In practice: **specs are the best prompt**.
