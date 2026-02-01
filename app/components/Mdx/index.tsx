@@ -144,15 +144,30 @@ const components = {
       {...props}
     />
   ),
-  code: ({ className, ...props }: CodeProps) => (
-    <code
-      className={clsx(
-        "relative rounded border bg-zinc-300 bg-opacity-25 py-[0.2rem] px-[0.3rem] font-mono text-sm text-zinc-600",
-        className,
-      )}
-      {...props}
-    />
-  ),
+  code: ({ className, ...props }: CodeProps) => {
+    const maybe = props as CodeProps & {
+      "data-language"?: string;
+      "data-theme"?: string;
+    };
+
+    // `rehype-pretty-code` adds `data-language`/`data-theme` to fenced code blocks.
+    // Inline code does not have these attributes.
+    const isFencedCodeBlock = Boolean(maybe["data-language"] || maybe["data-theme"]);
+
+    if (isFencedCodeBlock) {
+      return <code className={clsx("font-mono text-sm", className)} {...props} />;
+    }
+
+    return (
+      <code
+        className={clsx(
+          "relative rounded border bg-zinc-300 bg-opacity-25 py-[0.2rem] px-[0.3rem] font-mono text-sm text-zinc-600",
+          className,
+        )}
+        {...props}
+      />
+    );
+  },
   Image,
 };
 
