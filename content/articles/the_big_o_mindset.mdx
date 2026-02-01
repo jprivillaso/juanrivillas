@@ -7,14 +7,14 @@ language: en
 ---
 
 As the year wraps up, I've been reflecting on what scalability really means. After working on several products
-reaching millions of users every day—and on my recent personal project [Momento](https://momento.baby/), an AI-powered photo app for families—I've been asking myself:
+reaching millions of users every day—and on my recent personal project [Momento Baby](https://momento.baby/), an AI-powered photo app for families—I've been asking myself:
 **what are the habits that actually make software scalable and economically viable?**
 
 We can create an analogy between scalability and staying fit. Focusing only on a single thing won't take you there. Instead,
 we have to think about what good habits we can apply in our organizations in order to remain scalable. And, funnily enough,
 similar to staying fit, having a scalable application is the desire of everyone.
 
-While I was working on Momento, I faced a series of interesting challenges that I'd like to share. Those challenges made me think about
+While I was working on Momento Baby, I faced a series of interesting challenges that I'd like to share. Those challenges made me think about
 what it would take to make my app more scalable and cost-effective, especially in the context of AI where every call has a real dollar cost.
 Today, I'll start with one idea that has helped me a lot: **the Big-O mindset**.
 
@@ -53,7 +53,7 @@ It means that you have to start your application with good practices from the be
 
 Having a Big-O mindset mostly solves the problem at the code and data layers. As an example,
 my colleague saved Appcues one million dollars after optimizing an algorithm that ran at scale.
-In Momento, I'm taking a similar approach to avoid waking up to an OpenAI bill that makes the project unsustainable.
+In Momento Baby, I'm taking a similar approach to avoid waking up to an OpenAI bill that makes the project unsustainable.
 
 ## How Big-O shows up in real products
 
@@ -63,7 +63,7 @@ In interview problems, Big-O is abstract. In real products, it shows up as:
 - **Exploding cloud bills**: because an O(\(n^2\)) operation runs in the hot path of your app.
 - **Background jobs that never catch up**: imports, email campaigns, AI pipelines that always run behind.
 
-In Momento specifically, a few patterns immediately forced me to think in terms of complexity:
+In Momento Baby specifically, a few patterns immediately forced me to think in terms of complexity:
 
 - **Photo imports**: when a user imports hundreds or thousands of photos, each photo triggers multiple operations (compression, AI vision, embeddings, storage). If I'm not careful, the total work and cost grow faster than the number of photos.
 - **Search**: queries that feel instant with 100 photos can become painful with 100,000 if my indexing strategy is naive.
@@ -166,7 +166,7 @@ page1 = MyApp.Blog.list_posts(%{"limit" => 10})
 page2 = MyApp.Blog.list_posts(%{"limit" => 10, "after" => page1.next_cursor})
 ```
 
-When developing Momento, I started with the best practices and certainly, cursor-based pagination was one of them.
+When developing Momento Baby, I started with the best practices and certainly, cursor-based pagination was one of them.
 If I'm going to let users search through thousands of photos, I want the experience to remain fast as their library grows.
 
 ## A practical Big-O checklist
@@ -188,7 +188,7 @@ Scalability is a mindset composed of good practices at every level of our stack.
 remain efficient no matter how many users you have or how much data you store.
 
 Therefore, always think about your algorithm's behavior before deploying your code to
-production; otherwise, you'll need to face huge tech debt to fix inefficient code that consumes most of your infrastructure resources—or, in the case of AI-heavy apps like Momento,
+production; otherwise, you'll need to face huge tech debt to fix inefficient code that consumes most of your infrastructure resources—or, in the case of AI-heavy apps like Momento Baby,
 most of your API budget.
 
 Let me know your thoughts about it in the comments!

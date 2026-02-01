@@ -1,0 +1,1547 @@
+0 verbose cli /Users/juanrivillas/.asdf/installs/nodejs/22.14.0/bin/node /Users/juanrivillas/.asdf/installs/nodejs/22.14.0/bin/npm
+1 info using npm@10.9.2
+2 info using node@v22.14.0
+3 silly config load:file:/Users/juanrivillas/.asdf/installs/nodejs/22.14.0/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/juanrivillas/workspace/personal/juanrivillas/.npmrc
+5 silly config load:file:/Users/juanrivillas/.npmrc
+6 silly config load:file:/Users/juanrivillas/.asdf/installs/nodejs/22.14.0/etc/npmrc
+7 verbose title npm install
+8 verbose argv "install"
+9 verbose logfile logs-max:10 dir:/Users/juanrivillas/workspace/personal/juanrivillas/.npm-cache/_logs/2026-02-01T12_14_17_713Z-
+10 verbose logfile /Users/juanrivillas/workspace/personal/juanrivillas/.npm-cache/_logs/2026-02-01T12_14_17_713Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+13 silly idealTree buildDeps
+14 silly fetch manifest remark-gfm@3.0.1
+15 silly packumentCache full:https://registry.npmjs.org/remark-gfm cache-miss
+16 http fetch GET 200 https://registry.npmjs.org/remark-gfm 8825ms (cache miss)
+17 silly packumentCache full:https://registry.npmjs.org/remark-gfm set size:undefined disposed:false
+18 silly placeDep ROOT remark-gfm@3.0.1 REPLACE for: juanrivillas.com@0.1.0 want: 3.0.1
+19 silly fetch manifest mdast-util-gfm@^2.0.0
+20 silly packumentCache full:https://registry.npmjs.org/mdast-util-gfm cache-miss
+21 silly fetch manifest micromark-extension-gfm@^2.0.0
+22 silly packumentCache full:https://registry.npmjs.org/micromark-extension-gfm cache-miss
+23 http fetch GET 200 https://registry.npmjs.org/mdast-util-gfm 965ms (cache miss)
+24 silly packumentCache full:https://registry.npmjs.org/mdast-util-gfm set size:undefined disposed:false
+25 http fetch GET 200 https://registry.npmjs.org/micromark-extension-gfm 3637ms (cache miss)
+26 silly packumentCache full:https://registry.npmjs.org/micromark-extension-gfm set size:undefined disposed:false
+27 silly placeDep ROOT mdast-util-gfm@2.0.2 OK for: remark-gfm@3.0.1 want: ^2.0.0
+28 silly placeDep ROOT micromark-extension-gfm@2.0.3 OK for: remark-gfm@3.0.1 want: ^2.0.0
+29 silly fetch manifest mdast-util-gfm-table@^1.0.0
+30 silly packumentCache full:https://registry.npmjs.org/mdast-util-gfm-table cache-miss
+31 silly fetch manifest mdast-util-gfm-footnote@^1.0.0
+32 silly packumentCache full:https://registry.npmjs.org/mdast-util-gfm-footnote cache-miss
+33 silly fetch manifest mdast-util-gfm-strikethrough@^1.0.0
+34 silly packumentCache full:https://registry.npmjs.org/mdast-util-gfm-strikethrough cache-miss
+35 silly fetch manifest mdast-util-gfm-task-list-item@^1.0.0
+36 silly packumentCache full:https://registry.npmjs.org/mdast-util-gfm-task-list-item cache-miss
+37 silly fetch manifest mdast-util-gfm-autolink-literal@^1.0.0
+38 silly packumentCache full:https://registry.npmjs.org/mdast-util-gfm-autolink-literal cache-miss
+39 silly fetch manifest micromark-extension-gfm-autolink-literal@^1.0.0
+40 silly packumentCache full:https://registry.npmjs.org/micromark-extension-gfm-autolink-literal cache-miss
+41 silly fetch manifest micromark-extension-gfm-footnote@^1.0.0
+42 silly packumentCache full:https://registry.npmjs.org/micromark-extension-gfm-footnote cache-miss
+43 silly fetch manifest micromark-extension-gfm-strikethrough@^1.0.0
+44 silly packumentCache full:https://registry.npmjs.org/micromark-extension-gfm-strikethrough cache-miss
+45 silly fetch manifest micromark-extension-gfm-table@^1.0.0
+46 silly packumentCache full:https://registry.npmjs.org/micromark-extension-gfm-table cache-miss
+47 silly fetch manifest micromark-extension-gfm-tagfilter@^1.0.0
+48 silly packumentCache full:https://registry.npmjs.org/micromark-extension-gfm-tagfilter cache-miss
+49 silly fetch manifest micromark-extension-gfm-task-list-item@^1.0.0
+50 silly packumentCache full:https://registry.npmjs.org/micromark-extension-gfm-task-list-item cache-miss
+51 http fetch GET 200 https://registry.npmjs.org/mdast-util-gfm-footnote 550ms (cache miss)
+52 silly packumentCache full:https://registry.npmjs.org/mdast-util-gfm-footnote set size:undefined disposed:false
+53 http fetch GET 200 https://registry.npmjs.org/mdast-util-gfm-task-list-item 700ms (cache miss)
+54 silly packumentCache full:https://registry.npmjs.org/mdast-util-gfm-task-list-item set size:undefined disposed:false
+55 http fetch GET 200 https://registry.npmjs.org/mdast-util-gfm-table 862ms (cache miss)
+56 silly packumentCache full:https://registry.npmjs.org/mdast-util-gfm-table set size:undefined disposed:false
+57 http fetch GET 200 https://registry.npmjs.org/micromark-extension-gfm-autolink-literal 1334ms (cache miss)
+58 silly packumentCache full:https://registry.npmjs.org/micromark-extension-gfm-autolink-literal set size:undefined disposed:false
+59 http fetch GET 200 https://registry.npmjs.org/micromark-extension-gfm-task-list-item 1384ms (cache miss)
+60 silly packumentCache full:https://registry.npmjs.org/micromark-extension-gfm-task-list-item set size:undefined disposed:false
+61 http fetch GET 200 https://registry.npmjs.org/mdast-util-gfm-autolink-literal 2768ms (cache miss)
+62 silly packumentCache full:https://registry.npmjs.org/mdast-util-gfm-autolink-literal set size:undefined disposed:false
+63 http fetch GET 200 https://registry.npmjs.org/mdast-util-gfm-strikethrough 2835ms (cache miss)
+64 silly packumentCache full:https://registry.npmjs.org/mdast-util-gfm-strikethrough set size:undefined disposed:false
+65 http fetch GET 200 https://registry.npmjs.org/micromark-extension-gfm-tagfilter 3554ms (cache miss)
+66 silly packumentCache full:https://registry.npmjs.org/micromark-extension-gfm-tagfilter set size:undefined disposed:false
+67 http fetch GET 200 https://registry.npmjs.org/micromark-extension-gfm-footnote 4000ms (cache miss)
+68 silly packumentCache full:https://registry.npmjs.org/micromark-extension-gfm-footnote set size:undefined disposed:false
+69 http fetch GET 200 https://registry.npmjs.org/micromark-extension-gfm-strikethrough 4385ms (cache miss)
+70 silly packumentCache full:https://registry.npmjs.org/micromark-extension-gfm-strikethrough set size:undefined disposed:false
+71 http fetch GET https://registry.npmjs.org/micromark-extension-gfm-table attempt 1 failed with ECONNRESET
+72 http fetch GET 200 https://registry.npmjs.org/micromark-extension-gfm-table 27510ms attempt #2 (cache miss)
+73 silly packumentCache full:https://registry.npmjs.org/micromark-extension-gfm-table set size:undefined disposed:false
+74 silly placeDep ROOT mdast-util-gfm-autolink-literal@1.0.3 OK for: mdast-util-gfm@2.0.2 want: ^1.0.0
+75 silly placeDep ROOT mdast-util-gfm-footnote@1.0.2 OK for: mdast-util-gfm@2.0.2 want: ^1.0.0
+76 silly placeDep ROOT mdast-util-gfm-strikethrough@1.0.3 OK for: mdast-util-gfm@2.0.2 want: ^1.0.0
+77 silly placeDep ROOT mdast-util-gfm-table@1.0.7 OK for: mdast-util-gfm@2.0.2 want: ^1.0.0
+78 silly placeDep ROOT mdast-util-gfm-task-list-item@1.0.2 OK for: mdast-util-gfm@2.0.2 want: ^1.0.0
+79 silly fetch manifest mdast-util-find-and-replace@^2.0.0
+80 silly packumentCache full:https://registry.npmjs.org/mdast-util-find-and-replace cache-miss
+81 silly fetch manifest markdown-table@^3.0.0
+82 silly packumentCache full:https://registry.npmjs.org/markdown-table cache-miss
+83 http fetch GET 200 https://registry.npmjs.org/markdown-table 5454ms (cache miss)
+84 silly packumentCache full:https://registry.npmjs.org/markdown-table set size:undefined disposed:false
+85 http fetch GET 200 https://registry.npmjs.org/mdast-util-find-and-replace 15084ms (cache miss)
+86 silly packumentCache full:https://registry.npmjs.org/mdast-util-find-and-replace set size:undefined disposed:false
+87 silly placeDep ROOT mdast-util-find-and-replace@2.2.2 OK for: mdast-util-gfm-autolink-literal@1.0.3 want: ^2.0.0
+88 silly fetch manifest escape-string-regexp@^5.0.0
+89 silly packumentCache full:https://registry.npmjs.org/escape-string-regexp cache-miss
+90 silly fetch manifest unist-util-visit-parents@^5.0.0
+91 silly packumentCache full:https://registry.npmjs.org/unist-util-visit-parents cache-miss
+92 http fetch GET 200 https://registry.npmjs.org/escape-string-regexp 117ms (cache miss)
+93 silly packumentCache full:https://registry.npmjs.org/escape-string-regexp set size:undefined disposed:false
+94 http fetch GET 200 https://registry.npmjs.org/unist-util-visit-parents 1246ms (cache miss)
+95 silly packumentCache full:https://registry.npmjs.org/unist-util-visit-parents set size:undefined disposed:false
+96 silly placeDep node_modules/mdast-util-find-and-replace escape-string-regexp@5.0.0 OK for: mdast-util-find-and-replace@2.2.2 want: ^5.0.0
+97 silly placeDep node_modules/mdast-util-find-and-replace unist-util-visit-parents@5.1.3 OK for: mdast-util-find-and-replace@2.2.2 want: ^5.0.0
+98 silly placeDep ROOT markdown-table@3.0.4 OK for: mdast-util-gfm-table@1.0.7 want: ^3.0.0
+99 silly placeDep ROOT micromark-extension-gfm-autolink-literal@1.0.5 OK for: micromark-extension-gfm@2.0.3 want: ^1.0.0
+100 silly placeDep ROOT micromark-extension-gfm-footnote@1.1.2 OK for: micromark-extension-gfm@2.0.3 want: ^1.0.0
+101 silly placeDep ROOT micromark-extension-gfm-strikethrough@1.0.7 OK for: micromark-extension-gfm@2.0.3 want: ^1.0.0
+102 silly placeDep ROOT micromark-extension-gfm-table@1.0.7 OK for: micromark-extension-gfm@2.0.3 want: ^1.0.0
+103 silly placeDep ROOT micromark-extension-gfm-tagfilter@1.0.2 OK for: micromark-extension-gfm@2.0.3 want: ^1.0.0
+104 silly placeDep ROOT micromark-extension-gfm-task-list-item@1.0.5 OK for: micromark-extension-gfm@2.0.3 want: ^1.0.0
+105 silly reify mark retired [
+105 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/mdast-util-find-and-replace'
+105 silly reify ]
+106 silly reify mark retired [
+106 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/mdast-util-gfm'
+106 silly reify ]
+107 silly reify mark retired [
+107 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/mdast-util-gfm-autolink-literal'
+107 silly reify ]
+108 silly reify mark retired [
+108 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/mdast-util-gfm-footnote'
+108 silly reify ]
+109 silly reify mark retired [
+109 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/mdast-util-gfm-strikethrough'
+109 silly reify ]
+110 silly reify mark retired [
+110 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/mdast-util-gfm-table'
+110 silly reify ]
+111 silly reify mark retired [
+111 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/mdast-util-gfm-task-list-item'
+111 silly reify ]
+112 silly reify mark retired [
+112 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/micromark-extension-gfm'
+112 silly reify ]
+113 silly reify mark retired [
+113 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/micromark-extension-gfm-autolink-literal'
+113 silly reify ]
+114 silly reify mark retired [
+114 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/micromark-extension-gfm-footnote'
+114 silly reify ]
+115 silly reify mark retired [
+115 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/micromark-extension-gfm-strikethrough'
+115 silly reify ]
+116 silly reify mark retired [
+116 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/micromark-extension-gfm-table'
+116 silly reify ]
+117 silly reify mark retired [
+117 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/micromark-extension-gfm-tagfilter'
+117 silly reify ]
+118 silly reify mark retired [
+118 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/micromark-extension-gfm-task-list-item'
+118 silly reify ]
+119 silly reify mark retired [
+119 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/remark-gfm'
+119 silly reify ]
+120 silly reify mark retired [
+120 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/remark-stringify'
+120 silly reify ]
+121 silly reify moves {
+121 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/mdast-util-find-and-replace': '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/.mdast-util-find-and-replace-GGphjc62',
+121 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/mdast-util-gfm': '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/.mdast-util-gfm-G59aTdLl',
+121 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/mdast-util-gfm-autolink-literal': '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/.mdast-util-gfm-autolink-literal-V4wNNsJN',
+121 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/mdast-util-gfm-footnote': '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/.mdast-util-gfm-footnote-2OdEoTiV',
+121 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/mdast-util-gfm-strikethrough': '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/.mdast-util-gfm-strikethrough-xLS0TcyB',
+121 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/mdast-util-gfm-table': '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/.mdast-util-gfm-table-0QudnFoC',
+121 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/mdast-util-gfm-task-list-item': '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/.mdast-util-gfm-task-list-item-fwhT0Fky',
+121 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/micromark-extension-gfm': '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/.micromark-extension-gfm-mandDj9g',
+121 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/micromark-extension-gfm-autolink-literal': '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/.micromark-extension-gfm-autolink-literal-bHRtb2pP',
+121 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/micromark-extension-gfm-footnote': '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/.micromark-extension-gfm-footnote-tF2Kqkdx',
+121 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/micromark-extension-gfm-strikethrough': '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/.micromark-extension-gfm-strikethrough-gSJFPzVk',
+121 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/micromark-extension-gfm-table': '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/.micromark-extension-gfm-table-gA7bgDKm',
+121 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/micromark-extension-gfm-tagfilter': '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/.micromark-extension-gfm-tagfilter-C6h7siMQ',
+121 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/micromark-extension-gfm-task-list-item': '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/.micromark-extension-gfm-task-list-item-T4RVayaN',
+121 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/remark-gfm': '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/.remark-gfm-F6LtMvjB',
+121 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/remark-stringify': '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/.remark-stringify-lf8sbMpg'
+121 silly reify }
+122 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-wasm32-wasi
+123 silly reify mark deleted [
+123 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-wasm32-wasi'
+123 silly reify ]
+124 silly audit bulk request {
+124 silly audit   '@alloc/quick-lru': [ '5.2.0' ],
+124 silly audit   '@babel/runtime': [ '7.28.6' ],
+124 silly audit   '@contentlayer/cli': [ '0.3.4' ],
+124 silly audit   '@contentlayer/client': [ '0.3.4' ],
+124 silly audit   '@contentlayer/core': [ '0.3.4' ],
+124 silly audit   '@contentlayer/source-files': [ '0.3.4' ],
+124 silly audit   chokidar: [ '3.6.0', '4.0.3' ],
+124 silly audit   readdirp: [ '3.6.0', '4.1.2' ],
+124 silly audit   '@contentlayer/source-remote-files': [ '0.3.4' ],
+124 silly audit   '@contentlayer/utils': [ '0.3.4' ],
+124 silly audit   '@effect-ts/core': [ '0.60.5' ],
+124 silly audit   '@effect-ts/otel': [ '0.15.1' ],
+124 silly audit   '@effect-ts/otel-exporter-trace-otlp-grpc': [ '0.15.1' ],
+124 silly audit   '@effect-ts/otel-sdk-trace-node': [ '0.15.1' ],
+124 silly audit   '@effect-ts/system': [ '0.57.5' ],
+124 silly audit   '@emnapi/runtime': [ '1.8.1' ],
+124 silly audit   '@envelop/instrumentation': [ '1.0.0' ],
+124 silly audit   '@esbuild-plugins/node-resolve': [ '0.1.4' ],
+124 silly audit   '@esbuild/aix-ppc64': [ '0.25.12' ],
+124 silly audit   '@esbuild/android-arm': [ '0.25.12' ],
+124 silly audit   '@esbuild/android-arm64': [ '0.25.12' ],
+124 silly audit   '@esbuild/android-x64': [ '0.25.12' ],
+124 silly audit   '@esbuild/darwin-arm64': [ '0.25.12' ],
+124 silly audit   '@esbuild/darwin-x64': [ '0.25.12' ],
+124 silly audit   '@esbuild/freebsd-arm64': [ '0.25.12' ],
+124 silly audit   '@esbuild/freebsd-x64': [ '0.25.12' ],
+124 silly audit   '@esbuild/linux-arm': [ '0.25.12' ],
+124 silly audit   '@esbuild/linux-arm64': [ '0.25.12' ],
+124 silly audit   '@esbuild/linux-ia32': [ '0.25.12' ],
+124 silly audit   '@esbuild/linux-loong64': [ '0.25.12' ],
+124 silly audit   '@esbuild/linux-mips64el': [ '0.25.12' ],
+124 silly audit   '@esbuild/linux-ppc64': [ '0.25.12' ],
+124 silly audit   '@esbuild/linux-riscv64': [ '0.25.12' ],
+124 silly audit   '@esbuild/linux-s390x': [ '0.25.12' ],
+124 silly audit   '@esbuild/linux-x64': [ '0.25.12' ],
+124 silly audit   '@esbuild/netbsd-arm64': [ '0.25.12' ],
+124 silly audit   '@esbuild/netbsd-x64': [ '0.25.12' ],
+124 silly audit   '@esbuild/openbsd-arm64': [ '0.25.12' ],
+124 silly audit   '@esbuild/openbsd-x64': [ '0.25.12' ],
+124 silly audit   '@esbuild/openharmony-arm64': [ '0.25.12' ],
+124 silly audit   '@esbuild/sunos-x64': [ '0.25.12' ],
+124 silly audit   '@esbuild/win32-arm64': [ '0.25.12' ],
+124 silly audit   '@esbuild/win32-ia32': [ '0.25.12' ],
+124 silly audit   '@esbuild/win32-x64': [ '0.25.12' ],
+124 silly audit   '@fal-works/esbuild-plugin-global-externals': [ '2.1.2' ],
+124 silly audit   '@fastify/busboy': [ '3.2.0' ],
+124 silly audit   '@grpc/grpc-js': [ '1.14.3' ],
+124 silly audit   '@grpc/proto-loader': [ '0.8.0' ],
+124 silly audit   '@img/colour': [ '1.0.0' ],
+124 silly audit   '@img/sharp-darwin-arm64': [ '0.34.5' ],
+124 silly audit   '@img/sharp-darwin-x64': [ '0.34.5' ],
+124 silly audit   '@img/sharp-libvips-darwin-arm64': [ '1.2.4' ],
+124 silly audit   '@img/sharp-libvips-darwin-x64': [ '1.2.4' ],
+124 silly audit   '@img/sharp-libvips-linux-arm': [ '1.2.4' ],
+124 silly audit   '@img/sharp-libvips-linux-arm64': [ '1.2.4' ],
+124 silly audit   '@img/sharp-libvips-linux-ppc64': [ '1.2.4' ],
+124 silly audit   '@img/sharp-libvips-linux-riscv64': [ '1.2.4' ],
+124 silly audit   '@img/sharp-libvips-linux-s390x': [ '1.2.4' ],
+124 silly audit   '@img/sharp-libvips-linux-x64': [ '1.2.4' ],
+124 silly audit   '@img/sharp-libvips-linuxmusl-arm64': [ '1.2.4' ],
+124 silly audit   '@img/sharp-libvips-linuxmusl-x64': [ '1.2.4' ],
+124 silly audit   '@img/sharp-linux-arm': [ '0.34.5' ],
+124 silly audit   '@img/sharp-linux-arm64': [ '0.34.5' ],
+124 silly audit   '@img/sharp-linux-ppc64': [ '0.34.5' ],
+124 silly audit   '@img/sharp-linux-riscv64': [ '0.34.5' ],
+124 silly audit   '@img/sharp-linux-s390x': [ '0.34.5' ],
+124 silly audit   '@img/sharp-linux-x64': [ '0.34.5' ],
+124 silly audit   '@img/sharp-linuxmusl-arm64': [ '0.34.5' ],
+124 silly audit   '@img/sharp-linuxmusl-x64': [ '0.34.5' ],
+124 silly audit   '@img/sharp-wasm32': [ '0.34.5' ],
+124 silly audit   '@img/sharp-win32-arm64': [ '0.34.5' ],
+124 silly audit   '@img/sharp-win32-ia32': [ '0.34.5' ],
+124 silly audit   '@img/sharp-win32-x64': [ '0.34.5' ],
+124 silly audit   '@jridgewell/gen-mapping': [ '0.3.13' ],
+124 silly audit   '@jridgewell/remapping': [ '2.3.5' ],
+124 silly audit   '@jridgewell/resolve-uri': [ '3.1.2' ],
+124 silly audit   '@jridgewell/sourcemap-codec': [ '1.5.5' ],
+124 silly audit   '@jridgewell/trace-mapping': [ '0.3.31' ],
+124 silly audit   '@js-sdsl/ordered-map': [ '4.4.2' ],
+124 silly audit   '@js-temporal/polyfill': [ '0.4.4' ],
+124 silly audit   '@mdx-js/esbuild': [ '2.3.0' ],
+124 silly audit   '@mdx-js/mdx': [ '2.3.0' ],
+124 silly audit   '@netlify/blobs': [ '10.5.0' ],
+124 silly audit   '@netlify/dev-utils': [ '4.3.3' ],
+124 silly audit   '@netlify/otel': [ '5.1.1' ],
+124 silly audit   '@opentelemetry/api': [ '1.9.0', '1.4.1' ],
+124 silly audit   '@netlify/plugin-nextjs': [ '5.15.5' ],
+124 silly audit   '@netlify/runtime-utils': [ '2.2.1' ],
+124 silly audit   '@next/env': [ '16.1.4' ],
+124 silly audit   '@next/mdx': [ '16.1.4' ],
+124 silly audit   '@next/swc-darwin-arm64': [ '16.1.4' ],
+124 silly audit   '@next/swc-darwin-x64': [ '16.1.4' ],
+124 silly audit   '@next/swc-linux-arm64-gnu': [ '16.1.4' ],
+124 silly audit   '@next/swc-linux-arm64-musl': [ '16.1.4' ],
+124 silly audit   '@next/swc-linux-x64-gnu': [ '16.1.4' ],
+124 silly audit   '@next/swc-linux-x64-musl': [ '16.1.4' ],
+124 silly audit   '@next/swc-win32-arm64-msvc': [ '16.1.4' ],
+124 silly audit   '@next/swc-win32-x64-msvc': [ '16.1.4' ],
+124 silly audit   '@nodelib/fs.scandir': [ '2.1.5' ],
+124 silly audit   '@nodelib/fs.stat': [ '2.0.5' ],
+124 silly audit   '@nodelib/fs.walk': [ '1.2.8' ],
+124 silly audit   '@opentelemetry/api-logs': [ '0.203.0', '0.39.1' ],
+124 silly audit   '@opentelemetry/context-async-hooks': [ '1.30.1' ],
+124 silly audit   '@opentelemetry/core': [ '1.30.1', '1.13.0' ],
+124 silly audit   '@opentelemetry/exporter-trace-otlp-grpc': [ '0.39.1' ],
+124 silly audit   '@opentelemetry/resources': [ '1.13.0', '1.30.1' ],
+124 silly audit   '@opentelemetry/sdk-trace-base': [ '1.13.0', '1.30.1' ],
+124 silly audit   '@opentelemetry/semantic-conventions': [ '1.13.0', '1.28.0' ],
+124 silly audit   '@opentelemetry/instrumentation': [ '0.203.0' ],
+124 silly audit   '@opentelemetry/otlp-exporter-base': [ '0.39.1' ],
+124 silly audit   '@opentelemetry/otlp-grpc-exporter-base': [ '0.39.1' ],
+124 silly audit   '@opentelemetry/otlp-transformer': [ '0.39.1' ],
+124 silly audit   '@opentelemetry/propagator-b3': [ '1.30.1' ],
+124 silly audit   '@opentelemetry/propagator-jaeger': [ '1.30.1' ],
+124 silly audit   '@opentelemetry/sdk-logs': [ '0.39.1' ],
+124 silly audit   '@opentelemetry/sdk-metrics': [ '1.13.0' ],
+124 silly audit   '@opentelemetry/sdk-trace-node': [ '1.30.1' ],
+124 silly audit   '@protobufjs/aspromise': [ '1.1.2' ],
+124 silly audit   '@protobufjs/base64': [ '1.1.2' ],
+124 silly audit   '@protobufjs/codegen': [ '2.0.4' ],
+124 silly audit   '@protobufjs/eventemitter': [ '1.1.0' ],
+124 silly audit   '@protobufjs/fetch': [ '1.1.0' ],
+124 silly audit   '@protobufjs/float': [ '1.0.2' ],
+124 silly audit   '@protobufjs/inquire': [ '1.1.0' ],
+124 silly audit   '@protobufjs/path': [ '1.1.2' ],
+124 silly audit   '@protobufjs/pool': [ '1.1.0' ],
+124 silly audit   '@protobufjs/utf8': [ '1.1.0' ],
+124 silly audit   '@reactflow/background': [ '11.3.14' ],
+124 silly audit   '@reactflow/controls': [ '11.2.14' ],
+124 silly audit   '@reactflow/core': [ '11.11.4' ],
+124 silly audit   '@reactflow/minimap': [ '11.7.14' ],
+124 silly audit   '@reactflow/node-resizer': [ '2.2.14' ],
+124 silly audit   '@reactflow/node-toolbar': [ '1.3.14' ],
+124 silly audit   '@rometools/cli-darwin-arm64': [ '12.1.3' ],
+124 silly audit   '@rometools/cli-darwin-x64': [ '12.1.3' ],
+124 silly audit   '@rometools/cli-linux-arm64': [ '12.1.3' ],
+124 silly audit   '@rometools/cli-linux-x64': [ '12.1.3' ],
+124 silly audit   '@rometools/cli-win32-arm64': [ '12.1.3' ],
+124 silly audit   '@rometools/cli-win32-x64': [ '12.1.3' ],
+124 silly audit   '@shikijs/core': [ '3.21.0' ],
+124 silly audit   '@types/hast': [ '3.0.4', '2.3.10' ],
+124 silly audit   '@types/mdast': [ '4.0.4', '3.0.15' ],
+124 silly audit   '@types/unist': [ '3.0.3', '2.0.11' ],
+124 silly audit   'hast-util-to-html': [ '9.0.5', '8.0.4' ],
+124 silly audit   'hast-util-whitespace': [ '3.0.0', '2.0.1' ],
+124 silly audit   'html-void-elements': [ '3.0.0', '2.0.1' ],
+124 silly audit   'mdast-util-to-hast': [ '13.2.1', '12.3.0' ],
+124 silly audit   'micromark-util-character': [ '2.1.1', '1.2.0' ],
+124 silly audit   'micromark-util-encode': [ '2.0.1', '1.1.0' ],
+124 silly audit   'micromark-util-sanitize-uri': [ '2.0.1', '1.2.0' ],
+124 silly audit   'micromark-util-symbol': [ '2.0.1', '1.1.0' ],
+124 silly audit   'micromark-util-types': [ '2.0.2', '1.1.0' ],
+124 silly audit   'property-information': [ '7.1.0', '6.5.0' ],
+124 silly audit   'unist-util-is': [ '6.0.1', '5.2.1' ],
+124 silly audit   'unist-util-position': [ '5.0.0', '4.0.4' ],
+124 silly audit   'unist-util-visit': [ '5.1.0', '4.1.2' ],
+124 silly audit   vfile: [ '6.0.3', '5.3.7' ],
+124 silly audit   '@shikijs/engine-javascript': [ '3.21.0' ],
+124 silly audit   '@shikijs/engine-oniguruma': [ '3.21.0' ],
+124 silly audit   '@shikijs/langs': [ '3.21.0' ],
+124 silly audit   '@shikijs/themes': [ '3.21.0' ],
+124 silly audit   '@shikijs/types': [ '3.21.0' ],
+124 silly audit   '@shikijs/vscode-textmate': [ '10.0.2' ],
+124 silly audit   '@swc/helpers': [ '0.5.15' ],
+124 silly audit   '@tailwindcss/line-clamp': [ '0.4.4' ],
+124 silly audit   '@tailwindcss/node': [ '4.1.18' ],
+124 silly audit   '@tailwindcss/oxide': [ '4.1.18' ],
+124 silly audit   '@tailwindcss/oxide-android-arm64': [ '4.1.18' ],
+124 silly audit   '@tailwindcss/oxide-darwin-arm64': [ '4.1.18' ],
+124 silly audit   '@tailwindcss/oxide-darwin-x64': [ '4.1.18' ],
+124 silly audit   '@tailwindcss/oxide-freebsd-x64': [ '4.1.18' ],
+124 silly audit   '@tailwindcss/oxide-linux-arm-gnueabihf': [ '4.1.18' ],
+124 silly audit   '@tailwindcss/oxide-linux-arm64-gnu': [ '4.1.18' ],
+124 silly audit   '@tailwindcss/oxide-linux-arm64-musl': [ '4.1.18' ],
+124 silly audit   '@tailwindcss/oxide-linux-x64-gnu': [ '4.1.18' ],
+124 silly audit   '@tailwindcss/oxide-linux-x64-musl': [ '4.1.18' ],
+124 silly audit   '@tailwindcss/oxide-win32-arm64-msvc': [ '4.1.18' ],
+124 silly audit   '@tailwindcss/oxide-win32-x64-msvc': [ '4.1.18' ],
+124 silly audit   '@tailwindcss/postcss': [ '4.1.18' ],
+124 silly audit   '@tailwindcss/typography': [ '0.5.19' ],
+124 silly audit   '@types/acorn': [ '4.0.6' ],
+124 silly audit   '@types/d3': [ '7.4.3' ],
+124 silly audit   '@types/d3-array': [ '3.2.2' ],
+124 silly audit   '@types/d3-axis': [ '3.0.6' ],
+124 silly audit   '@types/d3-brush': [ '3.0.6' ],
+124 silly audit   '@types/d3-chord': [ '3.0.6' ],
+124 silly audit   '@types/d3-color': [ '3.1.3' ],
+124 silly audit   '@types/d3-contour': [ '3.0.6' ],
+124 silly audit   '@types/d3-delaunay': [ '6.0.4' ],
+124 silly audit   '@types/d3-dispatch': [ '3.0.7' ],
+124 silly audit   '@types/d3-drag': [ '3.0.7' ],
+124 silly audit   '@types/d3-dsv': [ '3.0.7' ],
+124 silly audit   '@types/d3-ease': [ '3.0.2' ],
+124 silly audit   '@types/d3-fetch': [ '3.0.7' ],
+124 silly audit   '@types/d3-force': [ '3.0.10' ],
+124 silly audit   '@types/d3-format': [ '3.0.4' ],
+124 silly audit   '@types/d3-geo': [ '3.1.0' ],
+124 silly audit   '@types/d3-hierarchy': [ '3.1.7' ],
+124 silly audit   '@types/d3-interpolate': [ '3.0.4' ],
+124 silly audit   '@types/d3-path': [ '3.1.1' ],
+124 silly audit   '@types/d3-polygon': [ '3.0.2' ],
+124 silly audit   '@types/d3-quadtree': [ '3.0.6' ],
+124 silly audit   '@types/d3-random': [ '3.0.3' ],
+124 silly audit   '@types/d3-scale': [ '4.0.9' ],
+124 silly audit   '@types/d3-scale-chromatic': [ '3.1.0' ],
+124 silly audit   '@types/d3-selection': [ '3.0.11' ],
+124 silly audit   '@types/d3-shape': [ '3.1.8' ],
+124 silly audit   '@types/d3-time': [ '3.0.4' ],
+124 silly audit   '@types/d3-time-format': [ '4.0.3' ],
+124 silly audit   '@types/d3-timer': [ '3.0.2' ],
+124 silly audit   '@types/d3-transition': [ '3.0.9' ],
+124 silly audit   '@types/d3-zoom': [ '3.0.8' ],
+124 silly audit   '@types/dagre': [ '0.7.53' ],
+124 silly audit   '@types/debug': [ '4.1.12' ],
+124 silly audit   '@types/estree': [ '1.0.8' ],
+124 silly audit   '@types/estree-jsx': [ '1.0.5' ],
+124 silly audit   '@types/geojson': [ '7946.0.16' ],
+124 silly audit   '@types/mdx': [ '2.0.13' ],
+124 silly audit   '@types/ms': [ '2.1.0' ],
+124 silly audit   '@types/node': [ '25.0.10' ],
+124 silly audit   '@types/parse5': [ '6.0.3' ],
+124 silly audit   '@types/react': [ '19.2.9' ],
+124 silly audit   '@types/react-dom': [ '19.2.3' ],
+124 silly audit   '@types/react-modal': [ '3.16.3' ],
+124 silly audit   '@types/resolve': [ '1.20.6' ],
+124 silly audit   '@ungap/structured-clone': [ '1.3.0' ],
+124 silly audit   '@upstash/redis': [ '1.36.1' ],
+124 silly audit   '@whatwg-node/disposablestack': [ '0.0.6' ],
+124 silly audit   '@whatwg-node/fetch': [ '0.10.13' ],
+124 silly audit   '@whatwg-node/node-fetch': [ '0.8.5' ],
+124 silly audit   '@whatwg-node/promise-helpers': [ '1.3.2' ],
+124 silly audit   '@whatwg-node/server': [ '0.10.18' ],
+124 silly audit   '@yarnpkg/lockfile': [ '1.1.0' ],
+124 silly audit   acorn: [ '8.15.0' ],
+124 silly audit   'acorn-import-attributes': [ '1.9.5' ],
+124 silly audit   'acorn-jsx': [ '5.3.2' ],
+124 silly audit   'ansi-regex': [ '5.0.1' ],
+124 silly audit   'ansi-styles': [ '4.3.0' ],
+124 silly audit   ansis: [ '4.2.0' ],
+124 silly audit   anymatch: [ '3.1.3' ],
+124 silly audit   argparse: [ '1.0.10', '2.0.1' ],
+124 silly audit   'array-timsort': [ '1.0.3' ],
+124 silly audit   astring: [ '1.9.0' ],
+124 silly audit   autoprefixer: [ '10.4.23' ],
+124 silly audit   bail: [ '2.0.2' ],
+124 silly audit   'baseline-browser-mapping': [ '2.9.18' ],
+124 silly audit   'binary-extensions': [ '2.3.0' ],
+124 silly audit   braces: [ '3.0.3' ],
+124 silly audit   browserslist: [ '4.28.1' ],
+124 silly audit   'buffer-from': [ '1.1.2' ],
+124 silly audit   'call-bind': [ '1.0.8' ],
+124 silly audit   'call-bind-apply-helpers': [ '1.0.2' ],
+124 silly audit   'call-bound': [ '1.0.4' ],
+124 silly audit   callsite: [ '1.0.0' ],
+124 silly audit   'camel-case': [ '4.1.2' ],
+124 silly audit   'caniuse-lite': [ '1.0.30001766' ],
+124 silly audit   ccount: [ '2.0.1' ],
+124 silly audit   chalk: [ '4.1.2' ],
+124 silly audit   'supports-color': [ '7.2.0', '8.1.1' ],
+124 silly audit   'character-entities': [ '2.0.2' ],
+124 silly audit   'character-entities-html4': [ '2.1.0' ],
+124 silly audit   'character-entities-legacy': [ '3.0.0' ],
+124 silly audit   'character-reference-invalid': [ '2.0.1' ],
+124 silly audit   'ci-info': [ '3.9.0' ],
+124 silly audit   'cjs-module-lexer': [ '1.4.3' ],
+124 silly audit   classcat: [ '5.0.5' ],
+124 silly audit   'client-only': [ '0.0.1' ],
+124 silly audit   clipanion: [ '3.2.1' ],
+124 silly audit   cliui: [ '8.0.1' ],
+124 silly audit   'color-convert': [ '2.0.1' ],
+124 silly audit   'color-name': [ '1.1.4' ],
+124 silly audit   'comma-separated-tokens': [ '2.0.3' ],
+124 silly audit   'comment-json': [ '4.5.1' ],
+124 silly audit   concurrently: [ '9.2.1' ],
+124 silly audit   contentlayer: [ '0.3.4' ],
+124 silly audit   'core-util-is': [ '1.0.3' ],
+124 silly audit   'cross-spawn': [ '7.0.6' ],
+124 silly audit   cssesc: [ '3.0.0' ],
+124 silly audit   csstype: [ '3.2.3' ],
+124 silly audit   'd3-color': [ '3.1.0' ],
+124 silly audit   'd3-dispatch': [ '3.0.1' ],
+124 silly audit   'd3-drag': [ '3.0.0' ],
+124 silly audit   'd3-ease': [ '3.0.1' ],
+124 silly audit   'd3-interpolate': [ '3.0.1' ],
+124 silly audit   'd3-selection': [ '3.0.0' ],
+124 silly audit   'd3-timer': [ '3.0.1' ],
+124 silly audit   'd3-transition': [ '3.0.1' ],
+124 silly audit   'd3-zoom': [ '3.0.0' ],
+124 silly audit   dagre: [ '0.8.5' ],
+124 silly audit   'data-uri-to-buffer': [ '4.0.1' ],
+124 silly audit   debug: [ '4.4.3' ],
+124 silly audit   decache: [ '4.6.2' ],
+124 silly audit   'decode-named-character-reference': [ '1.3.0' ],
+124 silly audit   'define-data-property': [ '1.1.4' ],
+124 silly audit   dequal: [ '2.0.3' ],
+124 silly audit   'detect-indent': [ '7.0.2' ],
+124 silly audit   'detect-libc': [ '2.1.2' ],
+124 silly audit   'detect-newline': [ '4.0.1' ],
+124 silly audit   dettle: [ '1.0.5' ],
+124 silly audit   devlop: [ '1.1.0' ],
+124 silly audit   diff: [ '5.2.2' ],
+124 silly audit   'disqus-react': [ '1.1.7' ],
+124 silly audit   'dot-prop': [ '9.0.0' ],
+124 silly audit   'type-fest': [ '4.41.0', '3.13.1' ],
+124 silly audit   'dunder-proto': [ '1.0.1' ],
+124 silly audit   'electron-to-chromium': [ '1.5.278' ],
+124 silly audit   'emoji-regex': [ '8.0.0' ],
+124 silly audit   empathic: [ '2.0.0' ],
+124 silly audit   'enhanced-resolve': [ '5.18.4' ],
+124 silly audit   entities: [ '6.0.1' ],
+124 silly audit   'env-paths': [ '3.0.0' ],
+124 silly audit   'es-define-property': [ '1.0.1' ],
+124 silly audit   'es-errors': [ '1.3.0' ],
+124 silly audit   'es-object-atoms': [ '1.1.1' ],
+124 silly audit   esbuild: [ '0.25.12' ],
+124 silly audit   escalade: [ '3.2.0' ],
+124 silly audit   'escape-string-regexp': [ '4.0.0', '5.0.0' ],
+124 silly audit   esprima: [ '4.0.1' ],
+124 silly audit   'estree-util-attach-comments': [ '2.1.1' ],
+124 silly audit   'estree-util-build-jsx': [ '2.2.2' ],
+124 silly audit   'estree-util-is-identifier-name': [ '2.1.0', '1.1.0' ],
+124 silly audit   'estree-util-to-js': [ '1.2.0' ],
+124 silly audit   'estree-util-value-to-estree': [ '3.5.0' ],
+124 silly audit   'estree-util-visit': [ '1.2.1' ],
+124 silly audit   'estree-walker': [ '3.0.3' ],
+124 silly audit   exenv: [ '1.2.2' ],
+124 silly audit   extend: [ '3.0.2' ],
+124 silly audit   'extend-shallow': [ '2.0.1' ],
+124 silly audit   'fast-glob': [ '3.3.3' ],
+124 silly audit   fastq: [ '1.20.1' ],
+124 silly audit   fault: [ '2.0.1' ],
+124 silly audit   'fetch-blob': [ '3.2.0' ],
+124 silly audit   'fill-range': [ '7.1.1' ],
+124 silly audit   'find-yarn-workspace-root': [ '2.0.0' ],
+124 silly audit   'follow-redirects': [ '1.15.11' ],
+124 silly audit   format: [ '0.2.2' ],
+124 silly audit   'formdata-polyfill': [ '4.0.10' ],
+124 silly audit   'fraction.js': [ '5.3.4' ],
+124 silly audit   'framer-motion': [ '12.29.0' ],
+124 silly audit   'fs-extra': [ '10.1.0' ],
+124 silly audit   'fs-monkey': [ '1.1.0' ],
+124 silly audit   fsevents: [ '2.3.3' ],
+124 silly audit   'function-bind': [ '1.1.2' ],
+124 silly audit   'get-caller-file': [ '2.0.5' ],
+124 silly audit   'get-intrinsic': [ '1.3.0' ],
+124 silly audit   'get-proto': [ '1.0.1' ],
+124 silly audit   'git-hooks-list': [ '4.2.1' ],
+124 silly audit   'github-slugger': [ '2.0.0' ],
+124 silly audit   'glob-parent': [ '5.1.2' ],
+124 silly audit   gopd: [ '1.2.0' ],
+124 silly audit   'graceful-fs': [ '4.2.11' ],
+124 silly audit   graphlib: [ '2.1.8' ],
+124 silly audit   'gray-matter': [ '4.0.3' ],
+124 silly audit   'has-flag': [ '4.0.0' ],
+124 silly audit   'has-property-descriptors': [ '1.0.2' ],
+124 silly audit   'has-symbols': [ '1.1.0' ],
+124 silly audit   'hash-wasm': [ '4.12.0' ],
+124 silly audit   hasown: [ '2.0.2' ],
+124 silly audit   'hast-util-from-html': [ '2.0.3' ],
+124 silly audit   'hast-util-from-parse5': [ '8.0.3', '7.1.2' ],
+124 silly audit   'hast-util-heading-rank': [ '3.0.0' ],
+124 silly audit   'hast-util-is-element': [ '3.0.0' ],
+124 silly audit   'hast-util-parse-selector': [ '4.0.0', '3.1.1' ],
+124 silly audit   'hast-util-raw': [ '7.2.3' ],
+124 silly audit   hastscript: [ '7.2.0', '9.0.1' ],
+124 silly audit   parse5: [ '6.0.1', '7.3.0' ],
+124 silly audit   'vfile-location': [ '4.1.0', '5.0.3' ],
+124 silly audit   'hast-util-to-estree': [ '2.3.3' ],
+124 silly audit   'hast-util-to-parse5': [ '7.1.0' ],
+124 silly audit   'hast-util-to-string': [ '3.0.1' ],
+124 silly audit   'image-size': [ '2.0.2' ],
+124 silly audit   imagescript: [ '1.3.1' ],
+124 silly audit   'import-in-the-middle': [ '1.15.0' ],
+124 silly audit   imurmurhash: [ '0.1.4' ],
+124 silly audit   inflection: [ '2.0.1' ],
+124 silly audit   'inline-style-parser': [ '0.1.1' ],
+124 silly audit   'is-alphabetical': [ '2.0.1' ],
+124 silly audit   'is-alphanumerical': [ '2.0.1' ],
+124 silly audit   'is-binary-path': [ '2.1.0' ],
+124 silly audit   'is-buffer': [ '2.0.5' ],
+124 silly audit   'is-core-module': [ '2.16.1' ],
+124 silly audit   'is-decimal': [ '2.0.1' ],
+124 silly audit   'is-docker': [ '2.2.1' ],
+124 silly audit   'is-extendable': [ '0.1.1' ],
+124 silly audit   'is-extglob': [ '2.1.1' ],
+124 silly audit   'is-fullwidth-code-point': [ '3.0.0' ],
+124 silly audit   'is-glob': [ '4.0.3' ],
+124 silly audit   'is-hexadecimal': [ '2.0.1' ],
+124 silly audit   'is-number': [ '7.0.0' ],
+124 silly audit   'is-plain-obj': [ '4.1.0' ],
+124 silly audit   'is-reference': [ '3.0.3' ],
+124 silly audit   'is-wsl': [ '2.2.0' ],
+124 silly audit   isarray: [ '2.0.5' ],
+124 silly audit   isexe: [ '2.0.0' ],
+124 silly audit   jiti: [ '2.6.1' ],
+124 silly audit   'jpeg-js': [ '0.4.4' ],
+124 silly audit   'js-image-generator': [ '1.0.4' ],
+124 silly audit   'js-tokens': [ '4.0.0' ],
+124 silly audit   'js-yaml': [ '3.14.2', '4.1.1' ],
+124 silly audit   jsbi: [ '4.3.2' ],
+124 silly audit   'json-stable-stringify': [ '1.3.0' ],
+124 silly audit   jsonfile: [ '6.2.0' ],
+124 silly audit   jsonify: [ '0.0.1' ],
+124 silly audit   'kind-of': [ '6.0.3' ],
+124 silly audit   'klaw-sync': [ '6.0.0' ],
+124 silly audit   kleur: [ '4.1.5' ],
+124 silly audit   lightningcss: [ '1.30.2' ],
+124 silly audit   'lightningcss-android-arm64': [ '1.30.2' ],
+124 silly audit   'lightningcss-darwin-arm64': [ '1.30.2' ],
+124 silly audit   'lightningcss-darwin-x64': [ '1.30.2' ],
+124 silly audit   'lightningcss-freebsd-x64': [ '1.30.2' ],
+124 silly audit   'lightningcss-linux-arm-gnueabihf': [ '1.30.2' ],
+124 silly audit   'lightningcss-linux-arm64-gnu': [ '1.30.2' ],
+124 silly audit   'lightningcss-linux-arm64-musl': [ '1.30.2' ],
+124 silly audit   'lightningcss-linux-x64-gnu': [ '1.30.2' ],
+124 silly audit   'lightningcss-linux-x64-musl': [ '1.30.2' ],
+124 silly audit   'lightningcss-win32-arm64-msvc': [ '1.30.2' ],
+124 silly audit   'lightningcss-win32-x64-msvc': [ '1.30.2' ],
+124 silly audit   lodash: [ '4.17.23' ],
+124 silly audit   'lodash.camelcase': [ '4.3.0' ],
+124 silly audit   'lodash.merge': [ '4.6.2' ],
+124 silly audit   long: [ '5.3.2' ],
+124 silly audit   'longest-streak': [ '3.1.0' ],
+124 silly audit   'loose-envify': [ '1.4.0' ],
+124 silly audit   'lower-case': [ '2.0.2' ],
+124 silly audit   'lucide-react': [ '0.563.0' ],
+124 silly audit   'magic-string': [ '0.30.21' ],
+124 silly audit   'markdown-extensions': [ '1.1.1' ],
+124 silly audit   'markdown-wasm': [ '1.2.0' ],
+124 silly audit   'math-intrinsics': [ '1.1.0' ],
+124 silly audit   'mdast-util-definitions': [ '5.1.2' ],
+124 silly audit   'mdast-util-from-markdown': [ '1.3.1' ],
+124 silly audit   'mdast-util-frontmatter': [ '1.0.1' ],
+124 silly audit   'mdast-util-phrasing': [ '3.0.1' ],
+124 silly audit   'mdast-util-to-markdown': [ '1.5.0' ],
+124 silly audit   'mdast-util-to-string': [ '3.2.0' ],
+124 silly audit   micromark: [ '3.2.0' ],
+124 silly audit   'micromark-core-commonmark': [ '1.1.0' ],
+124 silly audit   'micromark-factory-destination': [ '1.1.0' ],
+124 silly audit   'micromark-factory-label': [ '1.1.0' ],
+124 silly audit   'micromark-factory-space': [ '1.1.0' ],
+124 silly audit   'micromark-factory-title': [ '1.1.0' ],
+124 silly audit   'micromark-factory-whitespace': [ '1.1.0' ],
+124 silly audit   'micromark-util-chunked': [ '1.1.0' ],
+124 silly audit   'micromark-util-classify-character': [ '1.1.0' ],
+124 silly audit   'micromark-util-combine-extensions': [ '1.1.0' ],
+124 silly audit   'micromark-util-decode-numeric-character-reference': [ '1.1.0' ],
+124 silly audit   'micromark-util-decode-string': [ '1.1.0' ],
+124 silly audit   'micromark-util-html-tag-name': [ '1.2.0' ],
+124 silly audit   'micromark-util-normalize-identifier': [ '1.1.0' ],
+124 silly audit   'micromark-util-resolve-all': [ '1.1.0' ],
+124 silly audit   'micromark-util-subtokenize': [ '1.1.0' ],
+124 silly audit   'unist-util-stringify-position': [ '3.0.3', '4.0.0' ],
+124 silly audit   'mdast-util-mdx': [ '2.0.1' ],
+124 silly audit   'mdast-util-mdx-expression': [ '1.3.2' ],
+124 silly audit   'mdast-util-mdx-jsx': [ '2.1.4' ],
+124 silly audit   'vfile-message': [ '3.1.4', '4.0.3' ],
+124 silly audit   'mdast-util-mdxjs-esm': [ '1.3.1' ],
+124 silly audit   'mdx-bundler': [ '9.2.1' ],
+124 silly audit   uuid: [ '8.3.2', '13.0.0' ],
+124 silly audit   memfs: [ '3.5.3' ],
+124 silly audit   merge2: [ '1.4.1' ],
+124 silly audit   'micromark-extension-frontmatter': [ '1.1.1' ],
+124 silly audit   'micromark-extension-mdx-expression': [ '1.0.8' ],
+124 silly audit   'micromark-extension-mdx-jsx': [ '1.0.5' ],
+124 silly audit   'micromark-extension-mdx-md': [ '1.0.1' ],
+124 silly audit   'micromark-extension-mdxjs': [ '1.0.1' ],
+124 silly audit   'micromark-extension-mdxjs-esm': [ '1.0.5' ],
+124 silly audit   'micromark-factory-mdx-expression': [ '1.0.9' ],
+124 silly audit   'micromark-util-events-to-acorn': [ '1.2.3' ],
+124 silly audit   micromatch: [ '4.0.8' ],
+124 silly audit   minimist: [ '1.2.8' ],
+124 silly audit   'module-details-from-path': [ '1.0.4' ],
+124 silly audit   'motion-dom': [ '12.29.0' ],
+124 silly audit   'motion-utils': [ '12.27.2' ],
+124 silly audit   mri: [ '1.2.0' ],
+124 silly audit   ms: [ '2.1.3' ],
+124 silly audit   nanoid: [ '3.3.11' ],
+124 silly audit   next: [ '16.1.4' ],
+124 silly audit   'next-contentlayer': [ '0.3.4' ],
+124 silly audit   postcss: [ '8.4.31', '8.5.6' ],
+124 silly audit   'no-case': [ '3.0.4' ],
+124 silly audit   'node-domexception': [ '1.0.0' ],
+124 silly audit   'node-fetch': [ '3.3.2' ],
+124 silly audit   'node-releases': [ '2.0.27' ],
+124 silly audit   'normalize-path': [ '3.0.0' ],
+124 silly audit   'object-assign': [ '4.1.1' ],
+124 silly audit   'object-keys': [ '1.1.1' ],
+124 silly audit   'oniguruma-parser': [ '0.12.1' ],
+124 silly audit   'oniguruma-to-es': [ '4.3.4' ],
+124 silly audit   'oo-ascii-tree': [ '1.125.0' ],
+124 silly audit   open: [ '7.4.2' ],
+124 silly audit   'parse-entities': [ '4.0.2' ],
+124 silly audit   'parse-gitignore': [ '2.0.0' ],
+124 silly audit   'parse-numeric-range': [ '1.3.0' ],
+124 silly audit   'pascal-case': [ '3.1.2' ],
+124 silly audit   'patch-package': [ '8.0.1' ],
+124 silly audit   'path-key': [ '3.1.1' ],
+124 silly audit   'path-parse': [ '1.0.7' ],
+124 silly audit   periscopic: [ '3.1.0' ],
+124 silly audit   picocolors: [ '1.1.1' ],
+124 silly audit   picomatch: [ '2.3.1', '4.0.3' ],
+124 silly audit   'postcss-nesting': [ '14.0.0' ],
+124 silly audit   '@csstools/selector-resolve-nested': [ '4.0.0' ],
+124 silly audit   '@csstools/selector-specificity': [ '6.0.0' ],
+124 silly audit   'postcss-selector-parser': [ '7.1.1', '6.0.10' ],
+124 silly audit   'postcss-value-parser': [ '4.2.0' ],
+124 silly audit   'prop-types': [ '15.8.1' ],
+124 silly audit   protobufjs: [ '7.5.4' ],
+124 silly audit   'queue-microtask': [ '1.2.3' ],
+124 silly audit   react: [ '19.2.3' ],
+124 silly audit   'react-dom': [ '19.2.3' ],
+124 silly audit   'react-icons': [ '5.5.0' ],
+124 silly audit   'react-is': [ '16.13.1' ],
+124 silly audit   'react-lifecycles-compat': [ '3.0.4' ],
+124 silly audit   'react-modal': [ '3.16.3' ],
+124 silly audit   'react-wrap-balancer': [ '1.1.1' ],
+124 silly audit   reactflow: [ '11.11.4' ],
+124 silly audit   regex: [ '6.1.0' ],
+124 silly audit   'regex-recursion': [ '6.0.2' ],
+124 silly audit   'regex-utilities': [ '2.3.0' ],
+124 silly audit   'rehype-autolink-headings': [ '7.1.0' ],
+124 silly audit   unified: [ '11.0.5', '10.1.2' ],
+124 silly audit   'rehype-parse': [ '9.0.1' ],
+124 silly audit   'rehype-pretty-code': [ '0.14.1' ],
+124 silly audit   'rehype-slug': [ '6.0.0' ],
+124 silly audit   'rehype-stringify': [ '9.0.4' ],
+124 silly audit   'remark-frontmatter': [ '4.0.1' ],
+124 silly audit   'remark-parse': [ '10.0.2' ],
+124 silly audit   'remark-mdx': [ '2.3.0' ],
+124 silly audit   'remark-mdx-frontmatter': [ '1.1.1' ],
+124 silly audit   'remark-rehype': [ '10.1.0' ],
+124 silly audit   'require-directory': [ '2.1.1' ],
+124 silly audit   'require-in-the-middle': [ '7.5.2' ],
+124 silly audit   resolve: [ '1.22.11' ],
+124 silly audit   reusify: [ '1.1.0' ],
+124 silly audit   rome: [ '12.1.3' ],
+124 silly audit   'run-parallel': [ '1.2.0' ],
+124 silly audit   rxjs: [ '7.8.2' ],
+124 silly audit   sade: [ '1.8.1' ],
+124 silly audit   scheduler: [ '0.27.0' ],
+124 silly audit   'section-matter': [ '1.0.0' ],
+124 silly audit   semver: [ '7.7.3' ],
+124 silly audit   'set-function-length': [ '1.2.2' ],
+124 silly audit   sharp: [ '0.34.5' ],
+124 silly audit   'shebang-command': [ '2.0.0' ],
+124 silly audit   'shebang-regex': [ '3.0.0' ],
+124 silly audit   'shell-quote': [ '1.8.3' ],
+124 silly audit   shiki: [ '3.21.0' ],
+124 silly audit   'signal-exit': [ '4.1.0' ],
+124 silly audit   slash: [ '2.0.0' ],
+124 silly audit   'sort-object-keys': [ '2.1.0' ],
+124 silly audit   'sort-package-json': [ '3.6.1' ],
+124 silly audit   'source-map': [ '0.7.6', '0.6.1' ],
+124 silly audit   'source-map-js': [ '1.2.1' ],
+124 silly audit   'source-map-support': [ '0.5.21' ],
+124 silly audit   'space-separated-tokens': [ '2.0.2' ],
+124 silly audit   'sprintf-js': [ '1.0.3' ],
+124 silly audit   'string-width': [ '4.2.3' ],
+124 silly audit   'stringify-entities': [ '4.0.4' ],
+124 silly audit   'strip-ansi': [ '6.0.1' ],
+124 silly audit   'strip-bom-string': [ '1.0.0' ],
+124 silly audit   'style-to-object': [ '0.4.4' ],
+124 silly audit   'styled-jsx': [ '5.1.6' ],
+124 silly audit   'supports-preserve-symlinks-flag': [ '1.0.0' ],
+124 silly audit   tailwindcss: [ '4.1.18' ],
+124 silly audit   'tailwindcss-debug-screens': [ '3.0.1' ],
+124 silly audit   tapable: [ '2.3.0' ],
+124 silly audit   tinyglobby: [ '0.2.15' ],
+124 silly audit   fdir: [ '6.5.0' ],
+124 silly audit   tmp: [ '0.2.5' ],
+124 silly audit   'tmp-promise': [ '3.0.3' ],
+124 silly audit   'to-regex-range': [ '5.0.1' ],
+124 silly audit   toml: [ '3.0.0' ],
+124 silly audit   'tree-kill': [ '1.2.2' ],
+124 silly audit   'trim-lines': [ '3.0.1' ],
+124 silly audit   trough: [ '2.2.0' ],
+124 silly audit   'ts-pattern': [ '4.3.0' ],
+124 silly audit   tslib: [ '2.8.1' ],
+124 silly audit   typanion: [ '3.14.0' ],
+124 silly audit   typescript: [ '5.9.3' ],
+124 silly audit   uncrypto: [ '0.1.3' ],
+124 silly audit   'undici-types': [ '7.16.0' ],
+124 silly audit   'unist-util-generated': [ '2.0.1' ],
+124 silly audit   'unist-util-position-from-estree': [ '1.1.2' ],
+124 silly audit   'unist-util-remove-position': [ '4.0.2' ],
+124 silly audit   'unist-util-visit-parents': [ '6.0.2', '5.1.3' ],
+124 silly audit   universalify: [ '2.0.1' ],
+124 silly audit   'update-browserslist-db': [ '1.2.3' ],
+124 silly audit   'urlpattern-polyfill': [ '10.1.0' ],
+124 silly audit   'use-sync-external-store': [ '1.6.0' ],
+124 silly audit   'util-deprecate': [ '1.0.2' ],
+124 silly audit   uvu: [ '0.5.6' ],
+124 silly audit   warning: [ '4.0.3' ],
+124 silly audit   'web-namespaces': [ '2.0.1' ],
+124 silly audit   'web-streams-polyfill': [ '3.3.3' ],
+124 silly audit   which: [ '2.0.2' ],
+124 silly audit   'wrap-ansi': [ '7.0.0' ],
+124 silly audit   'write-file-atomic': [ '5.0.1' ],
+124 silly audit   y18n: [ '5.0.8' ],
+124 silly audit   yaml: [ '2.8.2' ],
+124 silly audit   yargs: [ '17.7.2' ],
+124 silly audit   'yargs-parser': [ '21.1.1' ],
+124 silly audit   zod: [ '3.25.76' ],
+124 silly audit   zustand: [ '4.5.7' ],
+124 silly audit   zwitch: [ '2.0.4' ],
+124 silly audit   'remark-gfm': [ '3.0.1' ],
+124 silly audit   'mdast-util-gfm': [ '2.0.2' ],
+124 silly audit   'micromark-extension-gfm': [ '2.0.3' ],
+124 silly audit   'mdast-util-gfm-autolink-literal': [ '1.0.3' ],
+124 silly audit   'mdast-util-gfm-footnote': [ '1.0.2' ],
+124 silly audit   'mdast-util-gfm-strikethrough': [ '1.0.3' ],
+124 silly audit   'mdast-util-gfm-table': [ '1.0.7' ],
+124 silly audit   'mdast-util-gfm-task-list-item': [ '1.0.2' ],
+124 silly audit   'mdast-util-find-and-replace': [ '2.2.2' ],
+124 silly audit   'markdown-table': [ '3.0.4' ],
+124 silly audit   'micromark-extension-gfm-autolink-literal': [ '1.0.5' ],
+124 silly audit   'micromark-extension-gfm-footnote': [ '1.1.2' ],
+124 silly audit   'micromark-extension-gfm-strikethrough': [ '1.0.7' ],
+124 silly audit   'micromark-extension-gfm-table': [ '1.0.7' ],
+124 silly audit   'micromark-extension-gfm-tagfilter': [ '1.0.2' ],
+124 silly audit   'micromark-extension-gfm-task-list-item': [ '1.0.5' ],
+124 silly audit   '@tailwindcss/oxide-wasm32-wasi': [ '4.1.18' ]
+124 silly audit }
+125 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/lightningcss-win32-x64-msvc
+126 silly reify mark deleted [
+126 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/lightningcss-win32-x64-msvc'
+126 silly reify ]
+127 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/lightningcss-win32-arm64-msvc
+128 silly reify mark deleted [
+128 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/lightningcss-win32-arm64-msvc'
+128 silly reify ]
+129 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/lightningcss-linux-x64-musl
+130 silly reify mark deleted [
+130 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/lightningcss-linux-x64-musl'
+130 silly reify ]
+131 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/lightningcss-linux-x64-gnu
+132 silly reify mark deleted [
+132 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/lightningcss-linux-x64-gnu'
+132 silly reify ]
+133 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/lightningcss-linux-arm64-musl
+134 silly reify mark deleted [
+134 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/lightningcss-linux-arm64-musl'
+134 silly reify ]
+135 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/lightningcss-linux-arm64-gnu
+136 silly reify mark deleted [
+136 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/lightningcss-linux-arm64-gnu'
+136 silly reify ]
+137 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/lightningcss-linux-arm-gnueabihf
+138 silly reify mark deleted [
+138 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/lightningcss-linux-arm-gnueabihf'
+138 silly reify ]
+139 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/lightningcss-freebsd-x64
+140 silly reify mark deleted [
+140 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/lightningcss-freebsd-x64'
+140 silly reify ]
+141 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/lightningcss-darwin-x64
+142 silly reify mark deleted [
+142 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/lightningcss-darwin-x64'
+142 silly reify ]
+143 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/lightningcss-android-arm64
+144 silly reify mark deleted [
+144 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/lightningcss-android-arm64'
+144 silly reify ]
+145 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-win32-x64-msvc
+146 silly reify mark deleted [
+146 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-win32-x64-msvc'
+146 silly reify ]
+147 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-win32-arm64-msvc
+148 silly reify mark deleted [
+148 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-win32-arm64-msvc'
+148 silly reify ]
+149 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-linux-x64-musl
+150 silly reify mark deleted [
+150 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-linux-x64-musl'
+150 silly reify ]
+151 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-linux-x64-gnu
+152 silly reify mark deleted [
+152 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-linux-x64-gnu'
+152 silly reify ]
+153 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-linux-arm64-musl
+154 silly reify mark deleted [
+154 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-linux-arm64-musl'
+154 silly reify ]
+155 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-linux-arm64-gnu
+156 silly reify mark deleted [
+156 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-linux-arm64-gnu'
+156 silly reify ]
+157 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-linux-arm-gnueabihf
+158 silly reify mark deleted [
+158 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-linux-arm-gnueabihf'
+158 silly reify ]
+159 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-freebsd-x64
+160 silly reify mark deleted [
+160 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-freebsd-x64'
+160 silly reify ]
+161 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-darwin-x64
+162 silly reify mark deleted [
+162 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-darwin-x64'
+162 silly reify ]
+163 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-android-arm64
+164 silly reify mark deleted [
+164 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@tailwindcss/oxide-android-arm64'
+164 silly reify ]
+165 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@rometools/cli-win32-x64
+166 silly reify mark deleted [
+166 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@rometools/cli-win32-x64'
+166 silly reify ]
+167 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@rometools/cli-win32-arm64
+168 silly reify mark deleted [
+168 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@rometools/cli-win32-arm64'
+168 silly reify ]
+169 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@rometools/cli-linux-x64
+170 silly reify mark deleted [
+170 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@rometools/cli-linux-x64'
+170 silly reify ]
+171 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@rometools/cli-linux-arm64
+172 silly reify mark deleted [
+172 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@rometools/cli-linux-arm64'
+172 silly reify ]
+173 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@rometools/cli-darwin-x64
+174 silly reify mark deleted [
+174 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@rometools/cli-darwin-x64'
+174 silly reify ]
+175 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@next/swc-win32-x64-msvc
+176 silly reify mark deleted [
+176 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@next/swc-win32-x64-msvc'
+176 silly reify ]
+177 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@next/swc-win32-arm64-msvc
+178 silly reify mark deleted [
+178 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@next/swc-win32-arm64-msvc'
+178 silly reify ]
+179 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@next/swc-linux-x64-musl
+180 silly reify mark deleted [
+180 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@next/swc-linux-x64-musl'
+180 silly reify ]
+181 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@next/swc-linux-x64-gnu
+182 silly reify mark deleted [
+182 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@next/swc-linux-x64-gnu'
+182 silly reify ]
+183 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@next/swc-linux-arm64-musl
+184 silly reify mark deleted [
+184 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@next/swc-linux-arm64-musl'
+184 silly reify ]
+185 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@next/swc-linux-arm64-gnu
+186 silly reify mark deleted [
+186 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@next/swc-linux-arm64-gnu'
+186 silly reify ]
+187 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@next/swc-darwin-x64
+188 silly reify mark deleted [
+188 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@next/swc-darwin-x64'
+188 silly reify ]
+189 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-win32-x64
+190 silly reify mark deleted [
+190 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-win32-x64'
+190 silly reify ]
+191 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-win32-ia32
+192 silly reify mark deleted [
+192 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-win32-ia32'
+192 silly reify ]
+193 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-win32-arm64
+194 silly reify mark deleted [
+194 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-win32-arm64'
+194 silly reify ]
+195 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-wasm32
+196 silly reify mark deleted [
+196 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-wasm32'
+196 silly reify ]
+197 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-linuxmusl-x64
+198 silly reify mark deleted [
+198 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-linuxmusl-x64'
+198 silly reify ]
+199 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-linuxmusl-arm64
+200 silly reify mark deleted [
+200 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-linuxmusl-arm64'
+200 silly reify ]
+201 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-linux-x64
+202 silly reify mark deleted [
+202 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-linux-x64'
+202 silly reify ]
+203 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-linux-s390x
+204 silly reify mark deleted [
+204 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-linux-s390x'
+204 silly reify ]
+205 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-linux-riscv64
+206 silly reify mark deleted [
+206 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-linux-riscv64'
+206 silly reify ]
+207 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-linux-ppc64
+208 silly reify mark deleted [
+208 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-linux-ppc64'
+208 silly reify ]
+209 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-linux-arm64
+210 silly reify mark deleted [
+210 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-linux-arm64'
+210 silly reify ]
+211 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-linux-arm
+212 silly reify mark deleted [
+212 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-linux-arm'
+212 silly reify ]
+213 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-libvips-linuxmusl-x64
+214 silly reify mark deleted [
+214 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-libvips-linuxmusl-x64'
+214 silly reify ]
+215 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-libvips-linuxmusl-arm64
+216 silly reify mark deleted [
+216 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-libvips-linuxmusl-arm64'
+216 silly reify ]
+217 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-libvips-linux-x64
+218 silly reify mark deleted [
+218 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-libvips-linux-x64'
+218 silly reify ]
+219 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-libvips-linux-s390x
+220 silly reify mark deleted [
+220 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-libvips-linux-s390x'
+220 silly reify ]
+221 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-libvips-linux-riscv64
+222 silly reify mark deleted [
+222 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-libvips-linux-riscv64'
+222 silly reify ]
+223 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-libvips-linux-ppc64
+224 silly reify mark deleted [
+224 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-libvips-linux-ppc64'
+224 silly reify ]
+225 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-libvips-linux-arm64
+226 silly reify mark deleted [
+226 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-libvips-linux-arm64'
+226 silly reify ]
+227 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-libvips-linux-arm
+228 silly reify mark deleted [
+228 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-libvips-linux-arm'
+228 silly reify ]
+229 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-libvips-darwin-x64
+230 silly reify mark deleted [
+230 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-libvips-darwin-x64'
+230 silly reify ]
+231 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-darwin-x64
+232 silly reify mark deleted [
+232 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@img/sharp-darwin-x64'
+232 silly reify ]
+233 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/win32-x64
+234 silly reify mark deleted [
+234 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/win32-x64'
+234 silly reify ]
+235 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/win32-ia32
+236 silly reify mark deleted [
+236 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/win32-ia32'
+236 silly reify ]
+237 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/win32-arm64
+238 silly reify mark deleted [
+238 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/win32-arm64'
+238 silly reify ]
+239 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/sunos-x64
+240 silly reify mark deleted [
+240 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/sunos-x64'
+240 silly reify ]
+241 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/openharmony-arm64
+242 silly reify mark deleted [
+242 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/openharmony-arm64'
+242 silly reify ]
+243 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/openbsd-x64
+244 silly reify mark deleted [
+244 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/openbsd-x64'
+244 silly reify ]
+245 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/openbsd-arm64
+246 silly reify mark deleted [
+246 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/openbsd-arm64'
+246 silly reify ]
+247 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/netbsd-x64
+248 silly reify mark deleted [
+248 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/netbsd-x64'
+248 silly reify ]
+249 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/netbsd-arm64
+250 silly reify mark deleted [
+250 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/netbsd-arm64'
+250 silly reify ]
+251 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/linux-x64
+252 silly reify mark deleted [
+252 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/linux-x64'
+252 silly reify ]
+253 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/linux-s390x
+254 silly reify mark deleted [
+254 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/linux-s390x'
+254 silly reify ]
+255 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/linux-riscv64
+256 silly reify mark deleted [
+256 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/linux-riscv64'
+256 silly reify ]
+257 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/linux-ppc64
+258 silly reify mark deleted [
+258 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/linux-ppc64'
+258 silly reify ]
+259 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/linux-mips64el
+260 silly reify mark deleted [
+260 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/linux-mips64el'
+260 silly reify ]
+261 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/linux-loong64
+262 silly reify mark deleted [
+262 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/linux-loong64'
+262 silly reify ]
+263 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/linux-ia32
+264 silly reify mark deleted [
+264 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/linux-ia32'
+264 silly reify ]
+265 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/linux-arm64
+266 silly reify mark deleted [
+266 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/linux-arm64'
+266 silly reify ]
+267 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/linux-arm
+268 silly reify mark deleted [
+268 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/linux-arm'
+268 silly reify ]
+269 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/freebsd-x64
+270 silly reify mark deleted [
+270 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/freebsd-x64'
+270 silly reify ]
+271 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/freebsd-arm64
+272 silly reify mark deleted [
+272 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/freebsd-arm64'
+272 silly reify ]
+273 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/darwin-x64
+274 silly reify mark deleted [
+274 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/darwin-x64'
+274 silly reify ]
+275 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/android-x64
+276 silly reify mark deleted [
+276 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/android-x64'
+276 silly reify ]
+277 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/android-arm64
+278 silly reify mark deleted [
+278 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/android-arm64'
+278 silly reify ]
+279 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/android-arm
+280 silly reify mark deleted [
+280 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/android-arm'
+280 silly reify ]
+281 verbose reify failed optional dependency /Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/aix-ppc64
+282 silly reify mark deleted [
+282 silly reify   '/Users/juanrivillas/workspace/personal/juanrivillas/node_modules/@esbuild/aix-ppc64'
+282 silly reify ]
+283 http cache micromark-extension-gfm-task-list-item@https://registry.npmjs.org/micromark-extension-gfm-task-list-item/-/micromark-extension-gfm-task-list-item-1.0.5.tgz 0ms (cache hit)
+284 http cache micromark-extension-gfm-tagfilter@https://registry.npmjs.org/micromark-extension-gfm-tagfilter/-/micromark-extension-gfm-tagfilter-1.0.2.tgz 0ms (cache hit)
+285 http cache micromark-extension-gfm-table@https://registry.npmjs.org/micromark-extension-gfm-table/-/micromark-extension-gfm-table-1.0.7.tgz 0ms (cache hit)
+286 http cache remark-gfm@https://registry.npmjs.org/remark-gfm/-/remark-gfm-3.0.1.tgz 0ms (cache hit)
+287 http cache micromark-extension-gfm-strikethrough@https://registry.npmjs.org/micromark-extension-gfm-strikethrough/-/micromark-extension-gfm-strikethrough-1.0.7.tgz 0ms (cache hit)
+288 http cache micromark-extension-gfm-footnote@https://registry.npmjs.org/micromark-extension-gfm-footnote/-/micromark-extension-gfm-footnote-1.1.2.tgz 0ms (cache hit)
+289 http cache micromark-extension-gfm-autolink-literal@https://registry.npmjs.org/micromark-extension-gfm-autolink-literal/-/micromark-extension-gfm-autolink-literal-1.0.5.tgz 0ms (cache hit)
+290 http cache micromark-extension-gfm@https://registry.npmjs.org/micromark-extension-gfm/-/micromark-extension-gfm-2.0.3.tgz 0ms (cache hit)
+291 http cache mdast-util-gfm-task-list-item@https://registry.npmjs.org/mdast-util-gfm-task-list-item/-/mdast-util-gfm-task-list-item-1.0.2.tgz 0ms (cache hit)
+292 http cache mdast-util-gfm-table@https://registry.npmjs.org/mdast-util-gfm-table/-/mdast-util-gfm-table-1.0.7.tgz 0ms (cache hit)
+293 http cache mdast-util-gfm-footnote@https://registry.npmjs.org/mdast-util-gfm-footnote/-/mdast-util-gfm-footnote-1.0.2.tgz 0ms (cache hit)
+294 http cache mdast-util-gfm-strikethrough@https://registry.npmjs.org/mdast-util-gfm-strikethrough/-/mdast-util-gfm-strikethrough-1.0.3.tgz 0ms (cache hit)
+295 http cache mdast-util-gfm@https://registry.npmjs.org/mdast-util-gfm/-/mdast-util-gfm-2.0.2.tgz 0ms (cache hit)
+296 http cache mdast-util-gfm-autolink-literal@https://registry.npmjs.org/mdast-util-gfm-autolink-literal/-/mdast-util-gfm-autolink-literal-1.0.3.tgz 0ms (cache hit)
+297 silly tarball no local data for micromark-extension-gfm-task-list-item@https://registry.npmjs.org/micromark-extension-gfm-task-list-item/-/micromark-extension-gfm-task-list-item-1.0.5.tgz. Extracting by manifest.
+298 silly tarball no local data for micromark-extension-gfm-tagfilter@https://registry.npmjs.org/micromark-extension-gfm-tagfilter/-/micromark-extension-gfm-tagfilter-1.0.2.tgz. Extracting by manifest.
+299 silly tarball no local data for micromark-extension-gfm-table@https://registry.npmjs.org/micromark-extension-gfm-table/-/micromark-extension-gfm-table-1.0.7.tgz. Extracting by manifest.
+300 silly tarball no local data for remark-gfm@https://registry.npmjs.org/remark-gfm/-/remark-gfm-3.0.1.tgz. Extracting by manifest.
+301 silly tarball no local data for micromark-extension-gfm-strikethrough@https://registry.npmjs.org/micromark-extension-gfm-strikethrough/-/micromark-extension-gfm-strikethrough-1.0.7.tgz. Extracting by manifest.
+302 silly tarball no local data for micromark-extension-gfm-footnote@https://registry.npmjs.org/micromark-extension-gfm-footnote/-/micromark-extension-gfm-footnote-1.1.2.tgz. Extracting by manifest.
+303 silly tarball no local data for micromark-extension-gfm-autolink-literal@https://registry.npmjs.org/micromark-extension-gfm-autolink-literal/-/micromark-extension-gfm-autolink-literal-1.0.5.tgz. Extracting by manifest.
+304 silly tarball no local data for micromark-extension-gfm@https://registry.npmjs.org/micromark-extension-gfm/-/micromark-extension-gfm-2.0.3.tgz. Extracting by manifest.
+305 silly tarball no local data for mdast-util-gfm-task-list-item@https://registry.npmjs.org/mdast-util-gfm-task-list-item/-/mdast-util-gfm-task-list-item-1.0.2.tgz. Extracting by manifest.
+306 silly tarball no local data for mdast-util-gfm-table@https://registry.npmjs.org/mdast-util-gfm-table/-/mdast-util-gfm-table-1.0.7.tgz. Extracting by manifest.
+307 silly tarball no local data for mdast-util-gfm-footnote@https://registry.npmjs.org/mdast-util-gfm-footnote/-/mdast-util-gfm-footnote-1.0.2.tgz. Extracting by manifest.
+308 http cache unist-util-visit-parents@https://registry.npmjs.org/unist-util-visit-parents/-/unist-util-visit-parents-5.1.3.tgz 0ms (cache hit)
+309 http cache mdast-util-find-and-replace@https://registry.npmjs.org/mdast-util-find-and-replace/-/mdast-util-find-and-replace-2.2.2.tgz 0ms (cache hit)
+310 silly tarball no local data for mdast-util-gfm-strikethrough@https://registry.npmjs.org/mdast-util-gfm-strikethrough/-/mdast-util-gfm-strikethrough-1.0.3.tgz. Extracting by manifest.
+311 silly tarball no local data for mdast-util-gfm@https://registry.npmjs.org/mdast-util-gfm/-/mdast-util-gfm-2.0.2.tgz. Extracting by manifest.
+312 silly tarball no local data for mdast-util-gfm-autolink-literal@https://registry.npmjs.org/mdast-util-gfm-autolink-literal/-/mdast-util-gfm-autolink-literal-1.0.3.tgz. Extracting by manifest.
+313 silly tarball no local data for unist-util-visit-parents@https://registry.npmjs.org/unist-util-visit-parents/-/unist-util-visit-parents-5.1.3.tgz. Extracting by manifest.
+314 silly tarball no local data for mdast-util-find-and-replace@https://registry.npmjs.org/mdast-util-find-and-replace/-/mdast-util-find-and-replace-2.2.2.tgz. Extracting by manifest.
+315 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 210ms
+316 silly audit report {
+316 silly audit report   next: [
+316 silly audit report     {
+316 silly audit report       id: 1112592,
+316 silly audit report       url: 'https://github.com/advisories/GHSA-9g9p-9gw9-jx7f',
+316 silly audit report       title: 'Next.js self-hosted applications vulnerable to DoS via Image Optimizer remotePatterns configuration',
+316 silly audit report       severity: 'moderate',
+316 silly audit report       vulnerable_versions: '>=15.6.0-canary.0 <16.1.5',
+316 silly audit report       cwe: [Array],
+316 silly audit report       cvss: [Object]
+316 silly audit report     },
+316 silly audit report     {
+316 silly audit report       id: 1112637,
+316 silly audit report       url: 'https://github.com/advisories/GHSA-5f7q-jpqc-wp7h',
+316 silly audit report       title: 'Next.js has Unbounded Memory Consumption via PPR Resume Endpoint ',
+316 silly audit report       severity: 'moderate',
+316 silly audit report       vulnerable_versions: '>=16.0.0-beta.0 <16.1.5',
+316 silly audit report       cwe: [Array],
+316 silly audit report       cvss: [Object]
+316 silly audit report     },
+316 silly audit report     {
+316 silly audit report       id: 1112645,
+316 silly audit report       url: 'https://github.com/advisories/GHSA-h25m-26qc-wcjf',
+316 silly audit report       title: 'Next.js HTTP request deserialization can lead to DoS when using insecure React Server Components',
+316 silly audit report       severity: 'high',
+316 silly audit report       vulnerable_versions: '>=16.1.0-canary.0 <16.1.5',
+316 silly audit report       cwe: [Array],
+316 silly audit report       cvss: [Object]
+316 silly audit report     }
+316 silly audit report   ]
+316 silly audit report }
+317 silly packumentCache corgi:https://registry.npmjs.org/next cache-miss
+318 http fetch GET 200 https://registry.npmjs.org/micromark-extension-gfm-autolink-literal/-/micromark-extension-gfm-autolink-literal-1.0.5.tgz 235ms (cache miss)
+319 http fetch GET 200 https://registry.npmjs.org/micromark-extension-gfm/-/micromark-extension-gfm-2.0.3.tgz 324ms (cache miss)
+320 http fetch GET 200 https://registry.npmjs.org/micromark-extension-gfm-table/-/micromark-extension-gfm-table-1.0.7.tgz 366ms (cache miss)
+321 http fetch GET 200 https://registry.npmjs.org/mdast-util-gfm-task-list-item/-/mdast-util-gfm-task-list-item-1.0.2.tgz 374ms (cache miss)
+322 http fetch GET 200 https://registry.npmjs.org/remark-gfm/-/remark-gfm-3.0.1.tgz 499ms (cache miss)
+323 http fetch GET 200 https://registry.npmjs.org/mdast-util-find-and-replace/-/mdast-util-find-and-replace-2.2.2.tgz 589ms (cache miss)
+324 http fetch GET 200 https://registry.npmjs.org/micromark-extension-gfm-strikethrough/-/micromark-extension-gfm-strikethrough-1.0.7.tgz 615ms (cache miss)
+325 http fetch GET 200 https://registry.npmjs.org/mdast-util-gfm-footnote/-/mdast-util-gfm-footnote-1.0.2.tgz 667ms (cache miss)
+326 http fetch GET 200 https://registry.npmjs.org/micromark-extension-gfm-footnote/-/micromark-extension-gfm-footnote-1.1.2.tgz 777ms (cache miss)
+327 http fetch GET 200 https://registry.npmjs.org/micromark-extension-gfm-tagfilter/-/micromark-extension-gfm-tagfilter-1.0.2.tgz 823ms (cache miss)
+328 http fetch GET 200 https://registry.npmjs.org/micromark-extension-gfm-task-list-item/-/micromark-extension-gfm-task-list-item-1.0.5.tgz 876ms (cache miss)
+329 http fetch GET 200 https://registry.npmjs.org/mdast-util-gfm-strikethrough/-/mdast-util-gfm-strikethrough-1.0.3.tgz 1616ms (cache miss)
+330 http fetch GET 200 https://registry.npmjs.org/mdast-util-gfm-autolink-literal/-/mdast-util-gfm-autolink-literal-1.0.3.tgz 2050ms (cache miss)
+331 http fetch GET 200 https://registry.npmjs.org/unist-util-visit-parents/-/unist-util-visit-parents-5.1.3.tgz 3868ms (cache miss)
+332 http fetch GET 200 https://registry.npmjs.org/mdast-util-gfm-table/-/mdast-util-gfm-table-1.0.7.tgz 4504ms (cache miss)
+333 http fetch GET 200 https://registry.npmjs.org/mdast-util-gfm/-/mdast-util-gfm-2.0.2.tgz 4958ms (cache miss)
+334 http fetch GET 200 https://registry.npmjs.org/next 56791ms (cache miss)
+335 silly packumentCache corgi:https://registry.npmjs.org/next set size:undefined disposed:false
+336 silly packumentCache corgi:https://registry.npmjs.org/next-contentlayer cache-miss
+337 http fetch GET 200 https://registry.npmjs.org/next-contentlayer 12791ms (cache miss)
+338 silly packumentCache corgi:https://registry.npmjs.org/next-contentlayer set size:undefined disposed:false
+339 silly ADD
+340 silly ADD
+341 silly ADD
+342 silly ADD
+343 silly ADD
+344 silly ADD
+345 silly ADD
+346 silly ADD
+347 silly ADD
+348 silly ADD
+349 silly ADD
+350 silly ADD
+351 silly ADD
+352 silly ADD
+353 silly ADD
+354 silly ADD
+355 silly ADD
+356 silly ADD
+357 silly ADD
+358 silly ADD
+359 silly ADD
+360 silly ADD
+361 silly ADD
+362 silly ADD
+363 silly ADD
+364 silly ADD
+365 silly ADD
+366 silly ADD
+367 silly ADD
+368 silly ADD
+369 silly ADD
+370 silly ADD
+371 silly ADD
+372 silly ADD
+373 silly ADD
+374 silly ADD
+375 silly ADD
+376 silly ADD
+377 silly ADD
+378 silly ADD
+379 silly ADD
+380 silly ADD
+381 silly ADD
+382 silly ADD
+383 silly ADD
+384 silly ADD
+385 silly ADD
+386 silly ADD
+387 silly ADD
+388 silly ADD
+389 silly ADD
+390 silly ADD
+391 silly ADD
+392 silly ADD
+393 silly ADD
+394 silly ADD
+395 silly ADD
+396 silly ADD
+397 silly ADD
+398 silly ADD
+399 silly ADD
+400 silly ADD
+401 silly ADD
+402 silly ADD
+403 silly ADD
+404 silly ADD
+405 silly ADD
+406 silly ADD
+407 silly ADD
+408 silly ADD
+409 silly ADD
+410 silly ADD
+411 silly ADD
+412 silly ADD
+413 silly ADD
+414 silly ADD
+415 silly ADD
+416 silly ADD
+417 silly ADD
+418 silly ADD
+419 silly REMOVE node_modules/remark-stringify
+420 silly REMOVE node_modules/remark-stringify/node_modules/vfile
+421 silly REMOVE node_modules/remark-stringify/node_modules/unist-util-visit
+422 silly REMOVE node_modules/remark-stringify/node_modules/unist-util-is
+423 silly REMOVE node_modules/remark-stringify/node_modules/unified
+424 silly REMOVE node_modules/remark-stringify/node_modules/micromark-util-types
+425 silly REMOVE node_modules/remark-stringify/node_modules/micromark-util-symbol
+426 silly REMOVE node_modules/remark-stringify/node_modules/micromark-util-decode-string
+427 silly REMOVE node_modules/remark-stringify/node_modules/micromark-util-decode-numeric-character-reference
+428 silly REMOVE node_modules/remark-stringify/node_modules/micromark-util-classify-character
+429 silly REMOVE node_modules/remark-stringify/node_modules/micromark-util-character
+430 silly REMOVE node_modules/remark-stringify/node_modules/mdast-util-to-string
+431 silly REMOVE node_modules/remark-stringify/node_modules/mdast-util-to-markdown
+432 silly REMOVE node_modules/remark-stringify/node_modules/mdast-util-phrasing
+433 silly REMOVE node_modules/remark-stringify/node_modules/@types/unist
+434 silly REMOVE node_modules/remark-stringify/node_modules/@types/mdast
+435 silly CHANGE node_modules/remark-gfm
+436 silly REMOVE node_modules/remark-gfm/node_modules/vfile
+437 silly REMOVE node_modules/remark-gfm/node_modules/unist-util-stringify-position
+438 silly REMOVE node_modules/remark-gfm/node_modules/unified
+439 silly REMOVE node_modules/remark-gfm/node_modules/remark-parse
+440 silly REMOVE node_modules/remark-gfm/node_modules/micromark-util-types
+441 silly REMOVE node_modules/remark-gfm/node_modules/micromark-util-symbol
+442 silly REMOVE node_modules/remark-gfm/node_modules/micromark-util-subtokenize
+443 silly REMOVE node_modules/remark-gfm/node_modules/micromark-util-sanitize-uri
+444 silly REMOVE node_modules/remark-gfm/node_modules/micromark-util-resolve-all
+445 silly REMOVE node_modules/remark-gfm/node_modules/micromark-util-normalize-identifier
+446 silly REMOVE node_modules/remark-gfm/node_modules/micromark-util-html-tag-name
+447 silly REMOVE node_modules/remark-gfm/node_modules/micromark-util-encode
+448 silly REMOVE node_modules/remark-gfm/node_modules/micromark-util-decode-string
+449 silly REMOVE node_modules/remark-gfm/node_modules/micromark-util-decode-numeric-character-reference
+450 silly REMOVE node_modules/remark-gfm/node_modules/micromark-util-combine-extensions
+451 silly REMOVE node_modules/remark-gfm/node_modules/micromark-util-classify-character
+452 silly REMOVE node_modules/remark-gfm/node_modules/micromark-util-chunked
+453 silly REMOVE node_modules/remark-gfm/node_modules/micromark-util-character
+454 silly REMOVE node_modules/remark-gfm/node_modules/micromark-factory-whitespace
+455 silly REMOVE node_modules/remark-gfm/node_modules/micromark-factory-title
+456 silly REMOVE node_modules/remark-gfm/node_modules/micromark-factory-space
+457 silly REMOVE node_modules/remark-gfm/node_modules/micromark-factory-label
+458 silly REMOVE node_modules/remark-gfm/node_modules/micromark-factory-destination
+459 silly REMOVE node_modules/remark-gfm/node_modules/micromark-core-commonmark
+460 silly REMOVE node_modules/remark-gfm/node_modules/micromark
+461 silly REMOVE node_modules/remark-gfm/node_modules/mdast-util-to-string
+462 silly REMOVE node_modules/remark-gfm/node_modules/mdast-util-from-markdown
+463 silly REMOVE node_modules/remark-gfm/node_modules/@types/unist
+464 silly REMOVE node_modules/remark-gfm/node_modules/@types/mdast
+465 silly CHANGE node_modules/micromark-extension-gfm-task-list-item
+466 silly REMOVE node_modules/micromark-extension-gfm-task-list-item/node_modules/micromark-util-types
+467 silly REMOVE node_modules/micromark-extension-gfm-task-list-item/node_modules/micromark-util-symbol
+468 silly REMOVE node_modules/micromark-extension-gfm-task-list-item/node_modules/micromark-util-character
+469 silly REMOVE node_modules/micromark-extension-gfm-task-list-item/node_modules/micromark-factory-space
+470 silly CHANGE node_modules/micromark-extension-gfm-tagfilter
+471 silly REMOVE node_modules/micromark-extension-gfm-tagfilter/node_modules/micromark-util-types
+472 silly CHANGE node_modules/micromark-extension-gfm-table
+473 silly REMOVE node_modules/micromark-extension-gfm-table/node_modules/micromark-util-types
+474 silly REMOVE node_modules/micromark-extension-gfm-table/node_modules/micromark-util-symbol
+475 silly REMOVE node_modules/micromark-extension-gfm-table/node_modules/micromark-util-character
+476 silly REMOVE node_modules/micromark-extension-gfm-table/node_modules/micromark-factory-space
+477 silly CHANGE node_modules/micromark-extension-gfm-strikethrough
+478 silly REMOVE node_modules/micromark-extension-gfm-strikethrough/node_modules/micromark-util-types
+479 silly REMOVE node_modules/micromark-extension-gfm-strikethrough/node_modules/micromark-util-symbol
+480 silly REMOVE node_modules/micromark-extension-gfm-strikethrough/node_modules/micromark-util-resolve-all
+481 silly REMOVE node_modules/micromark-extension-gfm-strikethrough/node_modules/micromark-util-classify-character
+482 silly REMOVE node_modules/micromark-extension-gfm-strikethrough/node_modules/micromark-util-chunked
+483 silly REMOVE node_modules/micromark-extension-gfm-strikethrough/node_modules/micromark-util-character
+484 silly CHANGE node_modules/micromark-extension-gfm-footnote
+485 silly REMOVE node_modules/micromark-extension-gfm-footnote/node_modules/micromark-util-types
+486 silly REMOVE node_modules/micromark-extension-gfm-footnote/node_modules/micromark-util-symbol
+487 silly REMOVE node_modules/micromark-extension-gfm-footnote/node_modules/micromark-util-subtokenize
+488 silly REMOVE node_modules/micromark-extension-gfm-footnote/node_modules/micromark-util-sanitize-uri
+489 silly REMOVE node_modules/micromark-extension-gfm-footnote/node_modules/micromark-util-resolve-all
+490 silly REMOVE node_modules/micromark-extension-gfm-footnote/node_modules/micromark-util-normalize-identifier
+491 silly REMOVE node_modules/micromark-extension-gfm-footnote/node_modules/micromark-util-html-tag-name
+492 silly REMOVE node_modules/micromark-extension-gfm-footnote/node_modules/micromark-util-encode
+493 silly REMOVE node_modules/micromark-extension-gfm-footnote/node_modules/micromark-util-classify-character
+494 silly REMOVE node_modules/micromark-extension-gfm-footnote/node_modules/micromark-util-chunked
+495 silly REMOVE node_modules/micromark-extension-gfm-footnote/node_modules/micromark-util-character
+496 silly REMOVE node_modules/micromark-extension-gfm-footnote/node_modules/micromark-factory-whitespace
+497 silly REMOVE node_modules/micromark-extension-gfm-footnote/node_modules/micromark-factory-title
+498 silly REMOVE node_modules/micromark-extension-gfm-footnote/node_modules/micromark-factory-space
+499 silly REMOVE node_modules/micromark-extension-gfm-footnote/node_modules/micromark-factory-label
+500 silly REMOVE node_modules/micromark-extension-gfm-footnote/node_modules/micromark-factory-destination
+501 silly REMOVE node_modules/micromark-extension-gfm-footnote/node_modules/micromark-core-commonmark
+502 silly CHANGE node_modules/micromark-extension-gfm-autolink-literal
+503 silly REMOVE node_modules/micromark-extension-gfm-autolink-literal/node_modules/micromark-util-types
+504 silly REMOVE node_modules/micromark-extension-gfm-autolink-literal/node_modules/micromark-util-symbol
+505 silly REMOVE node_modules/micromark-extension-gfm-autolink-literal/node_modules/micromark-util-sanitize-uri
+506 silly REMOVE node_modules/micromark-extension-gfm-autolink-literal/node_modules/micromark-util-encode
+507 silly REMOVE node_modules/micromark-extension-gfm-autolink-literal/node_modules/micromark-util-character
+508 silly CHANGE node_modules/micromark-extension-gfm
+509 silly REMOVE node_modules/micromark-extension-gfm/node_modules/micromark-util-types
+510 silly REMOVE node_modules/micromark-extension-gfm/node_modules/micromark-util-symbol
+511 silly REMOVE node_modules/micromark-extension-gfm/node_modules/micromark-util-combine-extensions
+512 silly REMOVE node_modules/micromark-extension-gfm/node_modules/micromark-util-chunked
+513 silly CHANGE node_modules/mdast-util-gfm-task-list-item
+514 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/unist-util-visit
+515 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/unist-util-stringify-position
+516 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/unist-util-is
+517 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-util-types
+518 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-util-symbol
+519 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-util-subtokenize
+520 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-util-sanitize-uri
+521 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-util-resolve-all
+522 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-util-normalize-identifier
+523 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-util-html-tag-name
+524 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-util-encode
+525 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-util-decode-string
+526 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-util-decode-numeric-character-reference
+527 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-util-combine-extensions
+528 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-util-classify-character
+529 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-util-chunked
+530 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-util-character
+531 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-factory-whitespace
+532 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-factory-title
+533 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-factory-space
+534 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-factory-label
+535 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-factory-destination
+536 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/micromark-core-commonmark
+537 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/micromark
+538 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/mdast-util-to-string
+539 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/mdast-util-to-markdown
+540 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/mdast-util-phrasing
+541 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/mdast-util-from-markdown
+542 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/@types/unist
+543 silly REMOVE node_modules/mdast-util-gfm-task-list-item/node_modules/@types/mdast
+544 silly CHANGE node_modules/mdast-util-gfm-table
+545 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/unist-util-visit
+546 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/unist-util-stringify-position
+547 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/unist-util-is
+548 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/micromark-util-types
+549 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/micromark-util-symbol
+550 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/micromark-util-subtokenize
+551 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/micromark-util-sanitize-uri
+552 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/micromark-util-resolve-all
+553 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/micromark-util-normalize-identifier
+554 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/micromark-util-html-tag-name
+555 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/micromark-util-encode
+556 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/micromark-util-decode-string
+557 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/micromark-util-decode-numeric-character-reference
+558 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/micromark-util-combine-extensions
+559 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/micromark-util-classify-character
+560 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/micromark-util-chunked
+561 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/micromark-util-character
+562 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/micromark-factory-whitespace
+563 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/micromark-factory-title
+564 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/micromark-factory-space
+565 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/micromark-factory-label
+566 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/micromark-factory-destination
+567 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/micromark-core-commonmark
+568 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/micromark
+569 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/mdast-util-to-string
+570 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/mdast-util-to-markdown
+571 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/mdast-util-phrasing
+572 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/mdast-util-from-markdown
+573 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/@types/unist
+574 silly REMOVE node_modules/mdast-util-gfm-table/node_modules/@types/mdast
+575 silly CHANGE node_modules/mdast-util-gfm-strikethrough
+576 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/unist-util-visit
+577 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/unist-util-stringify-position
+578 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/unist-util-is
+579 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/micromark-util-types
+580 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/micromark-util-symbol
+581 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/micromark-util-subtokenize
+582 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/micromark-util-sanitize-uri
+583 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/micromark-util-resolve-all
+584 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/micromark-util-normalize-identifier
+585 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/micromark-util-html-tag-name
+586 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/micromark-util-encode
+587 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/micromark-util-decode-string
+588 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/micromark-util-decode-numeric-character-reference
+589 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/micromark-util-combine-extensions
+590 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/micromark-util-classify-character
+591 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/micromark-util-chunked
+592 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/micromark-util-character
+593 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/micromark-factory-whitespace
+594 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/micromark-factory-title
+595 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/micromark-factory-space
+596 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/micromark-factory-label
+597 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/micromark-factory-destination
+598 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/micromark-core-commonmark
+599 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/micromark
+600 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/mdast-util-to-string
+601 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/mdast-util-to-markdown
+602 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/mdast-util-phrasing
+603 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/mdast-util-from-markdown
+604 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/@types/unist
+605 silly REMOVE node_modules/mdast-util-gfm-strikethrough/node_modules/@types/mdast
+606 silly CHANGE node_modules/mdast-util-gfm-footnote
+607 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/unist-util-visit
+608 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/unist-util-stringify-position
+609 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/unist-util-is
+610 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/micromark-util-types
+611 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/micromark-util-symbol
+612 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/micromark-util-subtokenize
+613 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/micromark-util-sanitize-uri
+614 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/micromark-util-resolve-all
+615 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/micromark-util-normalize-identifier
+616 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/micromark-util-html-tag-name
+617 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/micromark-util-encode
+618 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/micromark-util-decode-string
+619 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/micromark-util-decode-numeric-character-reference
+620 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/micromark-util-combine-extensions
+621 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/micromark-util-classify-character
+622 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/micromark-util-chunked
+623 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/micromark-util-character
+624 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/micromark-factory-whitespace
+625 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/micromark-factory-title
+626 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/micromark-factory-space
+627 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/micromark-factory-label
+628 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/micromark-factory-destination
+629 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/micromark-core-commonmark
+630 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/micromark
+631 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/mdast-util-to-string
+632 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/mdast-util-to-markdown
+633 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/mdast-util-phrasing
+634 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/mdast-util-from-markdown
+635 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/@types/unist
+636 silly REMOVE node_modules/mdast-util-gfm-footnote/node_modules/@types/mdast
+637 silly CHANGE node_modules/mdast-util-gfm-autolink-literal
+638 silly REMOVE node_modules/mdast-util-gfm-autolink-literal/node_modules/micromark-util-types
+639 silly REMOVE node_modules/mdast-util-gfm-autolink-literal/node_modules/micromark-util-symbol
+640 silly REMOVE node_modules/mdast-util-gfm-autolink-literal/node_modules/micromark-util-character
+641 silly REMOVE node_modules/mdast-util-gfm-autolink-literal/node_modules/@types/mdast
+642 silly CHANGE node_modules/mdast-util-gfm
+643 silly REMOVE node_modules/mdast-util-gfm/node_modules/unist-util-visit
+644 silly REMOVE node_modules/mdast-util-gfm/node_modules/unist-util-stringify-position
+645 silly REMOVE node_modules/mdast-util-gfm/node_modules/unist-util-is
+646 silly REMOVE node_modules/mdast-util-gfm/node_modules/micromark-util-types
+647 silly REMOVE node_modules/mdast-util-gfm/node_modules/micromark-util-symbol
+648 silly REMOVE node_modules/mdast-util-gfm/node_modules/micromark-util-subtokenize
+649 silly REMOVE node_modules/mdast-util-gfm/node_modules/micromark-util-sanitize-uri
+650 silly REMOVE node_modules/mdast-util-gfm/node_modules/micromark-util-resolve-all
+651 silly REMOVE node_modules/mdast-util-gfm/node_modules/micromark-util-normalize-identifier
+652 silly REMOVE node_modules/mdast-util-gfm/node_modules/micromark-util-html-tag-name
+653 silly REMOVE node_modules/mdast-util-gfm/node_modules/micromark-util-encode
+654 silly REMOVE node_modules/mdast-util-gfm/node_modules/micromark-util-decode-string
+655 silly REMOVE node_modules/mdast-util-gfm/node_modules/micromark-util-decode-numeric-character-reference
+656 silly REMOVE node_modules/mdast-util-gfm/node_modules/micromark-util-combine-extensions
+657 silly REMOVE node_modules/mdast-util-gfm/node_modules/micromark-util-classify-character
+658 silly REMOVE node_modules/mdast-util-gfm/node_modules/micromark-util-chunked
+659 silly REMOVE node_modules/mdast-util-gfm/node_modules/micromark-util-character
+660 silly REMOVE node_modules/mdast-util-gfm/node_modules/micromark-factory-whitespace
+661 silly REMOVE node_modules/mdast-util-gfm/node_modules/micromark-factory-title
+662 silly REMOVE node_modules/mdast-util-gfm/node_modules/micromark-factory-space
+663 silly REMOVE node_modules/mdast-util-gfm/node_modules/micromark-factory-label
+664 silly REMOVE node_modules/mdast-util-gfm/node_modules/micromark-factory-destination
+665 silly REMOVE node_modules/mdast-util-gfm/node_modules/micromark-core-commonmark
+666 silly REMOVE node_modules/mdast-util-gfm/node_modules/micromark
+667 silly REMOVE node_modules/mdast-util-gfm/node_modules/mdast-util-to-string
+668 silly REMOVE node_modules/mdast-util-gfm/node_modules/mdast-util-to-markdown
+669 silly REMOVE node_modules/mdast-util-gfm/node_modules/mdast-util-phrasing
+670 silly REMOVE node_modules/mdast-util-gfm/node_modules/mdast-util-from-markdown
+671 silly REMOVE node_modules/mdast-util-gfm/node_modules/@types/unist
+672 silly REMOVE node_modules/mdast-util-gfm/node_modules/@types/mdast
+673 silly CHANGE node_modules/mdast-util-find-and-replace
+674 silly ADD node_modules/mdast-util-find-and-replace/node_modules/unist-util-visit-parents
+675 silly REMOVE node_modules/mdast-util-find-and-replace/node_modules/unist-util-is
+676 silly REMOVE node_modules/mdast-util-find-and-replace/node_modules/@types/unist
+677 silly REMOVE node_modules/mdast-util-find-and-replace/node_modules/@types/mdast
+678 verbose cwd /Users/juanrivillas/workspace/personal/juanrivillas
+679 verbose os Darwin 25.2.0
+680 verbose node v22.14.0
+681 verbose npm  v10.9.2
+682 verbose exit 0
+683 info ok
