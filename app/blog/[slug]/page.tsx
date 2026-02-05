@@ -46,7 +46,9 @@ export default async function PostPage({ params }: Props) {
         <Mdx code={project.body.code} />
       </article>
 
-      <DisqusWrapper title={project.title} slug={project.slug} />
+      <div style={{ backgroundColor: 'rgb(250, 250, 250)' }}>
+        <DisqusWrapper title={project.title} slug={project.slug} />
+      </div>
     </div>
   );
 }
