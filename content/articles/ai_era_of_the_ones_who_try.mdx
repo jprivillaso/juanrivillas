@@ -1,0 +1,81 @@
+---
+title: AI: The era of the ones who try
+description: It's never been easier to experiment
+date: "2026-02-07"
+published: true
+language: en
+---
+
+Two weeks ago I saw a tweet from Marc Lou saying he had built a mobile app version of DataFast, one of his most successful products, in just four hours. My immediate reaction: this has to be clickbait.
+
+Sure, he was transparent that this didn't include the App Store submission paperwork. But still, four hours? I've been building web applications for over a decade. The few times I touched mobile development, it felt like entering a completely different world. Four hours seemed impossible.
+
+So I decided to test it myself.
+
+## The experiment
+
+I had been putting off building a mobile version of Momento Baby (https://momento.baby/) for months. I knew it needed to happen eventually, but the thought of diving into mobile development felt daunting. Five years ago, I would have procrastinated indefinitely. My entire career has been web applications, with only a few minor mobile contributions from a decade ago that I barely remember.
+
+Marc's tweet changed that. If he could do it in four hours, maybe I could too. I wanted to see for myself how much time it would actually take someone with zero modern mobile experience to build something real. I chose React Native and Expo, mostly because they felt closest to the web world I knew.
+
+## Getting started
+
+The initial setup was surprisingly straightforward. Download Android Studio, initialize Expo, set up the repo. My M4 MacBook Pro helped here—a decade ago on my old Windows machine, just getting the environment running would have eaten half a day. But within fifteen minutes, I had a development environment ready to go.
+
+Now came the real challenge: actually building the app.
+
+## Planning with AI
+
+I started by explaining my situation to Cursor in Plan mode. I had a solid Elixir web app with LiveView handling real-time updates, and I needed to figure out how to translate that into a mobile context. The main components were straightforward: a login page, a photo gallery, and a subscription page. But I had questions about architecture—should I create API endpoints? How do I handle the real-time broadcasting that LiveView makes so easy?
+
+Cursor asked me clarifying questions, which I appreciated. But it quickly went down a path with authentication that felt overly complex. I had to redirect it: forget the real-time updates for now, just give users a refresh button. We can improve that later. But authentication needed to be solid—I wanted Google OAuth done right, not some brittle solution that would break in production.
+
+I asked Cursor to rate the difficulty. "6/10 for an experienced engineer," it said. That felt about right.
+
+We discussed whether to use one repo or two. I went with two separate repos—one for the backend API, one for the mobile app. Once Cursor laid out the plan—API endpoints, authentication flow, high-level architecture—I told it to start implementing.
+
+Within minutes, Cursor had scaffolded both repositories. The backend now had a proper OAuth flow with PKCE verification, token signing, and JSON endpoints for the gallery, search, and subscription features. The mobile repo was initialized with Expo's default template, ready for me to wire up the screens.
+
+## The authentication rabbit hole
+
+The next hour and a half was spent refining the authentication flow. Even though Cursor had set up the basics, I wasn't satisfied with the initial approach. I had to configure Google Auth API for local development, and I learned that Expo handles callbacks and deep links differently than I expected. It was one of those moments where having experience mattered—I could tell something felt off, even if I didn't know the mobile-specific solution yet.
+
+What impressed me was how Cursor could simultaneously modify both the API backend and the mobile repository. I'd describe what I wanted to change, and it would update both codebases in parallel. That kind of coordination would have taken me much longer doing it manually.
+
+## Building the UI
+
+Once I had the Expo app running, I asked Cursor to implement the login page using assets from my web app. I attached a few images so it could match the design.
+
+This is where things got interesting. Cursor started getting stuck, and I couldn't figure out why. Turns out I had attached a very large SVG file that was cluttering the context. Once I realized that, I switched to Claude Code and things moved smoothly again.
+
+The next two hours were spent chasing tiny bugs and refining the mobile experience. Not everything translates directly from web to mobile. I had to learn about concepts like Bottom Sheets, understand touch interactions versus mouse clicks, and figure out how navigation works in React Native. Claude Code became my guide here, explaining patterns I'd never encountered before—things like PKCE flows and Expo's AuthSession that just weren't part of my day-to-day web development.
+
+After four hours of focused work, I had something that was almost feature-complete compared to the web app. I was honestly astounded.
+
+The next day, I polished the mobile app and started the tedious process of filling out Apple and Android developer program paperwork. But the core functionality was there, built in a single afternoon.
+
+## What actually made this work
+
+Here's the thing that's easy to miss in all the AI hype: this wasn't magic. Marc was right about the four hours, but there's important context behind that number.
+
+I didn't blindly accept everything the AI suggested. When Cursor went down a weird path with authentication, I redirected it. When I attached a huge SVG and things slowed down, I diagnosed the problem and switched tools. When Claude Code suggested patterns I'd never heard of, I asked it to explain them until I understood what was happening.
+
+My decade of engineering experience mattered immensely. I could assess whether the proposed architecture made sense. I knew how to break down the problem into manageable pieces. I understood when to simplify (skip real-time updates initially) and when to insist on quality (authentication must be robust). I could tell when the AI was on the right track versus when it was hallucinating.
+
+This is what I'd call intentional coding with AI velocity. Not blind coding where you accept whatever the AI generates. Not traditional coding where you write every line yourself. Something in between—where you provide the judgment and direction, and the AI provides the speed and scaffolding.
+
+## The era of the ones who try
+
+Marc was right. Four hours is real. But it's not magic, and it's not for everyone.
+
+What AI has fundamentally changed is the cost of experimentation. Five years ago, building a mobile app meant committing weeks or months to learning a new platform. Today, I can explore mobile development in an afternoon. That's not because AI writes perfect code—it doesn't. It's because AI lowers the barrier to trying.
+
+But here's what doesn't change: you still need to know what you're building and why. You still need to recognize when the AI is going down the wrong path. You still need architectural judgment to make the right tradeoffs. You still need the experience to ask the right questions.
+
+I didn't have time to review every line of code the AI generated. But I didn't need to, because I was driving the decisions at every step. When to simplify, when to insist on quality, when to pivot to a different tool. That judgment came from a decade of engineering experience, not from the AI.
+
+This is why I think the next wave of innovation won't come from people who know everything—it'll come from people willing to try things they've never done before, with the judgment to guide AI toward the right solution. Authentication is still a nightmare to implement. Cloud providers are still confusing. Mobile development still has a learning curve. But now I have a partner that can explain PKCE flows, suggest patterns I've never heard of, and scaffold the boilerplate while I focus on the decisions that matter.
+
+The ability to experiment is becoming the most valuable skill. Not because AI makes everything easy, but because it makes trying things possible.
+
+That's why I believe: AI is the era of the ones who try.
