@@ -32,7 +32,7 @@
     "contentlayer": "^0.3.4",
     "dagre": "^0.8.5",
     "disqus-react": "^1.1.7",
-    "follow-redirects": "^1.15.11",
+    "follow-redirects": "^1.16.0",
     "framer-motion": "^12.29.0",
     "lucide-react": "^0.563.0",
     "markdown-wasm": "^1.2.0",
